@@ -642,6 +642,61 @@ highlight-text {
 
 /* Tags en tarjeta */
 .pac-tags-row { margin-top: 8px; }
+/* Botón guardar moderno */
+.form-submit-btn-modern {
+  margin: 20px 20px 30px 20px;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  -webkit-appearance: none;
+  box-shadow: 0 4px 15px rgba(44, 78, 126, 0.3);
+  width: calc(100% - 40px);
+}
+
+.form-submit-btn-modern:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 8px rgba(44, 78, 126, 0.2);
+}
+/* Animación de luz pulsante para críticos */
+@keyframes pulseRed {
+  0% {
+    box-shadow: 0 0 0px rgba(220, 38, 38, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(220, 38, 38, 0.4);
+  }
+}
+
+/* Estilo para el icono de activos con luz fija */
+.pac-stat-icon.blue {
+  background: linear-gradient(135deg, #2C4E7E, #4A7AB5);
+  box-shadow: 0 0 12px rgba(44, 78, 126, 0.5);
+}
+
+.pac-stat-icon.red {
+  background: linear-gradient(135deg, #DC2626, #EF4444);
+  box-shadow: 0 0 12px rgba(220, 38, 38, 0.6);
+  animation: pulseRed 1.5s infinite;
+}
+
+.pac-stat-icon i {
+  color: white;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
 </style>
 </head>
 <body>
@@ -826,6 +881,19 @@ highlight-text {
     </div>
     <span class="nav-label">Inicio</span>
   </button>
+  
+  <!-- Pacientes — segundo lugar (ANTES estaba al final) -->
+  <button class="nav-item" onclick="setNav(this,'pacientes')">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+      </svg>
+    </div>
+    <span class="nav-label">Pacientes</span>
+  </button>
+  
   <!-- Herramientas (próximamente) -->
   <button class="nav-item" onclick="setNav(this)">
     <div class="nav-icon">
@@ -835,6 +903,7 @@ highlight-text {
     </div>
     <span class="nav-label">Herramientas</span>
   </button>
+  
   <!-- Reloj (próximamente) -->
   <button class="nav-item" onclick="setNav(this)">
     <div class="nav-icon">
@@ -845,6 +914,7 @@ highlight-text {
     </div>
     <span class="nav-label">Reloj</span>
   </button>
+  
   <!-- Turnos (próximamente) -->
   <button class="nav-item" onclick="setNav(this)">
     <div class="nav-icon">
@@ -857,17 +927,6 @@ highlight-text {
       </svg>
     </div>
     <span class="nav-label">Turnos</span>
-  </button>
-  <!-- Pacientes — activa screen-pacientes -->
-  <button class="nav-item" onclick="setNav(this,'pacientes')">
-    <div class="nav-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
-      </svg>
-    </div>
-    <span class="nav-label">Pacientes</span>
   </button>
 </nav>
 
@@ -906,6 +965,9 @@ highlight-text {
      MODAL FORMULARIO — Nuevo / Editar paciente
      Se abre con abrirFormPaciente() / abrirFormPaciente(id)
 ============================================================ -->
+<!-- ============================================================
+     MODAL FORMULARIO — Nuevo / Editar paciente (VERSIÓN CORREGIDA)
+============================================================ -->
 <div class="form-overlay" id="formOverlay" onclick="cerrarFormSiOverlay(event)">
   <div class="form-card" id="formCard">
     <div style="padding: 12px 20px 0;"><div class="form-handle"></div></div>
@@ -913,49 +975,21 @@ highlight-text {
       <span class="form-title" id="formTitle">Nuevo paciente</span>
       <button class="form-close" onclick="cerrarFormPaciente()"><i class="fas fa-xmark"></i></button>
     </div>
-   <div class="form-body">
-  <div class="form-row">
-    <div class="form-group">
-      <label class="form-label"><i class="fas fa-bed"></i> N° de cama</label>
-      <input class="form-input" id="fCama" type="text" placeholder="Ej: 12-A" maxlength="6">
-    </div>
-    <div class="form-group">
-      <label class="form-label"><i class="fas fa-circle-dot"></i> Estado</label>
-      <select class="form-select" id="fEstado">
-        <option value="stable">Estable</option>
-        <option value="warning">Precaución</option>
-        <option value="critical">Crítico</option>
-      </select>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="form-label"><i class="fas fa-user"></i> Nombre / Iniciales</label>
-    <input class="form-input" id="fNombre" type="text" placeholder="Ej: J.G.M. o Juan García">
-  </div>
-  <div class="form-group">
-    <label class="form-label"><i class="fas fa-stethoscope"></i> Diagnóstico médico</label>
-    <input class="form-input" id="fDx" type="text" placeholder="Ej: Neumonía adquirida en comunidad">
-  </div>
-  <div class="form-group">
-    <div class="form-meds-header">
-      <span class="form-meds-title"><i class="fas fa-tags"></i> &nbsp;Intervenciones</span>
-      <button class="form-add-med-btn" onclick="agregarIntervForm()">
-        <i class="fas fa-plus"></i> Agregar
-      </button>
-    </div>
-    <div class="form-interv-list" id="formIntervList"></div>
-  </div>
-  <div class="form-group">
-    <div class="form-meds-header">
-      <span class="form-meds-title"><i class="fas fa-pills"></i> &nbsp;Medicamentos</span>
-      <button class="form-add-med-btn" onclick="agregarMedForm()">
-        <i class="fas fa-plus"></i> Agregar
-      </button>
-    </div>
-    <div class="form-meds-list" id="formMedsList"></div>
-  </div>
-</div>
-
+    <div class="form-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><i class="fas fa-bed"></i> N° de cama</label>
+          <input class="form-input" id="fCama" type="text" placeholder="Ej: 12-A" maxlength="6">
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fas fa-circle-dot"></i> Estado</label>
+          <select class="form-select" id="fEstado">
+            <option value="stable">🟢 Estable</option>
+            <option value="warning">🟡 Precaución</option>
+            <option value="critical">🔴 Crítico</option>
+          </select>
+        </div>
+      </div>
       <div class="form-group">
         <label class="form-label"><i class="fas fa-user"></i> Nombre / Iniciales</label>
         <input class="form-input" id="fNombre" type="text" placeholder="Ej: J.G.M. o Juan García">
@@ -964,27 +998,36 @@ highlight-text {
         <label class="form-label"><i class="fas fa-stethoscope"></i> Diagnóstico médico</label>
         <input class="form-input" id="fDx" type="text" placeholder="Ej: Neumonía adquirida en comunidad">
       </div>
-      <div class="form-group">
-  <label class="form-label"><i class="fas fa-tags"></i> Intervenciones / Tags</label>
-  <input class="form-input" id="fTags" type="text" 
-    placeholder="Ej: O2 2L, Curación, TA elevada (separadas por coma)">
-</div>
+      
+      <!-- INTERVENCIONES -->
       <div class="form-group">
         <div class="form-meds-header">
-          <span class="form-meds-title"><i class="fas fa-pills"></i> &nbsp;Medicamentos</span>
-          <button class="form-add-med-btn" onclick="agregarMedForm()">
+          <span class="form-meds-title"><i class="fas fa-tags"></i> Intervenciones</span>
+          <button type="button" class="form-add-med-btn" onclick="agregarIntervForm()">
+            <i class="fas fa-plus"></i> Agregar
+          </button>
+        </div>
+        <div class="form-interv-list" id="formIntervList"></div>
+      </div>
+      
+      <!-- MEDICAMENTOS -->
+      <div class="form-group">
+        <div class="form-meds-header">
+          <span class="form-meds-title"><i class="fas fa-pills"></i> Medicamentos</span>
+          <button type="button" class="form-add-med-btn" onclick="agregarMedForm()">
             <i class="fas fa-plus"></i> Agregar
           </button>
         </div>
         <div class="form-meds-list" id="formMedsList"></div>
       </div>
     </div>
-    <button class="form-submit-btn" onclick="guardarPaciente()">
-      <i class="fas fa-floppy-disk"></i> Guardar paciente
+    
+    <!-- BOTÓN GUARDAR MODERNO -->
+    <button class="form-submit-btn-modern" onclick="guardarPaciente()">
+      <i class="fas fa-save"></i> Guardar paciente
     </button>
   </div>
 </div>
-
 <!-- ============================================================
      FLASHCARD ALERTA MEDICAMENTO
      Se activa automáticamente por checkMedAlerts() cada 60s.
@@ -1094,14 +1137,13 @@ function setNav(el, screen) {
 // ============================================================
 // DATOS
 // ============================================================
-let pacientes       = JSON.parse(localStorage.getItem('enfiapp_pacientes') || '[]');
-let editandoId      = null;
-let medFormCount    = 0;
-let intervFormCount = 0;
-let filtroActual    = 'todos';
-let sheetPacId      = null;
-let detailPacId     = null;
-let busquedaActual  = '';
+let pacientes = JSON.parse(localStorage.getItem('enfiapp_pacientes') || '[]');
+let editandoId = null;
+let filtroActual = 'todos';
+let sheetPacId = null;
+let detailPacId = null;
+let busquedaActual = '';
+let intervCounter = 0;
 
 function savePacientes() {
   try { localStorage.setItem('enfiapp_pacientes', JSON.stringify(pacientes)); } catch(e) {}
@@ -1120,13 +1162,13 @@ function syncFab(screen) {
 // ESTADÍSTICAS
 // ============================================================
 function renderStats() {
-  const activos  = pacientes.filter(p => p.estado !== 'alta').length;
+  const activos = pacientes.filter(p => p.estado !== 'alta').length;
   const criticos = pacientes.filter(p => p.estado === 'critical').length;
   document.getElementById('pacStatsRow').innerHTML =
-    '<div class="pac-stat-card"><div class="pac-stat-icon blue">👥</div>' +
+    '<div class="pac-stat-card"><div class="pac-stat-icon blue" style="background: linear-gradient(135deg, #2C4E7E, #4A7AB5); box-shadow: 0 0 12px rgba(44, 78, 126, 0.5);"><i class="fas fa-users" style="font-size: 18px; color: white; text-shadow: 0 0 5px rgba(255,255,255,0.8);"></i></div>' +
     '<div><div class="pac-stat-num">' + activos + '</div>' +
     '<div class="pac-stat-lbl">Pacientes activos</div></div></div>' +
-    '<div class="pac-stat-card"><div class="pac-stat-icon red">🚨</div>' +
+    '<div class="pac-stat-card"><div class="pac-stat-icon red" style="background: linear-gradient(135deg, #DC2626, #EF4444); box-shadow: 0 0 12px rgba(220, 38, 38, 0.6); animation: pulseRed 1.5s infinite;"><i class="fas fa-triangle-exclamation" style="font-size: 18px; color: white; text-shadow: 0 0 5px rgba(255,255,255,0.8);"></i></div>' +
     '<div><div class="pac-stat-num">' + criticos + '</div>' +
     '<div class="pac-stat-lbl">Pacientes críticos</div></div></div>';
   const critDot = document.getElementById('critDot');
@@ -1162,12 +1204,12 @@ function filtrarPacientes() {
   renderPacientes();
   document.querySelectorAll('.pac-card').forEach(card => {
     const id = parseInt(card.id.replace('pac-', ''));
-    const p  = pacientes.find(x => x.id === id);
+    const p = pacientes.find(x => x.id === id);
     if (!p) return;
     const hayMatch = p.nombre.toLowerCase().includes(busquedaActual) ||
-                     p.cama.toLowerCase().includes(busquedaActual)   ||
+                     p.cama.toLowerCase().includes(busquedaActual) ||
                      p.dx.toLowerCase().includes(busquedaActual);
-    card.classList.toggle('search-match',    hayMatch);
+    card.classList.toggle('search-match', hayMatch);
     card.classList.toggle('search-no-match', !hayMatch);
     if (hayMatch) {
       [card.querySelector('.pac-patient-name'), card.querySelector('.pac-dx-text'), card.querySelector('.pac-bed-badge')].forEach(el => {
@@ -1199,42 +1241,35 @@ function getMedStatus(med) {
   const medTime = new Date(); medTime.setHours(h, m, 0, 0);
   const diff = (medTime - now) / 60000;
   if (diff <= 0 && diff >= -30) return 'due';
-  if (diff > 0  && diff <= 30) return 'soon';
+  if (diff > 0 && diff <= 30) return 'soon';
   return '';
 }
 
-// Genera todos los horarios según frecuencia desde la hora inicial
 function generarHorarios(horaInicio, frecuenciaHoras) {
   const horas = [];
-  const frec  = parseInt(frecuenciaHoras) || 8;
+  const frec = parseInt(frecuenciaHoras) || 8;
   const [hh, mm] = horaInicio.split(':').map(Number);
   for (let i = 0; i < 24; i += frec) {
-    const total  = (hh * 60 + mm + i * 60) % (24 * 60);
-    const h      = Math.floor(total / 60).toString().padStart(2, '0');
-    const m      = (total % 60).toString().padStart(2, '0');
+    const total = (hh * 60 + mm + i * 60) % (24 * 60);
+    const h = Math.floor(total / 60).toString().padStart(2, '0');
+    const m = (total % 60).toString().padStart(2, '0');
     horas.push(h + ':' + m);
   }
   return horas;
 }
 
-// Turno según hora
 function getTurno(hora) {
   const h = parseInt(hora.split(':')[0]);
-  if (h >= 7  && h < 15) return 'turno-m'; // Matutino
-  if (h >= 15 && h < 23) return 'turno-v'; // Vespertino
-  return 'turno-n';                          // Nocturno
-}
-function getTurnoLabel(clase) {
-  if (clase === 'turno-m') return '☀️';
-  if (clase === 'turno-v') return '🌇';
-  return '🌙';
+  if (h >= 7 && h < 15) return 'turno-m';
+  if (h >= 15 && h < 23) return 'turno-v';
+  return 'turno-n';
 }
 
 // ============================================================
 // RENDER TARJETAS
 // ============================================================
 function renderPacientes() {
-  const list     = document.getElementById('pacList');
+  const list = document.getElementById('pacList');
   const subtitle = document.getElementById('pac-subtitle');
   renderStats();
 
@@ -1242,16 +1277,16 @@ function renderPacientes() {
   if (busquedaActual) {
     lista = lista.filter(p =>
       p.nombre.toLowerCase().includes(busquedaActual) ||
-      p.cama.toLowerCase().includes(busquedaActual)   ||
+      p.cama.toLowerCase().includes(busquedaActual) ||
       p.dx.toLowerCase().includes(busquedaActual)
     );
   }
-  if      (filtroActual === 'alta')    lista = lista.filter(p => p.estado === 'alta');
-  else if (filtroActual !== 'todos')   lista = lista.filter(p => p.estado === filtroActual);
+  if (filtroActual === 'alta') lista = lista.filter(p => p.estado === 'alta');
+  else if (filtroActual !== 'todos') lista = lista.filter(p => p.estado === filtroActual);
 
   const activos = lista.filter(p => p.estado !== 'alta');
-  const altas   = lista.filter(p => p.estado === 'alta');
-  const total   = pacientes.filter(p => p.estado !== 'alta').length;
+  const altas = lista.filter(p => p.estado === 'alta');
+  const total = pacientes.filter(p => p.estado !== 'alta').length;
   if (subtitle) subtitle.textContent = total + ' paciente' + (total !== 1 ? 's' : '') + ' en turno';
 
   if (lista.length === 0) {
@@ -1259,34 +1294,33 @@ function renderPacientes() {
     return;
   }
 
-  const estadoLabel = { stable:'Estable', warning:'Vigilancia', critical:'Crítico', alta:'Alta' };
+  const estadoLabel = { stable: 'Estable', warning: 'Vigilancia', critical: 'Crítico', alta: 'Alta' };
 
   function cardHtml(p) {
     const tags = (p.tags || []).map(t =>
-      '<span class="pac-tag ' + (t.tipo||'') + '"><i class="fas fa-tag" style="font-size:9px"></i> ' + t.label + '</span>'
+      '<span class="pac-tag ' + (t.tipo || '') + '"><i class="fas fa-tag" style="font-size:9px"></i> ' + t.label + '</span>'
     ).join('');
 
-    // Icono de medicamentos con próxima hora
     let medTag = '';
     if (p.meds && p.meds.length > 0) {
-      const sorted  = [...p.meds].sort((a,b) => a.hora.localeCompare(b.hora));
-      const status  = getMedStatus(sorted[0]);
-      const color   = status === 'due' ? 'red' : status === 'soon' ? 'yellow' : 'gray';
+      const sorted = [...p.meds].sort((a, b) => a.hora.localeCompare(b.hora));
+      const status = getMedStatus(sorted[0]);
+      const color = status === 'due' ? 'red' : status === 'soon' ? 'yellow' : 'gray';
       medTag = '<span class="pac-tag ' + color + '"><i class="fas fa-pills" style="font-size:9px"></i> ' + sorted[0].hora + '</span>';
     }
 
     return '<div class="pac-card" id="pac-' + p.id + '" onclick="abrirDetail(' + p.id + ')">' +
       '<div class="pac-card-bar ' + p.estado + '"></div>' +
       '<div class="pac-card-body" style="padding:14px 14px 12px 20px;">' +
-        '<div class="pac-card-top">' +
-          '<div class="pac-card-bed">' +
-            '<span class="pac-bed-badge"><i class="fas fa-bed"></i> ' + p.cama + '</span>' +
-            '<span class="pac-patient-name">' + p.nombre + '</span>' +
-          '</div>' +
-          '<span class="pac-status-badge ' + p.estado + '">' + (estadoLabel[p.estado]||p.estado) + '</span>' +
-        '</div>' +
-        '<div class="pac-dx-row"><i class="fas fa-stethoscope"></i><span class="pac-dx-text">' + p.dx + '</span></div>' +
-        '<div class="pac-tags-row">' + tags + medTag + '</div>' +
+      '<div class="pac-card-top">' +
+      '<div class="pac-card-bed">' +
+      '<span class="pac-bed-badge"><i class="fas fa-bed"></i> ' + p.cama + '</span>' +
+      '<span class="pac-patient-name">' + p.nombre + '</span>' +
+      '</div>' +
+      '<span class="pac-status-badge ' + p.estado + '">' + (estadoLabel[p.estado] || p.estado) + '</span>' +
+      '</div>' +
+      '<div class="pac-dx-row"><i class="fas fa-stethoscope"></i><span class="pac-dx-text">' + p.dx + '</span></div>' +
+      '<div class="pac-tags-row">' + tags + medTag + '</div>' +
       '</div></div>';
   }
 
@@ -1306,48 +1340,59 @@ function abrirDetail(id) {
   const p = pacientes.find(x => x.id === id);
   if (!p) return;
 
-  const estadoLabel = { stable:'Estable', warning:'Vigilancia', critical:'Crítico', alta:'Alta' };
+  const estadoLabel = { stable: 'Estable', warning: 'Vigilancia', critical: 'Crítico', alta: 'Alta' };
 
   document.getElementById('detailNombre').textContent = p.nombre;
-  document.getElementById('detailCama').textContent   = '🛏 Cama ' + p.cama;
-  document.getElementById('detailDx').textContent     = '📋 ' + p.dx;
+  document.getElementById('detailCama').textContent = '🛏 Cama ' + p.cama;
+  document.getElementById('detailDx').textContent = '📋 ' + p.dx;
 
   const badge = document.getElementById('detailEstadoBadge');
-  badge.textContent  = estadoLabel[p.estado] || p.estado;
-  badge.className    = 'pac-status-badge ' + p.estado;
+  badge.textContent = estadoLabel[p.estado] || p.estado;
+  badge.className = 'pac-status-badge ' + p.estado;
 
-  // Medicamentos con horarios generados
   const medsSection = document.getElementById('detailMedsSection');
-  const medsList    = document.getElementById('detailMedsList');
+  const medsList = document.getElementById('detailMedsList');
+
   if (p.meds && p.meds.length > 0) {
     medsSection.style.display = 'block';
-    medsList.innerHTML = p.meds.map(m => {
-      const horarios = generarHorarios(m.hora, m.frecuencia);
+    medsList.innerHTML = p.meds.map(med => {
+      const horarios = generarHorarios(med.hora, med.frecuencia);
       const horasHtml = horarios.map(h => {
         const turno = getTurno(h);
-        return '<span class="detail-med-hora-chip ' + turno + '">' + getTurnoLabel(turno) + ' ' + h + '</span>';
+        let turnoIcon = '';
+        if (turno === 'turno-m') turnoIcon = '☀️';
+        else if (turno === 'turno-v') turnoIcon = '🌇';
+        else turnoIcon = '🌙';
+        return '<span class="detail-med-hora-chip ' + turno + '">' + turnoIcon + ' ' + h + '</span>';
       }).join('');
-      return '<div class="detail-med-card">' +
-        '<div class="detail-med-name"><i class="fas fa-pills"></i>' + m.nombre + '</div>' +
-        '<div class="detail-med-dose">' + m.dosis + ' · cada ' + m.frecuencia + 'h</div>' +
-        '<div class="detail-med-horarios">' + horasHtml + '</div>' +
-      '</div>';
+      return `
+        <div class="detail-med-card">
+          <div class="detail-med-name">
+            <i class="fas fa-pills"></i> ${escapeHtml(med.nombre)}
+          </div>
+          <div class="detail-med-dose">
+            ${escapeHtml(med.dosis || 'Sin dosis')} · cada ${med.frecuencia || '8'}h
+          </div>
+          <div class="detail-med-horarios">${horasHtml}</div>
+        </div>
+      `;
     }).join('');
   } else {
     medsSection.style.display = 'none';
   }
 
-  // Intervenciones
   const intervSection = document.getElementById('detailIntervSection');
-  const intervList    = document.getElementById('detailIntervList');
+  const intervList = document.getElementById('detailIntervList');
+
   if (p.tags && p.tags.length > 0) {
     intervSection.style.display = 'block';
-    const iconos = { green:'fa-circle-check', yellow:'fa-triangle-exclamation', red:'fa-circle-exclamation', gray:'fa-circle-info', '':'fa-tag' };
-    intervList.innerHTML = p.tags.map(t =>
-      '<div class="detail-interv-item ' + (t.tipo||'') + '">' +
-        '<i class="fas ' + (iconos[t.tipo||'']||'fa-tag') + '"></i>' + t.label +
-      '</div>'
-    ).join('');
+    const iconos = { green: 'fa-circle-check', yellow: 'fa-triangle-exclamation', red: 'fa-circle-exclamation', gray: 'fa-circle-info', '': 'fa-tag' };
+    intervList.innerHTML = p.tags.map(t => `
+      <div class="detail-interv-item ${t.tipo || ''}">
+        <i class="fas ${iconos[t.tipo || ''] || 'fa-tag'}"></i>
+        ${escapeHtml(t.label)}
+      </div>
+    `).join('');
   } else {
     intervSection.style.display = 'none';
   }
@@ -1359,10 +1404,13 @@ function cerrarDetail() {
   document.getElementById('detailOverlay').classList.remove('open');
   detailPacId = null;
 }
+
 function cerrarDetailSiOverlay(e) {
   if (e.target === document.getElementById('detailOverlay')) cerrarDetail();
 }
-function detailEditar()   { const id = detailPacId; cerrarDetail(); abrirFormPaciente(id); }
+
+function detailEditar() { const id = detailPacId; cerrarDetail(); abrirFormPaciente(id); }
+
 function detailAlta() {
   if (!detailPacId) return;
   const idx = pacientes.findIndex(p => p.id === detailPacId);
@@ -1370,6 +1418,7 @@ function detailAlta() {
   cerrarDetail(); renderPacientes();
   showToast('🏠 Paciente dado de alta');
 }
+
 function detailEliminar() {
   if (!detailPacId) return;
   if (!confirm('¿Eliminar este paciente del turno?')) return;
@@ -1379,33 +1428,137 @@ function detailEliminar() {
 }
 
 // ============================================================
+// FORMULARIO PACIENTE
+// ============================================================
+function abrirFormPaciente(id = null) {
+  editandoId = id;
+  const overlay = document.getElementById('formOverlay');
+  const title = document.getElementById('formTitle');
+
+  if (id !== null) {
+    const p = pacientes.find(x => x.id === id);
+    if (!p) return;
+    title.textContent = 'Editar paciente';
+    document.getElementById('fCama').value = p.cama;
+    document.getElementById('fNombre').value = p.nombre;
+    document.getElementById('fDx').value = p.dx;
+    document.getElementById('fEstado').value = p.estado === 'alta' ? 'stable' : p.estado;
+
+    cargarIntervenciones(p.tags || []);
+
+    const medsContainer = document.getElementById('formMedsList');
+    medsContainer.innerHTML = '';
+    if (p.meds && p.meds.length) {
+      p.meds.forEach(m => agregarMedForm(m));
+    }
+  } else {
+    title.textContent = 'Nuevo paciente';
+    limpiarFormulario();
+  }
+  overlay.classList.add('open');
+}
+
+function cerrarFormPaciente() {
+  document.getElementById('formOverlay').classList.remove('open');
+  editandoId = null;
+}
+
+function cerrarFormSiOverlay(e) {
+  if (e.target === document.getElementById('formOverlay')) cerrarFormPaciente();
+}
+
+function limpiarFormulario() {
+  document.getElementById('fCama').value = '';
+  document.getElementById('fNombre').value = '';
+  document.getElementById('fDx').value = '';
+  document.getElementById('fEstado').value = 'stable';
+  document.getElementById('formIntervList').innerHTML = '';
+  intervCounter = 0;
+  document.getElementById('formMedsList').innerHTML = '';
+}
+
+// ============================================================
+// MEDICAMENTOS EN FORMULARIO
+// ============================================================
+function agregarMedForm(med = null) {
+  const container = document.getElementById('formMedsList');
+  const idx = Date.now() + Math.random();
+
+  const div = document.createElement('div');
+  div.className = 'form-med-item';
+  div.id = 'med-item-' + idx;
+  div.innerHTML = `
+    <button type="button" class="form-med-remove" onclick="removeMedItem('${idx}')">
+      <i class="fas fa-trash-alt"></i>
+    </button>
+    <div class="form-med-row">
+      <div class="form-group" style="grid-column: span 2;">
+        <label class="form-label"><i class="fas fa-capsules"></i> Medicamento</label>
+        <input class="form-input" id="mNombre-${idx}" type="text" placeholder="Ej: Paracetamol" value="${med ? escapeHtml(med.nombre) : ''}">
+      </div>
+    </div>
+    <div class="form-med-row">
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-flask"></i> Dosis</label>
+        <input class="form-input" id="mDosis-${idx}" type="text" placeholder="Ej: 500mg IV" value="${med ? escapeHtml(med.dosis) : ''}">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-clock"></i> Hora inicio</label>
+        <input class="form-input" id="mHora-${idx}" type="time" value="${med ? med.hora : '08:00'}">
+      </div>
+    </div>
+    <div class="form-med-row">
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-rotate"></i> Frecuencia (horas)</label>
+        <input class="form-input" id="mFrec-${idx}" type="number" min="1" max="24" step="1" placeholder="Ej: 8" value="${med ? med.frecuencia : '8'}">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-hourglass-half"></i> Duración (días)</label>
+        <input class="form-input" id="mDuracion-${idx}" type="number" min="1" placeholder="Ej: 5" value="${med ? (med.duracion || '3') : '3'}">
+      </div>
+    </div>
+  `;
+  container.appendChild(div);
+}
+
+function removeMedItem(idx) {
+  const el = document.getElementById('med-item-' + idx);
+  if (el) el.remove();
+}
+
+// ============================================================
 // INTERVENCIONES EN FORMULARIO
 // ============================================================
 const tiposInterv = [
-  { value: '',       label: '⬜ Neutro'     },
-  { value: 'green',  label: '🟢 Normal'     },
+  { value: '', label: '⚪ Normal' },
+  { value: 'green', label: '🟢 Bueno' },
   { value: 'yellow', label: '🟡 Precaución' },
-  { value: 'red',    label: '🔴 Urgente'    },
-  { value: 'gray',   label: '⚪ Info'       },
+  { value: 'red', label: '🔴 Urgente' },
+  { value: 'gray', label: 'ℹ️ Informativo' },
 ];
 
 function agregarIntervForm(interv = null) {
-  intervFormCount++;
-  const idx       = intervFormCount;
+  intervCounter++;
+  const idx = intervCounter;
   const container = document.getElementById('formIntervList');
-  const div       = document.createElement('div');
-  div.className   = 'form-interv-item';
-  div.id          = 'interv-item-' + idx;
-  const optsHtml  = tiposInterv.map(t =>
-    '<option value="' + t.value + '"' + (interv && interv.tipo === t.value ? ' selected' : '') + '>' + t.label + '</option>'
+  const div = document.createElement('div');
+  div.className = 'form-interv-item';
+  div.id = 'interv-item-' + idx;
+
+  const optsHtml = tiposInterv.map(t =>
+    `<option value="${t.value}" ${interv && interv.tipo === t.value ? 'selected' : ''}>${t.label}</option>`
   ).join('');
-  div.innerHTML =
-    '<button class="form-interv-remove" onclick="removeIntervItem(' + idx + ')"><i class="fas fa-xmark"></i></button>' +
-    '<div style="flex:1;display:flex;gap:8px;align-items:center;padding-right:28px;">' +
-      '<input class="form-input" id="iLabel-' + idx + '" type="text" placeholder="Ej: O2 2L, Curación..." ' +
-        'value="' + (interv ? interv.label : '') + '" style="flex:1;padding:9px 12px;font-size:13px;">' +
-      '<select class="form-select" id="iTipo-' + idx + '" style="width:140px;padding:9px 10px;font-size:12px;">' + optsHtml + '</select>' +
-    '</div>';
+
+  div.innerHTML = `
+    <button type="button" class="form-interv-remove" onclick="removeIntervItem(${idx})">
+      <i class="fas fa-times"></i>
+    </button>
+    <div style="flex:1;display:flex;gap:8px;align-items:center;padding-right:28px;">
+      <input class="form-input" id="iLabel-${idx}" type="text" placeholder="Ej: O2 2L, Curación..." 
+        value="${interv ? escapeHtml(interv.label) : ''}" style="flex:1;">
+      <select class="form-select" id="iTipo-${idx}" style="width:120px;">${optsHtml}</select>
+    </div>
+  `;
   container.appendChild(div);
 }
 
@@ -1417,121 +1570,113 @@ function removeIntervItem(idx) {
 function leerIntervenciones() {
   const items = [];
   document.querySelectorAll('.form-interv-item').forEach(item => {
-    const idx   = item.id.replace('interv-item-', '');
+    const idMatch = item.id.match(/\d+$/);
+    if (!idMatch) return;
+    const idx = idMatch[0];
     const label = document.getElementById('iLabel-' + idx)?.value.trim();
-    const tipo  = document.getElementById('iTipo-'  + idx)?.value || '';
+    const tipo = document.getElementById('iTipo-' + idx)?.value || '';
     if (label) items.push({ label, tipo });
   });
   return items;
 }
 
 function cargarIntervenciones(tags) {
-  intervFormCount = 0;
-  document.getElementById('formIntervList').innerHTML = '';
-  (tags || []).forEach(t => agregarIntervForm(t));
-}
-
-// ============================================================
-// FORMULARIO PACIENTE
-// ============================================================
-function abrirFormPaciente(id = null) {
-  editandoId   = id;
-  medFormCount = 0;
-  const overlay = document.getElementById('formOverlay');
-  const title   = document.getElementById('formTitle');
-  if (id !== null) {
-    const p = pacientes.find(x => x.id === id);
-    if (!p) return;
-    title.textContent = 'Editar paciente';
-    document.getElementById('fCama').value   = p.cama;
-    document.getElementById('fNombre').value = p.nombre;
-    document.getElementById('fDx').value     = p.dx;
-    document.getElementById('fEstado').value = p.estado === 'alta' ? 'stable' : p.estado;
-    cargarIntervenciones(p.tags || []);
-    document.getElementById('formMedsList').innerHTML = '';
-    (p.meds || []).forEach(m => agregarMedForm(m));
-  } else {
-    title.textContent = 'Nuevo paciente';
-    document.getElementById('fCama').value   = '';
-    document.getElementById('fNombre').value = '';
-    document.getElementById('fDx').value     = '';
-    document.getElementById('fEstado').value = 'stable';
-    cargarIntervenciones([]);
-    document.getElementById('formMedsList').innerHTML = '';
+  intervCounter = 0;
+  const container = document.getElementById('formIntervList');
+  if (!container) return;
+  container.innerHTML = '';
+  if (tags && tags.length) {
+    tags.forEach(t => agregarIntervForm(t));
   }
-  overlay.classList.add('open');
-}
-
-function cerrarFormPaciente() {
-  document.getElementById('formOverlay').classList.remove('open');
-  editandoId = null;
-}
-function cerrarFormSiOverlay(e) {
-  if (e.target === document.getElementById('formOverlay')) cerrarFormPaciente();
 }
 
 // ============================================================
-// MEDICAMENTOS EN FORMULARIO
-// ============================================================
-function agregarMedForm(med = null) {
-  medFormCount++;
-  const idx       = medFormCount;
-  const container = document.getElementById('formMedsList');
-  const div       = document.createElement('div');
-  div.className   = 'form-med-item';
-  div.id          = 'med-item-' + idx;
-  div.innerHTML   =
-    '<button class="form-med-remove" onclick="removeMedItem(' + idx + ')"><i class="fas fa-xmark"></i></button>' +
-    '<div class="form-med-row">' +
-      '<div class="form-group"><label class="form-label"><i class="fas fa-capsules"></i> Medicamento</label>' +
-        '<input class="form-input" id="mNombre-' + idx + '" type="text" placeholder="Ej: Paracetamol" value="' + (med?med.nombre:'') + '"></div>' +
-      '<div class="form-group"><label class="form-label"><i class="fas fa-flask"></i> Dosis</label>' +
-        '<input class="form-input" id="mDosis-' + idx + '" type="text" placeholder="Ej: 500mg IV" value="' + (med?med.dosis:'') + '"></div>' +
-    '</div>' +
-    '<div class="form-med-row">' +
-      '<div class="form-group"><label class="form-label"><i class="fas fa-clock"></i> Primera dosis</label>' +
-        '<input class="form-input" id="mHora-' + idx + '" type="time" value="' + (med?med.hora:'') + '"></div>' +
-      '<div class="form-group"><label class="form-label"><i class="fas fa-rotate"></i> Frecuencia (h)</label>' +
-        '<input class="form-input" id="mFrec-' + idx + '" type="number" min="1" max="24" placeholder="Ej: 8" value="' + (med?med.frecuencia:'') + '"></div>' +
-    '</div>';
-  container.appendChild(div);
-}
-function removeMedItem(idx) { const el = document.getElementById('med-item-' + idx); if (el) el.remove(); }
-
-// ============================================================
-// GUARDAR PACIENTE
+// GUARDAR PACIENTE (CORREGIDO)
 // ============================================================
 function guardarPaciente() {
-  const cama   = document.getElementById('fCama').value.trim();
+  const cama = document.getElementById('fCama').value.trim();
   const nombre = document.getElementById('fNombre').value.trim();
-  const dx     = document.getElementById('fDx').value.trim();
+  const dx = document.getElementById('fDx').value.trim();
   const estado = document.getElementById('fEstado').value;
-  if (!cama || !nombre || !dx) { showToast('⚠️ Completa cama, nombre y diagnóstico'); return; }
+
+  if (!cama || !nombre || !dx) {
+    showToast('⚠️ Completa cama, nombre y diagnóstico');
+    return;
+  }
+
   const tags = leerIntervenciones();
+
+  // ========== LEER MEDICAMENTOS CORRECTAMENTE ==========
   const meds = [];
-  document.querySelectorAll('.form-med-item').forEach(item => {
-    const id = item.id.replace('med-item-', '');
-    const n  = document.getElementById('mNombre-' + id)?.value.trim();
-    const d  = document.getElementById('mDosis-'  + id)?.value.trim();
-    const h  = document.getElementById('mHora-'   + id)?.value;
-    const f  = document.getElementById('mFrec-'   + id)?.value;
-    if (n && h) meds.push({ nombre:n, dosis:d||'', hora:h, frecuencia:f||'8', ultimaAdmin:null });
+  const medItems = document.querySelectorAll('.form-med-item');
+  console.log('Número de medicamentos en el formulario:', medItems.length);
+  
+  medItems.forEach(item => {
+    // Obtener el ID correctamente
+    const idParts = item.id.split('-');
+    const idx = idParts[idParts.length - 1];
+    
+    const nombreMed = document.getElementById('mNombre-' + idx)?.value.trim();
+    const dosis = document.getElementById('mDosis-' + idx)?.value.trim() || '';
+    const hora = document.getElementById('mHora-' + idx)?.value;
+    const frecuencia = document.getElementById('mFrec-' + idx)?.value;
+    const duracion = document.getElementById('mDuracion-' + idx)?.value;
+    
+    console.log('Leyendo medicamento:', { idx, nombreMed, dosis, hora, frecuencia, duracion });
+    
+    if (nombreMed && hora) {
+      meds.push({
+        nombre: nombreMed,
+        dosis: dosis,
+        hora: hora,
+        frecuencia: frecuencia || '8',
+        duracion: duracion || '3',
+        ultimaAdmin: null
+      });
+    }
   });
+
+  console.log('Medicamentos a guardar:', meds);
+
   if (editandoId !== null) {
     const idx = pacientes.findIndex(p => p.id === editandoId);
-    if (idx !== -1) pacientes[idx] = { ...pacientes[idx], cama, nombre, dx, estado, meds, tags };
-    showToast('✅ Paciente actualizado');
+    if (idx !== -1) {
+      pacientes[idx] = {
+        ...pacientes[idx],
+        cama,
+        nombre,
+        dx,
+        estado,
+        meds: meds,
+        tags: tags
+      };
+      showToast('✅ Paciente actualizado');
+    }
   } else {
-    pacientes.push({ id: Date.now(), cama, nombre, dx, estado, meds, tags });
+    pacientes.push({
+      id: Date.now(),
+      cama,
+      nombre,
+      dx,
+      estado,
+      meds: meds,
+      tags: tags
+    });
     showToast('✅ Paciente agregado');
   }
-  savePacientes(); cerrarFormPaciente(); renderPacientes();
+
+  savePacientes();
+  cerrarFormPaciente();
+  renderPacientes();
 }
+
+
 function eliminarPaciente(id) {
   if (!confirm('¿Eliminar?')) return;
   pacientes = pacientes.filter(p => p.id !== id);
   savePacientes(); renderPacientes(); showToast('🗑️ Eliminado');
 }
+
 function editarPaciente(id) { abrirFormPaciente(id); }
 
 // ============================================================
@@ -1545,9 +1690,9 @@ function checkMedAlerts() {
     for (let i = 0; i < p.meds.length; i++) {
       const m = p.meds[i];
       if (getMedStatus(m) === 'due') {
-        const key  = 'alert_' + p.id + '_' + i + '_' + m.hora;
+        const key = 'alert_' + p.id + '_' + i + '_' + m.hora;
         const last = localStorage.getItem(key);
-        const now  = Date.now();
+        const now = Date.now();
         if (!last || (now - parseInt(last)) > 1800000) {
           localStorage.setItem(key, now.toString());
           mostrarAlerta(p, m, p.id, i); return;
@@ -1556,17 +1701,19 @@ function checkMedAlerts() {
     }
   }
 }
+
 function mostrarAlerta(paciente, med, pacId, medIdx) {
   alertaActual = { pacId, medIdx };
-  document.getElementById('alertMedName').textContent     = med.nombre;
-  document.getElementById('alertMedDose').textContent     = med.dosis + ' · ' + med.hora + ' hrs';
+  document.getElementById('alertMedName').textContent = med.nombre;
+  document.getElementById('alertMedDose').textContent = med.dosis + ' · ' + med.hora + ' hrs';
   document.getElementById('alertPatientName').textContent = paciente.nombre;
-  document.getElementById('alertPatientBed').textContent  = 'Cama ' + paciente.cama + ' · ' + paciente.dx;
+  document.getElementById('alertPatientBed').textContent = 'Cama ' + paciente.cama + ' · ' + paciente.dx;
   document.getElementById('medAlertOverlay').classList.add('open');
   if ('Notification' in window && Notification.permission === 'granted') {
-    new Notification('💊 ' + med.nombre, { body: 'Paciente: ' + paciente.nombre + ' · Cama ' + paciente.cama, icon: 'icon.png' });
+    new Notification('💊 ' + med.nombre, { body: 'Paciente: ' + paciente.nombre + ' · Cama ' + paciente.cama });
   }
 }
+
 function snoozeAlerta() {
   document.getElementById('medAlertOverlay').classList.remove('open');
   showToast('⏰ Alerta pospuesta 15 min');
@@ -1580,6 +1727,7 @@ function snoozeAlerta() {
   }, 15 * 60 * 1000);
   alertaActual = null;
 }
+
 function confirmarAlerta() {
   document.getElementById('medAlertOverlay').classList.remove('open');
   if (alertaActual) {
@@ -1602,35 +1750,38 @@ setTimeout(checkMedAlerts, 3000);
 // ============================================================
 const favData = [
   { id: 1, emoji: "❤️", name: "Infarto agudo de miocardio", count: 18 },
-  { id: 2, emoji: "🫁", name: "Neumonía",                   count: 12 },
-  { id: 3, emoji: "🧠", name: "EVC",                        count: 9  },
-  { id: 4, emoji: "🤰", name: "Preeclampsia",               count: 7  },
+  { id: 2, emoji: "🫁", name: "Neumonía", count: 12 },
+  { id: 3, emoji: "🧠", name: "EVC", count: 9 },
+  { id: 4, emoji: "🤰", name: "Preeclampsia", count: 7 },
 ];
 let starred = JSON.parse(localStorage.getItem("enfiapp_starred") || "[]");
+
 function saveStarred() { try { localStorage.setItem("enfiapp_starred", JSON.stringify(starred)); } catch(e) {} }
 
 function renderFavoritos() {
   const container = document.getElementById("favoritosContainer");
-  const toShow    = [...favData.filter(f => starred.includes(f.id)), ...favData.filter(f => !starred.includes(f.id))].slice(0,6);
+  const toShow = [...favData.filter(f => starred.includes(f.id)), ...favData.filter(f => !starred.includes(f.id))].slice(0, 6);
   if (!toShow.length) {
     container.innerHTML = '<div class="fav-empty"><div class="fav-empty-icon">⭐</div><p>Aún no tienes favoritos.</p></div>';
     return;
   }
   container.innerHTML = '<div class="fav-scroll">' + toShow.map(f =>
-    '<div class="fav-chip ' + (starred.includes(f.id)?"active":"") + '" onclick="openDx(' + f.id + ')">' +
-      '<span class="fav-chip-icon">' + f.emoji + '</span>' +
-      '<div class="fav-chip-text"><strong>' + f.name + '</strong><span>' + f.count + ' intervenciones</span></div>' +
-      '<button class="fav-star ' + (starred.includes(f.id)?"starred":"") + '" onclick="toggleStar(event,' + f.id + ')">' +
-        (starred.includes(f.id)?"★":"☆") + '</button>' +
+    '<div class="fav-chip ' + (starred.includes(f.id) ? "active" : "") + '" onclick="openDx(' + f.id + ')">' +
+    '<span class="fav-chip-icon">' + f.emoji + '</span>' +
+    '<div class="fav-chip-text"><strong>' + f.name + '</strong><span>' + f.count + ' intervenciones</span></div>' +
+    '<button class="fav-star ' + (starred.includes(f.id) ? "starred" : "") + '" onclick="toggleStar(event,' + f.id + ')">' +
+    (starred.includes(f.id) ? "★" : "☆") + '</button>' +
     '</div>'
   ).join('') + '</div>';
 }
+
 function toggleStar(e, id) {
   e.stopPropagation();
-  starred = starred.includes(id) ? starred.filter(s=>s!==id) : [...starred, id];
+  starred = starred.includes(id) ? starred.filter(s => s !== id) : [...starred, id];
   showToast(starred.includes(id) ? "⭐ Agregado a favoritos" : "☆ Eliminado de favoritos");
   saveStarred(); renderFavoritos();
 }
+
 function openDx(id) {
   const dx = favData.find(f => f.id === id);
   if (dx) showToast("🔍 Abriendo: " + dx.name);
@@ -1645,14 +1796,16 @@ function buscarNanda() {
   const query = "Etiqueta diagnóstica NANDA para: " + input + ". Dame: 1 etiqueta diagnóstica NANDA, 3 factores relacionados (relacionado con), 3 características definitorias (manifestado por), intervenciones de enfermería NIC y resultados NOC";
   window.open("https://www.google.com/search?q=" + encodeURIComponent(query), "_blank");
 }
+
 document.getElementById("searchInput").addEventListener("keydown", e => { if (e.key === "Enter") buscarNanda(); });
 
 // ============================================================
 // MODAL APOYAR
 // ============================================================
-function abrirModalApoyar()  { document.getElementById("modalApoyar").classList.add("open"); }
+function abrirModalApoyar() { document.getElementById("modalApoyar").classList.add("open"); }
 function cerrarModalApoyar() { document.getElementById("modalApoyar").classList.remove("open"); }
 function cerrarModalSiOverlay(e) { if (e.target === document.getElementById("modalApoyar")) cerrarModalApoyar(); }
+
 function copiarClabe() {
   const val = document.getElementById("clabeInput").value;
   if (navigator.clipboard) navigator.clipboard.writeText(val).then(() => showToast("📋 ¡Copiado!"));
@@ -1672,6 +1825,19 @@ function showToast(msg) {
   t.textContent = msg; t.classList.add("show");
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => t.classList.remove("show"), 2500);
+}
+
+// ============================================================
+// HELPER
+// ============================================================
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/[&<>]/g, function(m) {
+    if (m === '&') return '&amp;';
+    if (m === '<') return '&lt;';
+    if (m === '>') return '&gt;';
+    return m;
+  });
 }
 
 // ============================================================
