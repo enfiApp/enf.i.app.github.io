@@ -359,6 +359,152 @@ body {
 ============================================================ */
 .toast { position: fixed; bottom: calc(var(--nav-height) + 16px); left: 50%; transform: translateX(-50%) translateY(20px); background: var(--navy); color: #fff; padding: 10px 18px; border-radius: 20px; font-size: 13px; font-weight: 500; opacity: 0; transition: opacity 0.3s, transform 0.3s; pointer-events: none; z-index: 300; white-space: nowrap; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+/* ============================================================
+   FILTROS DE PACIENTES (Todos / Hospitalizados / Altas / Críticos / etc.)
+============================================================ */
+.pac-filters {
+  display: flex; gap: 8px; overflow-x: auto; padding: 6px 16px 4px;
+  scrollbar-width: none;
+}
+.pac-filters::-webkit-scrollbar { display: none; }
+.pac-filter-btn {
+  flex-shrink: 0; padding: 7px 16px; border-radius: 20px; border: 1.5px solid var(--border);
+  font-family: var(--font); font-size: 13px; font-weight: 600; cursor: pointer;
+  background: var(--card); color: var(--text-secondary); transition: all 0.2s;
+  white-space: nowrap; position: relative;
+}
+.pac-filter-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+.pac-filter-btn .filter-dot {
+  position: absolute; top: 4px; right: 6px; width: 7px; height: 7px;
+  background: #EF4444; border-radius: 50%; border: 1.5px solid var(--card);
+}
+
+/* ============================================================
+   BUSCADOR EN PANTALLA PACIENTES
+============================================================ */
+.pac-search-wrap {
+  margin: 6px 16px 4px; position: relative;
+}
+.pac-search-wrap svg {
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  color: var(--text-muted); pointer-events: none;
+}
+.pac-search-input {
+  width: 100%; padding: 12px 40px 12px 42px; border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); font-family: var(--font); font-size: 13.5px;
+  color: var(--text-primary); background: var(--card); outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.pac-search-input::placeholder { color: var(--text-muted); }
+.pac-search-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(45,95,166,0.1); }
+.pac-search-clear {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 15px;
+  display: none;
+}
+
+/* ============================================================
+   ESTADÍSTICAS ARRIBA
+============================================================ */
+.pac-stats-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  margin: 8px 16px 4px;
+}
+.pac-stat-card {
+  background: var(--card); border-radius: var(--radius-sm); padding: 12px 14px;
+  box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 10px;
+  border: 1.5px solid var(--border);
+}
+.pac-stat-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.pac-stat-icon.blue   { background: #EBF1FB; }
+.pac-stat-icon.red    { background: #FEE2E2; }
+.pac-stat-num  { font-size: 22px; font-weight: 700; color: var(--navy); line-height: 1; }
+.pac-stat-lbl  { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+
+/* ============================================================
+   TARJETA PACIENTE — versión mejorada con barra lateral coloreada
+============================================================ */
+.pac-card { cursor: pointer; }
+.pac-card-bar { width: 5px; height: 100%; min-height: 100%; position: absolute; left: 0; top: 0; bottom: 0; border-radius: 0; }
+.pac-card-inner { position: relative; padding-left: 5px; }
+.pac-card-body-new { padding: 14px 14px 12px 16px; }
+
+/* Redefinir la barra para que sea lateral */
+.pac-card { overflow: hidden; position: relative; }
+.pac-card .pac-card-bar { height: auto; width: 5px; position: absolute; left: 0; top: 0; bottom: 0; border-radius: 0; }
+
+/* Etiqueta de estado */
+.pac-status-badge {
+  font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 12px;
+  white-space: nowrap; letter-spacing: 0.2px;
+}
+.pac-status-badge.stable   { background: #DCFCE7; color: #16A34A; }
+.pac-status-badge.warning  { background: #FEF9C3; color: #A16207; }
+.pac-status-badge.critical { background: #FEE2E2; color: #DC2626; }
+.pac-status-badge.alta     { background: #F0F4FA; color: #5A6A82; }
+
+/* Tags de intervenciones/síntomas */
+.pac-tags-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.pac-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: #F0F5FF; color: var(--blue); border-radius: 8px;
+  font-size: 11px; font-weight: 600; padding: 4px 8px; border: 1px solid #DBEAFE;
+}
+.pac-tag.green  { background: #F0FDF4; color: #16A34A; border-color: #BBF7D0; }
+.pac-tag.yellow { background: #FFFBEB; color: #B45309; border-color: #FDE68A; }
+.pac-tag.red    { background: #FFF1F2; color: #BE123C; border-color: #FECDD3; }
+.pac-tag.gray   { background: #F8FAFD; color: #5A6A82; border-color: #E2E8F2; }
+
+/* ============================================================
+   BOTTOM SHEET — Detalle / Acciones del paciente
+============================================================ */
+.pac-sheet-overlay {
+  position: fixed; inset: 0; z-index: 250; background: rgba(15,23,36,0.55);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.pac-sheet-overlay.open { opacity: 1; pointer-events: all; }
+.pac-sheet-card {
+  background: var(--card); border-radius: 24px 24px 0 0; width: 100%; max-width: 430px;
+  max-height: 85vh; overflow-y: auto; padding: 0 0 40px;
+  transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.34,1.2,0.64,1);
+  box-shadow: 0 -8px 40px rgba(27,58,107,0.2);
+}
+.pac-sheet-card::-webkit-scrollbar { display: none; }
+.pac-sheet-overlay.open .pac-sheet-card { transform: translateY(0); }
+.pac-sheet-handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 14px auto 0; }
+.pac-sheet-header { padding: 14px 20px 12px; border-bottom: 1px solid var(--border); }
+.pac-sheet-title { font-size: 18px; font-weight: 700; color: var(--navy); letter-spacing: -0.4px; }
+.pac-sheet-sub   { font-size: 12.5px; color: var(--text-secondary); margin-top: 2px; }
+.pac-sheet-actions { padding: 16px 20px 0; display: flex; flex-direction: column; gap: 10px; }
+.pac-sheet-btn {
+  padding: 14px 18px; border-radius: var(--radius-sm); border: none;
+  font-family: var(--font); font-size: 14px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; gap: 10px; transition: all 0.15s; -webkit-appearance: none;
+  text-align: left;
+}
+.pac-sheet-btn:active { transform: scale(0.98); }
+.pac-sheet-btn.edit    { background: #EBF1FB; color: var(--blue); }
+.pac-sheet-btn.alta    { background: #F0FDF4; color: #16A34A; }
+.pac-sheet-btn.delete  { background: #FEE2E2; color: #DC2626; }
+.pac-sheet-btn.cancel  { background: #F0F4FA; color: var(--text-secondary); }
+.pac-sheet-btn i { width: 18px; text-align: center; }
+
+/* Sección altas */
+.pac-alta-section { margin: 12px 16px 0; }
+.pac-alta-header { font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 0 6px; display: flex; align-items: center; gap: 6px; }
+
+/* Botón flotante */
+.fab-btn {
+  position: fixed; bottom: calc(var(--nav-height) + 16px); right: 20px;
+  width: 54px; height: 54px; border-radius: 50%; background: var(--navy); color: #fff;
+  border: none; font-size: 22px; cursor: pointer; box-shadow: var(--shadow-lg);
+  display: none; align-items: center; justify-content: center;
+  transition: transform 0.15s, background 0.2s; z-index: 99;
+}
+.fab-btn.visible { display: flex; }
+.fab-btn:active { transform: scale(0.92); background: #142d54; }
 </style>
 </head>
 <body>
@@ -463,19 +609,71 @@ body {
      Controles: showScreen('pacientes') / showScreen('inicio')
 ============================================================ -->
 <div class="screen" id="screen-pacientes">
+  <!-- Header -->
   <div class="pac-header">
     <div>
       <h2>Pacientes</h2>
       <p id="pac-subtitle">Cargando turno...</p>
     </div>
-    <button class="pac-add-btn" onclick="abrirFormPaciente()" title="Nuevo paciente">
-      <i class="fas fa-plus"></i>
+    <div style="display:flex;gap:8px;">
+      <button class="header-btn" onclick="togglePacSearch()" id="pacSearchBtn" title="Buscar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B3A6B" stroke-width="1.8">
+          <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Buscador (oculto por defecto) -->
+  <div class="pac-search-wrap" id="pacSearchWrap" style="display:none;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+    </svg>
+    <input class="pac-search-input" id="pacSearchInput" type="text"
+      placeholder="Buscar por nombre, cama o diagnóstico..." oninput="filtrarPacientes()">
+    <button class="pac-search-clear" id="pacSearchClear" onclick="limpiarBusqueda()">
+      <i class="fas fa-xmark"></i>
     </button>
   </div>
-  <!-- Tarjetas renderizadas por JS desde renderPacientes() -->
+
+  <!-- Estadísticas -->
+  <div class="pac-stats-row" id="pacStatsRow"></div>
+
+  <!-- Filtros -->
+  <div class="pac-filters" id="pacFilters">
+    <button class="pac-filter-btn active" data-filter="todos"          onclick="setFilter(this,'todos')">Todos</button>
+    <button class="pac-filter-btn"        data-filter="hospitalizados" onclick="setFilter(this,'hospitalizados')">Hospitalizados</button>
+    <button class="pac-filter-btn"        data-filter="stable"         onclick="setFilter(this,'stable')">Estables</button>
+    <button class="pac-filter-btn"        data-filter="warning"        onclick="setFilter(this,'warning')">Precaución</button>
+    <button class="pac-filter-btn"        data-filter="critical"       onclick="setFilter(this,'critical')">Críticos<span class="filter-dot" id="critDot" style="display:none;"></span></button>
+    <button class="pac-filter-btn"        data-filter="alta"           onclick="setFilter(this,'alta')">🏠 Altas</button>
+  </div>
+
+  <!-- Lista pacientes -->
   <div class="pac-list" id="pacList"></div>
 </div>
 
+<!-- Botón flotante -->
+<button class="fab-btn" id="fabBtn" onclick="abrirFormPaciente()" title="Nuevo paciente">
+  <i class="fas fa-plus"></i>
+</button>
+
+<!-- Bottom Sheet acciones paciente -->
+<div class="pac-sheet-overlay" id="pacSheetOverlay" onclick="cerrarSheetSiOverlay(event)">
+  <div class="pac-sheet-card">
+    <div class="pac-sheet-handle"></div>
+    <div class="pac-sheet-header">
+      <div class="pac-sheet-title" id="sheetPatientName">—</div>
+      <div class="pac-sheet-sub"   id="sheetPatientInfo">—</div>
+    </div>
+    <div class="pac-sheet-actions">
+      <button class="pac-sheet-btn edit"   onclick="sheetEditar()"><i class="fas fa-pen"></i> Editar paciente</button>
+      <button class="pac-sheet-btn alta"   onclick="sheetDarAlta()"><i class="fas fa-house-medical-circle-check"></i> Dar de alta</button>
+      <button class="pac-sheet-btn delete" onclick="sheetEliminar()"><i class="fas fa-trash"></i> Eliminar del turno</button>
+      <button class="pac-sheet-btn cancel" onclick="cerrarSheet()"><i class="fas fa-xmark"></i> Cancelar</button>
+    </div>
+  </div>
+</div>
 <!-- ============================================================
      BARRA DE NAVEGACIÓN INFERIOR
      setNav(el) = Inicio | setNav(el,'pacientes') = Pacientes
@@ -603,6 +801,11 @@ body {
         <input class="form-input" id="fDx" type="text" placeholder="Ej: Neumonía adquirida en comunidad">
       </div>
       <div class="form-group">
+  <label class="form-label"><i class="fas fa-tags"></i> Intervenciones / Tags</label>
+  <input class="form-input" id="fTags" type="text" 
+    placeholder="Ej: O2 2L, Curación, TA elevada (separadas por coma)">
+</div>
+      <div class="form-group">
         <div class="form-meds-header">
           <span class="form-meds-title"><i class="fas fa-pills"></i> &nbsp;Medicamentos</span>
           <button class="form-add-med-btn" onclick="agregarMedForm()">
@@ -692,16 +895,276 @@ function setNav(el, screen) {
 
 // ============================================================
 // DATOS DE PACIENTES
-// Guardados en localStorage. Estructura:
-// { id, cama, nombre, dx, estado, meds:[{nombre,dosis,hora,frecuencia,ultimaAdmin}] }
+// estado: 'stable' | 'warning' | 'critical' | 'alta'
+// meds:[{nombre,dosis,hora,frecuencia,ultimaAdmin}]
+// tags:[{label,tipo}]  tipo: '' | 'green' | 'yellow' | 'red' | 'gray'
 // ============================================================
 let pacientes = JSON.parse(localStorage.getItem('enfiapp_pacientes') || '[]');
 let editandoId = null;
 let medFormCount = 0;
+let filtroActual = 'todos';
+let sheetPacId = null;
 
 function savePacientes() {
   try { localStorage.setItem('enfiapp_pacientes', JSON.stringify(pacientes)); } catch(e) {}
 }
+
+// ============================================================
+// ESTADÍSTICAS
+// ============================================================
+function renderStats() {
+  const activos  = pacientes.filter(p => p.estado !== 'alta').length;
+  const criticos = pacientes.filter(p => p.estado === 'critical').length;
+  document.getElementById('pacStatsRow').innerHTML =
+    '<div class="pac-stat-card"><div class="pac-stat-icon blue">👥</div><div><div class="pac-stat-num">' + activos + '</div><div class="pac-stat-lbl">Pacientes activos</div></div></div>' +
+    '<div class="pac-stat-card"><div class="pac-stat-icon red">⚠️</div><div><div class="pac-stat-num">' + criticos + '</div><div class="pac-stat-lbl">Pendientes críticos</div></div></div>';
+  const critDot = document.getElementById('critDot');
+  if (critDot) critDot.style.display = criticos > 0 ? 'block' : 'none';
+}
+
+// ============================================================
+// FILTROS
+// ============================================================
+function setFilter(btn, filter) {
+  filtroActual = filter;
+  document.querySelectorAll('.pac-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPacientes();
+}
+
+// ============================================================
+// BUSCADOR
+// ============================================================
+let busquedaActual = '';
+function togglePacSearch() {
+  const wrap = document.getElementById('pacSearchWrap');
+  wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
+  if (wrap.style.display === 'block') document.getElementById('pacSearchInput').focus();
+  else { limpiarBusqueda(); }
+}
+function filtrarPacientes() {
+  busquedaActual = document.getElementById('pacSearchInput').value.toLowerCase().trim();
+  const clearBtn = document.getElementById('pacSearchClear');
+  if (clearBtn) clearBtn.style.display = busquedaActual ? 'block' : 'none';
+  renderPacientes();
+}
+function limpiarBusqueda() {
+  busquedaActual = '';
+  const inp = document.getElementById('pacSearchInput');
+  if (inp) inp.value = '';
+  const clearBtn = document.getElementById('pacSearchClear');
+  if (clearBtn) clearBtn.style.display = 'none';
+  renderPacientes();
+}
+
+// ============================================================
+// RENDER TARJETAS
+// ============================================================
+function renderPacientes() {
+  const list = document.getElementById('pacList');
+  const subtitle = document.getElementById('pac-subtitle');
+  renderStats();
+
+  let lista = [...pacientes];
+
+  // Aplicar búsqueda
+  if (busquedaActual) {
+    lista = lista.filter(p =>
+      p.nombre.toLowerCase().includes(busquedaActual) ||
+      p.cama.toLowerCase().includes(busquedaActual) ||
+      p.dx.toLowerCase().includes(busquedaActual)
+    );
+  }
+
+  // Aplicar filtro
+  if (filtroActual === 'alta') {
+    lista = lista.filter(p => p.estado === 'alta');
+  } else if (filtroActual === 'hospitalizados') {
+    lista = lista.filter(p => p.estado !== 'alta');
+  } else if (filtroActual !== 'todos') {
+    lista = lista.filter(p => p.estado === filtroActual);
+  }
+
+  const activos = lista.filter(p => p.estado !== 'alta');
+  const altas   = lista.filter(p => p.estado === 'alta');
+
+  if (subtitle) subtitle.textContent = pacientes.filter(p=>p.estado!=='alta').length + ' paciente' + (pacientes.filter(p=>p.estado!=='alta').length!==1?'s':'') + ' en turno';
+
+  if (lista.length === 0) {
+    list.innerHTML = '<div class="pac-empty"><i class="fas fa-hospital-user"></i><h3>Sin resultados</h3><p>No hay pacientes que coincidan con el filtro seleccionado.</p></div>';
+    return;
+  }
+
+  const estadoLabel = { stable:'Estable', warning:'Vigilancia', critical:'Crítico', alta:'Alta' };
+
+  function cardHtml(p) {
+    const tags = p.tags && p.tags.length > 0
+      ? p.tags.map(t => '<span class="pac-tag ' + (t.tipo||'') + '"><i class="fas fa-tag" style="font-size:9px"></i>' + t.label + '</span>').join('')
+      : '';
+    // Next med time
+    let nextMed = '';
+    if (p.meds && p.meds.length > 0) {
+      const sorted = [...p.meds].sort((a,b)=> a.hora.localeCompare(b.hora));
+      nextMed = '<span class="pac-tag gray"><i class="fas fa-clock" style="font-size:9px"></i>' + sorted[0].hora + '</span>';
+    }
+    return '<div class="pac-card" id="pac-' + p.id + '" onclick="abrirSheet(' + p.id + ')">' +
+      '<div class="pac-card-bar ' + p.estado + '"></div>' +
+      '<div class="pac-card-body" style="padding:14px 14px 12px 20px;">' +
+        '<div class="pac-card-top">' +
+          '<div class="pac-card-bed">' +
+            '<span class="pac-bed-badge"><i class="fas fa-bed"></i> ' + p.cama + '</span>' +
+            '<span class="pac-patient-name">' + p.nombre + '</span>' +
+          '</div>' +
+          '<span class="pac-status-badge ' + p.estado + '">' + (estadoLabel[p.estado]||p.estado) + '</span>' +
+        '</div>' +
+        '<div class="pac-dx-row"><i class="fas fa-stethoscope"></i><span class="pac-dx-text">' + p.dx + '</span></div>' +
+        '<div class="pac-tags-row">' + tags + nextMed + '</div>' +
+      '</div></div>';
+  }
+
+  let html = activos.map(cardHtml).join('');
+
+  if (altas.length > 0 && (filtroActual === 'todos' || filtroActual === 'alta')) {
+    html += '<div class="pac-alta-section"><div class="pac-alta-header"><i class="fas fa-house-medical-circle-check"></i> Altas del turno</div></div>';
+    html += altas.map(cardHtml).join('');
+  }
+
+  list.innerHTML = html;
+}
+
+// ============================================================
+// BOTTOM SHEET
+// ============================================================
+function abrirSheet(id) {
+  sheetPacId = id;
+  const p = pacientes.find(x => x.id === id);
+  if (!p) return;
+  const estadoLabel = { stable:'Estable', warning:'Vigilancia', critical:'Crítico', alta:'Alta' };
+  document.getElementById('sheetPatientName').textContent = p.nombre;
+  document.getElementById('sheetPatientInfo').textContent = 'Cama ' + p.cama + ' · ' + p.dx + ' · ' + (estadoLabel[p.estado]||p.estado);
+  document.getElementById('pacSheetOverlay').classList.add('open');
+}
+function cerrarSheet() {
+  document.getElementById('pacSheetOverlay').classList.remove('open');
+  sheetPacId = null;
+}
+function cerrarSheetSiOverlay(e) {
+  if (e.target === document.getElementById('pacSheetOverlay')) cerrarSheet();
+}
+function sheetEditar() { const id = sheetPacId; cerrarSheet(); abrirFormPaciente(id); }
+function sheetEliminar() {
+  if (!sheetPacId) return;
+  if (!confirm('¿Eliminar este paciente del turno?')) return;
+  pacientes = pacientes.filter(p => p.id !== sheetPacId);
+  savePacientes(); cerrarSheet(); renderPacientes();
+  showToast('🗑️ Paciente eliminado');
+}
+function sheetDarAlta() {
+  if (!sheetPacId) return;
+  const idx = pacientes.findIndex(p => p.id === sheetPacId);
+  if (idx !== -1) { pacientes[idx].estado = 'alta'; savePacientes(); }
+  cerrarSheet(); renderPacientes();
+  showToast('🏠 Paciente dado de alta');
+}
+
+// ============================================================
+// FAB — visible solo en pantalla Pacientes
+// ============================================================
+function syncFab(screen) {
+  const fab = document.getElementById('fabBtn');
+  if (!fab) return;
+  if (screen === 'pacientes') fab.classList.add('visible');
+  else fab.classList.remove('visible');
+}
+
+// ============================================================
+// FORMULARIO PACIENTE — Abrir / Cerrar
+// ============================================================
+function abrirFormPaciente(id = null) {
+  editandoId = id;
+  medFormCount = 0;
+  const overlay = document.getElementById('formOverlay');
+  const title   = document.getElementById('formTitle');
+  if (id !== null) {
+    const p = pacientes.find(x => x.id === id);
+    title.textContent = 'Editar paciente';
+    document.getElementById('fCama').value   = p.cama;
+    document.getElementById('fNombre').value = p.nombre;
+    document.getElementById('fDx').value     = p.dx;
+    document.getElementById('fEstado').value = p.estado === 'alta' ? 'stable' : p.estado;
+    document.getElementById('fTags').value   = (p.tags||[]).map(t=>t.label).join(', ');
+    document.getElementById('formMedsList').innerHTML = '';
+    (p.meds || []).forEach(m => agregarMedForm(m));
+  } else {
+    title.textContent = 'Nuevo paciente';
+    document.getElementById('fCama').value   = '';
+    document.getElementById('fNombre').value = '';
+    document.getElementById('fDx').value     = '';
+    document.getElementById('fEstado').value = 'stable';
+    document.getElementById('fTags').value   = '';
+    document.getElementById('formMedsList').innerHTML = '';
+  }
+  overlay.classList.add('open');
+}
+
+function cerrarFormPaciente() {
+  document.getElementById('formOverlay').classList.remove('open');
+  editandoId = null;
+}
+function cerrarFormSiOverlay(e) {
+  if (e.target === document.getElementById('formOverlay')) cerrarFormPaciente();
+}
+
+// ============================================================
+// AGREGAR MEDICAMENTO AL FORMULARIO
+// ============================================================
+function agregarMedForm(med = null) {
+  medFormCount++;
+  const idx = medFormCount;
+  const container = document.getElementById('formMedsList');
+  const div = document.createElement('div');
+  div.className = 'form-med-item'; div.id = 'med-item-' + idx;
+  div.innerHTML = '<button class="form-med-remove" onclick="removeMedItem(' + idx + ')"><i class="fas fa-xmark"></i></button><div class="form-med-row"><div class="form-group"><label class="form-label"><i class="fas fa-capsules"></i> Medicamento</label><input class="form-input" id="mNombre-' + idx + '" type="text" placeholder="Ej: O2 2 L/min" value="' + (med?med.nombre:'') + '"></div><div class="form-group"><label class="form-label"><i class="fas fa-flask"></i> Dosis</label><input class="form-input" id="mDosis-' + idx + '" type="text" placeholder="Ej: 500mg IV" value="' + (med?med.dosis:'') + '"></div></div><div class="form-med-row"><div class="form-group"><label class="form-label"><i class="fas fa-clock"></i> Primera dosis</label><input class="form-input" id="mHora-' + idx + '" type="time" value="' + (med?med.hora:'') + '"></div><div class="form-group"><label class="form-label"><i class="fas fa-rotate"></i> Frecuencia (h)</label><input class="form-input" id="mFrec-' + idx + '" type="number" min="1" max="24" placeholder="Ej: 8" value="' + (med?med.frecuencia:'') + '"></div></div>';
+  container.appendChild(div);
+}
+function removeMedItem(idx) { const el = document.getElementById('med-item-' + idx); if (el) el.remove(); }
+
+// ============================================================
+// GUARDAR PACIENTE
+// ============================================================
+function guardarPaciente() {
+  const cama   = document.getElementById('fCama').value.trim();
+  const nombre = document.getElementById('fNombre').value.trim();
+  const dx     = document.getElementById('fDx').value.trim();
+  const estado = document.getElementById('fEstado').value;
+  const tagsRaw = document.getElementById('fTags').value.trim();
+  if (!cama || !nombre || !dx) { showToast('⚠️ Completa cama, nombre y diagnóstico'); return; }
+  const tags = tagsRaw ? tagsRaw.split(',').map(t=>({label:t.trim(), tipo:''})).filter(t=>t.label) : [];
+  const meds = [];
+  document.querySelectorAll('.form-med-item').forEach(item => {
+    const id = item.id.replace('med-item-', '');
+    const n = document.getElementById('mNombre-' + id)?.value.trim();
+    const d = document.getElementById('mDosis-'  + id)?.value.trim();
+    const h = document.getElementById('mHora-'   + id)?.value;
+    const f = document.getElementById('mFrec-'   + id)?.value;
+    if (n && h) meds.push({ nombre:n, dosis:d||'', hora:h, frecuencia:f||'8', ultimaAdmin:null });
+  });
+  if (editandoId !== null) {
+    const idx = pacientes.findIndex(p => p.id === editandoId);
+    if (idx !== -1) pacientes[idx] = { ...pacientes[idx], cama, nombre, dx, estado, meds, tags };
+    showToast('✅ Paciente actualizado');
+  } else {
+    pacientes.push({ id: Date.now(), cama, nombre, dx, estado, meds, tags });
+    showToast('✅ Paciente agregado');
+  }
+  savePacientes(); cerrarFormPaciente(); renderPacientes();
+}
+function eliminarPaciente(id) {
+  if (!confirm('¿Eliminar este paciente?')) return;
+  pacientes = pacientes.filter(p => p.id !== id);
+  savePacientes(); renderPacientes(); showToast('🗑️ Eliminado');
+}
+function editarPaciente(id) { abrirFormPaciente(id); }
 
 // ============================================================
 // RENDER TARJETAS DE PACIENTES
