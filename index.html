@@ -22,28 +22,27 @@
    VARIABLES GLOBALES — Cambiar aquí afecta todo el diseño
 ============================================================ */
 :root {
-  --bg:            #EEF2F8;
+  --bg:            #F0F4FA;
   --card:          #FFFFFF;
-  --navy:          #1B3A6B;
-  --blue:          #2D5FA6;
-  --blue-light:    #4A7EC7;
-  --accent:        #3B82F6;
-  --teal:          #0E9F8E;
-  --purple:        #7C3AED;
-  --text-primary:  #0F1724;
-  --text-secondary:#5A6A82;
-  --text-muted:    #96A4B8;
-  --border:        #E2E8F2;
-  --shadow-sm:     0 2px 8px rgba(27,58,107,0.08);
-  --shadow-md:     0 4px 20px rgba(27,58,107,0.12);
-  --shadow-lg:     0 8px 32px rgba(27,58,107,0.16);
+  --navy:          #2C4E7E;
+  --blue:          #4A7AB5;
+  --blue-light:    #6B9BD2;
+  --accent:        #5B9BD5;
+  --teal:          #2BA899;
+  --purple:        #8B5CF6;
+  --text-primary:  #1A2535;
+  --text-secondary:#6B7C96;
+  --text-muted:    #A0AEBE;
+  --border:        #DDE6F2;
+  --shadow-sm:     0 2px 8px rgba(44,78,126,0.07);
+  --shadow-md:     0 4px 20px rgba(44,78,126,0.10);
+  --shadow-lg:     0 8px 32px rgba(44,78,126,0.14);
   --radius:        16px;
   --radius-sm:     12px;
   --radius-xs:     8px;
   --nav-height:    58px;
   --font: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
 }
-
 /* ============================================================
    RESET Y BASE
 ============================================================ */
@@ -538,6 +537,111 @@ highlight-text {
 
 /* Tags con icono más visible en tarjeta */
 .pac-tag i { font-size: 9px; }
+/* ============================================================
+   ESTADÍSTICAS — versión compacta
+============================================================ */
+.pac-stats-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  margin: 6px 16px 2px;
+}
+.pac-stat-card {
+  background: var(--card); border-radius: var(--radius-sm); padding: 8px 12px;
+  box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 8px;
+  border: 1.5px solid var(--border);
+}
+.pac-stat-icon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.pac-stat-icon.blue { background: #E8F0FB; }
+.pac-stat-icon.red  { background: #FCE8E8; }
+.pac-stat-num { font-size: 18px; font-weight: 700; color: var(--navy); line-height: 1; }
+.pac-stat-lbl { font-size: 10px; color: var(--text-secondary); margin-top: 1px; }
+
+/* ============================================================
+   FLASHCARD DETALLE PACIENTE
+============================================================ */
+.detail-overlay {
+  position: fixed; inset: 0; z-index: 300; background: rgba(15,23,36,0.6);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.detail-overlay.open { opacity: 1; pointer-events: all; }
+.detail-card {
+  background: var(--card); border-radius: 24px 24px 0 0; width: 100%; max-width: 430px;
+  max-height: 90vh; overflow-y: auto; padding: 0 0 40px;
+  transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.34,1.2,0.64,1);
+  box-shadow: 0 -8px 40px rgba(44,78,126,0.18);
+}
+.detail-card::-webkit-scrollbar { display: none; }
+.detail-overlay.open .detail-card { transform: translateY(0); }
+
+.detail-handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 14px auto 0; }
+
+.detail-hero {
+  padding: 16px 20px 14px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+}
+.detail-hero-left { flex: 1; }
+.detail-patient-name { font-size: 20px; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; }
+.detail-bed-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+.detail-dx { font-size: 13px; color: var(--text-secondary); margin-top: 6px; line-height: 1.4; }
+
+.detail-section { padding: 14px 20px 0; }
+.detail-section-title {
+  font-size: 10px; font-weight: 700; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.detail-section-title i { font-size: 11px; color: var(--blue-light); }
+
+/* Medicamentos con horarios */
+.detail-med-card {
+  background: #F6F9FE; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 10px 12px; margin-bottom: 8px;
+}
+.detail-med-name { font-size: 13.5px; font-weight: 700; color: var(--navy); display: flex; align-items: center; gap: 6px; }
+.detail-med-name i { color: var(--blue-light); font-size: 13px; }
+.detail-med-dose { font-size: 12px; color: var(--text-secondary); margin-top: 2px; margin-left: 20px; }
+.detail-med-horarios { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; margin-left: 20px; }
+.detail-med-hora-chip {
+  font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 10px;
+  display: flex; align-items: center; gap: 4px;
+}
+.detail-med-hora-chip.turno-m  { background: #FEF9C3; color: #92400E; }
+.detail-med-hora-chip.turno-v  { background: #DBEAFE; color: #1E40AF; }
+.detail-med-hora-chip.turno-n  { background: #EDE9FE; color: #5B21B6; }
+
+/* Intervenciones */
+.detail-interv-list { display: flex; flex-direction: column; gap: 7px; }
+.detail-interv-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; border-radius: var(--radius-xs); border: 1px solid var(--border);
+  background: #F6F9FE; font-size: 13px; font-weight: 500; color: var(--text-primary);
+}
+.detail-interv-item.green  { background: #F0FDF4; border-color: #BBF7D0; color: #166534; }
+.detail-interv-item.yellow { background: #FFFBEB; border-color: #FDE68A; color: #92400E; }
+.detail-interv-item.red    { background: #FFF1F2; border-color: #FECDD3; color: #9F1239; }
+.detail-interv-item.gray   { background: #F8FAFD; border-color: #E2E8F2; color: #4B5563; }
+.detail-interv-item i      { font-size: 12px; width: 14px; text-align: center; flex-shrink: 0; }
+
+/* Acciones minimalistas en la flashcard */
+.detail-actions {
+  display: flex; gap: 8px; padding: 16px 20px 0;
+}
+.detail-action-btn {
+  flex: 1; padding: 11px 10px; border-radius: var(--radius-sm); border: 1.5px solid var(--border);
+  font-family: var(--font); font-size: 12.5px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  background: var(--card); color: var(--text-secondary); transition: all 0.15s;
+  -webkit-appearance: none;
+}
+.detail-action-btn:active { transform: scale(0.97); }
+.detail-action-btn.edit   { color: var(--blue); border-color: #BFDBFE; background: #EFF6FF; }
+.detail-action-btn.alta   { color: #16A34A; border-color: #BBF7D0; background: #F0FDF4; }
+.detail-action-btn.del    { color: #DC2626; border-color: #FECACA; background: #FEF2F2; }
+.detail-action-btn i      { font-size: 12px; }
+
+/* Tags en tarjeta */
+.pac-tags-row { margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -675,7 +779,6 @@ highlight-text {
   <!-- Filtros -->
   <div class="pac-filters" id="pacFilters">
     <button class="pac-filter-btn active" data-filter="todos"          onclick="setFilter(this,'todos')">Todos</button>
-    <button class="pac-filter-btn"        data-filter="hospitalizados" onclick="setFilter(this,'hospitalizados')">Hospitalizados</button>
     <button class="pac-filter-btn"        data-filter="stable"         onclick="setFilter(this,'stable')">Estables</button>
     <button class="pac-filter-btn"        data-filter="warning"        onclick="setFilter(this,'warning')">Precaución</button>
     <button class="pac-filter-btn"        data-filter="critical"       onclick="setFilter(this,'critical')">Críticos<span class="filter-dot" id="critDot" style="display:none;"></span></button>
@@ -810,17 +913,49 @@ highlight-text {
       <span class="form-title" id="formTitle">Nuevo paciente</span>
       <button class="form-close" onclick="cerrarFormPaciente()"><i class="fas fa-xmark"></i></button>
     </div>
-    <div class="form-body">
-      <div class="form-row">
-      <div class="form-group">
-  <div class="form-meds-header">
-    <span class="form-meds-title"><i class="fas fa-tags"></i> &nbsp;Intervenciones</span>
-    <button class="form-add-med-btn" onclick="agregarIntervForm()">
-      <i class="fas fa-plus"></i> Agregar
-    </button>
+   <div class="form-body">
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label"><i class="fas fa-bed"></i> N° de cama</label>
+      <input class="form-input" id="fCama" type="text" placeholder="Ej: 12-A" maxlength="6">
+    </div>
+    <div class="form-group">
+      <label class="form-label"><i class="fas fa-circle-dot"></i> Estado</label>
+      <select class="form-select" id="fEstado">
+        <option value="stable">Estable</option>
+        <option value="warning">Precaución</option>
+        <option value="critical">Crítico</option>
+      </select>
+    </div>
   </div>
-  <div class="form-interv-list" id="formIntervList"></div>
+  <div class="form-group">
+    <label class="form-label"><i class="fas fa-user"></i> Nombre / Iniciales</label>
+    <input class="form-input" id="fNombre" type="text" placeholder="Ej: J.G.M. o Juan García">
+  </div>
+  <div class="form-group">
+    <label class="form-label"><i class="fas fa-stethoscope"></i> Diagnóstico médico</label>
+    <input class="form-input" id="fDx" type="text" placeholder="Ej: Neumonía adquirida en comunidad">
+  </div>
+  <div class="form-group">
+    <div class="form-meds-header">
+      <span class="form-meds-title"><i class="fas fa-tags"></i> &nbsp;Intervenciones</span>
+      <button class="form-add-med-btn" onclick="agregarIntervForm()">
+        <i class="fas fa-plus"></i> Agregar
+      </button>
+    </div>
+    <div class="form-interv-list" id="formIntervList"></div>
+  </div>
+  <div class="form-group">
+    <div class="form-meds-header">
+      <span class="form-meds-title"><i class="fas fa-pills"></i> &nbsp;Medicamentos</span>
+      <button class="form-add-med-btn" onclick="agregarMedForm()">
+        <i class="fas fa-plus"></i> Agregar
+      </button>
+    </div>
+    <div class="form-meds-list" id="formMedsList"></div>
+  </div>
 </div>
+
       <div class="form-group">
         <label class="form-label"><i class="fas fa-user"></i> Nombre / Iniciales</label>
         <input class="form-input" id="fNombre" type="text" placeholder="Ej: J.G.M. o Juan García">
@@ -875,6 +1010,51 @@ highlight-text {
   </div>
 </div>
 
+<!-- FLASHCARD DETALLE PACIENTE -->
+<div class="detail-overlay" id="detailOverlay" onclick="cerrarDetailSiOverlay(event)">
+  <div class="detail-card">
+    <div class="detail-handle"></div>
+    <div class="detail-hero">
+      <div class="detail-hero-left">
+        <div class="detail-patient-name" id="detailNombre">—</div>
+        <div class="detail-bed-row">
+          <span class="pac-bed-badge" id="detailCama">—</span>
+          <span class="pac-status-badge" id="detailEstadoBadge">—</span>
+        </div>
+        <div class="detail-dx" id="detailDx">—</div>
+      </div>
+    </div>
+
+    <!-- MEDICAMENTOS -->
+    <div class="detail-section" id="detailMedsSection">
+      <div class="detail-section-title">
+        <i class="fas fa-pills"></i> Medicamentos y horarios
+      </div>
+      <div id="detailMedsList"></div>
+    </div>
+
+    <!-- INTERVENCIONES -->
+    <div class="detail-section" id="detailIntervSection">
+      <div class="detail-section-title">
+        <i class="fas fa-tags"></i> Intervenciones
+      </div>
+      <div class="detail-interv-list" id="detailIntervList"></div>
+    </div>
+
+    <!-- ACCIONES MINIMALISTAS -->
+    <div class="detail-actions">
+      <button class="detail-action-btn edit" onclick="detailEditar()">
+        <i class="fas fa-pen"></i> Editar
+      </button>
+      <button class="detail-action-btn alta" onclick="detailAlta()">
+        <i class="fas fa-house-medical-circle-check"></i> Alta
+      </button>
+      <button class="detail-action-btn del" onclick="detailEliminar()">
+        <i class="fas fa-trash"></i> Eliminar
+      </button>
+    </div>
+  </div>
+</div>
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
@@ -884,18 +1064,14 @@ highlight-text {
 // ============================================================
 function showScreen(name) {
   const mainScroll = document.querySelector('.scroll-area');
-  if (name === 'inicio') {
-    mainScroll.style.display = 'block';
-  } else {
-    mainScroll.style.display = 'none';
-  }
+  mainScroll.style.display = name === 'inicio' ? 'block' : 'none';
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const target = document.getElementById('screen-' + name);
   if (target) target.classList.add('active');
 }
 
 // ============================================================
-// NAVEGACIÓN INFERIOR
+// NAVEGACIÓN
 // ============================================================
 function setNav(el, screen) {
   document.querySelectorAll('.nav-item').forEach(n => {
@@ -905,30 +1081,27 @@ function setNav(el, screen) {
     if (lbl) lbl.style.color = '';
   });
   el.classList.add('active');
-  el.querySelectorAll('svg').forEach(s => s.setAttribute('stroke', '#2D5FA6'));
+  el.querySelectorAll('svg').forEach(s => s.setAttribute('stroke', '#4A7AB5'));
   const lbl = el.querySelector('.nav-label');
-  if (lbl) lbl.style.color = '#2D5FA6';
-
+  if (lbl) lbl.style.color = '#4A7AB5';
   if (screen === 'pacientes') {
-    showScreen('pacientes');
-    renderPacientes();
-    syncFab('pacientes');
+    showScreen('pacientes'); renderPacientes(); syncFab('pacientes');
   } else {
-    showScreen('inicio');
-    syncFab('inicio');
+    showScreen('inicio'); syncFab('inicio');
   }
 }
 
 // ============================================================
-// DATOS DE PACIENTES
+// DATOS
 // ============================================================
-let pacientes = JSON.parse(localStorage.getItem('enfiapp_pacientes') || '[]');
-let editandoId = null;
-let medFormCount = 0;
-let filtroActual = 'todos';
-let sheetPacId = null;
-let busquedaActual = '';
+let pacientes       = JSON.parse(localStorage.getItem('enfiapp_pacientes') || '[]');
+let editandoId      = null;
+let medFormCount    = 0;
 let intervFormCount = 0;
+let filtroActual    = 'todos';
+let sheetPacId      = null;
+let detailPacId     = null;
+let busquedaActual  = '';
 
 function savePacientes() {
   try { localStorage.setItem('enfiapp_pacientes', JSON.stringify(pacientes)); } catch(e) {}
@@ -940,8 +1113,7 @@ function savePacientes() {
 function syncFab(screen) {
   const fab = document.getElementById('fabBtn');
   if (!fab) return;
-  if (screen === 'pacientes') fab.classList.add('visible');
-  else fab.classList.remove('visible');
+  fab.classList.toggle('visible', screen === 'pacientes');
 }
 
 // ============================================================
@@ -951,8 +1123,12 @@ function renderStats() {
   const activos  = pacientes.filter(p => p.estado !== 'alta').length;
   const criticos = pacientes.filter(p => p.estado === 'critical').length;
   document.getElementById('pacStatsRow').innerHTML =
-    '<div class="pac-stat-card"><div class="pac-stat-icon blue">👥</div><div><div class="pac-stat-num">' + activos + '</div><div class="pac-stat-lbl">Pacientes activos</div></div></div>' +
-    '<div class="pac-stat-card"><div class="pac-stat-icon red">⚠️</div><div><div class="pac-stat-num">' + criticos + '</div><div class="pac-stat-lbl">Pendientes críticos</div></div></div>';
+    '<div class="pac-stat-card"><div class="pac-stat-icon blue">👥</div>' +
+    '<div><div class="pac-stat-num">' + activos + '</div>' +
+    '<div class="pac-stat-lbl">Pacientes activos</div></div></div>' +
+    '<div class="pac-stat-card"><div class="pac-stat-icon red">🚨</div>' +
+    '<div><div class="pac-stat-num">' + criticos + '</div>' +
+    '<div class="pac-stat-lbl">Pacientes críticos</div></div></div>';
   const critDot = document.getElementById('critDot');
   if (critDot) critDot.style.display = criticos > 0 ? 'block' : 'none';
 }
@@ -972,8 +1148,9 @@ function setFilter(btn, filter) {
 // ============================================================
 function togglePacSearch() {
   const wrap = document.getElementById('pacSearchWrap');
-  wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
-  if (wrap.style.display === 'block') document.getElementById('pacSearchInput').focus();
+  const visible = wrap.style.display !== 'none' && wrap.style.display !== '';
+  wrap.style.display = visible ? 'none' : 'block';
+  if (!visible) document.getElementById('pacSearchInput').focus();
   else limpiarBusqueda();
 }
 
@@ -987,21 +1164,16 @@ function filtrarPacientes() {
     const id = parseInt(card.id.replace('pac-', ''));
     const p  = pacientes.find(x => x.id === id);
     if (!p) return;
-    const hayMatch =
-      p.nombre.toLowerCase().includes(busquedaActual) ||
-      p.cama.toLowerCase().includes(busquedaActual)   ||
-      p.dx.toLowerCase().includes(busquedaActual);
+    const hayMatch = p.nombre.toLowerCase().includes(busquedaActual) ||
+                     p.cama.toLowerCase().includes(busquedaActual)   ||
+                     p.dx.toLowerCase().includes(busquedaActual);
     card.classList.toggle('search-match',    hayMatch);
     card.classList.toggle('search-no-match', !hayMatch);
     if (hayMatch) {
-      const nameEl = card.querySelector('.pac-patient-name');
-      const dxEl   = card.querySelector('.pac-dx-text');
-      const bedEl  = card.querySelector('.pac-bed-badge');
-      [nameEl, dxEl, bedEl].forEach(el => {
+      [card.querySelector('.pac-patient-name'), card.querySelector('.pac-dx-text'), card.querySelector('.pac-bed-badge')].forEach(el => {
         if (!el) return;
-        const original = el.textContent;
         const regex = new RegExp('(' + busquedaActual.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
-        el.innerHTML = original.replace(regex, '<highlight-text>$1</highlight-text>');
+        el.innerHTML = el.textContent.replace(regex, '<highlight-text>$1</highlight-text>');
       });
     }
   });
@@ -1013,13 +1185,13 @@ function limpiarBusqueda() {
   busquedaActual = '';
   const inp = document.getElementById('pacSearchInput');
   if (inp) inp.value = '';
-  const clearBtn = document.getElementById('pacSearchClear');
-  if (clearBtn) clearBtn.style.display = 'none';
+  const cb = document.getElementById('pacSearchClear');
+  if (cb) cb.style.display = 'none';
   renderPacientes();
 }
 
 // ============================================================
-// RENDER TARJETAS
+// ESTADO MEDICAMENTO
 // ============================================================
 function getMedStatus(med) {
   const now = new Date();
@@ -1027,17 +1199,46 @@ function getMedStatus(med) {
   const medTime = new Date(); medTime.setHours(h, m, 0, 0);
   const diff = (medTime - now) / 60000;
   if (diff <= 0 && diff >= -30) return 'due';
-  if (diff > 0 && diff <= 30) return 'soon';
+  if (diff > 0  && diff <= 30) return 'soon';
   return '';
 }
 
+// Genera todos los horarios según frecuencia desde la hora inicial
+function generarHorarios(horaInicio, frecuenciaHoras) {
+  const horas = [];
+  const frec  = parseInt(frecuenciaHoras) || 8;
+  const [hh, mm] = horaInicio.split(':').map(Number);
+  for (let i = 0; i < 24; i += frec) {
+    const total  = (hh * 60 + mm + i * 60) % (24 * 60);
+    const h      = Math.floor(total / 60).toString().padStart(2, '0');
+    const m      = (total % 60).toString().padStart(2, '0');
+    horas.push(h + ':' + m);
+  }
+  return horas;
+}
+
+// Turno según hora
+function getTurno(hora) {
+  const h = parseInt(hora.split(':')[0]);
+  if (h >= 7  && h < 15) return 'turno-m'; // Matutino
+  if (h >= 15 && h < 23) return 'turno-v'; // Vespertino
+  return 'turno-n';                          // Nocturno
+}
+function getTurnoLabel(clase) {
+  if (clase === 'turno-m') return '☀️';
+  if (clase === 'turno-v') return '🌇';
+  return '🌙';
+}
+
+// ============================================================
+// RENDER TARJETAS
+// ============================================================
 function renderPacientes() {
   const list     = document.getElementById('pacList');
   const subtitle = document.getElementById('pac-subtitle');
   renderStats();
 
   let lista = [...pacientes];
-
   if (busquedaActual) {
     lista = lista.filter(p =>
       p.nombre.toLowerCase().includes(busquedaActual) ||
@@ -1045,38 +1246,36 @@ function renderPacientes() {
       p.dx.toLowerCase().includes(busquedaActual)
     );
   }
-
-  if (filtroActual === 'alta') {
-    lista = lista.filter(p => p.estado === 'alta');
-  } else if (filtroActual === 'hospitalizados') {
-    lista = lista.filter(p => p.estado !== 'alta');
-  } else if (filtroActual !== 'todos') {
-    lista = lista.filter(p => p.estado === filtroActual);
-  }
+  if      (filtroActual === 'alta')    lista = lista.filter(p => p.estado === 'alta');
+  else if (filtroActual !== 'todos')   lista = lista.filter(p => p.estado === filtroActual);
 
   const activos = lista.filter(p => p.estado !== 'alta');
   const altas   = lista.filter(p => p.estado === 'alta');
-
-  const total = pacientes.filter(p => p.estado !== 'alta').length;
+  const total   = pacientes.filter(p => p.estado !== 'alta').length;
   if (subtitle) subtitle.textContent = total + ' paciente' + (total !== 1 ? 's' : '') + ' en turno';
 
   if (lista.length === 0) {
-    list.innerHTML = '<div class="pac-empty"><i class="fas fa-hospital-user"></i><h3>Sin resultados</h3><p>No hay pacientes que coincidan con el filtro seleccionado.</p><button class="pac-empty-btn" onclick="abrirFormPaciente()"><i class="fas fa-plus"></i> Agregar paciente</button></div>';
+    list.innerHTML = '<div class="pac-empty"><i class="fas fa-hospital-user"></i><h3>Sin resultados</h3><p>No hay pacientes con este filtro.</p><button class="pac-empty-btn" onclick="abrirFormPaciente()"><i class="fas fa-plus"></i> Agregar paciente</button></div>';
     return;
   }
 
   const estadoLabel = { stable:'Estable', warning:'Vigilancia', critical:'Crítico', alta:'Alta' };
 
   function cardHtml(p) {
-    const tags = p.tags && p.tags.length > 0
-      ? p.tags.map(t => '<span class="pac-tag ' + (t.tipo || '') + '"><i class="fas fa-tag" style="font-size:9px"></i> ' + t.label + '</span>').join('')
-      : '';
-    let nextMed = '';
+    const tags = (p.tags || []).map(t =>
+      '<span class="pac-tag ' + (t.tipo||'') + '"><i class="fas fa-tag" style="font-size:9px"></i> ' + t.label + '</span>'
+    ).join('');
+
+    // Icono de medicamentos con próxima hora
+    let medTag = '';
     if (p.meds && p.meds.length > 0) {
-      const sorted = [...p.meds].sort((a, b) => a.hora.localeCompare(b.hora));
-      nextMed = '<span class="pac-tag gray"><i class="fas fa-clock" style="font-size:9px"></i> ' + sorted[0].hora + '</span>';
+      const sorted  = [...p.meds].sort((a,b) => a.hora.localeCompare(b.hora));
+      const status  = getMedStatus(sorted[0]);
+      const color   = status === 'due' ? 'red' : status === 'soon' ? 'yellow' : 'gray';
+      medTag = '<span class="pac-tag ' + color + '"><i class="fas fa-pills" style="font-size:9px"></i> ' + sorted[0].hora + '</span>';
     }
-    return '<div class="pac-card" id="pac-' + p.id + '" onclick="abrirSheet(' + p.id + ')">' +
+
+    return '<div class="pac-card" id="pac-' + p.id + '" onclick="abrirDetail(' + p.id + ')">' +
       '<div class="pac-card-bar ' + p.estado + '"></div>' +
       '<div class="pac-card-body" style="padding:14px 14px 12px 20px;">' +
         '<div class="pac-card-top">' +
@@ -1084,56 +1283,99 @@ function renderPacientes() {
             '<span class="pac-bed-badge"><i class="fas fa-bed"></i> ' + p.cama + '</span>' +
             '<span class="pac-patient-name">' + p.nombre + '</span>' +
           '</div>' +
-          '<span class="pac-status-badge ' + p.estado + '">' + (estadoLabel[p.estado] || p.estado) + '</span>' +
+          '<span class="pac-status-badge ' + p.estado + '">' + (estadoLabel[p.estado]||p.estado) + '</span>' +
         '</div>' +
         '<div class="pac-dx-row"><i class="fas fa-stethoscope"></i><span class="pac-dx-text">' + p.dx + '</span></div>' +
-        '<div class="pac-tags-row">' + tags + nextMed + '</div>' +
+        '<div class="pac-tags-row">' + tags + medTag + '</div>' +
       '</div></div>';
   }
 
   let html = activos.map(cardHtml).join('');
-
   if (altas.length > 0 && (filtroActual === 'todos' || filtroActual === 'alta')) {
     html += '<div class="pac-alta-section"><div class="pac-alta-header"><i class="fas fa-house-medical-circle-check"></i> Altas del turno</div></div>';
     html += altas.map(cardHtml).join('');
   }
-
   list.innerHTML = html;
 }
 
 // ============================================================
-// BOTTOM SHEET
+// FLASHCARD DETALLE PACIENTE
 // ============================================================
-function abrirSheet(id) {
-  sheetPacId = id;
+function abrirDetail(id) {
+  detailPacId = id;
   const p = pacientes.find(x => x.id === id);
   if (!p) return;
+
   const estadoLabel = { stable:'Estable', warning:'Vigilancia', critical:'Crítico', alta:'Alta' };
-  document.getElementById('sheetPatientName').textContent = p.nombre;
-  document.getElementById('sheetPatientInfo').textContent = 'Cama ' + p.cama + ' · ' + p.dx + ' · ' + (estadoLabel[p.estado] || p.estado);
-  document.getElementById('pacSheetOverlay').classList.add('open');
+
+  document.getElementById('detailNombre').textContent = p.nombre;
+  document.getElementById('detailCama').textContent   = '🛏 Cama ' + p.cama;
+  document.getElementById('detailDx').textContent     = '📋 ' + p.dx;
+
+  const badge = document.getElementById('detailEstadoBadge');
+  badge.textContent  = estadoLabel[p.estado] || p.estado;
+  badge.className    = 'pac-status-badge ' + p.estado;
+
+  // Medicamentos con horarios generados
+  const medsSection = document.getElementById('detailMedsSection');
+  const medsList    = document.getElementById('detailMedsList');
+  if (p.meds && p.meds.length > 0) {
+    medsSection.style.display = 'block';
+    medsList.innerHTML = p.meds.map(m => {
+      const horarios = generarHorarios(m.hora, m.frecuencia);
+      const horasHtml = horarios.map(h => {
+        const turno = getTurno(h);
+        return '<span class="detail-med-hora-chip ' + turno + '">' + getTurnoLabel(turno) + ' ' + h + '</span>';
+      }).join('');
+      return '<div class="detail-med-card">' +
+        '<div class="detail-med-name"><i class="fas fa-pills"></i>' + m.nombre + '</div>' +
+        '<div class="detail-med-dose">' + m.dosis + ' · cada ' + m.frecuencia + 'h</div>' +
+        '<div class="detail-med-horarios">' + horasHtml + '</div>' +
+      '</div>';
+    }).join('');
+  } else {
+    medsSection.style.display = 'none';
+  }
+
+  // Intervenciones
+  const intervSection = document.getElementById('detailIntervSection');
+  const intervList    = document.getElementById('detailIntervList');
+  if (p.tags && p.tags.length > 0) {
+    intervSection.style.display = 'block';
+    const iconos = { green:'fa-circle-check', yellow:'fa-triangle-exclamation', red:'fa-circle-exclamation', gray:'fa-circle-info', '':'fa-tag' };
+    intervList.innerHTML = p.tags.map(t =>
+      '<div class="detail-interv-item ' + (t.tipo||'') + '">' +
+        '<i class="fas ' + (iconos[t.tipo||'']||'fa-tag') + '"></i>' + t.label +
+      '</div>'
+    ).join('');
+  } else {
+    intervSection.style.display = 'none';
+  }
+
+  document.getElementById('detailOverlay').classList.add('open');
 }
-function cerrarSheet() {
-  document.getElementById('pacSheetOverlay').classList.remove('open');
-  sheetPacId = null;
+
+function cerrarDetail() {
+  document.getElementById('detailOverlay').classList.remove('open');
+  detailPacId = null;
 }
-function cerrarSheetSiOverlay(e) {
-  if (e.target === document.getElementById('pacSheetOverlay')) cerrarSheet();
+function cerrarDetailSiOverlay(e) {
+  if (e.target === document.getElementById('detailOverlay')) cerrarDetail();
 }
-function sheetEditar()   { const id = sheetPacId; cerrarSheet(); abrirFormPaciente(id); }
-function sheetEliminar() {
-  if (!sheetPacId) return;
-  if (!confirm('¿Eliminar este paciente del turno?')) return;
-  pacientes = pacientes.filter(p => p.id !== sheetPacId);
-  savePacientes(); cerrarSheet(); renderPacientes();
-  showToast('🗑️ Paciente eliminado');
-}
-function sheetDarAlta() {
-  if (!sheetPacId) return;
-  const idx = pacientes.findIndex(p => p.id === sheetPacId);
+function detailEditar()   { const id = detailPacId; cerrarDetail(); abrirFormPaciente(id); }
+function detailAlta() {
+  if (!detailPacId) return;
+  const idx = pacientes.findIndex(p => p.id === detailPacId);
   if (idx !== -1) { pacientes[idx].estado = 'alta'; savePacientes(); }
-  cerrarSheet(); renderPacientes();
+  cerrarDetail(); renderPacientes();
   showToast('🏠 Paciente dado de alta');
+}
+function detailEliminar() {
+  if (!detailPacId) return;
+  if (!confirm('¿Eliminar este paciente del turno?')) return;
+  pacientes = pacientes.filter(p => p.id !== detailPacId);
+  savePacientes(); cerrarDetail(); renderPacientes();
+  showToast('🗑️ Paciente eliminado');
 }
 
 // ============================================================
@@ -1149,24 +1391,20 @@ const tiposInterv = [
 
 function agregarIntervForm(interv = null) {
   intervFormCount++;
-  const idx = intervFormCount;
+  const idx       = intervFormCount;
   const container = document.getElementById('formIntervList');
-  const div = document.createElement('div');
-  div.className = 'form-interv-item';
-  div.id = 'interv-item-' + idx;
-  const optsHtml = tiposInterv.map(t =>
+  const div       = document.createElement('div');
+  div.className   = 'form-interv-item';
+  div.id          = 'interv-item-' + idx;
+  const optsHtml  = tiposInterv.map(t =>
     '<option value="' + t.value + '"' + (interv && interv.tipo === t.value ? ' selected' : '') + '>' + t.label + '</option>'
   ).join('');
   div.innerHTML =
     '<button class="form-interv-remove" onclick="removeIntervItem(' + idx + ')"><i class="fas fa-xmark"></i></button>' +
     '<div style="flex:1;display:flex;gap:8px;align-items:center;padding-right:28px;">' +
-      '<input class="form-input" id="iLabel-' + idx + '" type="text" ' +
-        'placeholder="Ej: O2 2L, Curación, TA elevada..." ' +
-        'value="' + (interv ? interv.label : '') + '" ' +
-        'style="flex:1;padding:9px 12px;font-size:13px;">' +
-      '<select class="form-select" id="iTipo-' + idx + '" style="width:140px;padding:9px 10px;font-size:12px;">' +
-        optsHtml +
-      '</select>' +
+      '<input class="form-input" id="iLabel-' + idx + '" type="text" placeholder="Ej: O2 2L, Curación..." ' +
+        'value="' + (interv ? interv.label : '') + '" style="flex:1;padding:9px 12px;font-size:13px;">' +
+      '<select class="form-select" id="iTipo-' + idx + '" style="width:140px;padding:9px 10px;font-size:12px;">' + optsHtml + '</select>' +
     '</div>';
   container.appendChild(div);
 }
@@ -1197,12 +1435,13 @@ function cargarIntervenciones(tags) {
 // FORMULARIO PACIENTE
 // ============================================================
 function abrirFormPaciente(id = null) {
-  editandoId    = id;
-  medFormCount  = 0;
+  editandoId   = id;
+  medFormCount = 0;
   const overlay = document.getElementById('formOverlay');
   const title   = document.getElementById('formTitle');
   if (id !== null) {
     const p = pacientes.find(x => x.id === id);
+    if (!p) return;
     title.textContent = 'Editar paciente';
     document.getElementById('fCama').value   = p.cama;
     document.getElementById('fNombre').value = p.nombre;
@@ -1245,22 +1484,19 @@ function agregarMedForm(med = null) {
     '<button class="form-med-remove" onclick="removeMedItem(' + idx + ')"><i class="fas fa-xmark"></i></button>' +
     '<div class="form-med-row">' +
       '<div class="form-group"><label class="form-label"><i class="fas fa-capsules"></i> Medicamento</label>' +
-        '<input class="form-input" id="mNombre-' + idx + '" type="text" placeholder="Ej: O2 2 L/min" value="' + (med ? med.nombre : '') + '"></div>' +
+        '<input class="form-input" id="mNombre-' + idx + '" type="text" placeholder="Ej: Paracetamol" value="' + (med?med.nombre:'') + '"></div>' +
       '<div class="form-group"><label class="form-label"><i class="fas fa-flask"></i> Dosis</label>' +
-        '<input class="form-input" id="mDosis-' + idx + '" type="text" placeholder="Ej: 500mg IV" value="' + (med ? med.dosis : '') + '"></div>' +
+        '<input class="form-input" id="mDosis-' + idx + '" type="text" placeholder="Ej: 500mg IV" value="' + (med?med.dosis:'') + '"></div>' +
     '</div>' +
     '<div class="form-med-row">' +
       '<div class="form-group"><label class="form-label"><i class="fas fa-clock"></i> Primera dosis</label>' +
-        '<input class="form-input" id="mHora-' + idx + '" type="time" value="' + (med ? med.hora : '') + '"></div>' +
+        '<input class="form-input" id="mHora-' + idx + '" type="time" value="' + (med?med.hora:'') + '"></div>' +
       '<div class="form-group"><label class="form-label"><i class="fas fa-rotate"></i> Frecuencia (h)</label>' +
-        '<input class="form-input" id="mFrec-' + idx + '" type="number" min="1" max="24" placeholder="Ej: 8" value="' + (med ? med.frecuencia : '') + '"></div>' +
+        '<input class="form-input" id="mFrec-' + idx + '" type="number" min="1" max="24" placeholder="Ej: 8" value="' + (med?med.frecuencia:'') + '"></div>' +
     '</div>';
   container.appendChild(div);
 }
-function removeMedItem(idx) {
-  const el = document.getElementById('med-item-' + idx);
-  if (el) el.remove();
-}
+function removeMedItem(idx) { const el = document.getElementById('med-item-' + idx); if (el) el.remove(); }
 
 // ============================================================
 // GUARDAR PACIENTE
@@ -1279,7 +1515,7 @@ function guardarPaciente() {
     const d  = document.getElementById('mDosis-'  + id)?.value.trim();
     const h  = document.getElementById('mHora-'   + id)?.value;
     const f  = document.getElementById('mFrec-'   + id)?.value;
-    if (n && h) meds.push({ nombre: n, dosis: d || '', hora: h, frecuencia: f || '8', ultimaAdmin: null });
+    if (n && h) meds.push({ nombre:n, dosis:d||'', hora:h, frecuencia:f||'8', ultimaAdmin:null });
   });
   if (editandoId !== null) {
     const idx = pacientes.findIndex(p => p.id === editandoId);
@@ -1292,14 +1528,14 @@ function guardarPaciente() {
   savePacientes(); cerrarFormPaciente(); renderPacientes();
 }
 function eliminarPaciente(id) {
-  if (!confirm('¿Eliminar este paciente?')) return;
+  if (!confirm('¿Eliminar?')) return;
   pacientes = pacientes.filter(p => p.id !== id);
   savePacientes(); renderPacientes(); showToast('🗑️ Eliminado');
 }
 function editarPaciente(id) { abrirFormPaciente(id); }
 
 // ============================================================
-// ALERTAS DE MEDICAMENTOS
+// ALERTAS MEDICAMENTOS
 // ============================================================
 let alertaActual = null;
 
@@ -1314,8 +1550,7 @@ function checkMedAlerts() {
         const now  = Date.now();
         if (!last || (now - parseInt(last)) > 1800000) {
           localStorage.setItem(key, now.toString());
-          mostrarAlerta(p, m, p.id, i);
-          return;
+          mostrarAlerta(p, m, p.id, i); return;
         }
       }
     }
@@ -1323,8 +1558,8 @@ function checkMedAlerts() {
 }
 function mostrarAlerta(paciente, med, pacId, medIdx) {
   alertaActual = { pacId, medIdx };
-  document.getElementById('alertMedName').textContent  = med.nombre;
-  document.getElementById('alertMedDose').textContent  = med.dosis + ' · ' + med.hora + ' hrs';
+  document.getElementById('alertMedName').textContent     = med.nombre;
+  document.getElementById('alertMedDose').textContent     = med.dosis + ' · ' + med.hora + ' hrs';
   document.getElementById('alertPatientName').textContent = paciente.nombre;
   document.getElementById('alertPatientBed').textContent  = 'Cama ' + paciente.cama + ' · ' + paciente.dx;
   document.getElementById('medAlertOverlay').classList.add('open');
@@ -1376,27 +1611,23 @@ function saveStarred() { try { localStorage.setItem("enfiapp_starred", JSON.stri
 
 function renderFavoritos() {
   const container = document.getElementById("favoritosContainer");
-  const topFavs   = favData.filter(f =>  starred.includes(f.id));
-  const others    = favData.filter(f => !starred.includes(f.id));
-  const toShow    = [...topFavs, ...others].slice(0, 6);
-  if (toShow.length === 0) {
-    container.innerHTML = '<div class="fav-empty"><div class="fav-empty-icon">⭐</div><p>Aún no tienes favoritos.<br>Marca diagnósticos para acceder rápido.</p></div>';
+  const toShow    = [...favData.filter(f => starred.includes(f.id)), ...favData.filter(f => !starred.includes(f.id))].slice(0,6);
+  if (!toShow.length) {
+    container.innerHTML = '<div class="fav-empty"><div class="fav-empty-icon">⭐</div><p>Aún no tienes favoritos.</p></div>';
     return;
   }
-  container.innerHTML = '<div class="fav-scroll">' +
-    toShow.map(f =>
-      '<div class="fav-chip ' + (starred.includes(f.id) ? "active" : "") + '" onclick="openDx(' + f.id + ')">' +
-        '<span class="fav-chip-icon">' + f.emoji + '</span>' +
-        '<div class="fav-chip-text"><strong>' + f.name + '</strong><span>' + f.count + ' intervenciones</span></div>' +
-        '<button class="fav-star ' + (starred.includes(f.id) ? "starred" : "") + '" onclick="toggleStar(event,' + f.id + ')">' +
-          (starred.includes(f.id) ? "★" : "☆") +
-        '</button>' +
-      '</div>'
-    ).join('') + '</div>';
+  container.innerHTML = '<div class="fav-scroll">' + toShow.map(f =>
+    '<div class="fav-chip ' + (starred.includes(f.id)?"active":"") + '" onclick="openDx(' + f.id + ')">' +
+      '<span class="fav-chip-icon">' + f.emoji + '</span>' +
+      '<div class="fav-chip-text"><strong>' + f.name + '</strong><span>' + f.count + ' intervenciones</span></div>' +
+      '<button class="fav-star ' + (starred.includes(f.id)?"starred":"") + '" onclick="toggleStar(event,' + f.id + ')">' +
+        (starred.includes(f.id)?"★":"☆") + '</button>' +
+    '</div>'
+  ).join('') + '</div>';
 }
 function toggleStar(e, id) {
   e.stopPropagation();
-  starred = starred.includes(id) ? starred.filter(s => s !== id) : [...starred, id];
+  starred = starred.includes(id) ? starred.filter(s=>s!==id) : [...starred, id];
   showToast(starred.includes(id) ? "⭐ Agregado a favoritos" : "☆ Eliminado de favoritos");
   saveStarred(); renderFavoritos();
 }
@@ -1424,12 +1655,11 @@ function cerrarModalApoyar() { document.getElementById("modalApoyar").classList.
 function cerrarModalSiOverlay(e) { if (e.target === document.getElementById("modalApoyar")) cerrarModalApoyar(); }
 function copiarClabe() {
   const val = document.getElementById("clabeInput").value;
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(val).then(() => showToast("📋 ¡Copiado al portapapeles!"));
-  } else {
+  if (navigator.clipboard) navigator.clipboard.writeText(val).then(() => showToast("📋 ¡Copiado!"));
+  else {
     const t = document.createElement("textarea"); t.value = val;
     document.body.appendChild(t); t.select(); document.execCommand("copy"); document.body.removeChild(t);
-    showToast("📋 ¡Copiado al portapapeles!");
+    showToast("📋 ¡Copiado!");
   }
 }
 
