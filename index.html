@@ -108,25 +108,54 @@ body {
 .hero-card {
   margin: 0 16px;
   background: linear-gradient(135deg, #EBF1FB 0%, #DDEAFB 100%);
-  border-radius: var(--radius); padding: 22px 20px 0;
-  overflow: hidden; position: relative; box-shadow: var(--shadow-sm);
+  border-radius: var(--radius);
+  padding: 12px 20px 0;  /* menos padding arriba */
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-sm);
 }
 .hero-content { display: flex; justify-content: space-between; align-items: flex-end; }
-.hero-text { flex: 1; }
-.hero-emoji { font-size: 26px; margin-bottom: 6px; }
-.hero-text h2 { font-size: 19px; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; line-height: 1.2; }
-.hero-text p { font-size: 13.5px; color: var(--text-secondary); margin: 6px 0 14px; line-height: 1.4; }
+
+.hero-text p {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  margin: 4px 0 8px;  /* menos espacio */
+  line-height: 1.3;
+}
 .hero-badge {
-  display: inline-flex; align-items: center; gap: 5px;
-  background: var(--blue); color: #fff; font-size: 11.5px; font-weight: 600;
-  padding: 5px 11px; border-radius: 20px; margin-bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 5px 11px;
+  border-radius: 20px;
+  margin-bottom: 8px;  /* menos espacio abajo */
 }
 .hero-badge svg { width: 12px; height: 12px; }
-.hero-illustration { width: 120px; flex-shrink: 0; display: flex; align-items: flex-end; }
-/* Imagen enfermero/a — cambiar desde Configuración (masculino/femenino) */
+.hero-illustration { 
+  width: 90px; 
+  flex-shrink: 0; 
+  display: flex; 
+  align-items: flex-end;
+  transform: translateY(8px);  /* sube la imagen */
+}
 .nurse-img {
-  width: 130px; object-fit: contain; display: block;
-  filter: drop-shadow(0 6px 16px rgba(27,58,107,0.18)); margin-bottom: -2px;
+  width: 90px; 
+  object-fit: contain; 
+  display: block;
+  filter: drop-shadow(0 6px 16px rgba(27,58,107,0.18)); 
+  margin-bottom: -2px;
+}
+.nurse-img {
+  width: 100px; /* antes 130px */
+  height: auto;
+  object-fit: contain; 
+  display: block;
+  filter: drop-shadow(0 6px 16px rgba(27,58,107,0.18)); 
+  margin-bottom: -2px;
 }
 
 /* ============================================================
@@ -697,6 +726,326 @@ highlight-text {
   color: white;
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
 }
+
+/* ============================================================
+   PANTALLA RELOJ — Estilos completos
+   Secciones: Hero, Cronómetro, Presets, Temporizadores Activos,
+   Historial, Modal Nuevo Temporizador
+============================================================ */
+
+/* ── HERO RELOJ ────────────────────────────────────────── */
+.reloj-hero {
+  margin: 0 16px 0;
+  background: linear-gradient(135deg, #EBF1FB 0%, #DDEAFB 100%);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  display: flex; align-items: center; gap: 16px;
+  box-shadow: var(--shadow-sm);
+}
+.reloj-hero-icon {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--blue); display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0;
+}
+.reloj-hero-icon i { font-size: 22px; color: #fff; }
+.reloj-hero-text h2 {
+  font-size: 15px; font-weight: 700; color: var(--navy);
+  letter-spacing: -0.3px;
+}
+.reloj-hero-text p { font-size: 12.5px; color: var(--text-secondary); margin-top: 2px; }
+.reloj-hero-img { margin-left: auto; font-size: 44px; flex-shrink: 0; }
+
+/* ── SECCIÓN LABEL ─────────────────────────────────────── */
+.reloj-section-label {
+  font-size: 11px; font-weight: 800; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 1px;
+  padding: 14px 20px 6px;
+}
+
+/* ── CRONÓMETRO ────────────────────────────────────────── */
+.crono-card {
+  margin: 0 16px;
+  background: var(--card); border-radius: var(--radius);
+  padding: 20px 20px 18px; box-shadow: var(--shadow-sm);
+  border: 1.5px solid var(--border);
+}
+.crono-display {
+  text-align: center; margin-bottom: 6px;
+}
+.crono-time {
+  font-size: 58px; font-weight: 700; color: var(--navy);
+  letter-spacing: -2px; font-variant-numeric: tabular-nums;
+  line-height: 1; display: block;
+}
+.crono-labels {
+  display: flex; justify-content: center; gap: 0;
+  margin-bottom: 18px;
+}
+.crono-label {
+  font-size: 11px; font-weight: 600; color: var(--text-muted);
+  letter-spacing: 1px; width: 80px; text-align: center;
+}
+.crono-btns {
+  display: flex; align-items: center; gap: 10px; justify-content: center;
+}
+.crono-btn-reset {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: #F0F4FA; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: var(--text-secondary);
+  transition: all 0.15s; flex-shrink: 0;
+}
+.crono-btn-reset:active { transform: scale(0.92); background: var(--border); }
+.crono-btn-start {
+  flex: 1; height: 44px; border-radius: 22px;
+  background: var(--navy); color: #fff; border: none;
+  font-family: var(--font); font-size: 15px; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  gap: 8px; transition: all 0.15s; max-width: 200px;
+}
+.crono-btn-start:active { transform: scale(0.97); background: #142d54; }
+.crono-btn-start.running { background: #DC2626; }
+.crono-btn-marcar {
+  height: 44px; padding: 0 16px; border-radius: 22px;
+  background: #F0F4FA; border: 1.5px solid var(--border);
+  font-family: var(--font); font-size: 13px; font-weight: 600;
+  color: var(--text-secondary); cursor: pointer;
+  display: flex; align-items: center; gap: 6px; transition: all 0.15s;
+  flex-shrink: 0;
+}
+.crono-btn-marcar:active { transform: scale(0.97); background: var(--border); }
+
+/* Marcas del cronómetro */
+.crono-marcas {
+  margin-top: 14px; display: flex; flex-direction: column; gap: 5px;
+  max-height: 100px; overflow-y: auto;
+}
+.crono-marcas::-webkit-scrollbar { display: none; }
+.crono-marca-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text-secondary);
+  padding: 5px 10px; background: #F6F9FE;
+  border-radius: 8px; border: 1px solid var(--border);
+}
+.crono-marca-item i { color: var(--blue-light); font-size: 11px; }
+.crono-marca-num { font-weight: 700; color: var(--navy); min-width: 24px; }
+
+/* ── PRESETS RÁPIDOS ───────────────────────────────────── */
+.presets-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 10px; padding: 0 16px;
+}
+.preset-btn {
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); padding: 14px 8px 12px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  cursor: pointer; transition: all 0.15s; box-shadow: var(--shadow-sm);
+  font-family: var(--font);
+}
+.preset-btn:active { transform: scale(0.94); box-shadow: none; }
+.preset-icon { font-size: 24px; line-height: 1; }
+.preset-time { font-size: 15px; font-weight: 700; color: var(--navy); }
+.preset-name { font-size: 10.5px; font-weight: 500; color: var(--text-secondary); }
+
+/* ── TEMPORIZADORES ACTIVOS ────────────────────────────── */
+.timers-list {
+  padding: 0 16px; display: flex; flex-direction: column; gap: 10px;
+}
+.timer-card {
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 14px;
+  display: flex; align-items: center; gap: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Círculo de progreso SVG */
+.timer-circle-wrap {
+  flex-shrink: 0; position: relative;
+  width: 56px; height: 56px;
+}
+.timer-circle-wrap svg { transform: rotate(-90deg); }
+.timer-circle-bg  { fill: none; stroke: var(--border); stroke-width: 4; }
+.timer-circle-fg  { fill: none; stroke-width: 4; stroke-linecap: round; transition: stroke-dashoffset 1s linear; }
+.timer-circle-fg.azul    { stroke: var(--blue); }
+.timer-circle-fg.verde   { stroke: #10B981; }
+.timer-circle-fg.naranja { stroke: #F59E0B; }
+.timer-circle-fg.morado  { stroke: #8B5CF6; }
+.timer-circle-label {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11.5px; font-weight: 700; color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Info del timer */
+.timer-info { flex: 1; min-width: 0; }
+.timer-icon-name {
+  display: flex; align-items: center; gap: 7px; margin-bottom: 2px;
+}
+.timer-emoji { font-size: 18px; }
+.timer-name { font-size: 14px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.3px; }
+.timer-status { font-size: 12px; color: var(--text-secondary); }
+
+/* Botones del timer */
+.timer-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.timer-action-btn {
+  width: 34px; height: 34px; border-radius: 50%; border: none;
+  background: #F0F4FA; color: var(--text-secondary); cursor: pointer;
+  font-size: 14px; display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.timer-action-btn:active { transform: scale(0.88); }
+.timer-action-btn.pause-btn { background: #EBF1FB; color: var(--blue); }
+.timer-action-btn.stop-btn  { background: #FEE2E2; color: #DC2626; }
+
+/* Timer vencido */
+.timer-card.vencido { border-color: #F59E0B; background: #FFFBEB; }
+.timer-card.vencido .timer-circle-fg { stroke: #F59E0B; }
+.timer-card.vencido .timer-status { color: #B45309; font-weight: 600; }
+
+/* Botón agregar temporizador */
+.add-timer-btn {
+  margin: 0 16px; height: 46px; border-radius: var(--radius-sm);
+  background: var(--card); border: 1.5px dashed var(--border);
+  font-family: var(--font); font-size: 14px; font-weight: 600;
+  color: var(--blue); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: all 0.2s;
+}
+.add-timer-btn:active { background: #EBF1FB; border-color: var(--blue); }
+
+/* Estado vacío temporizadores */
+.timers-empty {
+  margin: 0 16px; padding: 20px;
+  background: var(--card); border-radius: var(--radius-sm);
+  border: 1.5px dashed var(--border);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: var(--text-muted); font-size: 13px; text-align: center;
+}
+.timers-empty i { font-size: 28px; color: var(--border); }
+
+/* ── HISTORIAL ─────────────────────────────────────────── */
+.historial-header {
+  padding: 4px 20px 8px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.historial-header span { font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+.historial-ver-todo { font-size: 12.5px; color: var(--blue); font-weight: 600; background: none; border: none; cursor: pointer; }
+
+.historial-list { padding: 0 16px; display: flex; flex-direction: column; gap: 8px; }
+.historial-item {
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); padding: 10px 14px;
+  display: flex; align-items: center; gap: 12px;
+  box-shadow: var(--shadow-sm);
+}
+.historial-check {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #DCFCE7; color: #16A34A;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; flex-shrink: 0;
+}
+.historial-hora { font-size: 12px; font-weight: 700; color: var(--navy); min-width: 54px; font-variant-numeric: tabular-nums; }
+.historial-emoji { font-size: 18px; flex-shrink: 0; }
+.historial-info { flex: 1; }
+.historial-nombre { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.historial-sub { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+.historial-duracion { font-size: 12.5px; font-weight: 700; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+
+/* ── MODAL NUEVO TEMPORIZADOR ──────────────────────────── */
+.timer-modal-overlay {
+  position: fixed; inset: 0; z-index: 400;
+  background: rgba(15,23,36,0.55);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.timer-modal-overlay.open { opacity: 1; pointer-events: all; }
+.timer-modal-card {
+  background: var(--card); border-radius: 24px 24px 0 0;
+  width: 100%; max-width: 430px; padding: 0 0 40px;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.34,1.2,0.64,1);
+  box-shadow: 0 -8px 40px rgba(44,78,126,0.2);
+}
+.timer-modal-overlay.open .timer-modal-card { transform: translateY(0); }
+.timer-modal-handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 14px auto 0; }
+.timer-modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px 14px; border-bottom: 1px solid var(--border);
+}
+.timer-modal-title { font-size: 16px; font-weight: 700; color: var(--navy); }
+.timer-modal-close {
+  width: 30px; height: 30px; border-radius: 50%; background: #F0F4FA;
+  border: none; cursor: pointer; color: var(--text-secondary);
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+}
+.timer-modal-body { padding: 18px 20px 0; display: flex; flex-direction: column; gap: 16px; }
+
+/* Selector de tipo */
+.timer-tipo-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 8px;
+}
+.timer-tipo-btn {
+  padding: 10px 6px; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border); background: var(--card);
+  cursor: pointer; text-align: center; transition: all 0.15s;
+  font-family: var(--font);
+}
+.timer-tipo-btn:active { transform: scale(0.94); }
+.timer-tipo-btn.selected { border-color: var(--blue); background: #EFF6FF; }
+.timer-tipo-btn .tipo-emoji { font-size: 22px; display: block; margin-bottom: 4px; }
+.timer-tipo-btn .tipo-label { font-size: 10.5px; font-weight: 600; color: var(--text-secondary); }
+.timer-tipo-btn.selected .tipo-label { color: var(--blue); }
+
+/* Nombre personalizado */
+.timer-modal-label {
+  font-size: 11px; font-weight: 700; color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  display: flex; align-items: center; gap: 5px; margin-bottom: 6px;
+}
+.timer-modal-label i { color: var(--blue-light); font-size: 11px; }
+
+/* Input de tiempo MM:SS */
+.timer-time-input-row {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.timer-time-box {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.timer-time-box label { font-size: 10px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; }
+.timer-time-spinner {
+  width: 80px; height: 52px;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  background: #F8FAFD; font-family: var(--font); font-size: 26px; font-weight: 700;
+  color: var(--navy); text-align: center; outline: none;
+  font-variant-numeric: tabular-nums; -webkit-appearance: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.timer-time-spinner:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(74,122,181,0.12); background: #fff; }
+.timer-time-sep { font-size: 28px; font-weight: 700; color: var(--navy); margin-top: 16px; }
+
+/* Color selector */
+.timer-color-row { display: flex; gap: 10px; }
+.timer-color-dot {
+  width: 30px; height: 30px; border-radius: 50%; cursor: pointer;
+  transition: transform 0.15s; border: 2px solid transparent;
+}
+.timer-color-dot:active { transform: scale(0.88); }
+.timer-color-dot.selected { border-color: var(--navy); transform: scale(1.1); }
+
+/* Botón confirmar */
+.timer-confirm-btn {
+  margin: 18px 20px 0;
+  width: calc(100% - 40px); height: 48px;
+  background: var(--navy); color: #fff; border: none;
+  border-radius: var(--radius-sm); font-family: var(--font);
+  font-size: 15px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: all 0.15s; box-shadow: var(--shadow-md);
+}
+.timer-confirm-btn:active { transform: scale(0.98); background: #142d54; }
+
 </style>
 </head>
 <body>
@@ -870,6 +1219,181 @@ highlight-text {
      setNav(el) = Inicio | setNav(el,'pacientes') = Pacientes
      Próximamente: herramientas, reloj, turnos
 ============================================================ -->
+<!-- ============================================================
+     PANTALLA: RELOJ
+============================================================ -->
+<div class="screen" id="screen-reloj">
+
+  <!-- Hero -->
+  <div class="section" style="padding-top:16px;">
+    <div class="reloj-hero">
+      <div class="reloj-hero-icon">
+        <i class="fas fa-stopwatch"></i>
+      </div>
+      <div class="reloj-hero-text">
+        <h2>Mide, controla y optimiza</h2>
+        <p>tu tiempo en cada cuidado.</p>
+      </div>
+      <div class="reloj-hero-img">⏱️</div>
+    </div>
+  </div>
+
+  <!-- ── CRONÓMETRO ─────────────────────────────────────────── -->
+  <div class="reloj-section-label">Cronómetro</div>
+  <div class="section" style="padding-top:0;">
+    <div class="crono-card">
+      <div class="crono-display">
+        <span class="crono-time" id="cronoDisplay">00:00:00</span>
+      </div>
+      <div class="crono-labels">
+        <span class="crono-label">HH</span>
+        <span class="crono-label">MM</span>
+        <span class="crono-label">SS</span>
+      </div>
+      <div class="crono-btns">
+        <button class="crono-btn-reset" onclick="cronoReset()" title="Reiniciar">
+          <i class="fas fa-rotate-left"></i>
+        </button>
+        <button class="crono-btn-start" id="cronoStartBtn" onclick="cronoToggle()">
+          <i class="fas fa-play" id="cronoIcon"></i>
+          <span id="cronoLabel">Iniciar</span>
+        </button>
+        <button class="crono-btn-marcar" onclick="cronoMarcar()">
+          <i class="fas fa-flag"></i> Marcar
+        </button>
+      </div>
+      <div class="crono-marcas" id="cronoMarcas" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- ── PRESETS RÁPIDOS ────────────────────────────────────── -->
+  <div class="reloj-section-label">Presets Rápidos</div>
+  <div class="presets-grid" style="padding-bottom:4px;">
+    <button class="preset-btn" onclick="abrirTimerModalConPreset('Medicación','💊',5,0,'azul')">
+      <span class="preset-icon">💊</span>
+      <span class="preset-time">5:00</span>
+      <span class="preset-name">Medicación</span>
+    </button>
+    <button class="preset-btn" onclick="abrirTimerModalConPreset('Infusión','🩺',15,0,'verde')">
+      <span class="preset-icon">🩺</span>
+      <span class="preset-time">15:00</span>
+      <span class="preset-name">Infusión</span>
+    </button>
+    <button class="preset-btn" onclick="abrirTimerModalConPreset('Procedimiento','💉',30,0,'naranja')">
+      <span class="preset-icon">💉</span>
+      <span class="preset-time">30:00</span>
+      <span class="preset-name">Procedimiento</span>
+    </button>
+    <button class="preset-btn" onclick="abrirTimerModalConPreset('Valoración','❤️',60,0,'morado')">
+      <span class="preset-icon">❤️</span>
+      <span class="preset-time">60:00</span>
+      <span class="preset-name">Valoración</span>
+    </button>
+  </div>
+
+  <!-- ── TEMPORIZADORES ACTIVOS ─────────────────────────────── -->
+  <div class="reloj-section-label">Temporizadores Activos</div>
+  <div class="timers-list" id="timersList"></div>
+
+  <!-- Botón agregar nuevo temporizador -->
+  <div style="padding: 10px 0 4px;">
+    <button class="add-timer-btn" onclick="abrirTimerModal()">
+      <i class="fas fa-plus"></i> Nuevo temporizador
+    </button>
+  </div>
+
+  <!-- ── HISTORIAL RECIENTE ─────────────────────────────────── -->
+  <div class="historial-header">
+    <span>Historial Reciente</span>
+    <button class="historial-ver-todo" onclick="showToast('📋 Historial completo próximamente')">
+      Ver todo &rsaquo;
+    </button>
+  </div>
+  <div class="historial-list" id="historialList" style="padding-bottom: 16px;"></div>
+
+</div>
+
+<!-- ── MODAL NUEVO TEMPORIZADOR ─────────────────────────────── -->
+<div class="timer-modal-overlay" id="timerModalOverlay" onclick="cerrarTimerModalSiOverlay(event)">
+  <div class="timer-modal-card">
+    <div class="timer-modal-handle"></div>
+    <div class="timer-modal-header">
+      <span class="timer-modal-title">Nuevo temporizador</span>
+      <button class="timer-modal-close" onclick="cerrarTimerModal()">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+    <div class="timer-modal-body">
+
+      <div>
+        <div class="timer-modal-label"><i class="fas fa-shapes"></i> Tipo</div>
+        <div class="timer-tipo-grid" id="timerTipoGrid">
+          <button class="timer-tipo-btn selected" data-tipo="Medicación" data-emoji="💊" onclick="selTipo(this)">
+            <span class="tipo-emoji">💊</span><span class="tipo-label">Medicación</span>
+          </button>
+          <button class="timer-tipo-btn" data-tipo="Infusión" data-emoji="🩺" onclick="selTipo(this)">
+            <span class="tipo-emoji">🩺</span><span class="tipo-label">Infusión</span>
+          </button>
+          <button class="timer-tipo-btn" data-tipo="Procedimiento" data-emoji="💉" onclick="selTipo(this)">
+            <span class="tipo-emoji">💉</span><span class="tipo-label">Procedimiento</span>
+          </button>
+          <button class="timer-tipo-btn" data-tipo="Valoración" data-emoji="❤️" onclick="selTipo(this)">
+            <span class="tipo-emoji">❤️</span><span class="tipo-label">Valoración</span>
+          </button>
+          <button class="timer-tipo-btn" data-tipo="Curación" data-emoji="🩹" onclick="selTipo(this)">
+            <span class="tipo-emoji">🩹</span><span class="tipo-label">Curación</span>
+          </button>
+          <button class="timer-tipo-btn" data-tipo="Higiene" data-emoji="🧼" onclick="selTipo(this)">
+            <span class="tipo-emoji">🧼</span><span class="tipo-label">Higiene</span>
+          </button>
+          <button class="timer-tipo-btn" data-tipo="Reposo" data-emoji="🛌" onclick="selTipo(this)">
+            <span class="tipo-emoji">🛌</span><span class="tipo-label">Reposo</span>
+          </button>
+          <button class="timer-tipo-btn" data-tipo="Otro" data-emoji="⏱️" onclick="selTipo(this)">
+            <span class="tipo-emoji">⏱️</span><span class="tipo-label">Otro</span>
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <div class="timer-modal-label"><i class="fas fa-pen"></i> Nombre (opcional)</div>
+        <input class="form-input" id="timerNombreInput" type="text"
+          placeholder="Ej: Suero 500ml, Curación pie...">
+      </div>
+
+      <div>
+        <div class="timer-modal-label"><i class="fas fa-clock"></i> Duración</div>
+        <div class="timer-time-input-row">
+          <div class="timer-time-box">
+            <label>MIN</label>
+            <input class="timer-time-spinner" id="timerMin" type="number" min="0" max="999" value="5">
+          </div>
+          <div class="timer-time-sep">:</div>
+          <div class="timer-time-box">
+            <label>SEG</label>
+            <input class="timer-time-spinner" id="timerSeg" type="number" min="0" max="59" value="0">
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="timer-modal-label"><i class="fas fa-palette"></i> Color</div>
+        <div class="timer-color-row">
+          <div class="timer-color-dot selected" data-color="azul"    style="background:#4A7AB5;" onclick="selColor(this)"></div>
+          <div class="timer-color-dot"          data-color="verde"   style="background:#10B981;" onclick="selColor(this)"></div>
+          <div class="timer-color-dot"          data-color="naranja" style="background:#F59E0B;" onclick="selColor(this)"></div>
+          <div class="timer-color-dot"          data-color="morado"  style="background:#8B5CF6;" onclick="selColor(this)"></div>
+          <div class="timer-color-dot"          data-color="rojo"    style="background:#EF4444;" onclick="selColor(this)"></div>
+        </div>
+      </div>
+
+    </div>
+    <button class="timer-confirm-btn" onclick="crearTimer()">
+      <i class="fas fa-play"></i> Iniciar temporizador
+    </button>
+  </div>
+</div>
+
 <nav class="bottom-nav">
   <!-- Inicio -->
   <button class="nav-item active" onclick="setNav(this)">
@@ -882,7 +1406,7 @@ highlight-text {
     <span class="nav-label">Inicio</span>
   </button>
   
-  <!-- Pacientes — segundo lugar (ANTES estaba al final) -->
+  <!-- Pacientes -->
   <button class="nav-item" onclick="setNav(this,'pacientes')">
     <div class="nav-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -894,7 +1418,7 @@ highlight-text {
     <span class="nav-label">Pacientes</span>
   </button>
   
-  <!-- Herramientas (próximamente) -->
+  <!-- Herramientas -->
   <button class="nav-item" onclick="setNav(this)">
     <div class="nav-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -904,8 +1428,8 @@ highlight-text {
     <span class="nav-label">Herramientas</span>
   </button>
   
-  <!-- Reloj (próximamente) -->
-  <button class="nav-item" onclick="setNav(this)">
+  <!-- Reloj -->
+  <button class="nav-item" onclick="setNav(this,'reloj')">
     <div class="nav-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="9"/>
@@ -915,7 +1439,7 @@ highlight-text {
     <span class="nav-label">Reloj</span>
   </button>
   
-  <!-- Turnos (próximamente) -->
+  <!-- Turnos -->
   <button class="nav-item" onclick="setNav(this)">
     <div class="nav-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1129,6 +1653,8 @@ function setNav(el, screen) {
   if (lbl) lbl.style.color = '#4A7AB5';
   if (screen === 'pacientes') {
     showScreen('pacientes'); renderPacientes(); syncFab('pacientes');
+  } else if (screen === 'reloj') {
+    showScreen('reloj'); syncFab('reloj');
   } else {
     showScreen('inicio'); syncFab('inicio');
   }
@@ -1839,7 +2365,307 @@ function escapeHtml(str) {
     return m;
   });
 }
+// ============================================================
+// CRONÓMETRO
+// ============================================================
+let cronoMs       = 0;
+let cronoRunning  = false;
+let cronoInterval = null;
+let cronoMarcas   = [];
 
+function msToHMS(ms) {
+  const totalSec = Math.floor(ms / 1000);
+  const h = Math.floor(totalSec / 3600).toString().padStart(2,'0');
+  const m = Math.floor((totalSec % 3600) / 60).toString().padStart(2,'0');
+  const s = (totalSec % 60).toString().padStart(2,'0');
+  return h + ':' + m + ':' + s;
+}
+
+function cronoToggle() {
+  if (cronoRunning) {
+    clearInterval(cronoInterval);
+    cronoRunning = false;
+    document.getElementById('cronoStartBtn').classList.remove('running');
+    document.getElementById('cronoIcon').className = 'fas fa-play';
+    document.getElementById('cronoLabel').textContent = 'Continuar';
+  } else {
+    const start = Date.now() - cronoMs;
+    cronoInterval = setInterval(() => {
+      cronoMs = Date.now() - start;
+      document.getElementById('cronoDisplay').textContent = msToHMS(cronoMs);
+    }, 100);
+    cronoRunning = true;
+    document.getElementById('cronoStartBtn').classList.add('running');
+    document.getElementById('cronoIcon').className = 'fas fa-pause';
+    document.getElementById('cronoLabel').textContent = 'Pausar';
+  }
+}
+
+function cronoReset() {
+  clearInterval(cronoInterval);
+  cronoRunning = false;
+  cronoMs = 0;
+  cronoMarcas = [];
+  document.getElementById('cronoDisplay').textContent = '00:00:00';
+  document.getElementById('cronoStartBtn').classList.remove('running');
+  document.getElementById('cronoIcon').className = 'fas fa-play';
+  document.getElementById('cronoLabel').textContent = 'Iniciar';
+  const marcasEl = document.getElementById('cronoMarcas');
+  marcasEl.style.display = 'none';
+  marcasEl.innerHTML = '';
+}
+
+function cronoMarcar() {
+  if (cronoMs === 0) { showToast('⚠️ Inicia el cronómetro primero'); return; }
+  cronoMarcas.push(cronoMs);
+  const marcasEl = document.getElementById('cronoMarcas');
+  marcasEl.style.display = 'flex';
+  const item = document.createElement('div');
+  item.className = 'crono-marca-item';
+  item.innerHTML = '<i class="fas fa-flag"></i><span class="crono-marca-num">#' + cronoMarcas.length + '</span><span>' + msToHMS(cronoMs) + '</span>';
+  marcasEl.prepend(item);
+  showToast('🚩 Marca #' + cronoMarcas.length + ' — ' + msToHMS(cronoMs));
+}
+
+// ============================================================
+// TEMPORIZADORES
+// ============================================================
+let timers    = [];
+let historial = [];
+
+let timerModalTipo  = { tipo: 'Medicación', emoji: '💊' };
+let timerModalColor = 'azul';
+
+function selTipo(btn) {
+  document.querySelectorAll('.timer-tipo-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  timerModalTipo = { tipo: btn.dataset.tipo, emoji: btn.dataset.emoji };
+}
+
+function selColor(dot) {
+  document.querySelectorAll('.timer-color-dot').forEach(d => d.classList.remove('selected'));
+  dot.classList.add('selected');
+  timerModalColor = dot.dataset.color;
+}
+
+function abrirTimerModal() {
+  timerModalTipo  = { tipo: 'Medicación', emoji: '💊' };
+  timerModalColor = 'azul';
+  document.querySelectorAll('.timer-tipo-btn').forEach((b,i) => b.classList.toggle('selected', i===0));
+  document.querySelectorAll('.timer-color-dot').forEach((d,i) => d.classList.toggle('selected', i===0));
+  document.getElementById('timerNombreInput').value = '';
+  document.getElementById('timerMin').value = '5';
+  document.getElementById('timerSeg').value = '0';
+  document.getElementById('timerModalOverlay').classList.add('open');
+}
+
+function abrirTimerModalConPreset(tipo, emoji, min, seg, color) {
+  abrirTimerModal();
+  timerModalTipo  = { tipo, emoji };
+  timerModalColor = color;
+  document.querySelectorAll('.timer-tipo-btn').forEach(b => {
+    b.classList.toggle('selected', b.dataset.tipo === tipo);
+  });
+  document.querySelectorAll('.timer-color-dot').forEach(d => {
+    d.classList.toggle('selected', d.dataset.color === color);
+  });
+  document.getElementById('timerMin').value = min;
+  document.getElementById('timerSeg').value = seg;
+}
+
+function cerrarTimerModal() {
+  document.getElementById('timerModalOverlay').classList.remove('open');
+}
+
+function cerrarTimerModalSiOverlay(e) {
+  if (e.target === document.getElementById('timerModalOverlay')) cerrarTimerModal();
+}
+
+function crearTimer() {
+  const min = parseInt(document.getElementById('timerMin').value) || 0;
+  const seg = parseInt(document.getElementById('timerSeg').value) || 0;
+  const totalSec = min * 60 + seg;
+  if (totalSec <= 0) { showToast('⚠️ El tiempo debe ser mayor a 0'); return; }
+
+  const nombre = document.getElementById('timerNombreInput').value.trim() || timerModalTipo.tipo;
+  const id = Date.now();
+
+  const timer = {
+    id, nombre, emoji: timerModalTipo.emoji,
+    color: timerModalColor,
+    totalSec, restanteSec: totalSec,
+    running: true, intervalRef: null,
+    inicio: new Date().toLocaleTimeString('es-MX', { hour:'2-digit', minute:'2-digit', second:'2-digit' })
+  };
+
+  timer.intervalRef = setInterval(() => tickTimer(timer.id), 1000);
+  timers.push(timer);
+  cerrarTimerModal();
+  renderTimers();
+  showToast('⏱️ Temporizador iniciado: ' + nombre);
+}
+
+function tickTimer(id) {
+  const timer = timers.find(t => t.id === id);
+  if (!timer || !timer.running) return;
+  timer.restanteSec--;
+  if (timer.restanteSec <= 0) {
+    timer.restanteSec = 0;
+    clearInterval(timer.intervalRef);
+    timer.running = false;
+    timerVencido(timer);
+  }
+  renderTimerCard(timer);
+}
+
+function timerVencido(timer) {
+  historial.unshift({
+    hora: timer.inicio,
+    nombre: timer.nombre,
+    emoji: timer.emoji,
+    totalSec: timer.totalSec,
+    estado: 'Completado'
+  });
+  setTimeout(() => {
+    timers = timers.filter(t => t.id !== timer.id);
+    renderTimers();
+    renderHistorial();
+  }, 3000);
+  renderTimerCard(timer);
+  renderHistorial();
+  showToast('✅ ' + timer.nombre + ' — ¡Tiempo completado!');
+  if ('Notification' in window && Notification.permission === 'granted') {
+    new Notification('⏰ ' + timer.nombre, { body: 'El tiempo ha terminado.' });
+  }
+}
+
+function toggleTimer(id) {
+  const timer = timers.find(t => t.id === id);
+  if (!timer) return;
+  if (timer.running) {
+    clearInterval(timer.intervalRef);
+    timer.running = false;
+  } else {
+    timer.intervalRef = setInterval(() => tickTimer(id), 1000);
+    timer.running = true;
+  }
+  renderTimerCard(timer);
+}
+
+function stopTimer(id) {
+  const timer = timers.find(t => t.id === id);
+  if (!timer) return;
+  clearInterval(timer.intervalRef);
+  historial.unshift({
+    hora: timer.inicio,
+    nombre: timer.nombre,
+    emoji: timer.emoji,
+    totalSec: timer.totalSec,
+    estado: 'Detenido'
+  });
+  timers = timers.filter(t => t.id !== id);
+  renderTimers();
+  renderHistorial();
+  showToast('🛑 Timer detenido: ' + timer.nombre);
+}
+
+function secToMS(sec) {
+  const m = Math.floor(sec / 60).toString().padStart(2,'0');
+  const s = (sec % 60).toString().padStart(2,'0');
+  return m + ':' + s;
+}
+
+function secToHMS(sec) {
+  const h = Math.floor(sec / 3600).toString().padStart(2,'0');
+  const m = Math.floor((sec % 3600) / 60).toString().padStart(2,'0');
+  const s = (sec % 60).toString().padStart(2,'0');
+  return h + ':' + m + ':' + s;
+}
+
+function renderTimers() {
+  const list = document.getElementById('timersList');
+  if (timers.length === 0) {
+    list.innerHTML = '<div class="timers-empty"><i class="fas fa-hourglass-start"></i><span>Sin temporizadores activos.<br>Usa un preset o crea uno nuevo.</span></div>';
+    return;
+  }
+  list.innerHTML = timers.map(t => buildTimerCardHtml(t)).join('');
+}
+
+function renderTimerCard(timer) {
+  const el = document.getElementById('timer-card-' + timer.id);
+  if (!el) { renderTimers(); return; }
+  el.outerHTML = buildTimerCardHtml(timer);
+}
+
+function buildTimerCardHtml(timer) {
+  const pct = timer.totalSec > 0 ? timer.restanteSec / timer.totalSec : 0;
+  const r = 24;
+  const circ = 2 * Math.PI * r;
+  const offset = circ * (1 - pct);
+  const vencido = timer.restanteSec === 0 && !timer.running;
+  const estadoText = vencido ? '¡Tiempo!' : timer.running ? 'En progreso' : 'Pausado';
+
+  return `
+    <div class="timer-card ${vencido ? 'vencido' : ''}" id="timer-card-${timer.id}">
+      <div class="timer-circle-wrap">
+        <svg width="56" height="56" viewBox="0 0 56 56">
+          <circle class="timer-circle-bg" cx="28" cy="28" r="${r}"/>
+          <circle class="timer-circle-fg ${timer.color}"
+            cx="28" cy="28" r="${r}"
+            stroke-dasharray="${circ.toFixed(2)}"
+            stroke-dashoffset="${offset.toFixed(2)}"/>
+        </svg>
+        <div class="timer-circle-label">${secToMS(timer.restanteSec)}</div>
+      </div>
+      <div class="timer-info">
+        <div class="timer-icon-name">
+          <span class="timer-emoji">${timer.emoji}</span>
+          <span class="timer-name">${timer.nombre}</span>
+        </div>
+        <div class="timer-status">${estadoText}</div>
+      </div>
+      <div class="timer-actions">
+        ${!vencido ? `
+          <button class="timer-action-btn pause-btn" onclick="toggleTimer(${timer.id})" title="${timer.running ? 'Pausar' : 'Reanudar'}">
+            <i class="fas ${timer.running ? 'fa-pause' : 'fa-play'}"></i>
+          </button>
+          <button class="timer-action-btn stop-btn" onclick="stopTimer(${timer.id})" title="Detener">
+            <i class="fas fa-stop"></i>
+          </button>
+        ` : `
+          <button class="timer-action-btn stop-btn" onclick="stopTimer(${timer.id})" title="Cerrar">
+            <i class="fas fa-xmark"></i>
+          </button>
+        `}
+      </div>
+    </div>`;
+}
+
+function renderHistorial() {
+  const list = document.getElementById('historialList');
+  if (!historial.length) {
+    list.innerHTML = '<div style="text-align:center;padding:16px;color:var(--text-muted);font-size:13px;"><i class="fas fa-clock-rotate-left" style="font-size:24px;color:var(--border);margin-bottom:6px;display:block;"></i>El historial aparecerá aquí.</div>';
+    return;
+  }
+  list.innerHTML = historial.slice(0, 10).map(h => `
+    <div class="historial-item">
+      <div class="historial-check">
+        <i class="fas ${h.estado === 'Completado' ? 'fa-check' : 'fa-stop'}"></i>
+      </div>
+      <span class="historial-hora">${h.hora}</span>
+      <span class="historial-emoji">${h.emoji}</span>
+      <div class="historial-info">
+        <div class="historial-nombre">${h.nombre}</div>
+        <div class="historial-sub">${h.estado}</div>
+      </div>
+      <span class="historial-duracion">${secToHMS(h.totalSec)}</span>
+    </div>
+  `).join('');
+}
+
+renderTimers();
+
+renderHistorial();
 // ============================================================
 // INICIALIZACIÓN
 // ============================================================
