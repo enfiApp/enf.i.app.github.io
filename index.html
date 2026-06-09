@@ -1,4 +1,441 @@
-<!DOCTYPE html>
+<!-- ============================================================
+     PANTALLA: PACIENTES
+============================================================ -->
+<div class="screen" id="screen-pacientes">
+  <!-- Header -->
+  <div class="pac-header">
+    <div>
+      <h2>Pacientes</h2>
+      <p id="pac-subtitle">Cargando turno...</p>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="header-btn" onclick="togglePacSearch()" id="pacSearchBtn" title="Buscar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B3A6B" stroke-width="1.8">
+          <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Buscador (oculto por defecto) -->
+  <div class="pac-search-wrap" id="pacSearchWrap" style="display:none;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+    </svg>
+    <input class="pac-search-input" id="pacSearchInput" type="text"
+      placeholder="Buscar por nombre, cama o diagnóstico..." oninput="filtrarPacientes()">
+    <button class="pac-search-clear" id="pacSearchClear" onclick="limpiarBusqueda()">
+      <i class="fas fa-xmark"></i>
+    </button>
+  </div>
+
+  <!-- Estadísticas -->
+  <div class="pac-stats-row" id="pacStatsRow"></div>
+
+  <!-- Filtros -->
+  <div class="pac-filters" id="pacFilters">
+    <button class="pac-filter-btn active" data-filter="todos" onclick="setFilter(this,'todos')">Todos</button>
+    <button class="pac-filter-btn" data-filter="stable" onclick="setFilter(this,'stable')">Estables</button>
+    <button class="pac-filter-btn" data-filter="warning" onclick="setFilter(this,'warning')">Precaución</button>
+    <button class="pac-filter-btn" data-filter="critical" onclick="setFilter(this,'critical')">Críticos<span class="filter-dot" id="critDot" style="display:none;"></span></button>
+    <button class="pac-filter-btn" data-filter="alta" onclick="setFilter(this,'alta')">🏠 Altas</button>
+  </div>
+
+  <!-- Lista pacientes -->
+  <div class="pac-list" id="pacList"></div>
+</div>
+<!-- FIN PANTALLA PACIENTES -->
+
+<!-- Botón flotante (debe ir DESPUÉS de la pantalla) -->
+<button class="fab-btn" id="fabBtn" onclick="abrirFormPaciente()" title="Nuevo paciente">
+  <i class="fas fa-plus"></i>
+</button>
+
+<!-- Bottom Sheet acciones paciente -->
+<div class="pac-sheet-overlay" id="pacSheetOverlay" onclick="cerrarSheetSiOverlay(event)">
+  <div class="pac-sheet-card">
+    <div class="pac-sheet-handle"></div>
+    <div class="pac-sheet-header">
+      <div class="pac-sheet-title" id="sheetPatientName">—</div>
+      <div class="pac-sheet-sub" id="sheetPatientInfo">—</div>
+    </div>
+    <div class="pac-sheet-actions">
+      <button class="pac-sheet-btn edit" onclick="sheetEditar()"><i class="fas fa-pen"></i> Editar paciente</button>
+      <button class="pac-sheet-btn alta" onclick="sheetDarAlta()"><i class="fas fa-house-medical-circle-check"></i> Dar de alta</button>
+      <button class="pac-sheet-btn delete" onclick="sheetEliminar()"><i class="fas fa-trash"></i> Eliminar del turno</button>
+      <button class="pac-sheet-btn cancel" onclick="cerrarSheet()"><i class="fas fa-xmark"></i> Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PANTALLA: RELOJ
+============================================================ -->
+<div class="screen" id="screen-reloj">
+  <!-- Hero -->
+  <div class="section" style="padding-top:16px;">
+    <div class="reloj-hero">
+      <div class="reloj-hero-icon">
+        <i class="fas fa-stopwatch"></i>
+      </div>
+      <div class="reloj-hero-text">
+        <h2>Mide, controla y optimiza</h2>
+        <p>tu tiempo en cada cuidado.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRONÓMETRO -->
+  <div class="reloj-section-label">Cronómetro</div>
+  <div class="section" style="padding-top:0;">
+    <div class="crono-card">
+      <div class="crono-display">
+        <span class="crono-time" id="cronoDisplay">00:00:00</span>
+      </div>
+      <div class="crono-labels">
+        <span class="crono-label">HH</span>
+        <span class="crono-label">MM</span>
+        <span class="crono-label">SS</span>
+      </div>
+      <div class="crono-btns">
+        <button class="crono-btn-reset" onclick="cronoReset()" title="Reiniciar">
+          <i class="fas fa-rotate-left"></i>
+        </button>
+        <button class="crono-btn-start" id="cronoStartBtn" onclick="cronoToggle()">
+          <i class="fas fa-play" id="cronoIcon"></i>
+          <span id="cronoLabel">Iniciar</span>
+        </button>
+        <button class="crono-btn-marcar" onclick="cronoMarcar()">
+          <i class="fas fa-flag"></i> Marcar
+        </button>
+      </div>
+      <div class="crono-marcas" id="cronoMarcas" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- PRESETS RÁPIDOS -->
+  <div class="reloj-section-label">Presets Rápidos</div>
+  <div class="presets-grid" style="padding-bottom:4px;">
+    <button class="preset-btn" onclick="abrirTimerModalConPreset('Medicación','💊',5,0,'azul')">
+      <span class="preset-icon">💊</span>
+      <span class="preset-time">5:00</span>
+      <span class="preset-name">Medicación</span>
+    </button>
+    <button class="preset-btn" onclick="abrirTimerModalConPreset('Infusión','🩺',15,0,'verde')">
+      <span class="preset-icon">🩺</span>
+      <span class="preset-time">15:00</span>
+      <span class="preset-name">Infusión</span>
+    </button>
+    <button class="preset-btn" onclick="abrirTimerModalConPreset('Procedimiento','💉',30,0,'naranja')">
+      <span class="preset-icon">💉</span>
+      <span class="preset-time">30:00</span>
+      <span class="preset-name">Procedimiento</span>
+    </button>
+    <button class="preset-btn" onclick="abrirTimerModalConPreset('Valoración','❤️',60,0,'morado')">
+      <span class="preset-icon">❤️</span>
+      <span class="preset-time">60:00</span>
+      <span class="preset-name">Valoración</span>
+    </button>
+  </div>
+
+  <!-- TEMPORIZADORES ACTIVOS -->
+  <div class="reloj-section-label">Temporizadores Activos</div>
+  <div class="timers-list" id="timersList"></div>
+
+  <div style="padding: 10px 0 4px;">
+    <button class="add-timer-btn" onclick="abrirTimerModal()">
+      <i class="fas fa-plus"></i> Nuevo temporizador
+    </button>
+  </div>
+
+  <!-- HISTORIAL -->
+  <div class="historial-header">
+    <span>Historial Reciente</span>
+    <button class="historial-ver-todo" onclick="showToast('📋 Historial completo próximamente')">
+      Ver todo &rsaquo;
+    </button>
+  </div>
+  <div class="historial-list" id="historialList" style="padding-bottom: 16px;"></div>
+</div>
+
+<!-- MODAL NUEVO TEMPORIZADOR -->
+<div class="timer-modal-overlay" id="timerModalOverlay" onclick="cerrarTimerModalSiOverlay(event)">
+  <div class="timer-modal-card">
+    <div class="timer-modal-handle"></div>
+    <div class="timer-modal-header">
+      <span class="timer-modal-title">Nuevo temporizador</span>
+      <button class="timer-modal-close" onclick="cerrarTimerModal()">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+    <div class="timer-modal-body">
+      <!-- contenido del modal -->
+      <div>
+        <div class="timer-modal-label"><i class="fas fa-shapes"></i> Tipo</div>
+        <div class="timer-tipo-grid" id="timerTipoGrid">
+          <button class="timer-tipo-btn selected" data-tipo="Medicación" data-emoji="💊" onclick="selTipo(this)">
+            <span class="tipo-emoji">💊</span><span class="tipo-label">Medicación</span>
+          </button>
+          <button class="timer-tipo-btn" data-tipo="Infusión" data-emoji="🩺" onclick="selTipo(this)">
+            <span class="tipo-emoji">🩺</span><span class="tipo-label">Infusión</span>
+          </button>
+          <button class="timer-tipo-btn" data-tipo="Procedimiento" data-emoji="💉" onclick="selTipo(this)">
+            <span class="tipo-emoji">💉</span><span class="tipo-label">Procedimiento</span>
+          </button>
+          <button class="timer-tipo-btn" data-tipo="Valoración" data-emoji="❤️" onclick="selTipo(this)">
+            <span class="tipo-emoji">❤️</span><span class="tipo-label">Valoración</span>
+          </button>
+          <button class="timer-tipo-btn" data-tipo="Curación" data-emoji="🩹" onclick="selTipo(this)">
+            <span class="tipo-emoji">🩹</span><span class="tipo-label">Curación</span>
+          </button>
+          <button class="timer-tipo-btn" data-tipo="Higiene" data-emoji="🧼" onclick="selTipo(this)">
+            <span class="tipo-emoji">🧼</span><span class="tipo-label">Higiene</span>
+          </button>
+          <button class="timer-tipo-btn" data-tipo="Reposo" data-emoji="🛌" onclick="selTipo(this)">
+            <span class="tipo-emoji">🛌</span><span class="tipo-label">Reposo</span>
+          </button>
+          <button class="timer-tipo-btn" data-tipo="Otro" data-emoji="⏱️" onclick="selTipo(this)">
+            <span class="tipo-emoji">⏱️</span><span class="tipo-label">Otro</span>
+          </button>
+        </div>
+      </div>
+      <div>
+        <div class="timer-modal-label"><i class="fas fa-pen"></i> Nombre (opcional)</div>
+        <input class="form-input" id="timerNombreInput" type="text" placeholder="Ej: Suero 500ml, Curación pie...">
+      </div>
+      <div>
+        <div class="timer-modal-label"><i class="fas fa-clock"></i> Duración</div>
+        <div class="timer-time-input-row">
+          <div class="timer-time-box">
+            <label>MIN</label>
+            <input class="timer-time-spinner" id="timerMin" type="number" min="0" max="999" value="5">
+          </div>
+          <div class="timer-time-sep">:</div>
+          <div class="timer-time-box">
+            <label>SEG</label>
+            <input class="timer-time-spinner" id="timerSeg" type="number" min="0" max="59" value="0">
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="timer-modal-label"><i class="fas fa-palette"></i> Color</div>
+        <div class="timer-color-row">
+          <div class="timer-color-dot selected" data-color="azul" style="background:#4A7AB5;" onclick="selColor(this)"></div>
+          <div class="timer-color-dot" data-color="verde" style="background:#10B981;" onclick="selColor(this)"></div>
+          <div class="timer-color-dot" data-color="naranja" style="background:#F59E0B;" onclick="selColor(this)"></div>
+          <div class="timer-color-dot" data-color="morado" style="background:#8B5CF6;" onclick="selColor(this)"></div>
+          <div class="timer-color-dot" data-color="rojo" style="background:#EF4444;" onclick="selColor(this)"></div>
+        </div>
+      </div>
+    </div>
+    <button class="timer-confirm-btn" onclick="crearTimer()">
+      <i class="fas fa-play"></i> Iniciar temporizador
+    </button>
+  </div>
+</div>
+
+<!-- ============================================================
+     PANTALLA: TURNOS
+============================================================ -->
+<div class="screen" id="screen-turnos">
+  <!-- HEADER -->
+  <div class="pac-header">
+    <div>
+      <h2>Turnos</h2>
+      <p id="turnos-subtitle">Agenda y visualiza tus turnos del mes</p>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="header-btn" onclick="abrirModalTurno()" title="Agendar turno">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B3A6B" stroke-width="1.8">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- CALENDARIO -->
+  <div class="section" style="padding-top:0;">
+    <div class="card" style="padding:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <button onclick="calCambiarMes(-1)" style="width:32px;height:32px;border:none;background:#F0F4FA;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--navy);">‹</button>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span id="calTitulo" style="font-size:16px;font-weight:700;color:var(--navy);letter-spacing:-0.3px;">—</span>
+          <button onclick="calHoy()" style="padding:3px 10px;border:none;background:#EBF1FB;border-radius:8px;font-size:12px;font-weight:600;color:var(--blue);cursor:pointer;">Hoy</button>
+        </div>
+        <button onclick="calCambiarMes(1)" style="width:32px;height:32px;border:none;background:#F0F4FA;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--navy);">›</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);text-align:center;margin-bottom:6px;">
+        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Lun</span>
+        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Mar</span>
+        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Mié</span>
+        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Jue</span>
+        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Vie</span>
+        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Sáb</span>
+        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Dom</span>
+      </div>
+      <div id="calGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;"></div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);">
+        <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#4A7AB5;display:inline-block;"></span><span style="font-size:11px;color:var(--text-secondary);">Mañana</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#2BA899;display:inline-block;"></span><span style="font-size:11px;color:var(--text-secondary);">Tarde</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#8B5CF6;display:inline-block;"></span><span style="font-size:11px;color:var(--text-secondary);">Noche</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#F59E0B;display:inline-block;"></span><span style="font-size:11px;color:var(--text-secondary);">Guardia 24h</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#E2E8F2;display:inline-block;"></span><span style="font-size:11px;color:var(--text-secondary);">Libre</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TURNOS PRÓXIMOS -->
+  <div class="section" style="padding-top:4px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <span style="font-size:17px;font-weight:700;color:var(--text-primary);letter-spacing:-0.4px;">Turnos programados</span>
+      <button onclick="verTodosTurnos()" style="font-size:13px;color:var(--blue);font-weight:500;background:none;border:none;cursor:pointer;">Ver todos ›</button>
+    </div>
+    <div id="turnosList" style="display:flex;flex-direction:column;gap:10px;"></div>
+  </div>
+
+  <!-- ESTADÍSTICAS DEL MES -->
+  <div class="section" style="padding-top:8px;padding-bottom:8px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;" id="turnosStats"></div>
+  </div>
+
+  <!-- BOTÓN AGENDAR -->
+  <div style="padding:8px 16px 90px;">
+    <button onclick="abrirModalTurno()" style="width:100%;padding:11px 16px;background:var(--navy);color:#fff;border:none;border-radius:30px;font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:var(--shadow-md);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Agendar turno
+    </button>
+  </div>
+</div>
+
+<!-- MODAL NUEVO TURNO -->
+<div class="form-overlay" id="turnoFormOverlay" onclick="cerrarTurnoFormSiOverlay(event)">
+  <div class="form-card">
+    <div style="padding:12px 20px 0;"><div class="form-handle"></div></div>
+    <div class="form-header">
+      <span class="form-title" id="turnoFormTitle">Agendar turno</span>
+      <button class="form-close" onclick="cerrarModalTurno()"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="form-body">
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-calendar"></i> Fecha</label>
+        <input class="form-input" id="tFecha" type="date">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-sun"></i> Tipo de turno</label>
+        <div id="turnoTipoGrid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:2px;">
+          <button type="button" class="turno-tipo-btn selected" data-tipo="manana" onclick="selTurnoTipo(this)" style="padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--blue);background:#EFF6FF;cursor:pointer;">
+            <div style="font-size:20px;margin-bottom:4px;">☀️</div>
+            <div style="font-size:12px;font-weight:700;color:var(--blue);">Mañana</div>
+            <div style="font-size:10px;color:var(--text-muted);">07:00 – 15:00</div>
+          </button>
+          <button type="button" class="turno-tipo-btn" data-tipo="tarde" onclick="selTurnoTipo(this)" style="padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--card);cursor:pointer;">
+            <div style="font-size:20px;margin-bottom:4px;">🌇</div>
+            <div style="font-size:12px;font-weight:700;color:var(--text-secondary);">Tarde</div>
+            <div style="font-size:10px;color:var(--text-muted);">15:00 – 23:00</div>
+          </button>
+          <button type="button" class="turno-tipo-btn" data-tipo="noche" onclick="selTurnoTipo(this)" style="padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--card);cursor:pointer;">
+            <div style="font-size:20px;margin-bottom:4px;">🌙</div>
+            <div style="font-size:12px;font-weight:700;color:var(--text-secondary);">Noche</div>
+            <div style="font-size:10px;color:var(--text-muted);">23:00 – 07:00</div>
+          </button>
+          <button type="button" class="turno-tipo-btn" data-tipo="guardia" onclick="selTurnoTipo(this)" style="padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--card);cursor:pointer;">
+            <div style="font-size:20px;margin-bottom:4px;">🛡️</div>
+            <div style="font-size:12px;font-weight:700;color:var(--text-secondary);">Guardia 24h</div>
+            <div style="font-size:10px;color:var(--text-muted);">07:00 – 07:00</div>
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-hospital"></i> Hospital / Sede</label>
+        <input class="form-input" id="tHospital" type="text" placeholder="Ej: Hospital San José">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-note-sticky"></i> Notas (opcional)</label>
+        <input class="form-input" id="tNotas" type="text" placeholder="Ej: Llevar bata, área de urgencias...">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-circle-dot"></i> Estado</label>
+        <select class="form-select" id="tEstado">
+          <option value="confirmado">✅ Confirmado</option>
+          <option value="pendiente">🕐 Pendiente</option>
+        </select>
+      </div>
+    </div>
+    <button class="form-submit-btn-modern" onclick="guardarTurno()">
+      <i class="fas fa-calendar-check"></i> Guardar turno
+    </button>
+  </div>
+</div>
+
+<!-- ============================================================
+     BARRA DE NAVEGACIÓN INFERIOR
+============================================================ -->
+<nav class="bottom-nav">
+  <!-- Inicio -->
+  <button class="nav-item active" onclick="setNav(this)">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#2D5FA6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
+        <path d="M9 21V12h6v9"/>
+      </svg>
+    </div>
+    <span class="nav-label">Inicio</span>
+  </button>
+  
+  <!-- Pacientes -->
+  <button class="nav-item" onclick="setNav(this,'pacientes')">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+      </svg>
+    </div>
+    <span class="nav-label">Pacientes</span>
+  </button>
+  
+  <!-- Herramientas -->
+  <button class="nav-item" onclick="setNav(this)">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.77 3.77z"/>
+      </svg>
+    </div>
+    <span class="nav-label">Herramientas</span>
+  </button>
+  
+  <!-- Reloj -->
+  <button class="nav-item" onclick="setNav(this,'reloj')">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 7v5l3 3"/>
+      </svg>
+    </div>
+    <span class="nav-label">Reloj</span>
+  </button>
+  
+  <!-- Turnos -->
+  <button class="nav-item" onclick="setNav(this,'turnos')">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/>
+        <line x1="8" y1="2" x2="8" y2="6"/>
+        <line x1="3" y1="10" x2="21" y2="10"/>
+        <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
+      </svg>
+    </div>
+    <span class="nav-label">Turnos</span>
+  </button>
+</nav>
+
+<!-- ============================================================
+     MODALES (Apoyar, Formulario, Alertas, etc.)
+============================================================ -->DOCTYPE html>
 <html lang="es">
 <head>
 <!-- ============================================================
