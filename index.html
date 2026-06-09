@@ -1,441 +1,4 @@
-<!-- ============================================================
-     PANTALLA: PACIENTES
-============================================================ -->
-<div class="screen" id="screen-pacientes">
-  <!-- Header -->
-  <div class="pac-header">
-    <div>
-      <h2>Pacientes</h2>
-      <p id="pac-subtitle">Cargando turno...</p>
-    </div>
-    <div style="display:flex;gap:8px;">
-      <button class="header-btn" onclick="togglePacSearch()" id="pacSearchBtn" title="Buscar">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B3A6B" stroke-width="1.8">
-          <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
-        </svg>
-      </button>
-    </div>
-  </div>
-
-  <!-- Buscador (oculto por defecto) -->
-  <div class="pac-search-wrap" id="pacSearchWrap" style="display:none;">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
-    </svg>
-    <input class="pac-search-input" id="pacSearchInput" type="text"
-      placeholder="Buscar por nombre, cama o diagnóstico..." oninput="filtrarPacientes()">
-    <button class="pac-search-clear" id="pacSearchClear" onclick="limpiarBusqueda()">
-      <i class="fas fa-xmark"></i>
-    </button>
-  </div>
-
-  <!-- Estadísticas -->
-  <div class="pac-stats-row" id="pacStatsRow"></div>
-
-  <!-- Filtros -->
-  <div class="pac-filters" id="pacFilters">
-    <button class="pac-filter-btn active" data-filter="todos" onclick="setFilter(this,'todos')">Todos</button>
-    <button class="pac-filter-btn" data-filter="stable" onclick="setFilter(this,'stable')">Estables</button>
-    <button class="pac-filter-btn" data-filter="warning" onclick="setFilter(this,'warning')">Precaución</button>
-    <button class="pac-filter-btn" data-filter="critical" onclick="setFilter(this,'critical')">Críticos<span class="filter-dot" id="critDot" style="display:none;"></span></button>
-    <button class="pac-filter-btn" data-filter="alta" onclick="setFilter(this,'alta')">🏠 Altas</button>
-  </div>
-
-  <!-- Lista pacientes -->
-  <div class="pac-list" id="pacList"></div>
-</div>
-<!-- FIN PANTALLA PACIENTES -->
-
-<!-- Botón flotante (debe ir DESPUÉS de la pantalla) -->
-<button class="fab-btn" id="fabBtn" onclick="abrirFormPaciente()" title="Nuevo paciente">
-  <i class="fas fa-plus"></i>
-</button>
-
-<!-- Bottom Sheet acciones paciente -->
-<div class="pac-sheet-overlay" id="pacSheetOverlay" onclick="cerrarSheetSiOverlay(event)">
-  <div class="pac-sheet-card">
-    <div class="pac-sheet-handle"></div>
-    <div class="pac-sheet-header">
-      <div class="pac-sheet-title" id="sheetPatientName">—</div>
-      <div class="pac-sheet-sub" id="sheetPatientInfo">—</div>
-    </div>
-    <div class="pac-sheet-actions">
-      <button class="pac-sheet-btn edit" onclick="sheetEditar()"><i class="fas fa-pen"></i> Editar paciente</button>
-      <button class="pac-sheet-btn alta" onclick="sheetDarAlta()"><i class="fas fa-house-medical-circle-check"></i> Dar de alta</button>
-      <button class="pac-sheet-btn delete" onclick="sheetEliminar()"><i class="fas fa-trash"></i> Eliminar del turno</button>
-      <button class="pac-sheet-btn cancel" onclick="cerrarSheet()"><i class="fas fa-xmark"></i> Cancelar</button>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================================
-     PANTALLA: RELOJ
-============================================================ -->
-<div class="screen" id="screen-reloj">
-  <!-- Hero -->
-  <div class="section" style="padding-top:16px;">
-    <div class="reloj-hero">
-      <div class="reloj-hero-icon">
-        <i class="fas fa-stopwatch"></i>
-      </div>
-      <div class="reloj-hero-text">
-        <h2>Mide, controla y optimiza</h2>
-        <p>tu tiempo en cada cuidado.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- CRONÓMETRO -->
-  <div class="reloj-section-label">Cronómetro</div>
-  <div class="section" style="padding-top:0;">
-    <div class="crono-card">
-      <div class="crono-display">
-        <span class="crono-time" id="cronoDisplay">00:00:00</span>
-      </div>
-      <div class="crono-labels">
-        <span class="crono-label">HH</span>
-        <span class="crono-label">MM</span>
-        <span class="crono-label">SS</span>
-      </div>
-      <div class="crono-btns">
-        <button class="crono-btn-reset" onclick="cronoReset()" title="Reiniciar">
-          <i class="fas fa-rotate-left"></i>
-        </button>
-        <button class="crono-btn-start" id="cronoStartBtn" onclick="cronoToggle()">
-          <i class="fas fa-play" id="cronoIcon"></i>
-          <span id="cronoLabel">Iniciar</span>
-        </button>
-        <button class="crono-btn-marcar" onclick="cronoMarcar()">
-          <i class="fas fa-flag"></i> Marcar
-        </button>
-      </div>
-      <div class="crono-marcas" id="cronoMarcas" style="display:none;"></div>
-    </div>
-  </div>
-
-  <!-- PRESETS RÁPIDOS -->
-  <div class="reloj-section-label">Presets Rápidos</div>
-  <div class="presets-grid" style="padding-bottom:4px;">
-    <button class="preset-btn" onclick="abrirTimerModalConPreset('Medicación','💊',5,0,'azul')">
-      <span class="preset-icon">💊</span>
-      <span class="preset-time">5:00</span>
-      <span class="preset-name">Medicación</span>
-    </button>
-    <button class="preset-btn" onclick="abrirTimerModalConPreset('Infusión','🩺',15,0,'verde')">
-      <span class="preset-icon">🩺</span>
-      <span class="preset-time">15:00</span>
-      <span class="preset-name">Infusión</span>
-    </button>
-    <button class="preset-btn" onclick="abrirTimerModalConPreset('Procedimiento','💉',30,0,'naranja')">
-      <span class="preset-icon">💉</span>
-      <span class="preset-time">30:00</span>
-      <span class="preset-name">Procedimiento</span>
-    </button>
-    <button class="preset-btn" onclick="abrirTimerModalConPreset('Valoración','❤️',60,0,'morado')">
-      <span class="preset-icon">❤️</span>
-      <span class="preset-time">60:00</span>
-      <span class="preset-name">Valoración</span>
-    </button>
-  </div>
-
-  <!-- TEMPORIZADORES ACTIVOS -->
-  <div class="reloj-section-label">Temporizadores Activos</div>
-  <div class="timers-list" id="timersList"></div>
-
-  <div style="padding: 10px 0 4px;">
-    <button class="add-timer-btn" onclick="abrirTimerModal()">
-      <i class="fas fa-plus"></i> Nuevo temporizador
-    </button>
-  </div>
-
-  <!-- HISTORIAL -->
-  <div class="historial-header">
-    <span>Historial Reciente</span>
-    <button class="historial-ver-todo" onclick="showToast('📋 Historial completo próximamente')">
-      Ver todo &rsaquo;
-    </button>
-  </div>
-  <div class="historial-list" id="historialList" style="padding-bottom: 16px;"></div>
-</div>
-
-<!-- MODAL NUEVO TEMPORIZADOR -->
-<div class="timer-modal-overlay" id="timerModalOverlay" onclick="cerrarTimerModalSiOverlay(event)">
-  <div class="timer-modal-card">
-    <div class="timer-modal-handle"></div>
-    <div class="timer-modal-header">
-      <span class="timer-modal-title">Nuevo temporizador</span>
-      <button class="timer-modal-close" onclick="cerrarTimerModal()">
-        <i class="fas fa-xmark"></i>
-      </button>
-    </div>
-    <div class="timer-modal-body">
-      <!-- contenido del modal -->
-      <div>
-        <div class="timer-modal-label"><i class="fas fa-shapes"></i> Tipo</div>
-        <div class="timer-tipo-grid" id="timerTipoGrid">
-          <button class="timer-tipo-btn selected" data-tipo="Medicación" data-emoji="💊" onclick="selTipo(this)">
-            <span class="tipo-emoji">💊</span><span class="tipo-label">Medicación</span>
-          </button>
-          <button class="timer-tipo-btn" data-tipo="Infusión" data-emoji="🩺" onclick="selTipo(this)">
-            <span class="tipo-emoji">🩺</span><span class="tipo-label">Infusión</span>
-          </button>
-          <button class="timer-tipo-btn" data-tipo="Procedimiento" data-emoji="💉" onclick="selTipo(this)">
-            <span class="tipo-emoji">💉</span><span class="tipo-label">Procedimiento</span>
-          </button>
-          <button class="timer-tipo-btn" data-tipo="Valoración" data-emoji="❤️" onclick="selTipo(this)">
-            <span class="tipo-emoji">❤️</span><span class="tipo-label">Valoración</span>
-          </button>
-          <button class="timer-tipo-btn" data-tipo="Curación" data-emoji="🩹" onclick="selTipo(this)">
-            <span class="tipo-emoji">🩹</span><span class="tipo-label">Curación</span>
-          </button>
-          <button class="timer-tipo-btn" data-tipo="Higiene" data-emoji="🧼" onclick="selTipo(this)">
-            <span class="tipo-emoji">🧼</span><span class="tipo-label">Higiene</span>
-          </button>
-          <button class="timer-tipo-btn" data-tipo="Reposo" data-emoji="🛌" onclick="selTipo(this)">
-            <span class="tipo-emoji">🛌</span><span class="tipo-label">Reposo</span>
-          </button>
-          <button class="timer-tipo-btn" data-tipo="Otro" data-emoji="⏱️" onclick="selTipo(this)">
-            <span class="tipo-emoji">⏱️</span><span class="tipo-label">Otro</span>
-          </button>
-        </div>
-      </div>
-      <div>
-        <div class="timer-modal-label"><i class="fas fa-pen"></i> Nombre (opcional)</div>
-        <input class="form-input" id="timerNombreInput" type="text" placeholder="Ej: Suero 500ml, Curación pie...">
-      </div>
-      <div>
-        <div class="timer-modal-label"><i class="fas fa-clock"></i> Duración</div>
-        <div class="timer-time-input-row">
-          <div class="timer-time-box">
-            <label>MIN</label>
-            <input class="timer-time-spinner" id="timerMin" type="number" min="0" max="999" value="5">
-          </div>
-          <div class="timer-time-sep">:</div>
-          <div class="timer-time-box">
-            <label>SEG</label>
-            <input class="timer-time-spinner" id="timerSeg" type="number" min="0" max="59" value="0">
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="timer-modal-label"><i class="fas fa-palette"></i> Color</div>
-        <div class="timer-color-row">
-          <div class="timer-color-dot selected" data-color="azul" style="background:#4A7AB5;" onclick="selColor(this)"></div>
-          <div class="timer-color-dot" data-color="verde" style="background:#10B981;" onclick="selColor(this)"></div>
-          <div class="timer-color-dot" data-color="naranja" style="background:#F59E0B;" onclick="selColor(this)"></div>
-          <div class="timer-color-dot" data-color="morado" style="background:#8B5CF6;" onclick="selColor(this)"></div>
-          <div class="timer-color-dot" data-color="rojo" style="background:#EF4444;" onclick="selColor(this)"></div>
-        </div>
-      </div>
-    </div>
-    <button class="timer-confirm-btn" onclick="crearTimer()">
-      <i class="fas fa-play"></i> Iniciar temporizador
-    </button>
-  </div>
-</div>
-
-<!-- ============================================================
-     PANTALLA: TURNOS
-============================================================ -->
-<div class="screen" id="screen-turnos">
-  <!-- HEADER -->
-  <div class="pac-header">
-    <div>
-      <h2>Turnos</h2>
-      <p id="turnos-subtitle">Agenda y visualiza tus turnos del mes</p>
-    </div>
-    <div style="display:flex;gap:8px;">
-      <button class="header-btn" onclick="abrirModalTurno()" title="Agendar turno">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B3A6B" stroke-width="1.8">
-          <rect x="3" y="4" width="18" height="18" rx="2"/>
-          <line x1="16" y1="2" x2="16" y2="6"/>
-          <line x1="8" y1="2" x2="8" y2="6"/>
-          <line x1="3" y1="10" x2="21" y2="10"/>
-        </svg>
-      </button>
-    </div>
-  </div>
-
-  <!-- CALENDARIO -->
-  <div class="section" style="padding-top:0;">
-    <div class="card" style="padding:16px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-        <button onclick="calCambiarMes(-1)" style="width:32px;height:32px;border:none;background:#F0F4FA;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--navy);">‹</button>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <span id="calTitulo" style="font-size:16px;font-weight:700;color:var(--navy);letter-spacing:-0.3px;">—</span>
-          <button onclick="calHoy()" style="padding:3px 10px;border:none;background:#EBF1FB;border-radius:8px;font-size:12px;font-weight:600;color:var(--blue);cursor:pointer;">Hoy</button>
-        </div>
-        <button onclick="calCambiarMes(1)" style="width:32px;height:32px;border:none;background:#F0F4FA;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--navy);">›</button>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(7,1fr);text-align:center;margin-bottom:6px;">
-        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Lun</span>
-        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Mar</span>
-        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Mié</span>
-        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Jue</span>
-        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Vie</span>
-        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Sáb</span>
-        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Dom</span>
-      </div>
-      <div id="calGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;"></div>
-      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);">
-        <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#4A7AB5;display:inline-block;"></span><span style="font-size:11px;color:var(--text-secondary);">Mañana</span></div>
-        <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#2BA899;display:inline-block;"></span><span style="font-size:11px;color:var(--text-secondary);">Tarde</span></div>
-        <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#8B5CF6;display:inline-block;"></span><span style="font-size:11px;color:var(--text-secondary);">Noche</span></div>
-        <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#F59E0B;display:inline-block;"></span><span style="font-size:11px;color:var(--text-secondary);">Guardia 24h</span></div>
-        <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#E2E8F2;display:inline-block;"></span><span style="font-size:11px;color:var(--text-secondary);">Libre</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TURNOS PRÓXIMOS -->
-  <div class="section" style="padding-top:4px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-      <span style="font-size:17px;font-weight:700;color:var(--text-primary);letter-spacing:-0.4px;">Turnos programados</span>
-      <button onclick="verTodosTurnos()" style="font-size:13px;color:var(--blue);font-weight:500;background:none;border:none;cursor:pointer;">Ver todos ›</button>
-    </div>
-    <div id="turnosList" style="display:flex;flex-direction:column;gap:10px;"></div>
-  </div>
-
-  <!-- ESTADÍSTICAS DEL MES -->
-  <div class="section" style="padding-top:8px;padding-bottom:8px;">
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;" id="turnosStats"></div>
-  </div>
-
-  <!-- BOTÓN AGENDAR -->
-  <div style="padding:8px 16px 90px;">
-    <button onclick="abrirModalTurno()" style="width:100%;padding:11px 16px;background:var(--navy);color:#fff;border:none;border-radius:30px;font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:var(--shadow-md);">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      Agendar turno
-    </button>
-  </div>
-</div>
-
-<!-- MODAL NUEVO TURNO -->
-<div class="form-overlay" id="turnoFormOverlay" onclick="cerrarTurnoFormSiOverlay(event)">
-  <div class="form-card">
-    <div style="padding:12px 20px 0;"><div class="form-handle"></div></div>
-    <div class="form-header">
-      <span class="form-title" id="turnoFormTitle">Agendar turno</span>
-      <button class="form-close" onclick="cerrarModalTurno()"><i class="fas fa-xmark"></i></button>
-    </div>
-    <div class="form-body">
-      <div class="form-group">
-        <label class="form-label"><i class="fas fa-calendar"></i> Fecha</label>
-        <input class="form-input" id="tFecha" type="date">
-      </div>
-      <div class="form-group">
-        <label class="form-label"><i class="fas fa-sun"></i> Tipo de turno</label>
-        <div id="turnoTipoGrid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:2px;">
-          <button type="button" class="turno-tipo-btn selected" data-tipo="manana" onclick="selTurnoTipo(this)" style="padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--blue);background:#EFF6FF;cursor:pointer;">
-            <div style="font-size:20px;margin-bottom:4px;">☀️</div>
-            <div style="font-size:12px;font-weight:700;color:var(--blue);">Mañana</div>
-            <div style="font-size:10px;color:var(--text-muted);">07:00 – 15:00</div>
-          </button>
-          <button type="button" class="turno-tipo-btn" data-tipo="tarde" onclick="selTurnoTipo(this)" style="padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--card);cursor:pointer;">
-            <div style="font-size:20px;margin-bottom:4px;">🌇</div>
-            <div style="font-size:12px;font-weight:700;color:var(--text-secondary);">Tarde</div>
-            <div style="font-size:10px;color:var(--text-muted);">15:00 – 23:00</div>
-          </button>
-          <button type="button" class="turno-tipo-btn" data-tipo="noche" onclick="selTurnoTipo(this)" style="padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--card);cursor:pointer;">
-            <div style="font-size:20px;margin-bottom:4px;">🌙</div>
-            <div style="font-size:12px;font-weight:700;color:var(--text-secondary);">Noche</div>
-            <div style="font-size:10px;color:var(--text-muted);">23:00 – 07:00</div>
-          </button>
-          <button type="button" class="turno-tipo-btn" data-tipo="guardia" onclick="selTurnoTipo(this)" style="padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--card);cursor:pointer;">
-            <div style="font-size:20px;margin-bottom:4px;">🛡️</div>
-            <div style="font-size:12px;font-weight:700;color:var(--text-secondary);">Guardia 24h</div>
-            <div style="font-size:10px;color:var(--text-muted);">07:00 – 07:00</div>
-          </button>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label"><i class="fas fa-hospital"></i> Hospital / Sede</label>
-        <input class="form-input" id="tHospital" type="text" placeholder="Ej: Hospital San José">
-      </div>
-      <div class="form-group">
-        <label class="form-label"><i class="fas fa-note-sticky"></i> Notas (opcional)</label>
-        <input class="form-input" id="tNotas" type="text" placeholder="Ej: Llevar bata, área de urgencias...">
-      </div>
-      <div class="form-group">
-        <label class="form-label"><i class="fas fa-circle-dot"></i> Estado</label>
-        <select class="form-select" id="tEstado">
-          <option value="confirmado">✅ Confirmado</option>
-          <option value="pendiente">🕐 Pendiente</option>
-        </select>
-      </div>
-    </div>
-    <button class="form-submit-btn-modern" onclick="guardarTurno()">
-      <i class="fas fa-calendar-check"></i> Guardar turno
-    </button>
-  </div>
-</div>
-
-<!-- ============================================================
-     BARRA DE NAVEGACIÓN INFERIOR
-============================================================ -->
-<nav class="bottom-nav">
-  <!-- Inicio -->
-  <button class="nav-item active" onclick="setNav(this)">
-    <div class="nav-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#2D5FA6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
-        <path d="M9 21V12h6v9"/>
-      </svg>
-    </div>
-    <span class="nav-label">Inicio</span>
-  </button>
-  
-  <!-- Pacientes -->
-  <button class="nav-item" onclick="setNav(this,'pacientes')">
-    <div class="nav-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
-      </svg>
-    </div>
-    <span class="nav-label">Pacientes</span>
-  </button>
-  
-  <!-- Herramientas -->
-  <button class="nav-item" onclick="setNav(this)">
-    <div class="nav-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.77 3.77z"/>
-      </svg>
-    </div>
-    <span class="nav-label">Herramientas</span>
-  </button>
-  
-  <!-- Reloj -->
-  <button class="nav-item" onclick="setNav(this,'reloj')">
-    <div class="nav-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="9"/>
-        <path d="M12 7v5l3 3"/>
-      </svg>
-    </div>
-    <span class="nav-label">Reloj</span>
-  </button>
-  
-  <!-- Turnos -->
-  <button class="nav-item" onclick="setNav(this,'turnos')">
-    <div class="nav-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="4" width="18" height="18" rx="2"/>
-        <line x1="16" y1="2" x2="16" y2="6"/>
-        <line x1="8" y1="2" x2="8" y2="6"/>
-        <line x1="3" y1="10" x2="21" y2="10"/>
-        <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
-      </svg>
-    </div>
-    <span class="nav-label">Turnos</span>
-  </button>
-</nav>
-
-<!-- ============================================================
-     MODALES (Apoyar, Formulario, Alertas, etc.)
-============================================================ -->DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <!-- ============================================================
@@ -1483,6 +1046,14 @@ highlight-text {
 }
 .timer-confirm-btn:active { transform: scale(0.98); background: #142d54; }
 
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.bottom-nav {
+  z-index: 1000 !important;
+}
 </style>
 </head>
 <body>
@@ -1586,6 +1157,9 @@ highlight-text {
      Se activa con setNav(el, 'pacientes') desde el nav.
      Controles: showScreen('pacientes') / showScreen('inicio')
 ============================================================ -->
+<!-- ============================================================
+     PANTALLA: PACIENTES
+============================================================ -->
 <div class="screen" id="screen-pacientes">
   <!-- Header -->
   <div class="pac-header">
@@ -1619,18 +1193,19 @@ highlight-text {
 
   <!-- Filtros -->
   <div class="pac-filters" id="pacFilters">
-    <button class="pac-filter-btn active" data-filter="todos"          onclick="setFilter(this,'todos')">Todos</button>
-    <button class="pac-filter-btn"        data-filter="stable"         onclick="setFilter(this,'stable')">Estables</button>
-    <button class="pac-filter-btn"        data-filter="warning"        onclick="setFilter(this,'warning')">Precaución</button>
-    <button class="pac-filter-btn"        data-filter="critical"       onclick="setFilter(this,'critical')">Críticos<span class="filter-dot" id="critDot" style="display:none;"></span></button>
-    <button class="pac-filter-btn"        data-filter="alta"           onclick="setFilter(this,'alta')">🏠 Altas</button>
+    <button class="pac-filter-btn active" data-filter="todos" onclick="setFilter(this,'todos')">Todos</button>
+    <button class="pac-filter-btn" data-filter="stable" onclick="setFilter(this,'stable')">Estables</button>
+    <button class="pac-filter-btn" data-filter="warning" onclick="setFilter(this,'warning')">Precaución</button>
+    <button class="pac-filter-btn" data-filter="critical" onclick="setFilter(this,'critical')">Críticos<span class="filter-dot" id="critDot" style="display:none;"></span></button>
+    <button class="pac-filter-btn" data-filter="alta" onclick="setFilter(this,'alta')">🏠 Altas</button>
   </div>
 
   <!-- Lista pacientes -->
   <div class="pac-list" id="pacList"></div>
 </div>
+<!-- FIN PANTALLA PACIENTES -->
 
-<!-- Botón flotante -->
+<!-- Botón flotante (debe ir DESPUÉS de la pantalla) -->
 <button class="fab-btn" id="fabBtn" onclick="abrirFormPaciente()" title="Nuevo paciente">
   <i class="fas fa-plus"></i>
 </button>
@@ -1641,26 +1216,21 @@ highlight-text {
     <div class="pac-sheet-handle"></div>
     <div class="pac-sheet-header">
       <div class="pac-sheet-title" id="sheetPatientName">—</div>
-      <div class="pac-sheet-sub"   id="sheetPatientInfo">—</div>
+      <div class="pac-sheet-sub" id="sheetPatientInfo">—</div>
     </div>
     <div class="pac-sheet-actions">
-      <button class="pac-sheet-btn edit"   onclick="sheetEditar()"><i class="fas fa-pen"></i> Editar paciente</button>
-      <button class="pac-sheet-btn alta"   onclick="sheetDarAlta()"><i class="fas fa-house-medical-circle-check"></i> Dar de alta</button>
+      <button class="pac-sheet-btn edit" onclick="sheetEditar()"><i class="fas fa-pen"></i> Editar paciente</button>
+      <button class="pac-sheet-btn alta" onclick="sheetDarAlta()"><i class="fas fa-house-medical-circle-check"></i> Dar de alta</button>
       <button class="pac-sheet-btn delete" onclick="sheetEliminar()"><i class="fas fa-trash"></i> Eliminar del turno</button>
       <button class="pac-sheet-btn cancel" onclick="cerrarSheet()"><i class="fas fa-xmark"></i> Cancelar</button>
     </div>
   </div>
 </div>
-<!-- ============================================================
-     BARRA DE NAVEGACIÓN INFERIOR
-     setNav(el) = Inicio | setNav(el,'pacientes') = Pacientes
-     Próximamente: herramientas, reloj, turnos
-============================================================ -->
+
 <!-- ============================================================
      PANTALLA: RELOJ
 ============================================================ -->
 <div class="screen" id="screen-reloj">
-
   <!-- Hero -->
   <div class="section" style="padding-top:16px;">
     <div class="reloj-hero">
@@ -1671,11 +1241,10 @@ highlight-text {
         <h2>Mide, controla y optimiza</h2>
         <p>tu tiempo en cada cuidado.</p>
       </div>
-      <div class="reloj-hero-img">⏱️</div>
     </div>
   </div>
 
-  <!-- ── CRONÓMETRO ─────────────────────────────────────────── -->
+  <!-- CRONÓMETRO -->
   <div class="reloj-section-label">Cronómetro</div>
   <div class="section" style="padding-top:0;">
     <div class="crono-card">
@@ -1703,7 +1272,7 @@ highlight-text {
     </div>
   </div>
 
-  <!-- ── PRESETS RÁPIDOS ────────────────────────────────────── -->
+  <!-- PRESETS RÁPIDOS -->
   <div class="reloj-section-label">Presets Rápidos</div>
   <div class="presets-grid" style="padding-bottom:4px;">
     <button class="preset-btn" onclick="abrirTimerModalConPreset('Medicación','💊',5,0,'azul')">
@@ -1728,18 +1297,17 @@ highlight-text {
     </button>
   </div>
 
-  <!-- ── TEMPORIZADORES ACTIVOS ─────────────────────────────── -->
+  <!-- TEMPORIZADORES ACTIVOS -->
   <div class="reloj-section-label">Temporizadores Activos</div>
   <div class="timers-list" id="timersList"></div>
 
-  <!-- Botón agregar nuevo temporizador -->
   <div style="padding: 10px 0 4px;">
     <button class="add-timer-btn" onclick="abrirTimerModal()">
       <i class="fas fa-plus"></i> Nuevo temporizador
     </button>
   </div>
 
-  <!-- ── HISTORIAL RECIENTE ─────────────────────────────────── -->
+  <!-- HISTORIAL -->
   <div class="historial-header">
     <span>Historial Reciente</span>
     <button class="historial-ver-todo" onclick="showToast('📋 Historial completo próximamente')">
@@ -1747,10 +1315,9 @@ highlight-text {
     </button>
   </div>
   <div class="historial-list" id="historialList" style="padding-bottom: 16px;"></div>
-
 </div>
 
-<!-- ── MODAL NUEVO TEMPORIZADOR ─────────────────────────────── -->
+<!-- MODAL NUEVO TEMPORIZADOR -->
 <div class="timer-modal-overlay" id="timerModalOverlay" onclick="cerrarTimerModalSiOverlay(event)">
   <div class="timer-modal-card">
     <div class="timer-modal-handle"></div>
@@ -1761,7 +1328,7 @@ highlight-text {
       </button>
     </div>
     <div class="timer-modal-body">
-
+      <!-- contenido del modal -->
       <div>
         <div class="timer-modal-label"><i class="fas fa-shapes"></i> Tipo</div>
         <div class="timer-tipo-grid" id="timerTipoGrid">
@@ -1791,13 +1358,10 @@ highlight-text {
           </button>
         </div>
       </div>
-
       <div>
         <div class="timer-modal-label"><i class="fas fa-pen"></i> Nombre (opcional)</div>
-        <input class="form-input" id="timerNombreInput" type="text"
-          placeholder="Ej: Suero 500ml, Curación pie...">
+        <input class="form-input" id="timerNombreInput" type="text" placeholder="Ej: Suero 500ml, Curación pie...">
       </div>
-
       <div>
         <div class="timer-modal-label"><i class="fas fa-clock"></i> Duración</div>
         <div class="timer-time-input-row">
@@ -1812,18 +1376,16 @@ highlight-text {
           </div>
         </div>
       </div>
-
       <div>
         <div class="timer-modal-label"><i class="fas fa-palette"></i> Color</div>
         <div class="timer-color-row">
-          <div class="timer-color-dot selected" data-color="azul"    style="background:#4A7AB5;" onclick="selColor(this)"></div>
-          <div class="timer-color-dot"          data-color="verde"   style="background:#10B981;" onclick="selColor(this)"></div>
-          <div class="timer-color-dot"          data-color="naranja" style="background:#F59E0B;" onclick="selColor(this)"></div>
-          <div class="timer-color-dot"          data-color="morado"  style="background:#8B5CF6;" onclick="selColor(this)"></div>
-          <div class="timer-color-dot"          data-color="rojo"    style="background:#EF4444;" onclick="selColor(this)"></div>
+          <div class="timer-color-dot selected" data-color="azul" style="background:#4A7AB5;" onclick="selColor(this)"></div>
+          <div class="timer-color-dot" data-color="verde" style="background:#10B981;" onclick="selColor(this)"></div>
+          <div class="timer-color-dot" data-color="naranja" style="background:#F59E0B;" onclick="selColor(this)"></div>
+          <div class="timer-color-dot" data-color="morado" style="background:#8B5CF6;" onclick="selColor(this)"></div>
+          <div class="timer-color-dot" data-color="rojo" style="background:#EF4444;" onclick="selColor(this)"></div>
         </div>
       </div>
-
     </div>
     <button class="timer-confirm-btn" onclick="crearTimer()">
       <i class="fas fa-play"></i> Iniciar temporizador
@@ -1831,6 +1393,145 @@ highlight-text {
   </div>
 </div>
 
+<!-- ============================================================
+     PANTALLA: TURNOS
+============================================================ -->
+<div class="screen" id="screen-turnos">
+  <!-- HEADER -->
+  <div class="pac-header">
+    <div>
+      <h2>Turnos</h2>
+      <p id="turnos-subtitle">Agenda y visualiza tus turnos del mes</p>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="header-btn" onclick="abrirModalTurno()" title="Agendar turno">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B3A6B" stroke-width="1.8">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- CALENDARIO -->
+  <div class="section" style="padding-top:0;">
+    <div class="card" style="padding:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <button onclick="calCambiarMes(-1)" style="width:32px;height:32px;border:none;background:#F0F4FA;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--navy);">‹</button>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span id="calTitulo" style="font-size:16px;font-weight:700;color:var(--navy);letter-spacing:-0.3px;">—</span>
+          <button onclick="calHoy()" style="padding:3px 10px;border:none;background:#EBF1FB;border-radius:8px;font-size:12px;font-weight:600;color:var(--blue);cursor:pointer;">Hoy</button>
+        </div>
+        <button onclick="calCambiarMes(1)" style="width:32px;height:32px;border:none;background:#F0F4FA;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--navy);">›</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);text-align:center;margin-bottom:6px;">
+        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Lun</span>
+        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Mar</span>
+        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Mié</span>
+        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Jue</span>
+        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Vie</span>
+        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Sáb</span>
+        <span style="font-size:11px;font-weight:700;color:var(--text-muted);">Dom</span>
+      </div>
+      <div id="calGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;"></div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);">
+        <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#4A7AB5;display:inline-block;"></span><span style="font-size:11px;color:var(--text-secondary);">Mañana</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#2BA899;display:inline-block;"></span><span style="font-size:11px;color:var(--text-secondary);">Tarde</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#8B5CF6;display:inline-block;"></span><span style="font-size:11px;color:var(--text-secondary);">Noche</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#F59E0B;display:inline-block;"></span><span style="font-size:11px;color:var(--text-secondary);">Guardia 24h</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#E2E8F2;display:inline-block;"></span><span style="font-size:11px;color:var(--text-secondary);">Libre</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TURNOS PRÓXIMOS -->
+  <div class="section" style="padding-top:4px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <span style="font-size:17px;font-weight:700;color:var(--text-primary);letter-spacing:-0.4px;">Turnos programados</span>
+      <button onclick="verTodosTurnos()" style="font-size:13px;color:var(--blue);font-weight:500;background:none;border:none;cursor:pointer;">Ver todos ›</button>
+    </div>
+    <div id="turnosList" style="display:flex;flex-direction:column;gap:10px;"></div>
+  </div>
+
+  <!-- ESTADÍSTICAS DEL MES -->
+  <div class="section" style="padding-top:8px;padding-bottom:8px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;" id="turnosStats"></div>
+  </div>
+
+  <!-- BOTÓN AGENDAR -->
+  <div style="padding:8px 16px 90px;">
+    <button onclick="abrirModalTurno()" style="width:100%;padding:11px 16px;background:var(--navy);color:#fff;border:none;border-radius:30px;font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:var(--shadow-md);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Agendar turno
+    </button>
+  </div>
+</div>
+
+<!-- MODAL NUEVO TURNO -->
+<div class="form-overlay" id="turnoFormOverlay" onclick="cerrarTurnoFormSiOverlay(event)">
+  <div class="form-card">
+    <div style="padding:12px 20px 0;"><div class="form-handle"></div></div>
+    <div class="form-header">
+      <span class="form-title" id="turnoFormTitle">Agendar turno</span>
+      <button class="form-close" onclick="cerrarModalTurno()"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="form-body">
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-calendar"></i> Fecha</label>
+        <input class="form-input" id="tFecha" type="date">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-sun"></i> Tipo de turno</label>
+        <div id="turnoTipoGrid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:2px;">
+          <button type="button" class="turno-tipo-btn selected" data-tipo="manana" onclick="selTurnoTipo(this)" style="padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--blue);background:#EFF6FF;cursor:pointer;">
+            <div style="font-size:20px;margin-bottom:4px;">☀️</div>
+            <div style="font-size:12px;font-weight:700;color:var(--blue);">Mañana</div>
+            <div style="font-size:10px;color:var(--text-muted);">07:00 – 15:00</div>
+          </button>
+          <button type="button" class="turno-tipo-btn" data-tipo="tarde" onclick="selTurnoTipo(this)" style="padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--card);cursor:pointer;">
+            <div style="font-size:20px;margin-bottom:4px;">🌇</div>
+            <div style="font-size:12px;font-weight:700;color:var(--text-secondary);">Tarde</div>
+            <div style="font-size:10px;color:var(--text-muted);">15:00 – 23:00</div>
+          </button>
+          <button type="button" class="turno-tipo-btn" data-tipo="noche" onclick="selTurnoTipo(this)" style="padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--card);cursor:pointer;">
+            <div style="font-size:20px;margin-bottom:4px;">🌙</div>
+            <div style="font-size:12px;font-weight:700;color:var(--text-secondary);">Noche</div>
+            <div style="font-size:10px;color:var(--text-muted);">23:00 – 07:00</div>
+          </button>
+          <button type="button" class="turno-tipo-btn" data-tipo="guardia" onclick="selTurnoTipo(this)" style="padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--card);cursor:pointer;">
+            <div style="font-size:20px;margin-bottom:4px;">🛡️</div>
+            <div style="font-size:12px;font-weight:700;color:var(--text-secondary);">Guardia 24h</div>
+            <div style="font-size:10px;color:var(--text-muted);">07:00 – 07:00</div>
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-hospital"></i> Hospital / Sede</label>
+        <input class="form-input" id="tHospital" type="text" placeholder="Ej: Hospital San José">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-note-sticky"></i> Notas (opcional)</label>
+        <input class="form-input" id="tNotas" type="text" placeholder="Ej: Llevar bata, área de urgencias...">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-circle-dot"></i> Estado</label>
+        <select class="form-select" id="tEstado">
+          <option value="confirmado">✅ Confirmado</option>
+          <option value="pendiente">🕐 Pendiente</option>
+        </select>
+      </div>
+    </div>
+    <button class="form-submit-btn-modern" onclick="guardarTurno()">
+      <i class="fas fa-calendar-check"></i> Guardar turno
+    </button>
+  </div>
+</div>
+
+<!-- ============================================================
+     BARRA DE NAVEGACIÓN INFERIOR
+============================================================ -->
 <nav class="bottom-nav">
   <!-- Inicio -->
   <button class="nav-item active" onclick="setNav(this)">
@@ -1877,7 +1578,69 @@ highlight-text {
   </button>
   
   <!-- Turnos -->
+  <button class="nav-item" onclick="setNav(this,'turnos')">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/>
+        <line x1="8" y1="2" x2="8" y2="6"/>
+        <line x1="3" y1="10" x2="21" y2="10"/>
+        <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
+      </svg>
+    </div>
+    <span class="nav-label">Turnos</span>
+  </button>
+</nav>
+
+<!-- ============================================================
+     MODALES (Apoyar, Formulario, Alertas, etc.)
+============================================================ -->
+  <!-- Inicio -->
+  <button class="nav-item active" onclick="setNav(this)">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#2D5FA6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
+        <path d="M9 21V12h6v9"/>
+      </svg>
+    </div>
+    <span class="nav-label">Inicio</span>
+  </button>
+  
+  <!-- Pacientes -->
+  <button class="nav-item" onclick="setNav(this,'pacientes')">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+      </svg>
+    </div>
+    <span class="nav-label">Pacientes</span>
+  </button>
+  
+  <!-- Herramientas -->
   <button class="nav-item" onclick="setNav(this)">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.77 3.77z"/>
+      </svg>
+    </div>
+    <span class="nav-label">Herramientas</span>
+  </button>
+  
+  <!-- Reloj -->
+  <button class="nav-item" onclick="setNav(this,'reloj')">
+    <div class="nav-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 7v5l3 3"/>
+      </svg>
+    </div>
+    <span class="nav-label">Reloj</span>
+  </button>
+  
+  <!-- Turnos -->
+  <button class="nav-item" onclick="setNav(this,'turnos')">
     <div class="nav-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="#96A4B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <rect x="3" y="4" width="18" height="18" rx="2"/>
@@ -1893,7 +1656,6 @@ highlight-text {
 
 <!-- ============================================================
      MODAL APOYAR — Botón ☕ del header
-     DEVELOPER: edita el value de #clabeInput con tu CLABE/link
 ============================================================ -->
 <div class="modal-overlay" id="modalApoyar" onclick="cerrarModalSiOverlay(event)">
   <div class="modal-card">
@@ -1908,7 +1670,6 @@ highlight-text {
       <span>100% gratuita</span> para toda la comunidad. 💙
     </div>
     <div class="modal-divider"><span>Datos de pago</span></div>
-    <!-- DEVELOPER: reemplaza el value con tu CLABE o link -->
     <div class="modal-clabe-wrap">
       <input class="modal-clabe" type="text" id="clabeInput"
         value="AQUÍ PEGA TU CLABE O NÚMERO DE CUENTA"
@@ -3107,6 +2868,417 @@ renderHistorial();
 // INICIALIZACIÓN
 // ============================================================
 renderFavoritos();
+
+// ============================================================
+// MÓDULO TURNOS
+// ============================================================
+let turnos = JSON.parse(localStorage.getItem('enfiapp_turnos') || '[]');
+let calFecha = new Date();
+let editandoTurnoId = null;
+let turnoTipoSeleccionado = 'manana';
+
+function saveTurnos() {
+  try { localStorage.setItem('enfiapp_turnos', JSON.stringify(turnos)); } catch(e) {}
+}
+
+const TURNO_CONFIG = {
+  manana:  { label: 'Turno Mañana',  emoji: '☀️',  hora: '07:00 a.m. – 03:00 p.m. (8h)', color: '#4A7AB5', dot: '#4A7AB5' },
+  tarde:   { label: 'Turno Tarde',   emoji: '🌇',  hora: '03:00 p.m. – 11:00 p.m. (8h)', color: '#2BA899', dot: '#2BA899' },
+  noche:   { label: 'Turno Noche',   emoji: '🌙',  hora: '11:00 p.m. – 07:00 a.m. (8h)', color: '#8B5CF6', dot: '#8B5CF6' },
+  guardia: { label: 'Guardia 24h',   emoji: '🛡️', hora: '07:00 a.m. – 07:00 a.m. (24h)', color: '#F59E0B', dot: '#F59E0B' },
+};
+
+// ── Calendario ──────────────────────────────────────────────
+function calRender() {
+  const year  = calFecha.getFullYear();
+  const month = calFecha.getMonth();
+  const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  document.getElementById('calTitulo').textContent = meses[month] + ' ' + year;
+
+  const hoy       = new Date();
+  const primerDia = new Date(year, month, 1);
+  // Ajuste lunes=0
+  let startDow = primerDia.getDay() - 1;
+  if (startDow < 0) startDow = 6;
+  const diasEnMes = new Date(year, month + 1, 0).getDate();
+
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+
+  // Celdas vacías al inicio
+  for (let i = 0; i < startDow; i++) {
+    const prev = new Date(year, month, -startDow + i + 1);
+    const cell = document.createElement('div');
+    cell.style.cssText = 'padding:4px 2px;text-align:center;opacity:0.3;';
+    cell.innerHTML = '<span style="font-size:13px;color:var(--text-muted);">' + prev.getDate() + '</span>';
+    grid.appendChild(cell);
+  }
+
+  for (let d = 1; d <= diasEnMes; d++) {
+    const fechaStr = year + '-' + String(month+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+    const turnosDia = turnos.filter(t => t.fecha === fechaStr);
+    const esHoy = hoy.getFullYear()===year && hoy.getMonth()===month && hoy.getDate()===d;
+
+    const cell = document.createElement('div');
+    cell.style.cssText = 'padding:4px 2px;text-align:center;cursor:pointer;border-radius:10px;transition:background 0.15s;';
+    cell.onclick = () => { abrirModalTurno(fechaStr); };
+
+    let numStyle = 'font-size:14px;font-weight:500;color:var(--text-primary);display:block;line-height:1.6;';
+    let wrapStyle = 'display:inline-flex;flex-direction:column;align-items:center;width:32px;padding:3px 0;border-radius:10px;';
+
+    if (esHoy) {
+      wrapStyle += 'background:var(--navy);';
+      numStyle = 'font-size:14px;font-weight:700;color:#fff;display:block;line-height:1.6;';
+    }
+
+    let dotsHtml = '';
+    if (turnosDia.length > 0) {
+      const dotColors = turnosDia.slice(0,2).map(t => TURNO_CONFIG[t.tipo]?.dot || '#4A7AB5');
+      dotsHtml = '<div style="display:flex;gap:3px;justify-content:center;margin-top:1px;">' +
+        dotColors.map(c => '<span style="width:6px;height:6px;border-radius:50%;background:' + c + ';display:inline-block;"></span>').join('') +
+        '</div>';
+    }
+
+    cell.innerHTML = '<div style="' + wrapStyle + '"><span style="' + numStyle + '">' + d + '</span>' + dotsHtml + '</div>';
+    grid.appendChild(cell);
+  }
+
+  // Celdas vacías al final
+  const totalCells = startDow + diasEnMes;
+  const resto = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+  for (let i = 1; i <= resto; i++) {
+    const cell = document.createElement('div');
+    cell.style.cssText = 'padding:4px 2px;text-align:center;opacity:0.3;';
+    cell.innerHTML = '<span style="font-size:13px;color:var(--text-muted);">' + i + '</span>';
+    grid.appendChild(cell);
+  }
+}
+
+function calCambiarMes(delta) {
+  calFecha = new Date(calFecha.getFullYear(), calFecha.getMonth() + delta, 1);
+  calRender();
+  renderTurnosList();
+}
+
+function calHoy() {
+  calFecha = new Date();
+  calRender();
+  renderTurnosList();
+}
+
+// ── Lista de turnos ─────────────────────────────────────────
+function renderTurnosList() {
+  const year  = calFecha.getFullYear();
+  const month = calFecha.getMonth();
+  const prefix = year + '-' + String(month+1).padStart(2,'0') + '-';
+
+  const delMes = turnos
+    .filter(t => t.fecha.startsWith(prefix))
+    .sort((a,b) => a.fecha.localeCompare(b.fecha))
+    .slice(0,6);
+
+  const list = document.getElementById('turnosList');
+  const hoy  = new Date().toISOString().slice(0,10);
+
+  if (!delMes.length) {
+    list.innerHTML = '<div style="text-align:center;padding:24px 16px;color:var(--text-muted);font-size:13px;background:var(--card);border-radius:var(--radius-sm);border:1.5px dashed var(--border);"><i class="fas fa-calendar-xmark" style="font-size:28px;color:var(--border);display:block;margin-bottom:8px;"></i>Sin turnos este mes.<br>Toca <b>Agendar turno</b> para agregar.</div>';
+  } else {
+    list.innerHTML = delMes.map(t => {
+      const cfg = TURNO_CONFIG[t.tipo] || TURNO_CONFIG.manana;
+      const fechaObj = new Date(t.fecha + 'T12:00:00');
+      const diasSemana = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+      const mesesCortos = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+      const dow = diasSemana[fechaObj.getDay()];
+      const day = fechaObj.getDate();
+      const mon = mesesCortos[fechaObj.getMonth()];
+      const estadoBadgeStyle = t.estado === 'confirmado'
+        ? 'background:#DCFCE7;color:#16A34A;'
+        : 'background:#FEF9C3;color:#A16207;';
+
+      return `
+        <div onclick="abrirDetalleTurno(${t.id})" style="background:var(--card);border-radius:var(--radius-sm);border:1.5px solid var(--border);display:flex;align-items:center;gap:12px;padding:12px 14px;box-shadow:var(--shadow-sm);cursor:pointer;transition:all 0.15s;border-left:4px solid ${cfg.dot};">
+          <div style="min-width:36px;text-align:center;">
+            <div style="font-size:11px;font-weight:600;color:var(--text-muted);">${dow}</div>
+            <div style="font-size:20px;font-weight:700;color:var(--navy);line-height:1.1;">${day}</div>
+            <div style="font-size:10px;font-weight:700;color:var(--text-muted);">${mon}</div>
+          </div>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+              <span style="font-size:15px;">${cfg.emoji}</span>
+              <span style="font-size:14px;font-weight:700;color:var(--text-primary);">${cfg.label}</span>
+            </div>
+            <div style="font-size:12px;color:var(--text-secondary);display:flex;align-items:center;gap:4px;"><i class="fas fa-clock" style="font-size:10px;"></i> ${cfg.hora}</div>
+            ${t.hospital ? `<div style="font-size:12px;color:var(--text-secondary);display:flex;align-items:center;gap:4px;margin-top:2px;"><i class="fas fa-hospital" style="font-size:10px;"></i> ${escapeHtml(t.hospital)}</div>` : ''}
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+            <span style="font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;${estadoBadgeStyle}">${t.estado === 'confirmado' ? 'Confirmado' : 'Pendiente'}</span>
+            <i class="fas fa-chevron-right" style="font-size:11px;color:var(--text-muted);"></i>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  renderTurnosStats();
+}
+
+// ── Estadísticas ────────────────────────────────────────────
+function renderTurnosStats() {
+  const year  = calFecha.getFullYear();
+  const month = calFecha.getMonth();
+  const prefix = year + '-' + String(month+1).padStart(2,'0') + '-';
+  const delMes = turnos.filter(t => t.fecha.startsWith(prefix));
+
+  const total       = delMes.length;
+  const confirmados = delMes.filter(t => t.estado === 'confirmado').length;
+  const horas       = delMes.reduce((acc, t) => acc + (t.tipo === 'guardia' ? 24 : 8), 0);
+  const asistencia  = total > 0 ? Math.round((confirmados / total) * 100) : 0;
+
+  const stats = [
+    { val: total,            lbl: 'Turnos este mes', icon: 'fa-calendar-days', color: '#4A7AB5' },
+    { val: horas + 'h',      lbl: 'Horas programadas', icon: 'fa-clock',       color: '#2BA899' },
+    { val: confirmados,      lbl: 'Turnos confirmados', icon: 'fa-circle-check', color: '#8B5CF6' },
+    { val: asistencia + '%', lbl: 'Asistencia',        icon: 'fa-star',         color: '#F59E0B' },
+  ];
+
+  document.getElementById('turnosStats').innerHTML = stats.map(s => `
+    <div style="background:var(--card);border-radius:var(--radius-sm);padding:12px 8px;text-align:center;box-shadow:var(--shadow-sm);border:1.5px solid var(--border);">
+      <i class="fas ${s.icon}" style="font-size:18px;color:${s.color};margin-bottom:6px;display:block;"></i>
+      <div style="font-size:20px;font-weight:700;color:var(--navy);line-height:1;">${s.val}</div>
+      <div style="font-size:10px;color:var(--text-secondary);margin-top:3px;line-height:1.3;">${s.lbl}</div>
+    </div>
+  `).join('');
+}
+
+// ── Modal nuevo turno ───────────────────────────────────────
+function abrirModalTurno(fechaStr = null) {
+  editandoTurnoId = null;
+  turnoTipoSeleccionado = 'manana';
+  document.getElementById('turnoFormTitle').textContent = 'Agendar turno';
+
+  const hoy = fechaStr || new Date().toISOString().slice(0,10);
+  document.getElementById('tFecha').value    = hoy;
+  document.getElementById('tHospital').value = '';
+  document.getElementById('tNotas').value    = '';
+  document.getElementById('tEstado').value   = 'confirmado';
+
+  document.querySelectorAll('.turno-tipo-btn').forEach((b,i) => {
+    const sel = b.dataset.tipo === 'manana';
+    b.style.border      = sel ? '1.5px solid var(--blue)' : '1.5px solid var(--border)';
+    b.style.background  = sel ? '#EFF6FF' : 'var(--card)';
+    b.querySelector('div:nth-child(2)').style.color = sel ? 'var(--blue)' : 'var(--text-secondary)';
+  });
+
+  document.getElementById('turnoFormOverlay').classList.add('open');
+}
+
+function cerrarModalTurno() {
+  document.getElementById('turnoFormOverlay').classList.remove('open');
+  editandoTurnoId = null;
+}
+
+function cerrarTurnoFormSiOverlay(e) {
+  if (e.target === document.getElementById('turnoFormOverlay')) cerrarModalTurno();
+}
+
+function selTurnoTipo(btn) {
+  turnoTipoSeleccionado = btn.dataset.tipo;
+  document.querySelectorAll('.turno-tipo-btn').forEach(b => {
+    const sel = b === btn;
+    b.style.border     = sel ? '1.5px solid var(--blue)' : '1.5px solid var(--border)';
+    b.style.background = sel ? '#EFF6FF' : 'var(--card)';
+    b.querySelector('div:nth-child(2)').style.color = sel ? 'var(--blue)' : 'var(--text-secondary)';
+  });
+}
+
+function guardarTurno() {
+  const fecha    = document.getElementById('tFecha').value;
+  const hospital = document.getElementById('tHospital').value.trim();
+  const notas    = document.getElementById('tNotas').value.trim();
+  const estado   = document.getElementById('tEstado').value;
+
+  if (!fecha) { showToast('⚠️ Selecciona una fecha'); return; }
+
+  if (editandoTurnoId !== null) {
+    const idx = turnos.findIndex(t => t.id === editandoTurnoId);
+    if (idx !== -1) {
+      turnos[idx] = { ...turnos[idx], fecha, tipo: turnoTipoSeleccionado, hospital, notas, estado };
+      showToast('✅ Turno actualizado');
+    }
+  } else {
+    turnos.push({ id: Date.now(), fecha, tipo: turnoTipoSeleccionado, hospital, notas, estado });
+    showToast('✅ Turno agendado');
+  }
+
+  saveTurnos();
+  cerrarModalTurno();
+  calRender();
+  renderTurnosList();
+}
+
+// ── Detalle / Eliminar turno ────────────────────────────────
+function abrirDetalleTurno(id) {
+  const t = turnos.find(x => x.id === id);
+  if (!t) return;
+  const cfg = TURNO_CONFIG[t.tipo] || TURNO_CONFIG.manana;
+
+  const acciones = `
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <button onclick="editarTurno(${id})" class="pac-sheet-btn edit" style="text-align:left;"><i class="fas fa-pen"></i> Editar turno</button>
+      <button onclick="eliminarTurno(${id})" class="pac-sheet-btn delete" style="text-align:left;"><i class="fas fa-trash"></i> Eliminar turno</button>
+      <button onclick="cerrarDetalleSheet()" class="pac-sheet-btn cancel" style="text-align:left;"><i class="fas fa-xmark"></i> Cancelar</button>
+    </div>`;
+
+  const overlay = document.getElementById('pacSheetOverlay');
+  document.getElementById('sheetPatientName').textContent = cfg.emoji + ' ' + cfg.label;
+  document.getElementById('sheetPatientInfo').textContent = cfg.hora + (t.hospital ? ' · ' + t.hospital : '');
+  overlay.querySelector('.pac-sheet-actions').innerHTML = acciones;
+  overlay._turnoId = id;
+  overlay.classList.add('open');
+}
+
+function cerrarDetalleSheet() {
+  document.getElementById('pacSheetOverlay').classList.remove('open');
+}
+
+function editarTurno(id) {
+  const t = turnos.find(x => x.id === id);
+  if (!t) return;
+  cerrarDetalleSheet();
+  editandoTurnoId = id;
+  turnoTipoSeleccionado = t.tipo;
+  document.getElementById('turnoFormTitle').textContent = 'Editar turno';
+  document.getElementById('tFecha').value    = t.fecha;
+  document.getElementById('tHospital').value = t.hospital || '';
+  document.getElementById('tNotas').value    = t.notas    || '';
+  document.getElementById('tEstado').value   = t.estado   || 'confirmado';
+
+  document.querySelectorAll('.turno-tipo-btn').forEach(b => {
+    const sel = b.dataset.tipo === t.tipo;
+    b.style.border     = sel ? '1.5px solid var(--blue)' : '1.5px solid var(--border)';
+    b.style.background = sel ? '#EFF6FF' : 'var(--card)';
+    b.querySelector('div:nth-child(2)').style.color = sel ? 'var(--blue)' : 'var(--text-secondary)';
+  });
+
+  document.getElementById('turnoFormOverlay').classList.add('open');
+}
+
+function eliminarTurno(id) {
+  if (!confirm('¿Eliminar este turno?')) return;
+  turnos = turnos.filter(t => t.id !== id);
+  saveTurnos();
+  cerrarDetalleSheet();
+  calRender();
+  renderTurnosList();
+  showToast('🗑️ Turno eliminado');
+}
+
+// ── Integración con setNav ──────────────────────────────────
+const _setNavOriginal = setNav;
+// Extender setNav para soportar 'turnos'
+function setNav(el, screen) {
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.remove('active');
+    n.querySelectorAll('svg').forEach(s => s.setAttribute('stroke', '#96A4B8'));
+    const lbl = n.querySelector('.nav-label');
+    if (lbl) lbl.style.color = '';
+  });
+  el.classList.add('active');
+  el.querySelectorAll('svg').forEach(s => s.setAttribute('stroke', '#4A7AB5'));
+  const lbl = el.querySelector('.nav-label');
+  if (lbl) lbl.style.color = '#4A7AB5';
+
+  if (screen === 'pacientes') {
+    showScreen('pacientes'); renderPacientes(); syncFab('pacientes');
+  } else if (screen === 'reloj') {
+    showScreen('reloj'); syncFab('reloj');
+  } else if (screen === 'turnos') {
+    showScreen('turnos'); syncFab('turnos');
+    calFecha = new Date();
+    calRender();
+    renderTurnosList();
+  } else {
+    showScreen('inicio'); syncFab('inicio');
+  }
+}
+
+// ── Modal Ver Todos los Turnos ──────────────────────────────
+function verTodosTurnos() {
+  const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const diasSemana = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  const mesesCortos = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+
+  const year  = calFecha.getFullYear();
+  const month = calFecha.getMonth();
+  const prefix = year + '-' + String(month+1).padStart(2,'0') + '-';
+  const delMes = turnos
+    .filter(t => t.fecha.startsWith(prefix))
+    .sort((a,b) => a.fecha.localeCompare(b.fecha));
+
+  let itemsHtml = '';
+  if (!delMes.length) {
+    itemsHtml = '<div style="text-align:center;padding:32px 16px;color:var(--text-muted);font-size:13px;"><i class="fas fa-calendar-xmark" style="font-size:32px;color:var(--border);display:block;margin-bottom:10px;"></i>Sin turnos registrados este mes.</div>';
+  } else {
+    itemsHtml = delMes.map(t => {
+      const cfg = TURNO_CONFIG[t.tipo] || TURNO_CONFIG.manana;
+      const fechaObj = new Date(t.fecha + 'T12:00:00');
+      const dow = diasSemana[fechaObj.getDay()];
+      const day = fechaObj.getDate();
+      const mon = mesesCortos[fechaObj.getMonth()];
+      const estadoBadgeStyle = t.estado === 'confirmado'
+        ? 'background:#DCFCE7;color:#16A34A;'
+        : 'background:#FEF9C3;color:#A16207;';
+      return `
+        <div onclick="cerrarVerTodos();abrirDetalleTurno(${t.id})" style="background:var(--card);border-radius:var(--radius-sm);border:1.5px solid var(--border);display:flex;align-items:center;gap:12px;padding:12px 14px;box-shadow:var(--shadow-sm);cursor:pointer;border-left:4px solid ${cfg.dot};margin-bottom:8px;">
+          <div style="min-width:36px;text-align:center;">
+            <div style="font-size:11px;font-weight:600;color:var(--text-muted);">${dow}</div>
+            <div style="font-size:20px;font-weight:700;color:var(--navy);line-height:1.1;">${day}</div>
+            <div style="font-size:10px;font-weight:700;color:var(--text-muted);">${mon}</div>
+          </div>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+              <span style="font-size:15px;">${cfg.emoji}</span>
+              <span style="font-size:14px;font-weight:700;color:var(--text-primary);">${cfg.label}</span>
+            </div>
+            <div style="font-size:12px;color:var(--text-secondary);"><i class="fas fa-clock" style="font-size:10px;"></i> ${cfg.hora}</div>
+            ${t.hospital ? `<div style="font-size:12px;color:var(--text-secondary);margin-top:2px;"><i class="fas fa-hospital" style="font-size:10px;"></i> ${escapeHtml(t.hospital)}</div>` : ''}
+            ${t.notas    ? `<div style="font-size:11px;color:var(--text-muted);margin-top:2px;font-style:italic;">${escapeHtml(t.notas)}</div>` : ''}
+          </div>
+          <span style="font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;white-space:nowrap;${estadoBadgeStyle}">${t.estado === 'confirmado' ? 'Confirmado' : 'Pendiente'}</span>
+        </div>`;
+    }).join('');
+  }
+
+  const overlay = document.createElement('div');
+  overlay.id = 'verTodosOverlay';
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:350;background:rgba(15,23,36,0.55);backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;';
+  overlay.onclick = (e) => { if (e.target === overlay) cerrarVerTodos(); };
+
+  overlay.innerHTML = `
+    <div style="background:var(--card);border-radius:24px 24px 0 0;width:100%;max-width:430px;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 -8px 40px rgba(44,78,126,0.2);animation:slideUp 0.35s cubic-bezier(0.34,1.2,0.64,1);">
+      <div style="padding:14px 20px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+        <div>
+          <div style="font-size:17px;font-weight:700;color:var(--navy);">Todos los turnos</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">${meses[month]} ${year} · ${delMes.length} turno${delMes.length !== 1 ? 's' : ''}</div>
+        </div>
+        <button onclick="cerrarVerTodos()" style="width:32px;height:32px;border-radius:50%;border:none;background:#F0F4FA;color:var(--text-secondary);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;"><i class="fas fa-xmark"></i></button>
+      </div>
+      <div style="overflow-y:auto;padding:16px 16px 40px;flex:1;">
+        ${itemsHtml}
+        <button onclick="cerrarVerTodos();abrirModalTurno()" style="width:100%;padding:13px;background:var(--navy);color:#fff;border:none;border-radius:var(--radius-sm);font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;">
+          <i class="fas fa-plus"></i> Agendar nuevo turno
+        </button>
+      </div>
+    </div>`;
+
+  document.body.appendChild(overlay);
+}
+
+function cerrarVerTodos() {
+  const el = document.getElementById('verTodosOverlay');
+  if (el) el.remove();
+}
+
 </script>
+  
 </body>
 </html>
