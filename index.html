@@ -5006,7 +5006,7 @@ function calcularMNA() {
       </div>
       <div class="escala-score-info">
         <h3 style="color:#fff;">Resultado: <span id="apgarPuntosLabel">0</span> pts</h3>
-        <p style="color:#FDE68A;" id="apgarInterp">Interpretación</p>
+        <p style="color:#FDE68A;" id="apgarInterp">—</p>
       </div>
       <span class="escala-score-emoji" id="apgarEmoji">😐</span>
     </div>
@@ -5031,41 +5031,97 @@ function calcularMNA() {
     <div class="escala-icon-wrap" style="background:#EFF6FF;">🫁</div>
     <div class="escala-header-text">
       <h2 style="color:#1D4ED8;">Silverman-Andersen</h2>
-      <p style="color:#1D4ED8;">Dificultad respiratoria (0–10 puntos)</p>
+      <p style="color:#1D4ED8;">Dificultad respiratoria neonatal (0–10 puntos)</p>
     </div>
     <button class="escala-close" style="background:#EFF6FF;color:#1D4ED8;" onclick="cerrarEscala('modalSilverman')"><i class="fas fa-xmark"></i></button>
   </div>
 
   <div class="escala-section">
-    <div class="escala-section-header"><div class="escala-section-icon" style="background:#DBEAFE;">1️⃣</div><span class="escala-section-title">Tiraje costal</span></div>
-    <div class="escala-options" id="silv1"><label class="escala-option" onclick="selSilverman('silv1',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Sincrónico</span><span class="escala-option-pts">0</span></label><label class="escala-option" onclick="selSilverman('silv1',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Retracción leve</span><span class="escala-option-pts">1</span></label><label class="escala-option" onclick="selSilverman('silv1',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Retracción marcada</span><span class="escala-option-pts">2</span></label></div>
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DBEAFE;">1️⃣</div>
+      <span class="escala-section-title" style="color:#1E40AF;">Tiraje costal</span>
+    </div>
+    <div class="escala-options" id="silv1">
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selSilverman('silv1',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Sincrónico</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">0</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selSilverman('silv1',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Retracción leve</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">1</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selSilverman('silv1',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Retracción marcada</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">2</span></label>
+    </div>
   </div>
   <div class="escala-divider"></div>
+
   <div class="escala-section">
-    <div class="escala-section-header"><div class="escala-section-icon" style="background:#DBEAFE;">2️⃣</div><span class="escala-section-title">Tiraje xifoideo</span></div>
-    <div class="escala-options" id="silv2"><label class="escala-option" onclick="selSilverman('silv2',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">No visible</span><span class="escala-option-pts">0</span></label><label class="escala-option" onclick="selSilverman('silv2',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Leve</span><span class="escala-option-pts">1</span></label><label class="escala-option" onclick="selSilverman('silv2',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Marcado</span><span class="escala-option-pts">2</span></label></div>
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DBEAFE;">2️⃣</div>
+      <span class="escala-section-title" style="color:#1E40AF;">Tiraje xifoideo</span>
+    </div>
+    <div class="escala-options" id="silv2">
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selSilverman('silv2',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">No visible</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">0</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selSilverman('silv2',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Leve</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">1</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selSilverman('silv2',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Marcado</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">2</span></label>
+    </div>
   </div>
   <div class="escala-divider"></div>
+
   <div class="escala-section">
-    <div class="escala-section-header"><div class="escala-section-icon" style="background:#DBEAFE;">3️⃣</div><span class="escala-section-title">Aleteo nasal</span></div>
-    <div class="escala-options" id="silv3"><label class="escala-option" onclick="selSilverman('silv3',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ausente</span><span class="escala-option-pts">0</span></label><label class="escala-option" onclick="selSilverman('silv3',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Leve</span><span class="escala-option-pts">1</span></label><label class="escala-option" onclick="selSilverman('silv3',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Evidente</span><span class="escala-option-pts">2</span></label></div>
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DBEAFE;">3️⃣</div>
+      <span class="escala-section-title" style="color:#1E40AF;">Aleteo nasal</span>
+    </div>
+    <div class="escala-options" id="silv3">
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selSilverman('silv3',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ausente</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">0</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selSilverman('silv3',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Leve</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">1</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selSilverman('silv3',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Evidente</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">2</span></label>
+    </div>
   </div>
   <div class="escala-divider"></div>
+
   <div class="escala-section">
-    <div class="escala-section-header"><div class="escala-section-icon" style="background:#DBEAFE;">4️⃣</div><span class="escala-section-title">Quejido espiratorio</span></div>
-    <div class="escala-options" id="silv4"><label class="escala-option" onclick="selSilverman('silv4',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ausente</span><span class="escala-option-pts">0</span></label><label class="escala-option" onclick="selSilverman('silv4',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Leve</span><span class="escala-option-pts">1</span></label><label class="escala-option" onclick="selSilverman('silv4',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Claro</span><span class="escala-option-pts">2</span></label></div>
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DBEAFE;">4️⃣</div>
+      <span class="escala-section-title" style="color:#1E40AF;">Quejido espiratorio</span>
+    </div>
+    <div class="escala-options" id="silv4">
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selSilverman('silv4',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ausente</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">0</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selSilverman('silv4',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Leve</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">1</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selSilverman('silv4',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Claro</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">2</span></label>
+    </div>
   </div>
   <div class="escala-divider"></div>
+
   <div class="escala-section">
-    <div class="escala-section-header"><div class="escala-section-icon" style="background:#DBEAFE;">5️⃣</div><span class="escala-section-title">Retracción intercostal</span></div>
-    <div class="escala-options" id="silv5"><label class="escala-option" onclick="selSilverman('silv5',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ausente</span><span class="escala-option-pts">0</span></label><label class="escala-option" onclick="selSilverman('silv5',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Leve</span><span class="escala-option-pts">1</span></label><label class="escala-option" onclick="selSilverman('silv5',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Marcada</span><span class="escala-option-pts">2</span></label></div>
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DBEAFE;">5️⃣</div>
+      <span class="escala-section-title" style="color:#1E40AF;">Retracción intercostal</span>
+    </div>
+    <div class="escala-options" id="silv5">
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selSilverman('silv5',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ausente</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">0</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selSilverman('silv5',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Leve</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">1</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selSilverman('silv5',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Marcada</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">2</span></label>
+    </div>
   </div>
 
   <div class="escala-resultado" style="background:linear-gradient(135deg,#1D4ED8,#3B82F6);">
-    <div class="escala-resultado-row"><div class="escala-score-circle"><span class="escala-score-num" id="silvPuntos">0</span><span class="escala-score-sub">/10</span></div><div class="escala-score-info"><h3>Resultado: <span id="silvPuntosLabel">0</span> pts</h3><p id="silvInterp"></p></div><span class="escala-score-emoji" id="silvEmoji">😐</span></div>
-    <div class="escala-ranges"><span class="escala-range-chip">0–3 Leve</span><span class="escala-range-chip">4–6 Moderado</span><span class="escala-range-chip">7–10 Grave</span></div>
+    <div class="escala-resultado-row">
+      <div class="escala-score-circle" style="background:rgba(255,255,255,0.15);">
+        <span class="escala-score-num" style="color:#fff;" id="silvPuntos">0</span>
+        <span class="escala-score-sub" style="color:#fff;">/10</span>
+      </div>
+      <div class="escala-score-info">
+        <h3 style="color:#fff;">Resultado: <span id="silvPuntosLabel">0</span> pts</h3>
+        <p style="color:#BFDBFE;" id="silvInterp">—</p>
+      </div>
+      <span class="escala-score-emoji" id="silvEmoji">😐</span>
+    </div>
+    <div class="escala-ranges">
+      <span class="escala-range-chip" style="color:#fff;">0–3 Leve</span>
+      <span class="escala-range-chip" style="color:#fff;">4–6 Moderado</span>
+      <span class="escala-range-chip" style="color:#fff;">7–10 Grave</span>
+    </div>
   </div>
-  <div class="escala-footer"><button class="escala-btn-clear" onclick="limpiarSilverman()"><i class="fas fa-rotate-left"></i> Limpiar</button><button class="escala-btn-save" style="background:#3B82F6;" onclick="guardarEscala('Silverman',document.getElementById('silvPuntos').textContent,'modalSilverman')"><i class="fas fa-bookmark"></i> Guardar</button></div>
+  <div class="escala-footer">
+    <button class="escala-btn-clear" style="background:#EFF6FF;color:#1D4ED8;" onclick="limpiarSilverman()"><i class="fas fa-rotate-left"></i> Limpiar</button>
+    <button class="escala-btn-save" style="background:#3B82F6;" onclick="guardarEscala('Silverman',document.getElementById('silvPuntos').textContent,'modalSilverman')"><i class="fas fa-bookmark"></i> Guardar</button>
+  </div>
 </div>
 </div>
 
@@ -5073,99 +5129,519 @@ function calcularMNA() {
 <div class="escala-overlay" id="modalCapurro" onclick="if(event.target===this)cerrarEscala('modalCapurro')">
 <div class="escala-sheet" style="background:#fff;">
   <div class="escala-handle" style="background:#047857;"></div>
-  <div class="escala-header"><div class="escala-icon-wrap" style="background:#ECFDF5;">📅</div><div class="escala-header-text"><h2 style="color:#047857;">Capurro</h2><p style="color:#047857;">Edad gestacional (semanas)</p></div><button class="escala-close" onclick="cerrarEscala('modalCapurro')"><i class="fas fa-xmark"></i></button></div>
+  <div class="escala-header">
+    <div class="escala-icon-wrap" style="background:#ECFDF5;">📅</div>
+    <div class="escala-header-text">
+      <h2 style="color:#047857;">Capurro</h2>
+      <p style="color:#047857;">Edad gestacional por examen físico (semanas)</p>
+    </div>
+    <button class="escala-close" style="background:#ECFDF5;color:#047857;" onclick="cerrarEscala('modalCapurro')"><i class="fas fa-xmark"></i></button>
+  </div>
 
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon" style="background:#A7F3D0;">🧴</div><span class="escala-section-title">Piel</span></div><div class="escala-options" id="cap1"><label class="escala-option" onclick="selCapurro('cap1',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Edematosa / muy fina</span><span class="escala-option-pts">0</span></label><label class="escala-option" onclick="selCapurro('cap1',5,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Lisa, sin vasos</span><span class="escala-option-pts">5</span></label><label class="escala-option" onclick="selCapurro('cap1',10,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Descamación, venas finas</span><span class="escala-option-pts">10</span></label><label class="escala-option" onclick="selCapurro('cap1',15,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Papirácea</span><span class="escala-option-pts">15</span></label></div></div>
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">🧴</div>
+      <span class="escala-section-title" style="color:#065F46;">Piel</span>
+    </div>
+    <div class="escala-options" id="cap1">
+      <label class="escala-option" style="background:#F0FDF9;color:#047857;" onclick="selCapurro('cap1',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Edematosa / muy fina</span><span class="escala-option-pts" style="background:#A7F3D0;color:#047857;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#047857;" onclick="selCapurro('cap1',5,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Lisa, sin vasos</span><span class="escala-option-pts" style="background:#A7F3D0;color:#047857;">5</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#047857;" onclick="selCapurro('cap1',10,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Descamación, venas finas</span><span class="escala-option-pts" style="background:#A7F3D0;color:#047857;">10</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#047857;" onclick="selCapurro('cap1',15,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Papirácea</span><span class="escala-option-pts" style="background:#A7F3D0;color:#047857;">15</span></label>
+    </div>
+  </div>
   <div class="escala-divider"></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon" style="background:#A7F3D0;">👂</div><span class="escala-section-title">Pabellón auricular</span></div><div class="escala-options" id="cap2"><label class="escala-option" onclick="selCapurro('cap2',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Plano, borde invertido</span><span class="escala-option-pts">0</span></label><label class="escala-option" onclick="selCapurro('cap2',5,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Curvado parcial</span><span class="escala-option-pts">5</span></label><label class="escala-option" onclick="selCapurro('cap2',10,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Firme, rebote rápido</span><span class="escala-option-pts">10</span></label></div></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">👂</div>
+      <span class="escala-section-title" style="color:#065F46;">Pabellón auricular</span>
+    </div>
+    <div class="escala-options" id="cap2">
+      <label class="escala-option" style="background:#F0FDF9;color:#047857;" onclick="selCapurro('cap2',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Plano, borde invertido</span><span class="escala-option-pts" style="background:#A7F3D0;color:#047857;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#047857;" onclick="selCapurro('cap2',5,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Curvado parcial</span><span class="escala-option-pts" style="background:#A7F3D0;color:#047857;">5</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#047857;" onclick="selCapurro('cap2',10,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Firme, rebote rápido</span><span class="escala-option-pts" style="background:#A7F3D0;color:#047857;">10</span></label>
+    </div>
+  </div>
   <div class="escala-divider"></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon" style="background:#A7F3D0;">🍼</div><span class="escala-section-title">Glándula mamaria</span></div><div class="escala-options" id="cap3"><label class="escala-option" onclick="selCapurro('cap3',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">No palpable</span><span class="escala-option-pts">0</span></label><label class="escala-option" onclick="selCapurro('cap3',5,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">&lt; 5 mm</span><span class="escala-option-pts">5</span></label><label class="escala-option" onclick="selCapurro('cap3',10,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">&gt; 5 mm</span><span class="escala-option-pts">10</span></label></div></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">🍼</div>
+      <span class="escala-section-title" style="color:#065F46;">Glándula mamaria</span>
+    </div>
+    <div class="escala-options" id="cap3">
+      <label class="escala-option" style="background:#F0FDF9;color:#047857;" onclick="selCapurro('cap3',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">No palpable</span><span class="escala-option-pts" style="background:#A7F3D0;color:#047857;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#047857;" onclick="selCapurro('cap3',5,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">&lt; 5 mm</span><span class="escala-option-pts" style="background:#A7F3D0;color:#047857;">5</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#047857;" onclick="selCapurro('cap3',10,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">&gt; 5 mm</span><span class="escala-option-pts" style="background:#A7F3D0;color:#047857;">10</span></label>
+    </div>
+  </div>
   <div class="escala-divider"></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon" style="background:#A7F3D0;">🔍</div><span class="escala-section-title">Pliegues plantares</span></div><div class="escala-options" id="cap4"><label class="escala-option" onclick="selCapurro('cap4',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Sin pliegues</span><span class="escala-option-pts">0</span></label><label class="escala-option" onclick="selCapurro('cap4',5,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Surco anterior</span><span class="escala-option-pts">5</span></label><label class="escala-option" onclick="selCapurro('cap4',10,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Pliegues completos</span><span class="escala-option-pts">10</span></label></div></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">🔍</div>
+      <span class="escala-section-title" style="color:#065F46;">Pliegues plantares</span>
+    </div>
+    <div class="escala-options" id="cap4">
+      <label class="escala-option" style="background:#F0FDF9;color:#047857;" onclick="selCapurro('cap4',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Sin pliegues</span><span class="escala-option-pts" style="background:#A7F3D0;color:#047857;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#047857;" onclick="selCapurro('cap4',5,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Surco anterior</span><span class="escala-option-pts" style="background:#A7F3D0;color:#047857;">5</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#047857;" onclick="selCapurro('cap4',10,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Pliegues completos</span><span class="escala-option-pts" style="background:#A7F3D0;color:#047857;">10</span></label>
+    </div>
+  </div>
 
   <div class="escala-resultado" style="background:linear-gradient(135deg,#047857,#10B981);">
-    <div class="escala-resultado-row"><div class="escala-score-circle"><span class="escala-score-num" id="capPuntos">0</span><span class="escala-score-sub">pts</span></div><div class="escala-score-info"><h3>Puntaje: <span id="capPuntosLabel">0</span></h3><p id="capInterp"></p></div><span class="escala-score-emoji" id="capEmoji">😐</span></div>
-    <div class="escala-ranges"><span class="escala-range-chip">&lt; 20: &lt; 32 sem</span><span class="escala-range-chip">20–29: 32–36 sem</span><span class="escala-range-chip">30–44: 37–41 sem</span><span class="escala-range-chip">≥ 45: postérmino</span></div>
+    <div class="escala-resultado-row">
+      <div class="escala-score-circle" style="background:rgba(255,255,255,0.15);">
+        <span class="escala-score-num" style="color:#fff;" id="capPuntos">0</span>
+        <span class="escala-score-sub" style="color:#fff;">pts</span>
+      </div>
+      <div class="escala-score-info">
+        <h3 style="color:#fff;">Puntaje: <span id="capPuntosLabel">0</span></h3>
+        <p style="color:#A7F3D0;" id="capInterp">—</p>
+      </div>
+      <span class="escala-score-emoji" id="capEmoji">😐</span>
+    </div>
+    <div class="escala-ranges">
+      <span class="escala-range-chip" style="color:#fff;">&lt; 20: &lt; 32 sem</span>
+      <span class="escala-range-chip" style="color:#fff;">20–29: 32–36 sem</span>
+      <span class="escala-range-chip" style="color:#fff;">30–44: 37–41 sem</span>
+      <span class="escala-range-chip" style="color:#fff;">≥ 45: postérmino</span>
+    </div>
   </div>
-  <div class="escala-footer"><button class="escala-btn-clear" onclick="limpiarCapurro()"><i class="fas fa-rotate-left"></i> Limpiar</button><button class="escala-btn-save" style="background:#10B981;" onclick="guardarEscala('Capurro',document.getElementById('capPuntos').textContent,'modalCapurro')"><i class="fas fa-bookmark"></i> Guardar</button></div>
+  <div class="escala-footer">
+    <button class="escala-btn-clear" style="background:#ECFDF5;color:#047857;" onclick="limpiarCapurro()"><i class="fas fa-rotate-left"></i> Limpiar</button>
+    <button class="escala-btn-save" style="background:#10B981;" onclick="guardarEscala('Capurro',document.getElementById('capPuntos').textContent,'modalCapurro')"><i class="fas fa-bookmark"></i> Guardar</button>
+  </div>
 </div>
 </div>
 
-<!-- MODAL BALLARD -->
+<!-- MODAL BALLARD (Madurez Neuromuscular + Física) -->
 <div class="escala-overlay" id="modalBallard" onclick="if(event.target===this)cerrarEscala('modalBallard')">
 <div class="escala-sheet" style="background:#fff;">
   <div class="escala-handle" style="background:#7E22CE;"></div>
-  <div class="escala-header"><div class="escala-icon-wrap" style="background:#F5F3FF;">📏</div><div class="escala-header-text"><h2 style="color:#7E22CE;">Ballard (Madurez)</h2><p style="color:#7E22CE;">Neuromuscular + física</p></div><button class="escala-close" onclick="cerrarEscala('modalBallard')"><i class="fas fa-xmark"></i></button></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">🧠</div><span>Postura</span></div><div class="escala-options" id="ball1"><label onclick="selBallard('ball1',0,this)">0: Completamente extendido</label><label onclick="selBallard('ball1',1,this)">1: Ligera flexión</label><label onclick="selBallard('ball1',2,this)">2: Moderada flexión</label><label onclick="selBallard('ball1',3,this)">3: Completa flexión</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">🤲</div><span>Ángulo poplíteo</span></div><div class="escala-options" id="ball2"><label onclick="selBallard('ball2',0,this)">0: &gt; 130°</label><label onclick="selBallard('ball2',1,this)">1: 120–130°</label><label onclick="selBallard('ball2',2,this)">2: 100–119°</label><label onclick="selBallard('ball2',3,this)">3: 90–99°</label><label onclick="selBallard('ball2',4,this)">4: &lt; 90°</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">👶</div><span>Piel (física)</span></div><div class="escala-options" id="ball3"><label onclick="selBallard('ball3',-1,this)">-1: Pegajosa</label><label onclick="selBallard('ball3',0,this)">0: Lisa, rosada</label><label onclick="selBallard('ball3',1,this)">1: Descamación</label><label onclick="selBallard('ball3',2,this)">2: Grietas</label><label onclick="selBallard('ball3',3,this)">3: Papirácea</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">👂</div><span>Pabellón auricular</span></div><div class="escala-options" id="ball4"><label onclick="selBallard('ball4',-1,this)">-1: Plano, sin curvatura</label><label onclick="selBallard('ball4',0,this)">0: Curvatura parcial</label><label onclick="selBallard('ball4',1,this)">1: Curvatura firme</label><label onclick="selBallard('ball4',2,this)">2: Formado, firme</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">👣</div><span>Pliegues plantares</span></div><div class="escala-options" id="ball5"><label onclick="selBallard('ball5',-2,this)">-2: Sin pliegues</label><label onclick="selBallard('ball5',-1,this)">-1: Surco anterior</label><label onclick="selBallard('ball5',0,this)">0: Pliegue limitado</label><label onclick="selBallard('ball5',1,this)">1: Pliegues completos</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">🍼</div><span>Glándula mamaria</span></div><div class="escala-options" id="ball6"><label onclick="selBallard('ball6',-2,this)">-2: No visible</label><label onclick="selBallard('ball6',-1,this)">-1: &lt; 2 mm</label><label onclick="selBallard('ball6',0,this)">0: 2–4 mm</label><label onclick="selBallard('ball6',1,this)">1: 5–7 mm</label><label onclick="selBallard('ball6',2,this)">2: &gt; 8 mm</label></div></div>
+  <div class="escala-header">
+    <div class="escala-icon-wrap" style="background:#F5F3FF;">📏</div>
+    <div class="escala-header-text">
+      <h2 style="color:#7E22CE;">Ballard (Madurez)</h2>
+      <p style="color:#7E22CE;">Evaluación neuromuscular y física del RN</p>
+    </div>
+    <button class="escala-close" style="background:#F5F3FF;color:#7E22CE;" onclick="cerrarEscala('modalBallard')"><i class="fas fa-xmark"></i></button>
+  </div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DDD6FE;">🧠</div>
+      <span class="escala-section-title" style="color:#6D28D9;">Postura</span>
+    </div>
+    <div class="escala-options" id="ball1">
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball1',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Completamente extendido</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">0</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball1',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ligera flexión</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">1</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball1',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Moderada flexión</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">2</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball1',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Completa flexión</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">3</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DDD6FE;">🤲</div>
+      <span class="escala-section-title" style="color:#6D28D9;">Ángulo poplíteo</span>
+    </div>
+    <div class="escala-options" id="ball2">
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball2',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">&gt; 130°</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">0</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball2',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">120–130°</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">1</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball2',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">100–119°</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">2</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball2',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">90–99°</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">3</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball2',4,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">&lt; 90°</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">4</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DDD6FE;">👶</div>
+      <span class="escala-section-title" style="color:#6D28D9;">Piel (física)</span>
+    </div>
+    <div class="escala-options" id="ball3">
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball3',-1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Pegajosa</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">-1</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball3',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Lisa, rosada</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">0</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball3',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Descamación</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">1</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball3',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Grietas</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">2</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball3',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Papirácea</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">3</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DDD6FE;">👂</div>
+      <span class="escala-section-title" style="color:#6D28D9;">Pabellón auricular</span>
+    </div>
+    <div class="escala-options" id="ball4">
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball4',-1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Plano, sin curvatura</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">-1</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball4',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Curvatura parcial</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">0</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball4',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Curvatura firme</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">1</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball4',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Formado, firme</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">2</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DDD6FE;">👣</div>
+      <span class="escala-section-title" style="color:#6D28D9;">Pliegues plantares</span>
+    </div>
+    <div class="escala-options" id="ball5">
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball5',-2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Sin pliegues</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">-2</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball5',-1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Surco anterior</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">-1</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball5',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Pliegue limitado</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">0</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball5',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Pliegues completos</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DDD6FE;">🍼</div>
+      <span class="escala-section-title" style="color:#6D28D9;">Glándula mamaria</span>
+    </div>
+    <div class="escala-options" id="ball6">
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball6',-2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">No visible</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">-2</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball6',-1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">&lt; 2 mm</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">-1</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball6',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">2–4 mm</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">0</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball6',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">5–7 mm</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">1</span></label>
+      <label class="escala-option" style="background:#FAF8FF;color:#7E22CE;" onclick="selBallard('ball6',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">&gt; 8 mm</span><span class="escala-option-pts" style="background:#DDD6FE;color:#7E22CE;">2</span></label>
+    </div>
+  </div>
 
   <div class="escala-resultado" style="background:linear-gradient(135deg,#7E22CE,#A855F7);">
-    <div class="escala-resultado-row"><div class="escala-score-circle"><span class="escala-score-num" id="ballPuntos">0</span><span class="escala-score-sub">pts</span></div><div class="escala-score-info"><h3>Puntaje: <span id="ballPuntosLabel">0</span></h3><p id="ballInterp">Edad gestacional</p></div><span class="escala-score-emoji" id="ballEmoji">😐</span></div>
-    <div class="escala-ranges"><span class="escala-range-chip">&lt; 0: &lt; 28 sem</span><span class="escala-range-chip">0–10: 28–32 sem</span><span class="escala-range-chip">11–20: 33–36 sem</span><span class="escala-range-chip">21–30: 37–40 sem</span><span class="escala-range-chip">&gt;30: postérmino</span></div>
+    <div class="escala-resultado-row">
+      <div class="escala-score-circle" style="background:rgba(255,255,255,0.15);">
+        <span class="escala-score-num" style="color:#fff;" id="ballPuntos">0</span>
+        <span class="escala-score-sub" style="color:#fff;">pts</span>
+      </div>
+      <div class="escala-score-info">
+        <h3 style="color:#fff;">Puntaje: <span id="ballPuntosLabel">0</span></h3>
+        <p style="color:#C4B5FD;" id="ballInterp">—</p>
+      </div>
+      <span class="escala-score-emoji" id="ballEmoji">😐</span>
+    </div>
+    <div class="escala-ranges">
+      <span class="escala-range-chip" style="color:#fff;">&lt; 0: &lt; 28 sem</span>
+      <span class="escala-range-chip" style="color:#fff;">0–10: 28–32 sem</span>
+      <span class="escala-range-chip" style="color:#fff;">11–20: 33–36 sem</span>
+      <span class="escala-range-chip" style="color:#fff;">21–30: 37–40 sem</span>
+      <span class="escala-range-chip" style="color:#fff;">&gt;30: postérmino</span>
+    </div>
   </div>
-  <div class="escala-footer"><button class="escala-btn-clear" onclick="limpiarBallard()"><i class="fas fa-rotate-left"></i> Limpiar</button><button class="escala-btn-save" style="background:#A855F7;" onclick="guardarEscala('Ballard',document.getElementById('ballPuntos').textContent,'modalBallard')"><i class="fas fa-bookmark"></i> Guardar</button></div>
+  <div class="escala-footer">
+    <button class="escala-btn-clear" style="background:#F5F3FF;color:#7E22CE;" onclick="limpiarBallard()"><i class="fas fa-rotate-left"></i> Limpiar</button>
+    <button class="escala-btn-save" style="background:#A855F7;" onclick="guardarEscala('Ballard',document.getElementById('ballPuntos').textContent,'modalBallard')"><i class="fas fa-bookmark"></i> Guardar</button>
+  </div>
 </div>
 </div>
 
-<!-- MODAL KRAMER -->
+<!-- MODAL KRAMER (Ictericia) -->
 <div class="escala-overlay" id="modalKramer" onclick="if(event.target===this)cerrarEscala('modalKramer')">
 <div class="escala-sheet" style="background:#fff;">
   <div class="escala-handle" style="background:#B45309;"></div>
-  <div class="escala-header"><div class="escala-icon-wrap" style="background:#FFF7ED;">💛</div><div class="escala-header-text"><h2 style="color:#B45309;">Kramer</h2><p style="color:#B45309;">Ictericia neonatal por zonas</p></div><button class="escala-close" onclick="cerrarEscala('modalKramer')"><i class="fas fa-xmark"></i></button></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">1️⃣</div><span>Zona 1 (cabeza y cuello)</span></div><div class="escala-options" id="kramer1"><label onclick="selKramer('kramer1',0,this)">0: Sin ictericia</label><label onclick="selKramer('kramer1',1,this)">1: Ictericia presente</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">2️⃣</div><span>Zona 2 (tronco hasta ombligo)</span></div><div class="escala-options" id="kramer2"><label onclick="selKramer('kramer2',0,this)">0: Ausente</label><label onclick="selKramer('kramer2',1,this)">1: Presente</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">3️⃣</div><span>Zona 3 (muslos)</span></div><div class="escala-options" id="kramer3"><label onclick="selKramer('kramer3',0,this)">0: Ausente</label><label onclick="selKramer('kramer3',1,this)">1: Presente</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">4️⃣</div><span>Zona 4 (brazos y piernas)</span></div><div class="escala-options" id="kramer4"><label onclick="selKramer('kramer4',0,this)">0: Ausente</label><label onclick="selKramer('kramer4',1,this)">1: Presente</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">5️⃣</div><span>Zona 5 (palmas y plantas)</span></div><div class="escala-options" id="kramer5"><label onclick="selKramer('kramer5',0,this)">0: Ausente</label><label onclick="selKramer('kramer5',1,this)">1: Presente</label></div></div>
-  <div class="escala-resultado" style="background:linear-gradient(135deg,#B45309,#F59E0B);">
-    <div class="escala-resultado-row"><div class="escala-score-circle"><span class="escala-score-num" id="kramerPuntos">0</span><span class="escala-score-sub">/5</span></div><div class="escala-score-info"><h3>Zonas afectadas: <span id="kramerPuntosLabel">0</span></h3><p id="kramerInterp"></p></div><span class="escala-score-emoji" id="kramerEmoji">😐</span></div>
-    <div class="escala-ranges"><span class="escala-range-chip">Z1: 4–6 mg/dL</span><span class="escala-range-chip">Z2: 8–10 mg/dL</span><span class="escala-range-chip">Z3: 12–14 mg/dL</span><span class="escala-range-chip">Z4: 15–18 mg/dL</span><span class="escala-range-chip">Z5: &gt; 20 mg/dL</span></div>
+  <div class="escala-header">
+    <div class="escala-icon-wrap" style="background:#FFF7ED;">💛</div>
+    <div class="escala-header-text">
+      <h2 style="color:#B45309;">Kramer</h2>
+      <p style="color:#B45309;">Ictericia neonatal por zonas</p>
+    </div>
+    <button class="escala-close" style="background:#FFF7ED;color:#B45309;" onclick="cerrarEscala('modalKramer')"><i class="fas fa-xmark"></i></button>
   </div>
-  <div class="escala-footer"><button class="escala-btn-clear" onclick="limpiarKramer()"><i class="fas fa-rotate-left"></i> Limpiar</button><button class="escala-btn-save" style="background:#F59E0B;" onclick="guardarEscala('Kramer',document.getElementById('kramerPuntos').textContent,'modalKramer')"><i class="fas fa-bookmark"></i> Guardar</button></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#FED7AA;">1️⃣</div>
+      <span class="escala-section-title" style="color:#92400E;">Zona 1 (cabeza y cuello)</span>
+    </div>
+    <div class="escala-options" id="kramer1">
+      <label class="escala-option" style="background:#FFFBF5;color:#92400E;" onclick="selKramer('kramer1',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Sin ictericia</span><span class="escala-option-pts" style="background:#FED7AA;color:#92400E;">0</span></label>
+      <label class="escala-option" style="background:#FFFBF5;color:#92400E;" onclick="selKramer('kramer1',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ictericia presente</span><span class="escala-option-pts" style="background:#FED7AA;color:#92400E;">1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#FED7AA;">2️⃣</div>
+      <span class="escala-section-title" style="color:#92400E;">Zona 2 (tronco hasta ombligo)</span>
+    </div>
+    <div class="escala-options" id="kramer2">
+      <label class="escala-option" style="background:#FFFBF5;color:#92400E;" onclick="selKramer('kramer2',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ausente</span><span class="escala-option-pts" style="background:#FED7AA;color:#92400E;">0</span></label>
+      <label class="escala-option" style="background:#FFFBF5;color:#92400E;" onclick="selKramer('kramer2',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Presente</span><span class="escala-option-pts" style="background:#FED7AA;color:#92400E;">1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#FED7AA;">3️⃣</div>
+      <span class="escala-section-title" style="color:#92400E;">Zona 3 (muslos)</span>
+    </div>
+    <div class="escala-options" id="kramer3">
+      <label class="escala-option" style="background:#FFFBF5;color:#92400E;" onclick="selKramer('kramer3',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ausente</span><span class="escala-option-pts" style="background:#FED7AA;color:#92400E;">0</span></label>
+      <label class="escala-option" style="background:#FFFBF5;color:#92400E;" onclick="selKramer('kramer3',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Presente</span><span class="escala-option-pts" style="background:#FED7AA;color:#92400E;">1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#FED7AA;">4️⃣</div>
+      <span class="escala-section-title" style="color:#92400E;">Zona 4 (brazos y piernas)</span>
+    </div>
+    <div class="escala-options" id="kramer4">
+      <label class="escala-option" style="background:#FFFBF5;color:#92400E;" onclick="selKramer('kramer4',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ausente</span><span class="escala-option-pts" style="background:#FED7AA;color:#92400E;">0</span></label>
+      <label class="escala-option" style="background:#FFFBF5;color:#92400E;" onclick="selKramer('kramer4',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Presente</span><span class="escala-option-pts" style="background:#FED7AA;color:#92400E;">1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#FED7AA;">5️⃣</div>
+      <span class="escala-section-title" style="color:#92400E;">Zona 5 (palmas y plantas)</span>
+    </div>
+    <div class="escala-options" id="kramer5">
+      <label class="escala-option" style="background:#FFFBF5;color:#92400E;" onclick="selKramer('kramer5',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ausente</span><span class="escala-option-pts" style="background:#FED7AA;color:#92400E;">0</span></label>
+      <label class="escala-option" style="background:#FFFBF5;color:#92400E;" onclick="selKramer('kramer5',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Presente</span><span class="escala-option-pts" style="background:#FED7AA;color:#92400E;">1</span></label>
+    </div>
+  </div>
+
+  <div class="escala-resultado" style="background:linear-gradient(135deg,#B45309,#F59E0B);">
+    <div class="escala-resultado-row">
+      <div class="escala-score-circle" style="background:rgba(255,255,255,0.15);">
+        <span class="escala-score-num" style="color:#fff;" id="kramerPuntos">0</span>
+        <span class="escala-score-sub" style="color:#fff;">/5</span>
+      </div>
+      <div class="escala-score-info">
+        <h3 style="color:#fff;">Zonas afectadas: <span id="kramerPuntosLabel">0</span></h3>
+        <p style="color:#FDE68A;" id="kramerInterp">—</p>
+      </div>
+      <span class="escala-score-emoji" id="kramerEmoji">😐</span>
+    </div>
+    <div class="escala-ranges">
+      <span class="escala-range-chip" style="color:#fff;">Z1: 4–6 mg/dL</span>
+      <span class="escala-range-chip" style="color:#fff;">Z2: 8–10 mg/dL</span>
+      <span class="escala-range-chip" style="color:#fff;">Z3: 12–14 mg/dL</span>
+      <span class="escala-range-chip" style="color:#fff;">Z4: 15–18 mg/dL</span>
+      <span class="escala-range-chip" style="color:#fff;">Z5: &gt; 20 mg/dL</span>
+    </div>
+  </div>
+  <div class="escala-footer">
+    <button class="escala-btn-clear" style="background:#FFF7ED;color:#B45309;" onclick="limpiarKramer()"><i class="fas fa-rotate-left"></i> Limpiar</button>
+    <button class="escala-btn-save" style="background:#F59E0B;" onclick="guardarEscala('Kramer',document.getElementById('kramerPuntos').textContent,'modalKramer')"><i class="fas fa-bookmark"></i> Guardar</button>
+  </div>
 </div>
 </div>
+
 
 <!-- MODAL FINNEGAN -->
 <div class="escala-overlay" id="modalFinnegan" onclick="if(event.target===this)cerrarEscala('modalFinnegan')">
 <div class="escala-sheet" style="background:#fff;">
   <div class="escala-handle" style="background:#7C2D12;"></div>
-  <div class="escala-header"><div class="escala-icon-wrap" style="background:#FFF1F2;">💊</div><div class="escala-header-text"><h2 style="color:#7C2D12;">Finnegan</h2><p style="color:#7C2D12;">Síndrome de abstinencia neonatal</p></div><button class="escala-close" onclick="cerrarEscala('modalFinnegan')"><i class="fas fa-xmark"></i></button></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">😫</div><span>Llanto excesivo</span></div><div class="escala-options" id="fin1"><label onclick="selFinnegan('fin1',0,this)">0: No</label><label onclick="selFinnegan('fin1',1,this)">1: Sí</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">😴</div><span>Alteraciones del sueño</span></div><div class="escala-options" id="fin2"><label onclick="selFinnegan('fin2',0,this)">0: No</label><label onclick="selFinnegan('fin2',1,this)">1: Sí</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">🤮</div><span>Vómitos</span></div><div class="escala-options" id="fin3"><label onclick="selFinnegan('fin3',0,this)">0: No</label><label onclick="selFinnegan('fin3',1,this)">1: Sí</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">💩</div><span>Deposiciones</span></div><div class="escala-options" id="fin4"><label onclick="selFinnegan('fin4',0,this)">0: Normal</label><label onclick="selFinnegan('fin4',1,this)">1: Diarrea</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">🌡️</div><span>Fiebre</span></div><div class="escala-options" id="fin5"><label onclick="selFinnegan('fin5',0,this)">0: No</label><label onclick="selFinnegan('fin5',1,this)">1: Sí</label></div></div>
+  <div class="escala-header">
+    <div class="escala-icon-wrap" style="background:#FFF1F2;">💊</div>
+    <div class="escala-header-text">
+      <h2 style="color:#7C2D12;">Finnegan</h2>
+      <p style="color:#7C2D12;">Síndrome de abstinencia neonatal</p>
+    </div>
+    <button class="escala-close" style="background:#FFF1F2;color:#7C2D12;" onclick="cerrarEscala('modalFinnegan')"><i class="fas fa-xmark"></i></button>
+  </div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#FECACA;">😫</div>
+      <span class="escala-section-title" style="color:#991B1B;">Llanto excesivo</span>
+    </div>
+    <div class="escala-options" id="fin1">
+      <label class="escala-option" style="background:#FFF5F5;color:#7C2D12;" onclick="selFinnegan('fin1',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">No</span><span class="escala-option-pts" style="background:#FECACA;color:#7C2D12;">0</span></label>
+      <label class="escala-option" style="background:#FFF5F5;color:#7C2D12;" onclick="selFinnegan('fin1',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Sí</span><span class="escala-option-pts" style="background:#FECACA;color:#7C2D12;">1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#FECACA;">😴</div>
+      <span class="escala-section-title" style="color:#991B1B;">Alteraciones del sueño</span>
+    </div>
+    <div class="escala-options" id="fin2">
+      <label class="escala-option" style="background:#FFF5F5;color:#7C2D12;" onclick="selFinnegan('fin2',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">No</span><span class="escala-option-pts" style="background:#FECACA;color:#7C2D12;">0</span></label>
+      <label class="escala-option" style="background:#FFF5F5;color:#7C2D12;" onclick="selFinnegan('fin2',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Sí</span><span class="escala-option-pts" style="background:#FECACA;color:#7C2D12;">1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#FECACA;">🤮</div>
+      <span class="escala-section-title" style="color:#991B1B;">Vómitos</span>
+    </div>
+    <div class="escala-options" id="fin3">
+      <label class="escala-option" style="background:#FFF5F5;color:#7C2D12;" onclick="selFinnegan('fin3',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">No</span><span class="escala-option-pts" style="background:#FECACA;color:#7C2D12;">0</span></label>
+      <label class="escala-option" style="background:#FFF5F5;color:#7C2D12;" onclick="selFinnegan('fin3',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Sí</span><span class="escala-option-pts" style="background:#FECACA;color:#7C2D12;">1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#FECACA;">💩</div>
+      <span class="escala-section-title" style="color:#991B1B;">Deposiciones</span>
+    </div>
+    <div class="escala-options" id="fin4">
+      <label class="escala-option" style="background:#FFF5F5;color:#7C2D12;" onclick="selFinnegan('fin4',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Normal</span><span class="escala-option-pts" style="background:#FECACA;color:#7C2D12;">0</span></label>
+      <label class="escala-option" style="background:#FFF5F5;color:#7C2D12;" onclick="selFinnegan('fin4',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Diarrea</span><span class="escala-option-pts" style="background:#FECACA;color:#7C2D12;">1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#FECACA;">🌡️</div>
+      <span class="escala-section-title" style="color:#991B1B;">Fiebre</span>
+    </div>
+    <div class="escala-options" id="fin5">
+      <label class="escala-option" style="background:#FFF5F5;color:#7C2D12;" onclick="selFinnegan('fin5',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">No</span><span class="escala-option-pts" style="background:#FECACA;color:#7C2D12;">0</span></label>
+      <label class="escala-option" style="background:#FFF5F5;color:#7C2D12;" onclick="selFinnegan('fin5',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Sí</span><span class="escala-option-pts" style="background:#FECACA;color:#7C2D12;">1</span></label>
+    </div>
+  </div>
 
   <div class="escala-resultado" style="background:linear-gradient(135deg,#7C2D12,#EA580C);">
-    <div class="escala-resultado-row"><div class="escala-score-circle"><span class="escala-score-num" id="finPuntos">0</span><span class="escala-score-sub">/5</span></div><div class="escala-score-info"><h3>Puntaje: <span id="finPuntosLabel">0</span></h3><p id="finInterp"></p></div><span class="escala-score-emoji" id="finEmoji">😐</span></div>
-    <div class="escala-ranges"><span class="escala-range-chip">0–2 Leve</span><span class="escala-range-chip">3–4 Moderado</span><span class="escala-range-chip">5 Grave</span></div>
+    <div class="escala-resultado-row">
+      <div class="escala-score-circle" style="background:rgba(255,255,255,0.15);">
+        <span class="escala-score-num" style="color:#fff;" id="finPuntos">0</span>
+        <span class="escala-score-sub" style="color:#fff;">/5</span>
+      </div>
+      <div class="escala-score-info">
+        <h3 style="color:#fff;">Puntaje: <span id="finPuntosLabel">0</span></h3>
+        <p style="color:#FCA5A5;" id="finInterp">—</p>
+      </div>
+      <span class="escala-score-emoji" id="finEmoji">😐</span>
+    </div>
+    <div class="escala-ranges">
+      <span class="escala-range-chip" style="color:#fff;">0–2 Leve</span>
+      <span class="escala-range-chip" style="color:#fff;">3–4 Moderado</span>
+      <span class="escala-range-chip" style="color:#fff;">5 Grave</span>
+    </div>
   </div>
-  <div class="escala-footer"><button class="escala-btn-clear" onclick="limpiarFinnegan()"><i class="fas fa-rotate-left"></i> Limpiar</button><button class="escala-btn-save" style="background:#EA580C;" onclick="guardarEscala('Finnegan',document.getElementById('finPuntos').textContent,'modalFinnegan')"><i class="fas fa-bookmark"></i> Guardar</button></div>
+  <div class="escala-footer">
+    <button class="escala-btn-clear" style="background:#FFF1F2;color:#7C2D12;" onclick="limpiarFinnegan()"><i class="fas fa-rotate-left"></i> Limpiar</button>
+    <button class="escala-btn-save" style="background:#EA580C;" onclick="guardarEscala('Finnegan',document.getElementById('finPuntos').textContent,'modalFinnegan')"><i class="fas fa-bookmark"></i> Guardar</button>
+  </div>
 </div>
 </div>
 
-<!-- MODAL BRAZELTON -->
+
+<!-- MODAL BRAZELTON (NBAS) -->
 <div class="escala-overlay" id="modalBrazelton" onclick="if(event.target===this)cerrarEscala('modalBrazelton')">
 <div class="escala-sheet" style="background:#fff;">
   <div class="escala-handle" style="background:#0F766E;"></div>
-  <div class="escala-header"><div class="escala-icon-wrap" style="background:#F0FDFA;">🧠</div><div class="escala-header-text"><h2 style="color:#0F766E;">Brazelton (NBAS)</h2><p style="color:#0F766E;">Comportamiento neonatal</p></div><button class="escala-close" onclick="cerrarEscala('modalBrazelton')"><i class="fas fa-xmark"></i></button></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">👀</div><span>Orientación visual</span></div><div class="escala-options" id="braz1"><label onclick="selBrazelton('braz1',0,this)">0: Ausente</label><label onclick="selBrazelton('braz1',1,this)">1: Parcial</label><label onclick="selBrazelton('braz1',2,this)">2: Sigue objetos</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">🔊</div><span>Respuesta auditiva</span></div><div class="escala-options" id="braz2"><label onclick="selBrazelton('braz2',0,this)">0: No responde</label><label onclick="selBrazelton('braz2',1,this)">1: Inquietud</label><label onclick="selBrazelton('braz2',2,this)">2: Alerta</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">😌</div><span>Consolabilidad</span></div><div class="escala-options" id="braz3"><label onclick="selBrazelton('braz3',0,this)">0: Inconsolable</label><label onclick="selBrazelton('braz3',1,this)">1: Se calma con dificultad</label><label onclick="selBrazelton('braz3',2,this)">2: Fácilmente consolable</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">🤗</div><span>Tono muscular</span></div><div class="escala-options" id="braz4"><label onclick="selBrazelton('braz4',0,this)">0: Hipotónico</label><label onclick="selBrazelton('braz4',1,this)">1: Normal</label><label onclick="selBrazelton('braz4',2,this)">2: Hipertónico</label></div></div>
-  <div class="escala-section"><div class="escala-section-header"><div class="escala-section-icon">😊</div><span>Irritabilidad refleja</span></div><div class="escala-options" id="braz5"><label onclick="selBrazelton('braz5',0,this)">0: Hipotrreactivo</label><label onclick="selBrazelton('braz5',1,this)">1: Reactivo</label><label onclick="selBrazelton('braz5',2,this)">2: Hiperreactivo</label></div></div>
+  <div class="escala-header">
+    <div class="escala-icon-wrap" style="background:#F0FDFA;">🧠</div>
+    <div class="escala-header-text">
+      <h2 style="color:#0F766E;">Brazelton (NBAS)</h2>
+      <p style="color:#0F766E;">Comportamiento neonatal</p>
+    </div>
+    <button class="escala-close" style="background:#F0FDFA;color:#0F766E;" onclick="cerrarEscala('modalBrazelton')"><i class="fas fa-xmark"></i></button>
+  </div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#CCFBF1;">👀</div>
+      <span class="escala-section-title" style="color:#0D9488;">Orientación visual</span>
+    </div>
+    <div class="escala-options" id="braz1">
+      <label class="escala-option" style="background:#F0FDF9;color:#0F766E;" onclick="selBrazelton('braz1',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ausente</span><span class="escala-option-pts" style="background:#CCFBF1;color:#0F766E;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#0F766E;" onclick="selBrazelton('braz1',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Parcial</span><span class="escala-option-pts" style="background:#CCFBF1;color:#0F766E;">1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#0F766E;" onclick="selBrazelton('braz1',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Sigue objetos</span><span class="escala-option-pts" style="background:#CCFBF1;color:#0F766E;">2</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#CCFBF1;">🔊</div>
+      <span class="escala-section-title" style="color:#0D9488;">Respuesta auditiva</span>
+    </div>
+    <div class="escala-options" id="braz2">
+      <label class="escala-option" style="background:#F0FDF9;color:#0F766E;" onclick="selBrazelton('braz2',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">No responde</span><span class="escala-option-pts" style="background:#CCFBF1;color:#0F766E;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#0F766E;" onclick="selBrazelton('braz2',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Inquietud</span><span class="escala-option-pts" style="background:#CCFBF1;color:#0F766E;">1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#0F766E;" onclick="selBrazelton('braz2',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Alerta</span><span class="escala-option-pts" style="background:#CCFBF1;color:#0F766E;">2</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#CCFBF1;">😌</div>
+      <span class="escala-section-title" style="color:#0D9488;">Consolabilidad</span>
+    </div>
+    <div class="escala-options" id="braz3">
+      <label class="escala-option" style="background:#F0FDF9;color:#0F766E;" onclick="selBrazelton('braz3',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Inconsolable</span><span class="escala-option-pts" style="background:#CCFBF1;color:#0F766E;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#0F766E;" onclick="selBrazelton('braz3',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Se calma con dificultad</span><span class="escala-option-pts" style="background:#CCFBF1;color:#0F766E;">1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#0F766E;" onclick="selBrazelton('braz3',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Fácilmente consolable</span><span class="escala-option-pts" style="background:#CCFBF1;color:#0F766E;">2</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#CCFBF1;">🤗</div>
+      <span class="escala-section-title" style="color:#0D9488;">Tono muscular</span>
+    </div>
+    <div class="escala-options" id="braz4">
+      <label class="escala-option" style="background:#F0FDF9;color:#0F766E;" onclick="selBrazelton('braz4',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Hipotónico</span><span class="escala-option-pts" style="background:#CCFBF1;color:#0F766E;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#0F766E;" onclick="selBrazelton('braz4',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Normal</span><span class="escala-option-pts" style="background:#CCFBF1;color:#0F766E;">1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#0F766E;" onclick="selBrazelton('braz4',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Hipertónico</span><span class="escala-option-pts" style="background:#CCFBF1;color:#0F766E;">2</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#CCFBF1;">😊</div>
+      <span class="escala-section-title" style="color:#0D9488;">Irritabilidad refleja</span>
+    </div>
+    <div class="escala-options" id="braz5">
+      <label class="escala-option" style="background:#F0FDF9;color:#0F766E;" onclick="selBrazelton('braz5',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Hiporreactivo</span><span class="escala-option-pts" style="background:#CCFBF1;color:#0F766E;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#0F766E;" onclick="selBrazelton('braz5',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Reactivo</span><span class="escala-option-pts" style="background:#CCFBF1;color:#0F766E;">1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#0F766E;" onclick="selBrazelton('braz5',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Hiperreactivo</span><span class="escala-option-pts" style="background:#CCFBF1;color:#0F766E;">2</span></label>
+    </div>
+  </div>
 
   <div class="escala-resultado" style="background:linear-gradient(135deg,#0F766E,#14B8A6);">
-    <div class="escala-resultado-row"><div class="escala-score-circle"><span class="escala-score-num" id="brazPuntos">0</span><span class="escala-score-sub">/10</span></div><div class="escala-score-info"><h3>Puntaje: <span id="brazPuntosLabel">0</span></h3><p id="brazInterp"></p></div><span class="escala-score-emoji" id="brazEmoji">😐</span></div>
-    <div class="escala-ranges"><span class="escala-range-chip">0–3: Bajo rendimiento</span><span class="escala-range-chip">4–6: Rendimiento moderado</span><span class="escala-range-chip">7–10: Buen rendimiento</span></div>
+    <div class="escala-resultado-row">
+      <div class="escala-score-circle" style="background:rgba(255,255,255,0.15);">
+        <span class="escala-score-num" style="color:#fff;" id="brazPuntos">0</span>
+        <span class="escala-score-sub" style="color:#fff;">/10</span>
+      </div>
+      <div class="escala-score-info">
+        <h3 style="color:#fff;">Puntaje: <span id="brazPuntosLabel">0</span></h3>
+        <p style="color:#99F6E4;" id="brazInterp">—</p>
+      </div>
+      <span class="escala-score-emoji" id="brazEmoji">😐</span>
+    </div>
+    <div class="escala-ranges">
+      <span class="escala-range-chip" style="color:#fff;">0–3: Bajo rendimiento</span>
+      <span class="escala-range-chip" style="color:#fff;">4–6: Rendimiento moderado</span>
+      <span class="escala-range-chip" style="color:#fff;">7–10: Buen rendimiento</span>
+    </div>
   </div>
-  <div class="escala-footer"><button class="escala-btn-clear" onclick="limpiarBrazelton()"><i class="fas fa-rotate-left"></i> Limpiar</button><button class="escala-btn-save" style="background:#14B8A6;" onclick="guardarEscala('Brazelton',document.getElementById('brazPuntos').textContent,'modalBrazelton')"><i class="fas fa-bookmark"></i> Guardar</button></div>
+  <div class="escala-footer">
+    <button class="escala-btn-clear" style="background:#F0FDFA;color:#0F766E;" onclick="limpiarBrazelton()"><i class="fas fa-rotate-left"></i> Limpiar</button>
+    <button class="escala-btn-save" style="background:#14B8A6;" onclick="guardarEscala('Brazelton',document.getElementById('brazPuntos').textContent,'modalBrazelton')"><i class="fas fa-bookmark"></i> Guardar</button>
+  </div>
 </div>
 </div>
+
 
 <script>
 // ============================================================
