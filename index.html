@@ -387,6 +387,428 @@ body {
 ============================================================ */
 .toast { position: fixed; bottom: calc(var(--nav-height) + 16px); left: 50%; transform: translateX(-50%) translateY(20px); background: var(--navy); color: #fff; padding: 10px 18px; border-radius: 20px; font-size: 13px; font-weight: 500; opacity: 0; transition: opacity 0.3s, transform 0.3s; pointer-events: none; z-index: 300; white-space: nowrap; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ============================================================
+   PANTALLA CALCULADORAS — Layout de dos paneles
+============================================================ */
+#screen-calculadoras {
+  display: none;
+  height: calc(100vh - var(--nav-height));
+  overflow: hidden;
+  flex-direction: column;
+  background: var(--bg);
+}
+#screen-calculadoras.active {
+  display: flex;
+  padding-bottom: 0;
+}
+
+.calc-topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.calc-topbar-back {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: #F0F4FA;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  font-size: 16px;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.calc-topbar-back:active {
+  background: #DDE6F2;
+}
+
+.calc-topbar h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  flex: 1;
+}
+
+.calc-topbar-info {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: #F0F4FA;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+
+/* CUERPO PRINCIPAL - IMPORTANTE */
+.calc-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  height: calc(100vh - var(--nav-height) - 62px);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Panel izquierdo — lista de calculadoras */
+/* Panel izquierdo — lista de calculadoras */
+.calc-sidebar {
+  width: 130px;
+  flex-shrink: 0;
+  background: #F8FAFD;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px 8px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+  max-height: 100%;
+}
+
+.calc-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.calc-sidebar .calc-nav-item:last-child {
+  margin-bottom: 10px;
+}
+
+.calc-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.calc-sidebar-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 8px 6px 4px;
+}
+
+.calc-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 6px;
+  border-radius: 12px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  transition: background 0.15s, transform 0.1s;
+  text-align: center;
+}
+
+.calc-nav-item:active {
+  transform: scale(0.96);
+}
+
+.calc-nav-item.active {
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+
+.calc-nav-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.calc-nav-name {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.2;
+}
+
+.calc-nav-item.active .calc-nav-name {
+  color: var(--navy);
+}
+
+/* Panel derecho — contenido de la calculadora */
+/* Panel derecho — contenido de la calculadora */
+.calc-panel {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px 16px 80px;
+  background: var(--bg);
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.calc-panel::-webkit-scrollbar {
+  display: none;
+}
+
+.calc-panel .calc-view {
+  padding-bottom: 40px;
+}
+.calc-panel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Asegura que el contenido del panel tenga espacio inferior */
+.calc-panel .calc-view {
+  padding-bottom: 30px;
+}
+
+.calc-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.calc-panel-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  flex-shrink: 0;
+}
+
+.calc-panel-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.calc-panel-subtitle {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.calc-formula-box {
+  background: #EBF1FB;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calc-formula-box i {
+  color: var(--blue);
+  font-size: 13px;
+}
+
+.calc-formula-box span {
+  font-size: 12px;
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.calc-field {
+  margin-bottom: 14px;
+}
+
+.calc-field label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.calc-input-wrap {
+  position: relative;
+}
+
+.calc-input-wrap i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.calc-input-unit {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.calc-input {
+  width: 100%;
+  padding: 12px 48px 12px 36px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--card);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.calc-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(74,122,181,0.12);
+}
+
+.calc-select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--card);
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B7C96' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.calc-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: var(--navy);
+  color: #fff;
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: var(--shadow-md);
+}
+
+.calc-btn:active {
+  transform: scale(0.98);
+  background: #142d54;
+}
+
+.calc-result-box {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 16px;
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.calc-result-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.calc-result-label i {
+  color: #10B981;
+  font-size: 14px;
+}
+
+.calc-result-value {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.1;
+}
+
+.calc-result-unit {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--blue);
+  margin-left: 4px;
+}
+
+.calc-result-note {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.calc-warning {
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-top: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.calc-warning i {
+  color: #D97706;
+  font-size: 13px;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+.calc-warning span {
+  font-size: 11.5px;
+  color: #92400E;
+  line-height: 1.4;
+}
+
+.calc-view {
+  display: none;
+}
+
+.calc-view.active {
+  display: block;
+}
+
 /* ============================================================
    FILTROS DE PACIENTES (Todos / Hospitalizados / Altas / Críticos / etc.)
 ============================================================ */
@@ -1067,6 +1489,20 @@ highlight-text {
   transition: transform 0.1s ease;
 }
 
+/* Asegura que el contenido del panel tenga espacio inferior */
+.calc-panel .calc-view {
+  padding-bottom: 30px;
+}
+
+/* Ajuste adicional para el scroll del panel */
+.calc-panel {
+  scroll-behavior: smooth;
+}
+
+.calc-panel .calc-view:last-child {
+  padding-bottom: 40px;
+}
+
 </style>
 </head>
 <body>
@@ -1245,6 +1681,418 @@ highlight-text {
 <!-- ============================================================
      PANTALLA: HERRAMIENTAS
 ============================================================ -->
+<!-- ============================================================ -->
+<!-- PANTALLA CALCULADORAS — Pantalla completa con dos paneles    -->
+<!-- ============================================================ -->
+<div class="screen" id="screen-calculadoras">
+
+  <!-- Topbar -->
+  <div class="calc-topbar">
+    <button class="calc-topbar-back" onclick="showScreen('herramientas'); setNavByScreen('herramientas')">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h2>Calculadoras</h2>
+    <button class="calc-topbar-info" onclick="showToast('ℹ️ Fórmulas basadas en evidencia clínica')">
+      <i class="fas fa-circle-info"></i>
+    </button>
+  </div>
+
+  <!-- Cuerpo: sidebar + panel -->
+  <div class="calc-body">
+
+<!-- === SIDEBAR IZQUIERDO === -->
+<div class="calc-sidebar">
+  <div class="calc-sidebar-label">
+    <i class="fas fa-calculator" style="margin-right: 4px;"></i> Cálculos clínicos
+  </div>
+
+  <button class="calc-nav-item active" onclick="mostrarCalc('dosis')" id="nav-dosis">
+    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #4A7AB5, #6B9BD2);">
+      <i class="fas fa-syringe" style="color: white; font-size: 20px;"></i>
+    </div>
+    <span class="calc-nav-name">Dosis / Peso</span>
+  </button>
+
+  <button class="calc-nav-item" onclick="mostrarCalc('diluciones')" id="nav-diluciones">
+    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #2BA899, #34D399);">
+      <i class="fas fa-water" style="color: white; font-size: 20px;"></i>
+    </div>
+    <span class="calc-nav-name">Diluciones</span>
+  </button>
+
+  <button class="calc-nav-item" onclick="mostrarCalc('imc')" id="nav-imc">
+    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #10B981, #34D399);">
+      <i class="fas fa-weight-scale" style="color: white; font-size: 20px;"></i>
+    </div>
+    <span class="calc-nav-name">IMC</span>
+  </button>
+
+  <button class="calc-nav-item" onclick="mostrarCalc('pam')" id="nav-pam">
+    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #EF4444, #F87171);">
+      <i class="fas fa-heartbeat" style="color: white; font-size: 20px;"></i>
+    </div>
+    <span class="calc-nav-name">PAM</span>
+  </button>
+
+  <button class="calc-nav-item" onclick="mostrarCalc('goteo')" id="nav-goteo">
+    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);">
+      <i class="fas fa-droplet" style="color: white; font-size: 20px;"></i>
+    </div>
+    <span class="calc-nav-name">Goteo IV</span>
+  </button>
+
+  <button class="calc-nav-item" onclick="mostrarCalc('deficit')" id="nav-deficit">
+    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #3B82F6, #60A5FA);">
+      <i class="fas fa-tint" style="color: white; font-size: 20px;"></i>
+    </div>
+    <span class="calc-nav-name">Déficit Hídrico</span>
+  </button>
+
+  <button class="calc-nav-item" onclick="mostrarCalc('superficie')" id="nav-superficie">
+    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA);">
+      <i class="fas fa-vector-square" style="color: white; font-size: 20px;"></i>
+    </div>
+    <span class="calc-nav-name">Sup. Corporal</span>
+  </button>
+</div>
+    <!-- === PANEL DERECHO === -->
+<!-- === PANEL DERECHO === -->
+<div class="calc-panel">
+
+  <!-- ── DOSIS / PESO ── -->
+  <div class="calc-view active" id="calc-dosis">
+    <div class="calc-panel-header">
+      <div class="calc-panel-icon" style="background: linear-gradient(135deg, #4A7AB5, #6B9BD2);">
+        <i class="fas fa-syringe" style="color: white; font-size: 24px;"></i>
+      </div>
+      <div>
+        <div class="calc-panel-title">Dosis por peso</div>
+        <div class="calc-panel-subtitle"><i class="fas fa-calculator"></i> mg/kg → dosis total</div>
+      </div>
+    </div>
+    <div class="calc-formula-box">
+      <i class="fas fa-flask"></i>
+      <span>Dosis total (mg) = Peso (kg) × Dosis (mg/kg)</span>
+    </div>
+    <div class="calc-field">
+      <label>Peso del paciente</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-weight-hanging"></i>
+        <input class="calc-input" id="dp-peso" type="number" placeholder="0.0">
+        <span class="calc-input-unit">kg</span>
+      </div>
+    </div>
+    <div class="calc-field">
+      <label>Dosis prescrita</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-pills"></i>
+        <input class="calc-input" id="dp-dosis" type="number" placeholder="0.0">
+        <span class="calc-input-unit">mg/kg</span>
+      </div>
+    </div>
+    <div class="calc-field">
+      <label>Concentración disponible (opcional)</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-flask"></i>
+        <input class="calc-input" id="dp-conc" type="number" placeholder="0.0">
+        <span class="calc-input-unit">mg/mL</span>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcDP()">
+      <i class="fas fa-calculator"></i> Calcular dosis
+    </button>
+    <div class="calc-result-box" id="dp-resultado" style="display:none;">
+      <div class="calc-result-label"><i class="fas fa-circle-check"></i> Dosis total</div>
+      <div class="calc-result-value"><span id="dp-val">—</span><span class="calc-result-unit" id="dp-uni">mg</span></div>
+      <div class="calc-result-note" id="dp-note"></div>
+    </div>
+    <div class="calc-warning">
+      <i class="fas fa-triangle-exclamation"></i>
+      <span>Verifica siempre con el médico tratante antes de administrar.</span>
+    </div>
+  </div>
+
+  <!-- ── DILUCIONES ── -->
+  <div class="calc-view" id="calc-diluciones">
+    <div class="calc-panel-header">
+      <div class="calc-panel-icon" style="background: linear-gradient(135deg, #2BA899, #34D399);">
+        <i class="fas fa-water" style="color: white; font-size: 24px;"></i>
+      </div>
+      <div>
+        <div class="calc-panel-title">Diluciones</div>
+        <div class="calc-panel-subtitle"><i class="fas fa-calculator"></i> Cálculo de dilución de medicamentos</div>
+      </div>
+    </div>
+    <div class="calc-formula-box">
+      <i class="fas fa-flask"></i>
+      <span>Vol. a extraer = Dosis requerida ÷ Concentración disponible</span>
+    </div>
+    <div class="calc-field">
+      <label>Concentración disponible</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-vial"></i>
+        <input class="calc-input" id="dil-conc" type="number" placeholder="0.0">
+        <span class="calc-input-unit">mg/mL</span>
+      </div>
+    </div>
+    <div class="calc-field">
+      <label>Dosis requerida</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-pills"></i>
+        <input class="calc-input" id="dil-dosis" type="number" placeholder="0.0">
+        <span class="calc-input-unit">mg</span>
+      </div>
+    </div>
+    <div class="calc-field">
+      <label>Volumen final (opcional)</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-syringe"></i>
+        <input class="calc-input" id="dil-vol" type="number" placeholder="0.0">
+        <span class="calc-input-unit">mL</span>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcDil()">
+      <i class="fas fa-calculator"></i> Calcular dilución
+    </button>
+    <div class="calc-result-box" id="dil-resultado" style="display:none;">
+      <div class="calc-result-label"><i class="fas fa-circle-check"></i> Volumen a extraer</div>
+      <div class="calc-result-value"><span id="dil-val">—</span><span class="calc-result-unit">mL</span></div>
+      <div class="calc-result-note" id="dil-note"></div>
+    </div>
+    <div class="calc-warning">
+      <i class="fas fa-triangle-exclamation"></i>
+      <span>Confirma siempre la concentración en el envase original.</span>
+    </div>
+  </div>
+
+  <!-- ── IMC ── -->
+  <div class="calc-view" id="calc-imc">
+    <div class="calc-panel-header">
+      <div class="calc-panel-icon" style="background: linear-gradient(135deg, #10B981, #34D399);">
+        <i class="fas fa-weight-scale" style="color: white; font-size: 24px;"></i>
+      </div>
+      <div>
+        <div class="calc-panel-title">Índice de Masa Corporal</div>
+        <div class="calc-panel-subtitle"><i class="fas fa-calculator"></i> IMC = Peso / Talla²</div>
+      </div>
+    </div>
+    <div class="calc-formula-box">
+      <i class="fas fa-flask"></i>
+      <span>IMC = Peso (kg) ÷ Talla² (m²)</span>
+    </div>
+    <div class="calc-field">
+      <label>Peso</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-weight-hanging"></i>
+        <input class="calc-input" id="imc2-peso" type="number" placeholder="0.0">
+        <span class="calc-input-unit">kg</span>
+      </div>
+    </div>
+    <div class="calc-field">
+      <label>Talla</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-ruler-vertical"></i>
+        <input class="calc-input" id="imc2-talla" type="number" placeholder="1.70">
+        <span class="calc-input-unit">m</span>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcIMC2()">
+      <i class="fas fa-calculator"></i> Calcular IMC
+    </button>
+    <div class="calc-result-box" id="imc2-resultado" style="display:none;">
+      <div class="calc-result-label"><i class="fas fa-circle-check"></i> IMC</div>
+      <div class="calc-result-value"><span id="imc2-val">—</span><span class="calc-result-unit">kg/m²</span></div>
+      <div class="calc-result-note" id="imc2-note"></div>
+    </div>
+  </div>
+
+  <!-- ── PAM ── -->
+  <div class="calc-view" id="calc-pam">
+    <div class="calc-panel-header">
+      <div class="calc-panel-icon" style="background: linear-gradient(135deg, #EF4444, #F87171);">
+        <i class="fas fa-heartbeat" style="color: white; font-size: 24px;"></i>
+      </div>
+      <div>
+        <div class="calc-panel-title">Presión Arterial Media</div>
+        <div class="calc-panel-subtitle"><i class="fas fa-calculator"></i> PAM = (PAS + 2×PAD) / 3</div>
+      </div>
+    </div>
+    <div class="calc-formula-box">
+      <i class="fas fa-flask"></i>
+      <span>PAM = (PAS + 2 × PAD) ÷ 3</span>
+    </div>
+    <div class="calc-field">
+      <label>Presión Sistólica (PAS)</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-heart"></i>
+        <input class="calc-input" id="pam2-sis" type="number" placeholder="120">
+        <span class="calc-input-unit">mmHg</span>
+      </div>
+    </div>
+    <div class="calc-field">
+      <label>Presión Diastólica (PAD)</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-heart"></i>
+        <input class="calc-input" id="pam2-dia" type="number" placeholder="80">
+        <span class="calc-input-unit">mmHg</span>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcPAM2()">
+      <i class="fas fa-calculator"></i> Calcular PAM
+    </button>
+    <div class="calc-result-box" id="pam2-resultado" style="display:none;">
+      <div class="calc-result-label"><i class="fas fa-circle-check"></i> PAM</div>
+      <div class="calc-result-value"><span id="pam2-val">—</span><span class="calc-result-unit">mmHg</span></div>
+      <div class="calc-result-note" id="pam2-note"></div>
+    </div>
+    <div class="calc-warning">
+      <i class="fas fa-triangle-exclamation"></i>
+      <span>PAM normal: 70–100 mmHg. Por debajo de 70 hay riesgo de hipoperfusión.</span>
+    </div>
+  </div>
+
+  <!-- ── GOTEO IV ── -->
+  <div class="calc-view" id="calc-goteo">
+    <div class="calc-panel-header">
+      <div class="calc-panel-icon" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);">
+        <i class="fas fa-droplet" style="color: white; font-size: 24px;"></i>
+      </div>
+      <div>
+        <div class="calc-panel-title">Goteo Intravenoso</div>
+        <div class="calc-panel-subtitle"><i class="fas fa-calculator"></i> Gotas por minuto</div>
+      </div>
+    </div>
+    <div class="calc-formula-box">
+      <i class="fas fa-flask"></i>
+      <span>Gotas/min = (Volumen × Factor) ÷ (Tiempo en horas × 60)</span>
+    </div>
+    <div class="calc-field">
+      <label>Volumen total</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-flask"></i>
+        <input class="calc-input" id="got2-vol" type="number" placeholder="500">
+        <span class="calc-input-unit">mL</span>
+      </div>
+    </div>
+    <div class="calc-field">
+      <label>Tiempo de infusión</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-clock"></i>
+        <input class="calc-input" id="got2-tiempo" type="number" placeholder="8">
+        <span class="calc-input-unit">horas</span>
+      </div>
+    </div>
+    <div class="calc-field">
+      <label>Tipo de equipo</label>
+      <select class="calc-select" id="got2-tipo">
+        <option value="20">Macrogoteo (20 gotas/mL)</option>
+        <option value="60">Microgoteo (60 gotas/mL)</option>
+      </select>
+    </div>
+    <button class="calc-btn" onclick="calcGot2()">
+      <i class="fas fa-calculator"></i> Calcular goteo
+    </button>
+    <div class="calc-result-box" id="got2-resultado" style="display:none;">
+      <div class="calc-result-label"><i class="fas fa-circle-check"></i> Goteo</div>
+      <div class="calc-result-value"><span id="got2-val">—</span><span class="calc-result-unit">gotas/min</span></div>
+      <div class="calc-result-note" id="got2-note"></div>
+    </div>
+  </div>
+
+  <!-- ── DÉFICIT HÍDRICO ── -->
+  <div class="calc-view" id="calc-deficit">
+    <div class="calc-panel-header">
+      <div class="calc-panel-icon" style="background: linear-gradient(135deg, #3B82F6, #60A5FA);">
+        <i class="fas fa-tint" style="color: white; font-size: 24px;"></i>
+      </div>
+      <div>
+        <div class="calc-panel-title">Déficit Hídrico</div>
+        <div class="calc-panel-subtitle"><i class="fas fa-calculator"></i> Pérdida de líquidos</div>
+      </div>
+    </div>
+    <div class="calc-formula-box">
+      <i class="fas fa-flask"></i>
+      <span>Déficit (L) = (Peso habitual − Peso actual) × 1000</span>
+    </div>
+    <div class="calc-field">
+      <label>Peso actual</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-weight-hanging"></i>
+        <input class="calc-input" id="def2-actual" type="number" placeholder="0.0">
+        <span class="calc-input-unit">kg</span>
+      </div>
+    </div>
+    <div class="calc-field">
+      <label>Peso habitual</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-weight-hanging"></i>
+        <input class="calc-input" id="def2-habitual" type="number" placeholder="0.0">
+        <span class="calc-input-unit">kg</span>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcDef2()">
+      <i class="fas fa-calculator"></i> Calcular déficit
+    </button>
+    <div class="calc-result-box" id="def2-resultado" style="display:none;">
+      <div class="calc-result-label"><i class="fas fa-circle-check"></i> Déficit estimado</div>
+      <div class="calc-result-value"><span id="def2-val">—</span><span class="calc-result-unit">mL</span></div>
+      <div class="calc-result-note" id="def2-note"></div>
+    </div>
+    <div class="calc-warning">
+      <i class="fas fa-triangle-exclamation"></i>
+      <span>Este cálculo es orientativo. Confirma con gasometría y laboratorios.</span>
+    </div>
+  </div>
+
+  <!-- ── SUPERFICIE CORPORAL ── -->
+  <div class="calc-view" id="calc-superficie">
+    <div class="calc-panel-header">
+      <div class="calc-panel-icon" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA);">
+        <i class="fas fa-vector-square" style="color: white; font-size: 24px;"></i>
+      </div>
+      <div>
+        <div class="calc-panel-title">Superficie Corporal</div>
+        <div class="calc-panel-subtitle"><i class="fas fa-calculator"></i> Fórmula de Mosteller</div>
+      </div>
+    </div>
+    <div class="calc-formula-box">
+      <i class="fas fa-flask"></i>
+      <span>SC (m²) = √( Peso (kg) × Talla (cm) ÷ 3600 )</span>
+    </div>
+    <div class="calc-field">
+      <label>Peso</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-weight-hanging"></i>
+        <input class="calc-input" id="sc2-peso" type="number" placeholder="0.0">
+        <span class="calc-input-unit">kg</span>
+      </div>
+    </div>
+    <div class="calc-field">
+      <label>Talla</label>
+      <div class="calc-input-wrap">
+        <i class="fas fa-ruler-vertical"></i>
+        <input class="calc-input" id="sc2-talla" type="number" placeholder="170">
+        <span class="calc-input-unit">cm</span>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcSC2()">
+      <i class="fas fa-calculator"></i> Calcular superficie
+    </button>
+    <div class="calc-result-box" id="sc2-resultado" style="display:none;">
+      <div class="calc-result-label"><i class="fas fa-circle-check"></i> Superficie Corporal</div>
+      <div class="calc-result-value"><span id="sc2-val">—</span><span class="calc-result-unit">m²</span></div>
+      <div class="calc-result-note" id="sc2-note"></div>
+    </div>
+    <div class="calc-warning">
+      <i class="fas fa-triangle-exclamation"></i>
+      <span>Referencia adulto promedio: ~1.73 m² (Mosteller).</span>
+    </div>
+  </div>
+
+</div><!-- /calc-panel -->
+  </div><!-- /calc-body -->
+</div><!-- /screen-calculadoras -->
+
 <div class="screen" id="screen-herramientas">
   <!-- HEADER -->
   <div class="header">
@@ -1396,7 +2244,7 @@ highlight-text {
     </div>
   </div>
 
-    <!-- CALCULADORAS -->
+     <!-- CALCULADORAS -->
   <div class="section" style="padding-top:8px;padding-bottom:8px;">
     <div class="card">
       <div class="section-header">
@@ -1410,15 +2258,18 @@ highlight-text {
           </svg>
           Calculadoras de enfermería
         </h3>
-        <button class="see-all" onclick="showToast('🔢 Ver todas próximamente')">
+        <button class="see-all" onclick="abrirCalculadoras('dosis')">
           Ver todas
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
         </button>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;">
-        <!-- Diluciones -->
-        <div onclick="showToast('💉 Diluciones próximamente')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:50px;height:50px;background:#EFF6FF;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #BFDBFE;">
+
+      <!-- Grid de 2 columnas (vertical) -->
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">
+        
+        <!-- 1. Diluciones -->
+        <div onclick="abrirModalDiluciones()" style="background:#EFF6FF;border-radius:14px;padding:14px 12px;cursor:pointer;transition:all 0.15s;border:1.5px solid #BFDBFE;display:flex;align-items:center;gap:12px;">
+          <div style="width:48px;height:48px;background:#DBEAFE;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
               <rect x="12" y="4" width="8" height="22" rx="4" fill="#60A5FA" opacity="0.7"/>
               <rect x="10" y="8" width="12" height="16" rx="3" fill="#BFDBFE"/>
@@ -1427,71 +2278,99 @@ highlight-text {
               <rect x="14" y="2" width="4" height="4" rx="1" fill="#93C5FD"/>
             </svg>
           </div>
-          <span style="font-size:10.5px;font-weight:700;color:#2563EB;text-align:center;line-height:1.2;">Diluciones</span>
-          <span style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Cálculo de dilución de medicamentos</span>
+          <div>
+            <div style="font-weight:700;font-size:14px;color:#1E3A8A;">Diluciones</div>
+            <div style="font-size:10px;color:#6B7280;margin-top:2px;">Cálculo de dilución de medicamentos</div>
+          </div>
         </div>
-        <!-- IMC -->
-        <div onclick="showToast('⚖️ IMC próximamente')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:50px;height:50px;background:#F0FDF4;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #BBF7D0;">
+
+
+                <!-- 2. IMC -->
+        <div onclick="abrirModalIMC()" style="background:#F0FDF4;border-radius:14px;padding:14px 12px;cursor:pointer;transition:all 0.15s;border:1.5px solid #BBF7D0;display:flex;align-items:center;gap:12px;">
+          <div style="width:48px;height:48px;background:#DCFCE7;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-              <!-- Báscula / persona -->
               <ellipse cx="16" cy="10" rx="5" ry="6" fill="#86EFAC" opacity="0.8"/>
               <path d="M10 22 Q10 18 16 17 Q22 18 22 22 L22 26 L10 26 Z" fill="#4ADE80" opacity="0.6"/>
               <rect x="8" y="26" width="16" height="3" rx="1.5" fill="#16A34A" opacity="0.5"/>
             </svg>
           </div>
-          <span style="font-size:10.5px;font-weight:700;color:#16A34A;text-align:center;line-height:1.2;">IMC</span>
-          <span style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Índice de Masa Corporal</span>
+          <div>
+            <div style="font-weight:700;font-size:14px;color:#065F46;">IMC</div>
+            <div style="font-size:10px;color:#6B7280;margin-top:2px;">Índice de Masa Corporal</div>
+          </div>
         </div>
-        <!-- PAM -->
-        <div onclick="showToast('❤️ PAM próximamente')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:50px;height:50px;background:#FFF1F2;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #FECDD3;">
+
+                <!-- 3. PAM -->
+        <div onclick="abrirModalPAM()" style="background:#FFF1F2;border-radius:14px;padding:14px 12px;cursor:pointer;transition:all 0.15s;border:1.5px solid #FECDD3;display:flex;align-items:center;gap:12px;">
+          <div style="width:48px;height:48px;background:#FFE4E6;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
               <path d="M16 26 Q8 20 6 14 Q5 8 10 7 Q14 6 16 10 Q18 6 22 7 Q27 8 26 14 Q24 20 16 26Z" fill="#FB7185" opacity="0.8"/>
-              <!-- Línea de pulso -->
               <path d="M4 16 L10 16 L12 12 L14 20 L16 14 L18 18 L20 16 L28 16" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-          <span style="font-size:10.5px;font-weight:700;color:#F43F5E;text-align:center;line-height:1.2;">PAM</span>
-          <span style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Presión Arterial Media</span>
+          <div>
+            <div style="font-weight:700;font-size:14px;color:#BE123C;">PAM</div>
+            <div style="font-size:10px;color:#6B7280;margin-top:2px;">Presión Arterial Media</div>
+          </div>
         </div>
-        <!-- Goteo IV -->
-        <div onclick="showToast('🩸 Goteo IV próximamente')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:50px;height:50px;background:#FFFBEB;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #FDE68A;">
+
+
+                <!-- 4. Goteo IV -->
+        <div onclick="abrirModalGoteoIV()" style="background:#FFFBEB;border-radius:14px;padding:14px 12px;cursor:pointer;transition:all 0.15s;border:1.5px solid #FDE68A;display:flex;align-items:center;gap:12px;">
+          <div style="width:48px;height:48px;background:#FEF3C7;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-              <!-- Bolsa IV -->
               <path d="M10 6 Q10 4 16 4 Q22 4 22 6 L22 18 Q22 24 16 24 Q10 24 10 18 Z" fill="#FDE68A" opacity="0.8"/>
               <path d="M10 6 Q10 4 16 4 Q22 4 22 6 L22 18 Q22 24 16 24 Q10 24 10 18 Z" stroke="#F59E0B" stroke-width="1.2" fill="none"/>
-              <!-- Gota -->
               <path d="M16 26 Q14 29 16 30 Q18 29 16 26Z" fill="#F59E0B"/>
-              <!-- Línea tubo -->
               <line x1="16" y1="24" x2="16" y2="26" stroke="#F59E0B" stroke-width="1.5"/>
-              <!-- Burbujas dentro -->
               <circle cx="14" cy="14" r="2" fill="#FBBF24" opacity="0.5"/>
               <circle cx="18" cy="11" r="1.5" fill="#FBBF24" opacity="0.4"/>
             </svg>
           </div>
-          <span style="font-size:10.5px;font-weight:700;color:#D97706;text-align:center;line-height:1.2;">Goteo IV</span>
-          <span style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Cálculo de goteo por minuto</span>
+          <div>
+            <div style="font-weight:700;font-size:14px;color:#B45309;">Goteo IV</div>
+            <div style="font-size:10px;color:#6B7280;margin-top:2px;">Cálculo de goteo por minuto</div>
+          </div>
         </div>
-        <!-- Déficit Hídrico -->
-        <div onclick="showToast('💧 Déficit Hídrico próximamente')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:50px;height:50px;background:#F0FDF4;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #BBF7D0;">
+
+        
+                <!-- 5. Déficit Hídrico -->
+        <div onclick="abrirModalDeficitHidrico()" style="background:#F0FDF4;border-radius:14px;padding:14px 12px;cursor:pointer;transition:all 0.15s;border:1.5px solid #BBF7D0;display:flex;align-items:center;gap:12px;">
+          <div style="width:48px;height:48px;background:#DCFCE7;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-              <!-- Gota con porcentaje -->
               <path d="M16 4 Q10 12 10 18 Q10 25 16 26 Q22 25 22 18 Q22 12 16 4Z" fill="#34D399" opacity="0.7"/>
               <path d="M16 4 Q10 12 10 18 Q10 25 16 26 Q22 25 22 18 Q22 12 16 4Z" stroke="#10B981" stroke-width="1.2" fill="none"/>
-              <!-- % dentro -->
               <text x="13" y="20" font-size="7" fill="#065F46" font-weight="bold">%</text>
             </svg>
           </div>
-          <span style="font-size:10.5px;font-weight:700;color:#059669;text-align:center;line-height:1.2;">Déficit Hídrico</span>
-          <span style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Cálculo de déficit de líquidos</span>
+          <div>
+            <div style="font-weight:700;font-size:14px;color:#065F46;">Déficit Hídrico</div>
+            <div style="font-size:10px;color:#6B7280;margin-top:2px;">Cálculo de déficit de líquidos</div>
+          </div>
         </div>
+
+
+                <!-- 6. Superficie Corporal -->
+        <div onclick="abrirModalSuperficieCorporal()" style="background:#EFF6FF;border-radius:14px;padding:14px 12px;cursor:pointer;transition:all 0.15s;border:1.5px solid #BFDBFE;display:flex;align-items:center;gap:12px;">
+          <div style="width:48px;height:48px;background:#DBEAFE;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+              <circle cx="16" cy="14" r="8" fill="#93C5FD" opacity="0.6"/>
+              <path d="M12 18 L20 18" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M16 10 L16 18" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="14" y="22" width="4" height="6" rx="2" fill="#60A5FA"/>
+              <text x="13" y="17" font-size="7" fill="#1E3A8A" font-weight="bold">m²</text>
+            </svg>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:14px;color:#1E3A8A;">Superficie Corporal</div>
+            <div style="font-size:10px;color:#6B7280;margin-top:2px;">Fórmulas Mosteller / Du Bois</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
-  
+
    <!-- ESCALAS CLÍNICAS -->
   <div class="section" style="padding-top:8px;">
     <div class="card" style="padding: 18px 16px;">
@@ -2752,8 +3631,9 @@ function renderPacientes() {
     ).join('');
 
     let medTag = '';
-    if (p.meds && p.meds.length > 0) {
-      const sorted = [...p.meds].sort((a, b) => a.hora.localeCompare(b.hora));
+    if (p.meds && p.meds.length > 0) {const sorted = p.meds.sort((a, b) =>
+    a.hora.localeCompare(b.hora)
+);
       const status = getMedStatus(sorted[0]);
       const color = status === 'due' ? 'red' : status === 'soon' ? 'yellow' : 'gray';
       medTag = '<span class="pac-tag ' + color + '"><i class="fas fa-pills" style="font-size:9px"></i> ' + sorted[0].hora + '</span>';
@@ -4148,6 +5028,150 @@ setTimeout(() => {
 }, 100);
 
 // Funciones auxiliares para cerrar modales
+
+// ============================================================
+// PANTALLA CALCULADORAS — navegación y lógica
+// ============================================================
+  function abrirCalculadoras(calc) {
+    calc = calc || 'dosis';
+    showScreen('calculadoras');
+    mostrarCalc(calc);
+  }
+
+function mostrarCalc(id) {
+  document.querySelectorAll('.calc-view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.calc-nav-item').forEach(n => n.classList.remove('active'));
+  const view = document.getElementById('calc-' + id);
+  const nav  = document.getElementById('nav-' + id);
+  if (view) view.classList.add('active');
+  if (nav)  nav.classList.add('active');
+  
+  // Forzar scroll del sidebar
+  setTimeout(() => {
+    const sidebar = document.querySelector('.calc-sidebar');
+    if (sidebar && sidebar.scrollHeight > sidebar.clientHeight) {
+      sidebar.style.overflowY = 'auto';
+    }
+  }, 50);
+}
+
+// Dosis / Peso
+function calcDP() {
+  const peso  = parseFloat(document.getElementById('dp-peso').value);
+  const dosis = parseFloat(document.getElementById('dp-dosis').value);
+  const conc  = parseFloat(document.getElementById('dp-conc').value);
+  const res   = document.getElementById('dp-resultado');
+  if (isNaN(peso) || isNaN(dosis)) { showToast('⚠️ Ingresa peso y dosis'); return; }
+  const totalMg = peso * dosis;
+  document.getElementById('dp-val').textContent = totalMg.toFixed(2);
+  document.getElementById('dp-uni').textContent = 'mg';
+  let note = `Peso: ${peso} kg × Dosis: ${dosis} mg/kg = ${totalMg.toFixed(2)} mg`;
+  if (!isNaN(conc) && conc > 0) {
+    const vol = totalMg / conc;
+    note += `\nVolumen a administrar: ${vol.toFixed(2)} mL`;
+  }
+  document.getElementById('dp-note').textContent = note;
+  res.style.display = 'block';
+}
+
+// Diluciones
+function calcDil() {
+  const conc  = parseFloat(document.getElementById('dil-conc').value);
+  const dosis = parseFloat(document.getElementById('dil-dosis').value);
+  const vol   = parseFloat(document.getElementById('dil-vol').value);
+  if (isNaN(conc) || isNaN(dosis) || conc === 0) { showToast('⚠️ Ingresa concentración y dosis'); return; }
+  const extrae = dosis / conc;
+  document.getElementById('dil-val').textContent = extrae.toFixed(2);
+  let note = `Extraer ${extrae.toFixed(2)} mL de la ampolleta`;
+  if (!isNaN(vol) && vol > 0) note += ` y aforar a ${vol} mL con diluyente`;
+  document.getElementById('dil-note').textContent = note;
+  document.getElementById('dil-resultado').style.display = 'block';
+}
+
+// IMC
+function calcIMC2() {
+  const peso  = parseFloat(document.getElementById('imc2-peso').value);
+  const talla = parseFloat(document.getElementById('imc2-talla').value);
+  if (isNaN(peso) || isNaN(talla) || talla === 0) { showToast('⚠️ Ingresa peso y talla'); return; }
+  const imc = peso / (talla * talla);
+  document.getElementById('imc2-val').textContent = imc.toFixed(1);
+  let cat = '';
+  if (imc < 18.5) cat = 'Bajo peso';
+  else if (imc < 25) cat = 'Peso normal';
+  else if (imc < 30) cat = 'Sobrepeso';
+  else if (imc < 35) cat = 'Obesidad grado I';
+  else if (imc < 40) cat = 'Obesidad grado II';
+  else cat = 'Obesidad grado III';
+  document.getElementById('imc2-note').textContent = 'Clasificación: ' + cat;
+  document.getElementById('imc2-resultado').style.display = 'block';
+}
+
+// PAM
+function calcPAM2() {
+  const sis = parseFloat(document.getElementById('pam2-sis').value);
+  const dia = parseFloat(document.getElementById('pam2-dia').value);
+  if (isNaN(sis) || isNaN(dia)) { showToast('⚠️ Ingresa sistólica y diastólica'); return; }
+  const pam = (sis + 2 * dia) / 3;
+  document.getElementById('pam2-val').textContent = pam.toFixed(1);
+  let interp = pam < 70 ? '⚠️ PAM baja — riesgo de hipoperfusión' : pam <= 100 ? '✅ PAM en rango normal (70–100 mmHg)' : '⚠️ PAM elevada';
+  document.getElementById('pam2-note').textContent = interp;
+  document.getElementById('pam2-resultado').style.display = 'block';
+}
+
+// Goteo IV
+function calcGot2() {
+  const vol    = parseFloat(document.getElementById('got2-vol').value);
+  const tiempo = parseFloat(document.getElementById('got2-tiempo').value);
+  const factor = parseFloat(document.getElementById('got2-tipo').value);
+  if (isNaN(vol) || isNaN(tiempo) || tiempo === 0) { showToast('⚠️ Ingresa volumen y tiempo'); return; }
+  const gotas = (vol * factor) / (tiempo * 60);
+  const mlH   = vol / tiempo;
+  document.getElementById('got2-val').textContent = Math.round(gotas);
+  document.getElementById('got2-note').textContent = `Flujo: ${mlH.toFixed(1)} mL/h · 1 gota cada ${(60 / gotas).toFixed(1)} seg`;
+  document.getElementById('got2-resultado').style.display = 'block';
+}
+
+// Déficit Hídrico
+function calcDef2() {
+  const actual   = parseFloat(document.getElementById('def2-actual').value);
+  const habitual = parseFloat(document.getElementById('def2-habitual').value);
+  if (isNaN(actual) || isNaN(habitual)) { showToast('⚠️ Ingresa ambos pesos'); return; }
+  const diff   = habitual - actual;
+  const deficit = diff * 1000;
+  const pct    = (diff / habitual * 100).toFixed(1);
+  document.getElementById('def2-val').textContent = deficit > 0 ? deficit.toFixed(0) : 0;
+  let interp = deficit <= 0 ? 'Sin déficit aparente' : pct < 5 ? `Pérdida leve (${pct}%)` : pct < 10 ? `Pérdida moderada (${pct}%)` : `Pérdida grave (${pct}%)`;
+  document.getElementById('def2-note').textContent = interp;
+  document.getElementById('def2-resultado').style.display = 'block';
+}
+
+// Superficie Corporal
+function calcSC2() {
+  const peso  = parseFloat(document.getElementById('sc2-peso').value);
+  const talla = parseFloat(document.getElementById('sc2-talla').value);
+  if (isNaN(peso) || isNaN(talla)) { showToast('⚠️ Ingresa peso y talla'); return; }
+  const sc = Math.sqrt((talla * peso) / 3600);
+  document.getElementById('sc2-val').textContent = sc.toFixed(2);
+  document.getElementById('sc2-note').textContent = `Referencia adulto: ~1.73 m² | Mosteller`;
+  document.getElementById('sc2-resultado').style.display = 'block';
+}
+
+// Clearance Creatinina
+function calcCR2() {
+  const edad = parseFloat(document.getElementById('cr2-edad').value);
+  const peso = parseFloat(document.getElementById('cr2-peso').value);
+  const cr   = parseFloat(document.getElementById('cr2-cr').value);
+  const sexo = document.getElementById('cr2-sexo').value;
+  if (isNaN(edad) || isNaN(peso) || isNaN(cr) || cr === 0) { showToast('⚠️ Completa todos los campos'); return; }
+  let clcr = ((140 - edad) * peso) / (72 * cr);
+  if (sexo === 'f') clcr *= 0.85;
+  document.getElementById('cr2-val').textContent = clcr.toFixed(1);
+  let interp = clcr >= 90 ? 'Normal' : clcr >= 60 ? 'Daño renal leve' : clcr >= 30 ? 'Daño renal moderado' : clcr >= 15 ? 'Daño renal grave' : 'Falla renal';
+  document.getElementById('cr2-note').textContent = `Estadio: ${interp}`;
+  document.getElementById('cr2-resultado').style.display = 'block';
+}
+
+
 function cerrarModalGenerico(event, modalId) {
   if (!event || event.target === document.getElementById(modalId)) {
     document.getElementById(modalId).classList.remove('open');
@@ -4544,6 +5568,109 @@ function limpiarNorton() {
 
 function abrirModalNorton() { document.getElementById('modalNorton').classList.add('open'); }
 
+// ============================================================
+// CALCULADORAS
+// ============================================================
+
+// --- DILUCIONES ---
+function abrirModalDiluciones() {
+    showScreen('calculadoras');
+    mostrarCalc('diluciones');
+    // Resaltar Herramientas en la navegación
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const navHerramientas = Array.from(document.querySelectorAll('.nav-item')).find(
+        n => n.querySelector('.nav-label')?.textContent === 'Herramientas'
+    );
+    if (navHerramientas) {
+        navHerramientas.classList.add('active');
+        navHerramientas.querySelectorAll('svg').forEach(s => s.setAttribute('stroke', '#4A7AB5'));
+        const lbl = navHerramientas.querySelector('.nav-label');
+        if (lbl) lbl.style.color = '#4A7AB5';
+    }
+}
+
+function abrirModalIMC() {
+    showScreen('calculadoras');
+    mostrarCalc('imc');
+    // Resaltar Herramientas en la navegación
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const navHerramientas = Array.from(document.querySelectorAll('.nav-item')).find(
+        n => n.querySelector('.nav-label')?.textContent === 'Herramientas'
+    );
+    if (navHerramientas) {
+        navHerramientas.classList.add('active');
+        navHerramientas.querySelectorAll('svg').forEach(s => s.setAttribute('stroke', '#4A7AB5'));
+        const lbl = navHerramientas.querySelector('.nav-label');
+        if (lbl) lbl.style.color = '#4A7AB5';
+    }
+}
+
+function abrirModalPAM() {
+    showScreen('calculadoras');
+    mostrarCalc('pam');
+    // Resaltar Herramientas en la navegación
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const navHerramientas = Array.from(document.querySelectorAll('.nav-item')).find(
+        n => n.querySelector('.nav-label')?.textContent === 'Herramientas'
+    );
+    if (navHerramientas) {
+        navHerramientas.classList.add('active');
+        navHerramientas.querySelectorAll('svg').forEach(s => s.setAttribute('stroke', '#4A7AB5'));
+        const lbl = navHerramientas.querySelector('.nav-label');
+        if (lbl) lbl.style.color = '#4A7AB5';
+    }
+}
+
+function abrirModalGoteoIV() {
+    showScreen('calculadoras');
+    mostrarCalc('goteo');
+    // Resaltar Herramientas en la navegación
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const navHerramientas = Array.from(document.querySelectorAll('.nav-item')).find(
+        n => n.querySelector('.nav-label')?.textContent === 'Herramientas'
+    );
+    if (navHerramientas) {
+        navHerramientas.classList.add('active');
+        navHerramientas.querySelectorAll('svg').forEach(s => s.setAttribute('stroke', '#4A7AB5'));
+        const lbl = navHerramientas.querySelector('.nav-label');
+        if (lbl) lbl.style.color = '#4A7AB5';
+    }
+}
+
+function abrirModalDeficitHidrico() {
+    showScreen('calculadoras');
+    mostrarCalc('deficit');
+    // Resaltar Herramientas en la navegación
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const navHerramientas = Array.from(document.querySelectorAll('.nav-item')).find(
+        n => n.querySelector('.nav-label')?.textContent === 'Herramientas'
+    );
+    if (navHerramientas) {
+        navHerramientas.classList.add('active');
+        navHerramientas.querySelectorAll('svg').forEach(s => s.setAttribute('stroke', '#4A7AB5'));
+        const lbl = navHerramientas.querySelector('.nav-label');
+        if (lbl) lbl.style.color = '#4A7AB5';
+    }
+}
+
+function abrirModalSuperficieCorporal() {
+    showScreen('calculadoras');
+    mostrarCalc('superficie');
+    // Resaltar Herramientas en la navegación
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const navHerramientas = Array.from(document.querySelectorAll('.nav-item')).find(
+        n => n.querySelector('.nav-label')?.textContent === 'Herramientas'
+    );
+    if (navHerramientas) {
+        navHerramientas.classList.add('active');
+        navHerramientas.querySelectorAll('svg').forEach(s => s.setAttribute('stroke', '#4A7AB5'));
+        const lbl = navHerramientas.querySelector('.nav-label');
+        if (lbl) lbl.style.color = '#4A7AB5';
+    }
+}
+
+
+
 </script>
   
       <!-- MODAL BARTHEL -->
@@ -4725,6 +5852,115 @@ function abrirModalNorton() { document.getElementById('modalNorton').classList.a
 .escala-check-option.selected .escala-check-box::after {
   content: '✓'; font-weight: 800;
 }
+
+/* ============================================================
+   MEJORAS VISUALES CALCULADORAS
+============================================================ */
+.calc-sidebar-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #4A7AB5;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 6px 12px;
+  border-bottom: 2px solid #E2E8F0;
+  margin-bottom: 8px;
+}
+
+.calc-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 6px;
+  border-radius: 14px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.calc-nav-item:active {
+  transform: scale(0.95);
+}
+
+.calc-nav-item.active {
+  background: white;
+  box-shadow: 0 4px 12px rgba(44, 78, 126, 0.12);
+  border: 1px solid #E2E8F0;
+}
+
+.calc-nav-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.calc-nav-name {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #5A6A82;
+  line-height: 1.3;
+}
+
+.calc-nav-item.active .calc-nav-name {
+  color: #2C4E7E;
+  font-weight: 700;
+}
+
+.calc-panel-header {
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #E2E8F0;
+}
+
+.calc-panel-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2C4E7E;
+}
+
+.calc-panel-subtitle {
+  font-size: 12px;
+  color: #6B7C96;
+  margin-top: 4px;
+}
+
+.calc-formula-box {
+  background: linear-gradient(135deg, #F0F5FF, #E8F0FB);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-left: 4px solid #4A7AB5;
+}
+
+.calc-btn {
+  background: linear-gradient(135deg, #2C4E7E, #4A7AB5);
+  transition: all 0.2s ease;
+}
+
+.calc-btn:active {
+  transform: scale(0.97);
+  background: linear-gradient(135deg, #1E3A5F, #3B6A9F);
+}
+
+.calc-result-box {
+  background: linear-gradient(135deg, #F8FAFD, #F0F5FF);
+  border-left: 4px solid #10B981;
+}
+
+.calc-warning {
+  background: #FFFBEB;
+  border-left: 4px solid #F59E0B;
+}
+
+
 </style>
 
 <!-- ══════════════════════════════════════════════════
@@ -6945,6 +8181,176 @@ function limpiarNEWS() {
 </div>
 </div>
 
+
+<!-- MODAL CALCULADORAS -->
+
+<!-- ============================================================ -->
+<!-- MODAL DILUCIONES -->
+<!-- ============================================================ -->
+<div class="form-overlay" id="modalDiluciones" onclick="cerrarModalGenerico(event, 'modalDiluciones')">
+  <div class="form-card" style="max-height: 85vh;">
+    <div style="padding: 12px 20px 0;"><div class="form-handle"></div></div>
+    <div class="form-header">
+      <span class="form-title">💉 Calculadora de Diluciones</span>
+      <button class="form-close" onclick="cerrarModalGenerico(null, 'modalDiluciones')"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="form-body">
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-flask"></i> Concentración disponible (mg/mL)</label>
+        <input class="form-input" id="dilConcDisponible" type="number" step="0.1" placeholder="Ej: 100" value="100">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-syringe"></i> Dosis requerida (mg)</label>
+        <input class="form-input" id="dilDosisRequerida" type="number" step="0.1" placeholder="Ej: 25" value="25">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-arrows-alt"></i> Volumen final deseado (mL)</label>
+        <input class="form-input" id="dilVolumenFinal" type="number" step="0.1" placeholder="Ej: 10" value="10">
+      </div>
+      <button class="form-submit-btn-modern" onclick="calcularDilucion()">
+        <i class="fas fa-calculator"></i> Calcular dilución
+      </button>
+      <div id="dilResultado" style="background:#F6F9FE; border-radius: var(--radius-sm); padding: 12px; margin-top: 8px;">
+        <div style="font-weight:700;">Volumen a extraer:</div>
+        <div style="font-size:20px;font-weight:800;color:var(--navy);" id="dilVolumenExtraer">—</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;" id="dilExplicacion"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- MODAL IMC -->
+<!-- ============================================================ -->
+<div class="form-overlay" id="modalIMC" onclick="cerrarModalGenerico(event, 'modalIMC')">
+  <div class="form-card" style="max-height: 85vh;">
+    <div style="padding: 12px 20px 0;"><div class="form-handle"></div></div>
+    <div class="form-header">
+      <span class="form-title">⚖️ Índice de Masa Corporal (IMC)</span>
+      <button class="form-close" onclick="cerrarModalGenerico(null, 'modalIMC')"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="form-body">
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-weight-hanging"></i> Peso (kg)</label>
+        <input class="form-input" id="imcPeso" type="number" step="0.1" placeholder="Ej: 70" value="70">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-arrows-alt"></i> Talla (m)</label>
+        <input class="form-input" id="imcTalla" type="number" step="0.01" placeholder="Ej: 1.70" value="1.70">
+      </div>
+      <button class="form-submit-btn-modern" onclick="calcularIMC()">
+        <i class="fas fa-calculator"></i> Calcular IMC
+      </button>
+      <div id="imcResultado" style="background:#F6F9FE; border-radius: var(--radius-sm); padding: 12px; margin-top: 8px;">
+        <div style="font-weight:700;">IMC:</div>
+        <div style="font-size:24px;font-weight:800;color:var(--navy);" id="imcValor">—</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;" id="imcClasificacion"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- MODAL PAM -->
+<!-- ============================================================ -->
+<div class="form-overlay" id="modalPAM" onclick="cerrarModalGenerico(event, 'modalPAM')">
+  <div class="form-card" style="max-height: 85vh;">
+    <div style="padding: 12px 20px 0;"><div class="form-handle"></div></div>
+    <div class="form-header">
+      <span class="form-title">❤️ Presión Arterial Media (PAM)</span>
+      <button class="form-close" onclick="cerrarModalGenerico(null, 'modalPAM')"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="form-body">
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-heart"></i> Presión Sistólica (mmHg)</label>
+        <input class="form-input" id="pamSistolica" type="number" placeholder="Ej: 120" value="120">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-heartbeat"></i> Presión Diastólica (mmHg)</label>
+        <input class="form-input" id="pamDiastolica" type="number" placeholder="Ej: 80" value="80">
+      </div>
+      <button class="form-submit-btn-modern" onclick="calcularPAM()">
+        <i class="fas fa-calculator"></i> Calcular PAM
+      </button>
+      <div id="pamResultado" style="background:#F6F9FE; border-radius: var(--radius-sm); padding: 12px; margin-top: 8px;">
+        <div style="font-weight:700;">Presión Arterial Media:</div>
+        <div style="font-size:24px;font-weight:800;color:var(--navy);" id="pamValor">—</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;" id="pamInterpretacion"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- MODAL GOTEO IV -->
+<!-- ============================================================ -->
+<div class="form-overlay" id="modalGoteoIV" onclick="cerrarModalGenerico(event, 'modalGoteoIV')">
+  <div class="form-card" style="max-height: 85vh;">
+    <div style="padding: 12px 20px 0;"><div class="form-handle"></div></div>
+    <div class="form-header">
+      <span class="form-title">🩸 Calculadora de Goteo IV</span>
+      <button class="form-close" onclick="cerrarModalGenerico(null, 'modalGoteoIV')"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="form-body">
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-tint"></i> Volumen total (mL)</label>
+        <input class="form-input" id="goteoVolumen" type="number" step="1" placeholder="Ej: 500" value="500">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-clock"></i> Tiempo (horas)</label>
+        <input class="form-input" id="goteoTiempo" type="number" step="0.5" placeholder="Ej: 8" value="8">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-droplet"></i> Tipo de equipo</label>
+        <select class="form-select" id="goteoTipo">
+          <option value="macro">Macrogoteo (20 gotas/mL)</option>
+          <option value="micro">Microgoteo (60 gotas/mL)</option>
+        </select>
+      </div>
+      <button class="form-submit-btn-modern" onclick="calcularGoteo()">
+        <i class="fas fa-calculator"></i> Calcular goteo
+      </button>
+      <div id="goteoResultado" style="background:#F6F9FE; border-radius: var(--radius-sm); padding: 12px; margin-top: 8px;">
+        <div style="font-weight:700;">Resultados:</div>
+        <div style="font-size:16px;font-weight:700;color:var(--navy);margin-top:6px;" id="goteoGotasMin">—</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;" id="goteoMicroMacro"></div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;" id="goteoVolumenHora"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- MODAL DÉFICIT HÍDRICO -->
+<!-- ============================================================ -->
+<div class="form-overlay" id="modalDeficitHidrico" onclick="cerrarModalGenerico(event, 'modalDeficitHidrico')">
+  <div class="form-card" style="max-height: 85vh;">
+    <div style="padding: 12px 20px 0;"><div class="form-handle"></div></div>
+    <div class="form-header">
+      <span class="form-title">💧 Déficit Hídrico</span>
+      <button class="form-close" onclick="cerrarModalGenerico(null, 'modalDeficitHidrico')"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="form-body">
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-weight-hanging"></i> Peso actual (kg)</label>
+        <input class="form-input" id="defPesoActual" type="number" step="0.1" placeholder="Ej: 68" value="68">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-weight-hanging"></i> Peso habitual (kg)</label>
+        <input class="form-input" id="defPesoHabitual" type="number" step="0.1" placeholder="Ej: 70" value="70">
+      </div>
+      <button class="form-submit-btn-modern" onclick="calcularDeficitHidrico()">
+        <i class="fas fa-calculator"></i> Calcular déficit
+      </button>
+      <div id="defResultado" style="background:#F6F9FE; border-radius: var(--radius-sm); padding: 12px; margin-top: 8px;">
+        <div style="font-weight:700;">Resultados:</div>
+        <div style="font-size:16px;font-weight:700;color:var(--navy);margin-top:6px;" id="defPerdidaPeso">—</div>
+        <div style="font-size:14px;font-weight:700;color:var(--navy);margin-top:6px;" id="defDeficitLitros">—</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;" id="defInterpretacion"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 </body>
