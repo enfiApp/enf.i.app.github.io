@@ -1678,385 +1678,423 @@ highlight-text {
   </div>
 
   <button class="calc-nav-item active" onclick="mostrarCalc('dosis')" id="nav-dosis">
-    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #4A7AB5, #6B9BD2);">
-      <i class="fas fa-syringe" style="color: white; font-size: 20px;"></i>
+    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #FF6B6B, #FF8E53); box-shadow: 0 4px 12px rgba(255,107,107,0.4);">
+      <span style="font-size: 22px;">💉</span>
     </div>
     <span class="calc-nav-name">Dosis / Peso</span>
   </button>
 
   <button class="calc-nav-item" onclick="mostrarCalc('diluciones')" id="nav-diluciones">
-    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #2BA899, #34D399);">
-      <i class="fas fa-water" style="color: white; font-size: 20px;"></i>
+    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #4ECDC4, #44A08D); box-shadow: 0 4px 12px rgba(78,205,196,0.4);">
+      <span style="font-size: 22px;">🧪</span>
     </div>
     <span class="calc-nav-name">Diluciones</span>
   </button>
 
   <button class="calc-nav-item" onclick="mostrarCalc('imc')" id="nav-imc">
-    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #10B981, #34D399);">
-      <i class="fas fa-weight-scale" style="color: white; font-size: 20px;"></i>
+    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #A8E063, #56AB2F); box-shadow: 0 4px 12px rgba(86,171,47,0.4);">
+      <span style="font-size: 22px;">⚖️</span>
     </div>
     <span class="calc-nav-name">IMC</span>
   </button>
 
   <button class="calc-nav-item" onclick="mostrarCalc('pam')" id="nav-pam">
-    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #EF4444, #F87171);">
-      <i class="fas fa-heartbeat" style="color: white; font-size: 20px;"></i>
+    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #FF416C, #FF4B2B); box-shadow: 0 4px 12px rgba(255,65,108,0.4);">
+      <span style="font-size: 22px;">❤️</span>
     </div>
     <span class="calc-nav-name">PAM</span>
   </button>
 
   <button class="calc-nav-item" onclick="mostrarCalc('goteo')" id="nav-goteo">
-    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);">
-      <i class="fas fa-droplet" style="color: white; font-size: 20px;"></i>
+    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #F7971E, #FFD200); box-shadow: 0 4px 12px rgba(247,151,30,0.4);">
+      <span style="font-size: 22px;">🩸</span>
     </div>
     <span class="calc-nav-name">Goteo IV</span>
   </button>
 
   <button class="calc-nav-item" onclick="mostrarCalc('deficit')" id="nav-deficit">
-    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #3B82F6, #60A5FA);">
-      <i class="fas fa-tint" style="color: white; font-size: 20px;"></i>
+    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #4776E6, #8E54E9); box-shadow: 0 4px 12px rgba(71,118,230,0.4);">
+      <span style="font-size: 22px;">💧</span>
     </div>
     <span class="calc-nav-name">Déficit Hídrico</span>
   </button>
 
   <button class="calc-nav-item" onclick="mostrarCalc('superficie')" id="nav-superficie">
-    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA);">
-      <i class="fas fa-vector-square" style="color: white; font-size: 20px;"></i>
+    <div class="calc-nav-icon" style="background: linear-gradient(135deg, #C471ED, #F64F59); box-shadow: 0 4px 12px rgba(196,113,237,0.4);">
+      <span style="font-size: 22px;">🧍</span>
     </div>
     <span class="calc-nav-name">Sup. Corporal</span>
   </button>
 </div>
-    <!-- === PANEL DERECHO === -->
+
 <!-- === PANEL DERECHO === -->
 <div class="calc-panel">
 
   <!-- ── DOSIS / PESO ── -->
   <div class="calc-view active" id="calc-dosis">
-    <div class="calc-panel-header">
-      <div class="calc-panel-icon" style="background: linear-gradient(135deg, #4A7AB5, #6B9BD2);">
-        <i class="fas fa-syringe" style="color: white; font-size: 24px;"></i>
+
+    <!-- Header -->
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px; padding-bottom:16px; border-bottom:2px solid #F0F4FA;">
+      <div style="width:56px; height:56px; border-radius:18px; background:linear-gradient(135deg,#FF6B6B,#FF8E53); box-shadow:0 6px 16px rgba(255,107,107,0.35); display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0;">💉</div>
+      <div>
+        <div style="font-size:19px; font-weight:800; color:#1A2535; letter-spacing:-0.4px;">Dosis por peso</div>
+        <div style="font-size:12px; color:#6B7C96; margin-top:3px; display:flex; align-items:center; gap:5px;"><i class="fas fa-circle-info" style="color:#FF6B6B; font-size:11px;"></i> mg/kg → dosis total</div>
+      </div>
+    </div>
+
+    <!-- Fórmula -->
+    <div style="background:linear-gradient(135deg,#FFF0EE,#FFE4E0); border-radius:14px; padding:12px 16px; margin-bottom:20px; display:flex; align-items:center; gap:10px; border-left:4px solid #FF6B6B;">
+      <span style="font-size:18px;">🧮</span>
+      <span style="font-size:12.5px; font-weight:700; color:#CC3300;">Dosis total (mg) = Peso (kg) × Dosis (mg/kg)</span>
+    </div>
+
+    <!-- Campos -->
+    <div style="display:flex; flex-direction:column; gap:14px;">
+      <div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;">
+          <i class="fas fa-weight-hanging" style="color:#FF8E53; font-size:10px;"></i> Peso del paciente
+        </label>
+        <div style="position:relative;">
+          <input id="dp-peso" type="number" placeholder="0.0" style="width:100%; padding:13px 52px 13px 16px; border:2px solid #FFD5CC; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#FFF8F7; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#FF6B6B'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(255,107,107,0.12)'" onblur="this.style.borderColor='#FFD5CC'; this.style.background='#FFF8F7'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#FF8E53;">kg</span>
+        </div>
       </div>
       <div>
-        <div class="calc-panel-title">Dosis por peso</div>
-        <div class="calc-panel-subtitle"><i class="fas fa-calculator"></i> mg/kg → dosis total</div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;">
+          <i class="fas fa-pills" style="color:#FF8E53; font-size:10px;"></i> Dosis prescrita
+        </label>
+        <div style="position:relative;">
+          <input id="dp-dosis" type="number" placeholder="0.0" style="width:100%; padding:13px 64px 13px 16px; border:2px solid #FFD5CC; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#FFF8F7; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#FF6B6B'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(255,107,107,0.12)'" onblur="this.style.borderColor='#FFD5CC'; this.style.background='#FFF8F7'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#FF8E53;">mg/kg</span>
+        </div>
+      </div>
+      <div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;">
+          <i class="fas fa-flask" style="color:#FF8E53; font-size:10px;"></i> Concentración disponible <span style="font-weight:500; text-transform:none; letter-spacing:0; color:#A0AEBE;">(opcional)</span>
+        </label>
+        <div style="position:relative;">
+          <input id="dp-conc" type="number" placeholder="0.0" style="width:100%; padding:13px 64px 13px 16px; border:2px solid #FFD5CC; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#FFF8F7; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#FF6B6B'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(255,107,107,0.12)'" onblur="this.style.borderColor='#FFD5CC'; this.style.background='#FFF8F7'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#FF8E53;">mg/mL</span>
+        </div>
       </div>
     </div>
-    <div class="calc-formula-box">
-      <i class="fas fa-flask"></i>
-      <span>Dosis total (mg) = Peso (kg) × Dosis (mg/kg)</span>
-    </div>
-    <div class="calc-field">
-      <label>Peso del paciente</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-weight-hanging"></i>
-        <input class="calc-input" id="dp-peso" type="number" placeholder="0.0">
-        <span class="calc-input-unit">kg</span>
-      </div>
-    </div>
-    <div class="calc-field">
-      <label>Dosis prescrita</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-pills"></i>
-        <input class="calc-input" id="dp-dosis" type="number" placeholder="0.0">
-        <span class="calc-input-unit">mg/kg</span>
-      </div>
-    </div>
-    <div class="calc-field">
-      <label>Concentración disponible (opcional)</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-flask"></i>
-        <input class="calc-input" id="dp-conc" type="number" placeholder="0.0">
-        <span class="calc-input-unit">mg/mL</span>
-      </div>
-    </div>
-    <button class="calc-btn" onclick="calcDP()">
+
+    <!-- Botón -->
+    <button onclick="calcDP()" style="width:100%; margin-top:20px; padding:15px; background:linear-gradient(135deg,#FF6B6B,#FF8E53); color:#fff; border:none; border-radius:14px; font-size:15px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 6px 16px rgba(255,107,107,0.35); transition:all 0.2s;" onmousedown="this.style.transform='scale(0.97)'" onmouseup="this.style.transform='scale(1)'">
       <i class="fas fa-calculator"></i> Calcular dosis
     </button>
-    <div class="calc-result-box" id="dp-resultado" style="display:none;">
-      <div class="calc-result-label"><i class="fas fa-circle-check"></i> Dosis total</div>
-      <div class="calc-result-value"><span id="dp-val">—</span><span class="calc-result-unit" id="dp-uni">mg</span></div>
-      <div class="calc-result-note" id="dp-note"></div>
+
+    <!-- Resultado -->
+    <div id="dp-resultado" style="display:none; margin-top:16px; background:linear-gradient(135deg,#FFF0EE,#FFE4E0); border-radius:16px; padding:18px; border:2px solid #FFB5A7;">
+      <div style="font-size:10px; font-weight:800; color:#CC3300; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+        <i class="fas fa-circle-check" style="color:#FF6B6B;"></i> Resultado
+      </div>
+      <div style="font-size:34px; font-weight:900; color:#CC3300; line-height:1;"><span id="dp-val">—</span> <span style="font-size:16px; font-weight:700; color:#FF6B6B;" id="dp-uni">mg</span></div>
+      <div style="font-size:12px; color:#994422; margin-top:8px; line-height:1.5;" id="dp-note"></div>
     </div>
-    <div class="calc-warning">
-      <i class="fas fa-triangle-exclamation"></i>
-      <span>Verifica siempre con el médico tratante antes de administrar.</span>
+
+    <!-- Advertencia -->
+    <div style="margin-top:14px; background:#FFFBEB; border-radius:12px; padding:11px 14px; display:flex; align-items:flex-start; gap:9px; border:1.5px solid #FDE68A;">
+      <span style="font-size:16px; flex-shrink:0;">⚠️</span>
+      <span style="font-size:12px; color:#92400E; line-height:1.5;">Verifica siempre con el médico tratante antes de administrar.</span>
     </div>
   </div>
 
   <!-- ── DILUCIONES ── -->
   <div class="calc-view" id="calc-diluciones">
-    <div class="calc-panel-header">
-      <div class="calc-panel-icon" style="background: linear-gradient(135deg, #2BA899, #34D399);">
-        <i class="fas fa-water" style="color: white; font-size: 24px;"></i>
+
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px; padding-bottom:16px; border-bottom:2px solid #F0F4FA;">
+      <div style="width:56px; height:56px; border-radius:18px; background:linear-gradient(135deg,#4ECDC4,#44A08D); box-shadow:0 6px 16px rgba(78,205,196,0.35); display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0;">🧪</div>
+      <div>
+        <div style="font-size:19px; font-weight:800; color:#1A2535; letter-spacing:-0.4px;">Diluciones</div>
+        <div style="font-size:12px; color:#6B7C96; margin-top:3px; display:flex; align-items:center; gap:5px;"><i class="fas fa-circle-info" style="color:#4ECDC4; font-size:11px;"></i> Volumen a extraer del medicamento</div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#E8FAF8,#D4F5F1); border-radius:14px; padding:12px 16px; margin-bottom:20px; display:flex; align-items:center; gap:10px; border-left:4px solid #4ECDC4;">
+      <span style="font-size:18px;">🧮</span>
+      <span style="font-size:12.5px; font-weight:700; color:#0A7C72;">Vol. a extraer = Dosis requerida ÷ Concentración disponible</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:14px;">
+      <div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;"><i class="fas fa-vial" style="color:#4ECDC4; font-size:10px;"></i> Concentración disponible</label>
+        <div style="position:relative;">
+          <input id="dil-conc" type="number" placeholder="0.0" style="width:100%; padding:13px 64px 13px 16px; border:2px solid #B2EBE8; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#F0FFFE; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#4ECDC4'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(78,205,196,0.12)'" onblur="this.style.borderColor='#B2EBE8'; this.style.background='#F0FFFE'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#44A08D;">mg/mL</span>
+        </div>
       </div>
       <div>
-        <div class="calc-panel-title">Diluciones</div>
-        <div class="calc-panel-subtitle"><i class="fas fa-calculator"></i> Cálculo de dilución de medicamentos</div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;"><i class="fas fa-pills" style="color:#4ECDC4; font-size:10px;"></i> Dosis requerida</label>
+        <div style="position:relative;">
+          <input id="dil-dosis" type="number" placeholder="0.0" style="width:100%; padding:13px 52px 13px 16px; border:2px solid #B2EBE8; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#F0FFFE; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#4ECDC4'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(78,205,196,0.12)'" onblur="this.style.borderColor='#B2EBE8'; this.style.background='#F0FFFE'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#44A08D;">mg</span>
+        </div>
+      </div>
+      <div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;"><i class="fas fa-syringe" style="color:#4ECDC4; font-size:10px;"></i> Volumen final <span style="font-weight:500; text-transform:none; letter-spacing:0; color:#A0AEBE;">(opcional)</span></label>
+        <div style="position:relative;">
+          <input id="dil-vol" type="number" placeholder="0.0" style="width:100%; padding:13px 52px 13px 16px; border:2px solid #B2EBE8; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#F0FFFE; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#4ECDC4'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(78,205,196,0.12)'" onblur="this.style.borderColor='#B2EBE8'; this.style.background='#F0FFFE'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#44A08D;">mL</span>
+        </div>
       </div>
     </div>
-    <div class="calc-formula-box">
-      <i class="fas fa-flask"></i>
-      <span>Vol. a extraer = Dosis requerida ÷ Concentración disponible</span>
-    </div>
-    <div class="calc-field">
-      <label>Concentración disponible</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-vial"></i>
-        <input class="calc-input" id="dil-conc" type="number" placeholder="0.0">
-        <span class="calc-input-unit">mg/mL</span>
-      </div>
-    </div>
-    <div class="calc-field">
-      <label>Dosis requerida</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-pills"></i>
-        <input class="calc-input" id="dil-dosis" type="number" placeholder="0.0">
-        <span class="calc-input-unit">mg</span>
-      </div>
-    </div>
-    <div class="calc-field">
-      <label>Volumen final (opcional)</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-syringe"></i>
-        <input class="calc-input" id="dil-vol" type="number" placeholder="0.0">
-        <span class="calc-input-unit">mL</span>
-      </div>
-    </div>
-    <button class="calc-btn" onclick="calcDil()">
+
+    <button onclick="calcDil()" style="width:100%; margin-top:20px; padding:15px; background:linear-gradient(135deg,#4ECDC4,#44A08D); color:#fff; border:none; border-radius:14px; font-size:15px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 6px 16px rgba(78,205,196,0.35); transition:all 0.2s;" onmousedown="this.style.transform='scale(0.97)'" onmouseup="this.style.transform='scale(1)'">
       <i class="fas fa-calculator"></i> Calcular dilución
     </button>
-    <div class="calc-result-box" id="dil-resultado" style="display:none;">
-      <div class="calc-result-label"><i class="fas fa-circle-check"></i> Volumen a extraer</div>
-      <div class="calc-result-value"><span id="dil-val">—</span><span class="calc-result-unit">mL</span></div>
-      <div class="calc-result-note" id="dil-note"></div>
+
+    <div id="dil-resultado" style="display:none; margin-top:16px; background:linear-gradient(135deg,#E8FAF8,#D4F5F1); border-radius:16px; padding:18px; border:2px solid #80DDD8;">
+      <div style="font-size:10px; font-weight:800; color:#0A7C72; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; display:flex; align-items:center; gap:6px;"><i class="fas fa-circle-check" style="color:#4ECDC4;"></i> Resultado</div>
+      <div style="font-size:34px; font-weight:900; color:#0A7C72; line-height:1;"><span id="dil-val">—</span> <span style="font-size:16px; font-weight:700; color:#4ECDC4;">mL</span></div>
+      <div style="font-size:12px; color:#0A5C54; margin-top:8px; line-height:1.5;" id="dil-note"></div>
     </div>
-    <div class="calc-warning">
-      <i class="fas fa-triangle-exclamation"></i>
-      <span>Confirma siempre la concentración en el envase original.</span>
+
+    <div style="margin-top:14px; background:#FFFBEB; border-radius:12px; padding:11px 14px; display:flex; align-items:flex-start; gap:9px; border:1.5px solid #FDE68A;">
+      <span style="font-size:16px; flex-shrink:0;">⚠️</span>
+      <span style="font-size:12px; color:#92400E; line-height:1.5;">Confirma siempre la concentración en el envase original.</span>
     </div>
   </div>
 
   <!-- ── IMC ── -->
   <div class="calc-view" id="calc-imc">
-    <div class="calc-panel-header">
-      <div class="calc-panel-icon" style="background: linear-gradient(135deg, #10B981, #34D399);">
-        <i class="fas fa-weight-scale" style="color: white; font-size: 24px;"></i>
+
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px; padding-bottom:16px; border-bottom:2px solid #F0F4FA;">
+      <div style="width:56px; height:56px; border-radius:18px; background:linear-gradient(135deg,#A8E063,#56AB2F); box-shadow:0 6px 16px rgba(86,171,47,0.35); display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0;">⚖️</div>
+      <div>
+        <div style="font-size:19px; font-weight:800; color:#1A2535; letter-spacing:-0.4px;">Índice de Masa Corporal</div>
+        <div style="font-size:12px; color:#6B7C96; margin-top:3px; display:flex; align-items:center; gap:5px;"><i class="fas fa-circle-info" style="color:#56AB2F; font-size:11px;"></i> IMC = Peso ÷ Talla²</div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#F0FAE8,#E0F5CC); border-radius:14px; padding:12px 16px; margin-bottom:20px; display:flex; align-items:center; gap:10px; border-left:4px solid #56AB2F;">
+      <span style="font-size:18px;">🧮</span>
+      <span style="font-size:12.5px; font-weight:700; color:#2D6A0A;">IMC (kg/m²) = Peso (kg) ÷ Talla² (m²)</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:14px;">
+      <div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;"><i class="fas fa-weight-hanging" style="color:#56AB2F; font-size:10px;"></i> Peso</label>
+        <div style="position:relative;">
+          <input id="imc2-peso" type="number" placeholder="0.0" style="width:100%; padding:13px 52px 13px 16px; border:2px solid #C5E8A0; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#F5FFEE; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#56AB2F'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(86,171,47,0.12)'" onblur="this.style.borderColor='#C5E8A0'; this.style.background='#F5FFEE'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#56AB2F;">kg</span>
+        </div>
       </div>
       <div>
-        <div class="calc-panel-title">Índice de Masa Corporal</div>
-        <div class="calc-panel-subtitle"><i class="fas fa-calculator"></i> IMC = Peso / Talla²</div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;"><i class="fas fa-ruler-vertical" style="color:#56AB2F; font-size:10px;"></i> Talla</label>
+        <div style="position:relative;">
+          <input id="imc2-talla" type="number" placeholder="1.70" style="width:100%; padding:13px 52px 13px 16px; border:2px solid #C5E8A0; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#F5FFEE; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#56AB2F'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(86,171,47,0.12)'" onblur="this.style.borderColor='#C5E8A0'; this.style.background='#F5FFEE'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#56AB2F;">m</span>
+        </div>
       </div>
     </div>
-    <div class="calc-formula-box">
-      <i class="fas fa-flask"></i>
-      <span>IMC = Peso (kg) ÷ Talla² (m²)</span>
-    </div>
-    <div class="calc-field">
-      <label>Peso</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-weight-hanging"></i>
-        <input class="calc-input" id="imc2-peso" type="number" placeholder="0.0">
-        <span class="calc-input-unit">kg</span>
-      </div>
-    </div>
-    <div class="calc-field">
-      <label>Talla</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-ruler-vertical"></i>
-        <input class="calc-input" id="imc2-talla" type="number" placeholder="1.70">
-        <span class="calc-input-unit">m</span>
-      </div>
-    </div>
-    <button class="calc-btn" onclick="calcIMC2()">
+
+    <button onclick="calcIMC2()" style="width:100%; margin-top:20px; padding:15px; background:linear-gradient(135deg,#A8E063,#56AB2F); color:#fff; border:none; border-radius:14px; font-size:15px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 6px 16px rgba(86,171,47,0.35); transition:all 0.2s;" onmousedown="this.style.transform='scale(0.97)'" onmouseup="this.style.transform='scale(1)'">
       <i class="fas fa-calculator"></i> Calcular IMC
     </button>
-    <div class="calc-result-box" id="imc2-resultado" style="display:none;">
-      <div class="calc-result-label"><i class="fas fa-circle-check"></i> IMC</div>
-      <div class="calc-result-value"><span id="imc2-val">—</span><span class="calc-result-unit">kg/m²</span></div>
-      <div class="calc-result-note" id="imc2-note"></div>
+
+    <div id="imc2-resultado" style="display:none; margin-top:16px; background:linear-gradient(135deg,#F0FAE8,#E0F5CC); border-radius:16px; padding:18px; border:2px solid #A8D878;">
+      <div style="font-size:10px; font-weight:800; color:#2D6A0A; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; display:flex; align-items:center; gap:6px;"><i class="fas fa-circle-check" style="color:#56AB2F;"></i> Resultado</div>
+      <div style="font-size:34px; font-weight:900; color:#2D6A0A; line-height:1;"><span id="imc2-val">—</span> <span style="font-size:16px; font-weight:700; color:#56AB2F;">kg/m²</span></div>
+      <div style="font-size:12px; color:#1A4A05; margin-top:8px; line-height:1.5;" id="imc2-note"></div>
     </div>
   </div>
 
   <!-- ── PAM ── -->
   <div class="calc-view" id="calc-pam">
-    <div class="calc-panel-header">
-      <div class="calc-panel-icon" style="background: linear-gradient(135deg, #EF4444, #F87171);">
-        <i class="fas fa-heartbeat" style="color: white; font-size: 24px;"></i>
+
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px; padding-bottom:16px; border-bottom:2px solid #F0F4FA;">
+      <div style="width:56px; height:56px; border-radius:18px; background:linear-gradient(135deg,#FF416C,#FF4B2B); box-shadow:0 6px 16px rgba(255,65,108,0.35); display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0;">❤️</div>
+      <div>
+        <div style="font-size:19px; font-weight:800; color:#1A2535; letter-spacing:-0.4px;">Presión Arterial Media</div>
+        <div style="font-size:12px; color:#6B7C96; margin-top:3px; display:flex; align-items:center; gap:5px;"><i class="fas fa-circle-info" style="color:#FF416C; font-size:11px;"></i> PAM = (PAS + 2×PAD) ÷ 3</div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#FFF0F3,#FFE0E6); border-radius:14px; padding:12px 16px; margin-bottom:20px; display:flex; align-items:center; gap:10px; border-left:4px solid #FF416C;">
+      <span style="font-size:18px;">🧮</span>
+      <span style="font-size:12.5px; font-weight:700; color:#990020;">PAM = (PAS + 2 × PAD) ÷ 3</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:14px;">
+      <div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;"><i class="fas fa-heart" style="color:#FF416C; font-size:10px;"></i> Presión Sistólica (PAS)</label>
+        <div style="position:relative;">
+          <input id="pam2-sis" type="number" placeholder="120" style="width:100%; padding:13px 64px 13px 16px; border:2px solid #FFB3C0; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#FFF8F9; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#FF416C'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(255,65,108,0.12)'" onblur="this.style.borderColor='#FFB3C0'; this.style.background='#FFF8F9'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#FF416C;">mmHg</span>
+        </div>
       </div>
       <div>
-        <div class="calc-panel-title">Presión Arterial Media</div>
-        <div class="calc-panel-subtitle"><i class="fas fa-calculator"></i> PAM = (PAS + 2×PAD) / 3</div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;"><i class="fas fa-heart" style="color:#FF416C; font-size:10px;"></i> Presión Diastólica (PAD)</label>
+        <div style="position:relative;">
+          <input id="pam2-dia" type="number" placeholder="80" style="width:100%; padding:13px 64px 13px 16px; border:2px solid #FFB3C0; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#FFF8F9; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#FF416C'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(255,65,108,0.12)'" onblur="this.style.borderColor='#FFB3C0'; this.style.background='#FFF8F9'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#FF416C;">mmHg</span>
+        </div>
       </div>
     </div>
-    <div class="calc-formula-box">
-      <i class="fas fa-flask"></i>
-      <span>PAM = (PAS + 2 × PAD) ÷ 3</span>
-    </div>
-    <div class="calc-field">
-      <label>Presión Sistólica (PAS)</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-heart"></i>
-        <input class="calc-input" id="pam2-sis" type="number" placeholder="120">
-        <span class="calc-input-unit">mmHg</span>
-      </div>
-    </div>
-    <div class="calc-field">
-      <label>Presión Diastólica (PAD)</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-heart"></i>
-        <input class="calc-input" id="pam2-dia" type="number" placeholder="80">
-        <span class="calc-input-unit">mmHg</span>
-      </div>
-    </div>
-    <button class="calc-btn" onclick="calcPAM2()">
+
+    <button onclick="calcPAM2()" style="width:100%; margin-top:20px; padding:15px; background:linear-gradient(135deg,#FF416C,#FF4B2B); color:#fff; border:none; border-radius:14px; font-size:15px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 6px 16px rgba(255,65,108,0.35); transition:all 0.2s;" onmousedown="this.style.transform='scale(0.97)'" onmouseup="this.style.transform='scale(1)'">
       <i class="fas fa-calculator"></i> Calcular PAM
     </button>
-    <div class="calc-result-box" id="pam2-resultado" style="display:none;">
-      <div class="calc-result-label"><i class="fas fa-circle-check"></i> PAM</div>
-      <div class="calc-result-value"><span id="pam2-val">—</span><span class="calc-result-unit">mmHg</span></div>
-      <div class="calc-result-note" id="pam2-note"></div>
+
+    <div id="pam2-resultado" style="display:none; margin-top:16px; background:linear-gradient(135deg,#FFF0F3,#FFE0E6); border-radius:16px; padding:18px; border:2px solid #FF9AB0;">
+      <div style="font-size:10px; font-weight:800; color:#990020; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; display:flex; align-items:center; gap:6px;"><i class="fas fa-circle-check" style="color:#FF416C;"></i> Resultado</div>
+      <div style="font-size:34px; font-weight:900; color:#990020; line-height:1;"><span id="pam2-val">—</span> <span style="font-size:16px; font-weight:700; color:#FF416C;">mmHg</span></div>
+      <div style="font-size:12px; color:#660015; margin-top:8px; line-height:1.5;" id="pam2-note"></div>
     </div>
-    <div class="calc-warning">
-      <i class="fas fa-triangle-exclamation"></i>
-      <span>PAM normal: 70–100 mmHg. Por debajo de 70 hay riesgo de hipoperfusión.</span>
+
+    <div style="margin-top:14px; background:#FFFBEB; border-radius:12px; padding:11px 14px; display:flex; align-items:flex-start; gap:9px; border:1.5px solid #FDE68A;">
+      <span style="font-size:16px; flex-shrink:0;">⚠️</span>
+      <span style="font-size:12px; color:#92400E; line-height:1.5;">PAM normal: 70–100 mmHg. Por debajo de 70 hay riesgo de hipoperfusión.</span>
     </div>
   </div>
 
   <!-- ── GOTEO IV ── -->
   <div class="calc-view" id="calc-goteo">
-    <div class="calc-panel-header">
-      <div class="calc-panel-icon" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);">
-        <i class="fas fa-droplet" style="color: white; font-size: 24px;"></i>
+
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px; padding-bottom:16px; border-bottom:2px solid #F0F4FA;">
+      <div style="width:56px; height:56px; border-radius:18px; background:linear-gradient(135deg,#F7971E,#FFD200); box-shadow:0 6px 16px rgba(247,151,30,0.35); display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0;">🩸</div>
+      <div>
+        <div style="font-size:19px; font-weight:800; color:#1A2535; letter-spacing:-0.4px;">Goteo Intravenoso</div>
+        <div style="font-size:12px; color:#6B7C96; margin-top:3px; display:flex; align-items:center; gap:5px;"><i class="fas fa-circle-info" style="color:#F7971E; font-size:11px;"></i> Gotas por minuto</div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#FFF8E8,#FFF0CC); border-radius:14px; padding:12px 16px; margin-bottom:20px; display:flex; align-items:center; gap:10px; border-left:4px solid #F7971E;">
+      <span style="font-size:18px;">🧮</span>
+      <span style="font-size:12.5px; font-weight:700; color:#7A4500;">Gotas/min = (Vol. × Factor) ÷ (Tiempo horas × 60)</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:14px;">
+      <div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;"><i class="fas fa-flask" style="color:#F7971E; font-size:10px;"></i> Volumen total</label>
+        <div style="position:relative;">
+          <input id="got2-vol" type="number" placeholder="500" style="width:100%; padding:13px 52px 13px 16px; border:2px solid #FFD88A; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#FFFDF0; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#F7971E'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(247,151,30,0.12)'" onblur="this.style.borderColor='#FFD88A'; this.style.background='#FFFDF0'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#F7971E;">mL</span>
+        </div>
       </div>
       <div>
-        <div class="calc-panel-title">Goteo Intravenoso</div>
-        <div class="calc-panel-subtitle"><i class="fas fa-calculator"></i> Gotas por minuto</div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;"><i class="fas fa-clock" style="color:#F7971E; font-size:10px;"></i> Tiempo de infusión</label>
+        <div style="position:relative;">
+          <input id="got2-tiempo" type="number" placeholder="8" style="width:100%; padding:13px 64px 13px 16px; border:2px solid #FFD88A; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#FFFDF0; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#F7971E'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(247,151,30,0.12)'" onblur="this.style.borderColor='#FFD88A'; this.style.background='#FFFDF0'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#F7971E;">horas</span>
+        </div>
+      </div>
+      <div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;"><i class="fas fa-droplet" style="color:#F7971E; font-size:10px;"></i> Tipo de equipo</label>
+        <select id="got2-tipo" style="width:100%; padding:13px 16px; border:2px solid #FFD88A; border-radius:12px; font-size:14px; font-weight:600; color:#1A2535; background:#FFFDF0; outline:none; -webkit-appearance:none; cursor:pointer;">
+          <option value="20">Macrogoteo (20 gotas/mL)</option>
+          <option value="60">Microgoteo (60 gotas/mL)</option>
+        </select>
       </div>
     </div>
-    <div class="calc-formula-box">
-      <i class="fas fa-flask"></i>
-      <span>Gotas/min = (Volumen × Factor) ÷ (Tiempo en horas × 60)</span>
-    </div>
-    <div class="calc-field">
-      <label>Volumen total</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-flask"></i>
-        <input class="calc-input" id="got2-vol" type="number" placeholder="500">
-        <span class="calc-input-unit">mL</span>
-      </div>
-    </div>
-    <div class="calc-field">
-      <label>Tiempo de infusión</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-clock"></i>
-        <input class="calc-input" id="got2-tiempo" type="number" placeholder="8">
-        <span class="calc-input-unit">horas</span>
-      </div>
-    </div>
-    <div class="calc-field">
-      <label>Tipo de equipo</label>
-      <select class="calc-select" id="got2-tipo">
-        <option value="20">Macrogoteo (20 gotas/mL)</option>
-        <option value="60">Microgoteo (60 gotas/mL)</option>
-      </select>
-    </div>
-    <button class="calc-btn" onclick="calcGot2()">
+
+    <button onclick="calcGot2()" style="width:100%; margin-top:20px; padding:15px; background:linear-gradient(135deg,#F7971E,#FFD200); color:#fff; border:none; border-radius:14px; font-size:15px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 6px 16px rgba(247,151,30,0.35); transition:all 0.2s;" onmousedown="this.style.transform='scale(0.97)'" onmouseup="this.style.transform='scale(1)'">
       <i class="fas fa-calculator"></i> Calcular goteo
     </button>
-    <div class="calc-result-box" id="got2-resultado" style="display:none;">
-      <div class="calc-result-label"><i class="fas fa-circle-check"></i> Goteo</div>
-      <div class="calc-result-value"><span id="got2-val">—</span><span class="calc-result-unit">gotas/min</span></div>
-      <div class="calc-result-note" id="got2-note"></div>
+
+    <div id="got2-resultado" style="display:none; margin-top:16px; background:linear-gradient(135deg,#FFF8E8,#FFF0CC); border-radius:16px; padding:18px; border:2px solid #FFD08A;">
+      <div style="font-size:10px; font-weight:800; color:#7A4500; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; display:flex; align-items:center; gap:6px;"><i class="fas fa-circle-check" style="color:#F7971E;"></i> Resultado</div>
+      <div style="font-size:34px; font-weight:900; color:#7A4500; line-height:1;"><span id="got2-val">—</span> <span style="font-size:16px; font-weight:700; color:#F7971E;">gotas/min</span></div>
+      <div style="font-size:12px; color:#5A3000; margin-top:8px; line-height:1.5;" id="got2-note"></div>
     </div>
   </div>
 
   <!-- ── DÉFICIT HÍDRICO ── -->
   <div class="calc-view" id="calc-deficit">
-    <div class="calc-panel-header">
-      <div class="calc-panel-icon" style="background: linear-gradient(135deg, #3B82F6, #60A5FA);">
-        <i class="fas fa-tint" style="color: white; font-size: 24px;"></i>
+
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px; padding-bottom:16px; border-bottom:2px solid #F0F4FA;">
+      <div style="width:56px; height:56px; border-radius:18px; background:linear-gradient(135deg,#4776E6,#8E54E9); box-shadow:0 6px 16px rgba(71,118,230,0.35); display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0;">💧</div>
+      <div>
+        <div style="font-size:19px; font-weight:800; color:#1A2535; letter-spacing:-0.4px;">Déficit Hídrico</div>
+        <div style="font-size:12px; color:#6B7C96; margin-top:3px; display:flex; align-items:center; gap:5px;"><i class="fas fa-circle-info" style="color:#4776E6; font-size:11px;"></i> Estimación de pérdida de líquidos</div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#EEF2FF,#E0E8FF); border-radius:14px; padding:12px 16px; margin-bottom:20px; display:flex; align-items:center; gap:10px; border-left:4px solid #4776E6;">
+      <span style="font-size:18px;">🧮</span>
+      <span style="font-size:12.5px; font-weight:700; color:#1A3A9A;">Déficit (mL) = (Peso habitual − Peso actual) × 1000</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:14px;">
+      <div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;"><i class="fas fa-weight-hanging" style="color:#4776E6; font-size:10px;"></i> Peso actual</label>
+        <div style="position:relative;">
+          <input id="def2-actual" type="number" placeholder="0.0" style="width:100%; padding:13px 52px 13px 16px; border:2px solid #B3C6FF; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#F5F8FF; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#4776E6'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(71,118,230,0.12)'" onblur="this.style.borderColor='#B3C6FF'; this.style.background='#F5F8FF'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#4776E6;">kg</span>
+        </div>
       </div>
       <div>
-        <div class="calc-panel-title">Déficit Hídrico</div>
-        <div class="calc-panel-subtitle"><i class="fas fa-calculator"></i> Pérdida de líquidos</div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;"><i class="fas fa-weight-hanging" style="color:#4776E6; font-size:10px;"></i> Peso habitual</label>
+        <div style="position:relative;">
+          <input id="def2-habitual" type="number" placeholder="0.0" style="width:100%; padding:13px 52px 13px 16px; border:2px solid #B3C6FF; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#F5F8FF; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#4776E6'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(71,118,230,0.12)'" onblur="this.style.borderColor='#B3C6FF'; this.style.background='#F5F8FF'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#4776E6;">kg</span>
+        </div>
       </div>
     </div>
-    <div class="calc-formula-box">
-      <i class="fas fa-flask"></i>
-      <span>Déficit (L) = (Peso habitual − Peso actual) × 1000</span>
-    </div>
-    <div class="calc-field">
-      <label>Peso actual</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-weight-hanging"></i>
-        <input class="calc-input" id="def2-actual" type="number" placeholder="0.0">
-        <span class="calc-input-unit">kg</span>
-      </div>
-    </div>
-    <div class="calc-field">
-      <label>Peso habitual</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-weight-hanging"></i>
-        <input class="calc-input" id="def2-habitual" type="number" placeholder="0.0">
-        <span class="calc-input-unit">kg</span>
-      </div>
-    </div>
-    <button class="calc-btn" onclick="calcDef2()">
+
+    <button onclick="calcDef2()" style="width:100%; margin-top:20px; padding:15px; background:linear-gradient(135deg,#4776E6,#8E54E9); color:#fff; border:none; border-radius:14px; font-size:15px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 6px 16px rgba(71,118,230,0.35); transition:all 0.2s;" onmousedown="this.style.transform='scale(0.97)'" onmouseup="this.style.transform='scale(1)'">
       <i class="fas fa-calculator"></i> Calcular déficit
     </button>
-    <div class="calc-result-box" id="def2-resultado" style="display:none;">
-      <div class="calc-result-label"><i class="fas fa-circle-check"></i> Déficit estimado</div>
-      <div class="calc-result-value"><span id="def2-val">—</span><span class="calc-result-unit">mL</span></div>
-      <div class="calc-result-note" id="def2-note"></div>
+
+    <div id="def2-resultado" style="display:none; margin-top:16px; background:linear-gradient(135deg,#EEF2FF,#E0E8FF); border-radius:16px; padding:18px; border:2px solid #99AAFF;">
+      <div style="font-size:10px; font-weight:800; color:#1A3A9A; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; display:flex; align-items:center; gap:6px;"><i class="fas fa-circle-check" style="color:#4776E6;"></i> Resultado</div>
+      <div style="font-size:34px; font-weight:900; color:#1A3A9A; line-height:1;"><span id="def2-val">—</span> <span style="font-size:16px; font-weight:700; color:#4776E6;">mL</span></div>
+      <div style="font-size:12px; color:#0A2070; margin-top:8px; line-height:1.5;" id="def2-note"></div>
     </div>
-    <div class="calc-warning">
-      <i class="fas fa-triangle-exclamation"></i>
-      <span>Este cálculo es orientativo. Confirma con gasometría y laboratorios.</span>
+
+    <div style="margin-top:14px; background:#FFFBEB; border-radius:12px; padding:11px 14px; display:flex; align-items:flex-start; gap:9px; border:1.5px solid #FDE68A;">
+      <span style="font-size:16px; flex-shrink:0;">⚠️</span>
+      <span style="font-size:12px; color:#92400E; line-height:1.5;">Este cálculo es orientativo. Confirma con gasometría y laboratorios.</span>
     </div>
   </div>
 
   <!-- ── SUPERFICIE CORPORAL ── -->
   <div class="calc-view" id="calc-superficie">
-    <div class="calc-panel-header">
-      <div class="calc-panel-icon" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA);">
-        <i class="fas fa-vector-square" style="color: white; font-size: 24px;"></i>
+
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px; padding-bottom:16px; border-bottom:2px solid #F0F4FA;">
+      <div style="width:56px; height:56px; border-radius:18px; background:linear-gradient(135deg,#C471ED,#F64F59); box-shadow:0 6px 16px rgba(196,113,237,0.35); display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0;">🧍</div>
+      <div>
+        <div style="font-size:19px; font-weight:800; color:#1A2535; letter-spacing:-0.4px;">Superficie Corporal</div>
+        <div style="font-size:12px; color:#6B7C96; margin-top:3px; display:flex; align-items:center; gap:5px;"><i class="fas fa-circle-info" style="color:#C471ED; font-size:11px;"></i> Fórmula de Mosteller</div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#FDF0FF,#FAE0FF); border-radius:14px; padding:12px 16px; margin-bottom:20px; display:flex; align-items:center; gap:10px; border-left:4px solid #C471ED;">
+      <span style="font-size:18px;">🧮</span>
+      <span style="font-size:12.5px; font-weight:700; color:#6A007A;">SC (m²) = √( Peso (kg) × Talla (cm) ÷ 3600 )</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:14px;">
+      <div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;"><i class="fas fa-weight-hanging" style="color:#C471ED; font-size:10px;"></i> Peso</label>
+        <div style="position:relative;">
+          <input id="sc2-peso" type="number" placeholder="0.0" style="width:100%; padding:13px 52px 13px 16px; border:2px solid #E8AAFF; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#FDF5FF; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#C471ED'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(196,113,237,0.12)'" onblur="this.style.borderColor='#E8AAFF'; this.style.background='#FDF5FF'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#C471ED;">kg</span>
+        </div>
       </div>
       <div>
-        <div class="calc-panel-title">Superficie Corporal</div>
-        <div class="calc-panel-subtitle"><i class="fas fa-calculator"></i> Fórmula de Mosteller</div>
+        <label style="font-size:11px; font-weight:800; color:#6B7C96; text-transform:uppercase; letter-spacing:0.6px; display:flex; align-items:center; gap:5px; margin-bottom:7px;"><i class="fas fa-ruler-vertical" style="color:#C471ED; font-size:10px;"></i> Talla</label>
+        <div style="position:relative;">
+          <input id="sc2-talla" type="number" placeholder="170" style="width:100%; padding:13px 52px 13px 16px; border:2px solid #E8AAFF; border-radius:12px; font-size:15px; font-weight:600; color:#1A2535; background:#FDF5FF; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='#C471ED'; this.style.background='#fff'; this.style.boxShadow='0 0 0 4px rgba(196,113,237,0.12)'" onblur="this.style.borderColor='#E8AAFF'; this.style.background='#FDF5FF'; this.style.boxShadow='none'">
+          <span style="position:absolute; right:14px; top:50%; transform:translateY(-50%); font-size:12px; font-weight:700; color:#C471ED;">cm</span>
+        </div>
       </div>
     </div>
-    <div class="calc-formula-box">
-      <i class="fas fa-flask"></i>
-      <span>SC (m²) = √( Peso (kg) × Talla (cm) ÷ 3600 )</span>
-    </div>
-    <div class="calc-field">
-      <label>Peso</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-weight-hanging"></i>
-        <input class="calc-input" id="sc2-peso" type="number" placeholder="0.0">
-        <span class="calc-input-unit">kg</span>
-      </div>
-    </div>
-    <div class="calc-field">
-      <label>Talla</label>
-      <div class="calc-input-wrap">
-        <i class="fas fa-ruler-vertical"></i>
-        <input class="calc-input" id="sc2-talla" type="number" placeholder="170">
-        <span class="calc-input-unit">cm</span>
-      </div>
-    </div>
-    <button class="calc-btn" onclick="calcSC2()">
+
+    <button onclick="calcSC2()" style="width:100%; margin-top:20px; padding:15px; background:linear-gradient(135deg,#C471ED,#F64F59); color:#fff; border:none; border-radius:14px; font-size:15px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 6px 16px rgba(196,113,237,0.35); transition:all 0.2s;" onmousedown="this.style.transform='scale(0.97)'" onmouseup="this.style.transform='scale(1)'">
       <i class="fas fa-calculator"></i> Calcular superficie
     </button>
-    <div class="calc-result-box" id="sc2-resultado" style="display:none;">
-      <div class="calc-result-label"><i class="fas fa-circle-check"></i> Superficie Corporal</div>
-      <div class="calc-result-value"><span id="sc2-val">—</span><span class="calc-result-unit">m²</span></div>
-      <div class="calc-result-note" id="sc2-note"></div>
+
+    <div id="sc2-resultado" style="display:none; margin-top:16px; background:linear-gradient(135deg,#FDF0FF,#FAE0FF); border-radius:16px; padding:18px; border:2px solid #E0AAFF;">
+      <div style="font-size:10px; font-weight:800; color:#6A007A; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; display:flex; align-items:center; gap:6px;"><i class="fas fa-circle-check" style="color:#C471ED;"></i> Resultado</div>
+      <div style="font-size:34px; font-weight:900; color:#6A007A; line-height:1;"><span id="sc2-val">—</span> <span style="font-size:16px; font-weight:700; color:#C471ED;">m²</span></div>
+      <div style="font-size:12px; color:#4A0055; margin-top:8px; line-height:1.5;" id="sc2-note"></div>
     </div>
-    <div class="calc-warning">
-      <i class="fas fa-triangle-exclamation"></i>
-      <span>Referencia adulto promedio: ~1.73 m² (Mosteller).</span>
+
+    <div style="margin-top:14px; background:#FFFBEB; border-radius:12px; padding:11px 14px; display:flex; align-items:flex-start; gap:9px; border:1.5px solid #FDE68A;">
+      <span style="font-size:16px; flex-shrink:0;">⚠️</span>
+      <span style="font-size:12px; color:#92400E; line-height:1.5;">Referencia adulto promedio: ~1.73 m² (Mosteller).</span>
     </div>
   </div>
 
@@ -5848,12 +5886,13 @@ function abrirModalSuperficieCorporal() {
   display: none; /* Chrome, Safari, Opera */
 }
 
+/* ── SIDEBAR CALCULADORAS REDISEÑO ── */
 .calc-nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  padding: 12px 6px;
+  padding: 10px 6px;
   border-radius: 14px;
   cursor: pointer;
   border: none;
@@ -5864,35 +5903,41 @@ function abrirModalSuperficieCorporal() {
 }
 
 .calc-nav-item:active {
-  transform: scale(0.95);
+  transform: scale(0.94);
 }
 
 .calc-nav-item.active {
   background: white;
-  box-shadow: 0 4px 12px rgba(44, 78, 126, 0.12);
-  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
 }
 
 .calc-nav-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease;
+}
+
+.calc-nav-item:active .calc-nav-icon {
+  transform: scale(0.92);
+}
+
+.calc-nav-item.active .calc-nav-icon {
+  transform: scale(1.05);
 }
 
 .calc-nav-name {
-  font-size: 10.5px;
-  font-weight: 600;
-  color: #5A6A82;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-secondary);
   line-height: 1.3;
 }
 
 .calc-nav-item.active .calc-nav-name {
-  color: #2C4E7E;
-  font-weight: 700;
+  color: var(--navy);
 }
 
 .calc-panel-header {
