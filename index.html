@@ -1395,6 +1395,103 @@ highlight-text {
       </div>
     </div>
   </div>
+
+    <!-- CALCULADORAS -->
+  <div class="section" style="padding-top:8px;padding-bottom:8px;">
+    <div class="card">
+      <div class="section-header">
+        <h3 style="display:flex;align-items:center;gap:6px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2">
+            <rect x="4" y="2" width="16" height="20" rx="2"/>
+            <line x1="8" y1="6" x2="16" y2="6"/>
+            <line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/>
+            <line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/>
+            <line x1="8" y1="18" x2="10" y2="18"/><line x1="12" y1="18" x2="14" y2="18"/><line x1="16" y1="18" x2="16" y2="18"/>
+          </svg>
+          Calculadoras de enfermería
+        </h3>
+        <button class="see-all" onclick="showToast('🔢 Ver todas próximamente')">
+          Ver todas
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;">
+        <!-- Diluciones -->
+        <div onclick="showToast('💉 Diluciones próximamente')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
+          <div style="width:50px;height:50px;background:#EFF6FF;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #BFDBFE;">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+              <rect x="12" y="4" width="8" height="22" rx="4" fill="#60A5FA" opacity="0.7"/>
+              <rect x="10" y="8" width="12" height="16" rx="3" fill="#BFDBFE"/>
+              <path d="M13 14 L19 14" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M13 17 L17 17" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="14" y="2" width="4" height="4" rx="1" fill="#93C5FD"/>
+            </svg>
+          </div>
+          <span style="font-size:10.5px;font-weight:700;color:#2563EB;text-align:center;line-height:1.2;">Diluciones</span>
+          <span style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Cálculo de dilución de medicamentos</span>
+        </div>
+        <!-- IMC -->
+        <div onclick="showToast('⚖️ IMC próximamente')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
+          <div style="width:50px;height:50px;background:#F0FDF4;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #BBF7D0;">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+              <!-- Báscula / persona -->
+              <ellipse cx="16" cy="10" rx="5" ry="6" fill="#86EFAC" opacity="0.8"/>
+              <path d="M10 22 Q10 18 16 17 Q22 18 22 22 L22 26 L10 26 Z" fill="#4ADE80" opacity="0.6"/>
+              <rect x="8" y="26" width="16" height="3" rx="1.5" fill="#16A34A" opacity="0.5"/>
+            </svg>
+          </div>
+          <span style="font-size:10.5px;font-weight:700;color:#16A34A;text-align:center;line-height:1.2;">IMC</span>
+          <span style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Índice de Masa Corporal</span>
+        </div>
+        <!-- PAM -->
+        <div onclick="showToast('❤️ PAM próximamente')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
+          <div style="width:50px;height:50px;background:#FFF1F2;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #FECDD3;">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+              <path d="M16 26 Q8 20 6 14 Q5 8 10 7 Q14 6 16 10 Q18 6 22 7 Q27 8 26 14 Q24 20 16 26Z" fill="#FB7185" opacity="0.8"/>
+              <!-- Línea de pulso -->
+              <path d="M4 16 L10 16 L12 12 L14 20 L16 14 L18 18 L20 16 L28 16" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span style="font-size:10.5px;font-weight:700;color:#F43F5E;text-align:center;line-height:1.2;">PAM</span>
+          <span style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Presión Arterial Media</span>
+        </div>
+        <!-- Goteo IV -->
+        <div onclick="showToast('🩸 Goteo IV próximamente')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
+          <div style="width:50px;height:50px;background:#FFFBEB;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #FDE68A;">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+              <!-- Bolsa IV -->
+              <path d="M10 6 Q10 4 16 4 Q22 4 22 6 L22 18 Q22 24 16 24 Q10 24 10 18 Z" fill="#FDE68A" opacity="0.8"/>
+              <path d="M10 6 Q10 4 16 4 Q22 4 22 6 L22 18 Q22 24 16 24 Q10 24 10 18 Z" stroke="#F59E0B" stroke-width="1.2" fill="none"/>
+              <!-- Gota -->
+              <path d="M16 26 Q14 29 16 30 Q18 29 16 26Z" fill="#F59E0B"/>
+              <!-- Línea tubo -->
+              <line x1="16" y1="24" x2="16" y2="26" stroke="#F59E0B" stroke-width="1.5"/>
+              <!-- Burbujas dentro -->
+              <circle cx="14" cy="14" r="2" fill="#FBBF24" opacity="0.5"/>
+              <circle cx="18" cy="11" r="1.5" fill="#FBBF24" opacity="0.4"/>
+            </svg>
+          </div>
+          <span style="font-size:10.5px;font-weight:700;color:#D97706;text-align:center;line-height:1.2;">Goteo IV</span>
+          <span style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Cálculo de goteo por minuto</span>
+        </div>
+        <!-- Déficit Hídrico -->
+        <div onclick="showToast('💧 Déficit Hídrico próximamente')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
+          <div style="width:50px;height:50px;background:#F0FDF4;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #BBF7D0;">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+              <!-- Gota con porcentaje -->
+              <path d="M16 4 Q10 12 10 18 Q10 25 16 26 Q22 25 22 18 Q22 12 16 4Z" fill="#34D399" opacity="0.7"/>
+              <path d="M16 4 Q10 12 10 18 Q10 25 16 26 Q22 25 22 18 Q22 12 16 4Z" stroke="#10B981" stroke-width="1.2" fill="none"/>
+              <!-- % dentro -->
+              <text x="13" y="20" font-size="7" fill="#065F46" font-weight="bold">%</text>
+            </svg>
+          </div>
+          <span style="font-size:10.5px;font-weight:700;color:#059669;text-align:center;line-height:1.2;">Déficit Hídrico</span>
+          <span style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Cálculo de déficit de líquidos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
    <!-- ESCALAS CLÍNICAS -->
   <div class="section" style="padding-top:8px;">
     <div class="card" style="padding: 18px 16px;">
@@ -1535,37 +1632,74 @@ highlight-text {
 
 
       <!-- PEDIATRÍA -->
-      <div id="escala-pediatria" class="escala-content" style="display: none;">
-        <div style="margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #C7D2FE; display: inline-block;">
-          <span style="font-size: 13px; font-weight: 700; color: #5B21B6;">Más utilizadas</span>
-        </div>
-        <div class="escala-item" onclick="showToast('🧠 Glasgow Pediátrico - Próximamente')" style="background: #F5F3FF; border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; border: 1px solid #DDD6FE;">
-          <div style="display: flex; align-items: center; gap: 12px;"><div style="width: 44px; height: 44px; background: #C7D2FE; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px;">⭐</div><div style="flex: 1;"><div style="font-weight: 700; font-size: 15px; color: #5B21B6;">Glasgow Pediátrico</div><div style="font-size: 11px; color: #6D28D9; margin-top: 2px;">Nivel de conciencia en niños</div></div><i class="fas fa-chevron-right" style="color: #8B5CF6; font-size: 14px;"></i></div>
-        </div>
-        <div class="escala-item" onclick="showToast('📊 PEWS - Próximamente')" style="background: #F5F3FF; border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; border: 1px solid #DDD6FE;">
-          <div style="display: flex; align-items: center; gap: 12px;"><div style="width: 44px; height: 44px; background: #C7D2FE; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px;">📊</div><div style="flex: 1;"><div style="font-weight: 700; font-size: 15px; color: #5B21B6;">PEWS (Pediatric Early Warning Score)</div><div style="font-size: 11px; color: #6D28D9; margin-top: 2px;">Alerta temprana en pediatría</div></div><i class="fas fa-chevron-right" style="color: #8B5CF6; font-size: 14px;"></i></div>
-        </div>
-        <div class="escala-item" onclick="showToast('🎯 Denver II - Próximamente')" style="background: #F5F3FF; border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; border: 1px solid #DDD6FE;">
-          <div style="display: flex; align-items: center; gap: 12px;"><div style="width: 44px; height: 44px; background: #C7D2FE; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px;">🎯</div><div style="flex: 1;"><div style="font-weight: 700; font-size: 15px; color: #5B21B6;">Denver II</div><div style="font-size: 11px; color: #6D28D9; margin-top: 2px;">Desarrollo infantil (0-6 años)</div></div><i class="fas fa-chevron-right" style="color: #8B5CF6; font-size: 14px;"></i></div>
-        </div>
-        <div class="escala-item" onclick="showToast('🫁 CURB-65 Pediátrico - Próximamente')" style="background: #F5F3FF; border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; border: 1px solid #DDD6FE;">
-          <div style="display: flex; align-items: center; gap: 12px;"><div style="width: 44px; height: 44px; background: #C7D2FE; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px;">🫁</div><div style="flex: 1;"><div style="font-weight: 700; font-size: 15px; color: #5B21B6;">CURB-65 Pediátrico</div><div style="font-size: 11px; color: #6D28D9; margin-top: 2px;">Neumonía adquirida en comunidad</div></div><i class="fas fa-chevron-right" style="color: #8B5CF6; font-size: 14px;"></i></div>
-        </div>
-        <div class="escala-item" onclick="showToast('😤 Westley - Próximamente')" style="background: #F5F3FF; border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; border: 1px solid #DDD6FE;">
-          <div style="display: flex; align-items: center; gap: 12px;"><div style="width: 44px; height: 44px; background: #C7D2FE; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px;">😤</div><div style="flex: 1;"><div style="font-weight: 700; font-size: 15px; color: #5B21B6;">Westley (Crup)</div><div style="font-size: 11px; color: #6D28D9; margin-top: 2px;">Severidad de laringotraqueítis</div></div><i class="fas fa-chevron-right" style="color: #8B5CF6; font-size: 14px;"></i></div>
-        </div>
-        <div style="margin: 16px 0 12px; padding-bottom: 8px; border-bottom: 2px solid #E5E7EB; display: inline-block;">
-          <span style="font-size: 13px; font-weight: 700; color: #6B7280;">Otras escalas</span>
-        </div>
-        <div class="escala-item" onclick="showToast('📋 IMCI - Próximamente')" style="background: #F9FAFB; border-radius: 14px; padding: 12px 14px; margin-bottom: 8px; cursor: pointer; transition: all 0.15s; border: 1px solid #E5E7EB;">
-          <div style="display: flex; align-items: center; gap: 12px;"><div style="width: 44px; height: 44px; background: #E5E7EB; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px;">📋</div><div style="flex: 1;"><div style="font-weight: 700; font-size: 14px; color: #374151;">IMCI (Atención Integrada)</div><div style="font-size: 11px; color: #6B7280;">Enfermedades prevalentes infantiles</div></div><i class="fas fa-chevron-right" style="color: #9CA3AF; font-size: 14px;"></i></div>
-        </div>
-        <div class="escala-item" onclick="showToast('🚨 Triage Pediátrico - Próximamente')" style="background: #F9FAFB; border-radius: 14px; padding: 12px 14px; margin-bottom: 8px; cursor: pointer; transition: all 0.15s; border: 1px solid #E5E7EB;">
-          <div style="display: flex; align-items: center; gap: 12px;"><div style="width: 44px; height: 44px; background: #E5E7EB; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px;">🚨</div><div style="flex: 1;"><div style="font-weight: 700; font-size: 14px; color: #374151;">Triage Pediátrico (PTT)</div><div style="font-size: 11px; color: #6B7280;">Clasificación en emergencias</div></div><i class="fas fa-chevron-right" style="color: #9CA3AF; font-size: 14px;"></i></div>
-        </div>
-      </div>
+<div id="escala-pediatria" class="escala-content" style="display: none;">
+  
+  <!-- Título: Más utilizadas (verde) -->
+  <div style="margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #A7F3D0; display: inline-block;">
+    <span style="font-size: 13px; font-weight: 700; color: #065F46;">Más utilizadas</span>
+  </div>
 
-      <!-- ADULTO (con escalas funcionales) -->
+  <!-- BOTÓN 1: Glasgow Pediátrico -->
+  <div class="escala-item" onclick="abrirModalGlasgowPedi()" style="background: #ECFDF5; border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; border: 1px solid #A7F3D0;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="width: 44px; height: 44px; background: #A7F3D0; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px;">🧠</div>
+      <div style="flex: 1;">
+        <div style="font-weight: 700; font-size: 15px; color: #065F46;">Glasgow Pediátrico</div>
+        <div style="font-size: 11px; color: #047857; margin-top: 2px;">Nivel de conciencia en niños (3-15 pts)</div>
+      </div>
+      <i class="fas fa-chevron-right" style="color: #10B981; font-size: 14px;"></i>
+    </div>
+  </div>
+
+  <!-- BOTÓN 2: PEWS (Alerta Temprana) -->
+  <div class="escala-item" onclick="abrirModalPEWS()" style="background: #ECFDF5; border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; border: 1px solid #A7F3D0;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="width: 44px; height: 44px; background: #A7F3D0; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px;">📊</div>
+      <div style="flex: 1;">
+        <div style="font-weight: 700; font-size: 15px; color: #065F46;">PEWS (Alerta Temprana)</div>
+        <div style="font-size: 11px; color: #047857; margin-top: 2px;">Detección de deterioro clínico en niños</div>
+      </div>
+      <i class="fas fa-chevron-right" style="color: #10B981; font-size: 14px;"></i>
+    </div>
+  </div>
+
+  <!-- BOTÓN 3: Westley (Crup) -->
+  <div class="escala-item" onclick="abrirModalWestley()" style="background: #ECFDF5; border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; border: 1px solid #A7F3D0;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="width: 44px; height: 44px; background: #A7F3D0; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px;">😤</div>
+      <div style="flex: 1;">
+        <div style="font-weight: 700; font-size: 15px; color: #065F46;">Westley (Crup)</div>
+        <div style="font-size: 11px; color: #047857; margin-top: 2px;">Severidad de laringotraqueítis</div>
+      </div>
+      <i class="fas fa-chevron-right" style="color: #10B981; font-size: 14px;"></i>
+    </div>
+  </div>
+
+    <!-- BOTÓN 4: Denver II -->
+  <div class="escala-item" onclick="abrirModalDenverII()" style="background: #ECFDF5; border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; border: 1px solid #A7F3D0;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="width: 44px; height: 44px; background: #A7F3D0; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px;">🎯</div>
+      <div style="flex: 1;">
+        <div style="font-weight: 700; font-size: 15px; color: #065F46;">Denver II</div>
+        <div style="font-size: 11px; color: #047857; margin-top: 2px;">Desarrollo infantil (0-6 años)</div>
+      </div>
+      <i class="fas fa-chevron-right" style="color: #10B981; font-size: 14px;"></i>
+    </div>
+  </div>
+
+  <!-- BOTÓN 5: CURB-65 Pediátrico -->
+  <div class="escala-item" onclick="abrirModalCURB65Pedi()" style="background: #ECFDF5; border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; border: 1px solid #A7F3D0;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="width: 44px; height: 44px; background: #A7F3D0; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px;">🫁</div>
+      <div style="flex: 1;">
+        <div style="font-weight: 700; font-size: 15px; color: #065F46;">CURB-65 Pediátrico</div>
+        <div style="font-size: 11px; color: #047857; margin-top: 2px;">Neumonía adquirida en comunidad</div>
+      </div>
+      <i class="fas fa-chevron-right" style="color: #10B981; font-size: 14px;"></i>
+    </div>
+  </div>
+</div>
+      
 <!-- ADULTO (solo escalas clínicas) -->
 <div id="escala-adulto" class="escala-content" style="display: none;">
   
@@ -1598,6 +1732,18 @@ highlight-text {
     </div>
   </div>
 
+  <!-- Escala de Norton -->
+  <div class="escala-item" onclick="abrirModalNorton()" style="background: #EFF6FF; border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; border: 1px solid #BFDBFE;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="width: 44px; height: 44px; background: #BFDBFE; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px;">🛏️</div>
+      <div style="flex: 1;">
+        <div style="font-weight: 700; font-size: 15px; color: #1E3A8A;">Escala de Norton</div>
+        <div style="font-size: 11px; color: #1E40AF; margin-top: 2px;">Riesgo de úlceras por presión (5-20 puntos)</div>
+      </div>
+      <i class="fas fa-chevron-right" style="color: #3B82F6; font-size: 14px;"></i>
+    </div>
+  </div>
+  
   <!-- CURB-65 -->
   <div class="escala-item" onclick="abrirModalCURB65()" style="background: #EFF6FF; border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; border: 1px solid #BFDBFE;">
     <div style="display: flex; align-items: center; gap: 12px;">
@@ -1633,26 +1779,10 @@ highlight-text {
       <i class="fas fa-chevron-right" style="color: #3B82F6; font-size: 14px;"></i>
     </div>
   </div>
-
-  <!-- Otras escalas (opcional, solo si quieres mantenerlas) -->
-  <div style="margin: 20px 0 12px; padding-bottom: 8px; border-bottom: 2px solid #E5E7EB; display: inline-block;">
-    <span style="font-size: 13px; font-weight: 700; color: #6B7280;">Otras escalas</span>
-  </div>
-  <div class="escala-item" onclick="showToast('⚠️ Escala de Downton - Próximamente')" style="background: #F9FAFB; border-radius: 14px; padding: 12px 14px; margin-bottom: 8px; cursor: pointer; transition: all 0.15s; border: 1px solid #E5E7EB;">
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <div style="width: 44px; height: 44px; background: #E5E7EB; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px;">⚠️</div>
-      <div style="flex: 1;"><div style="font-weight: 700; font-size: 14px; color: #374151;">Downton</div><div style="font-size: 11px; color: #6B7280;">Riesgo de caídas</div></div>
-      <i class="fas fa-chevron-right" style="color: #9CA3AF; font-size: 14px;"></i>
-    </div>
-  </div>
-  <div class="escala-item" onclick="showToast('🛏️ Escala de Norton - Próximamente')" style="background: #F9FAFB; border-radius: 14px; padding: 12px 14px; margin-bottom: 8px; cursor: pointer; transition: all 0.15s; border: 1px solid #E5E7EB;">
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <div style="width: 44px; height: 44px; background: #E5E7EB; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px;">🛏️</div>
-      <div style="flex: 1;"><div style="font-weight: 700; font-size: 14px; color: #374151;">Norton</div><div style="font-size: 11px; color: #6B7280;">Riesgo de úlceras por presión</div></div>
-      <i class="fas fa-chevron-right" style="color: #9CA3AF; font-size: 14px;"></i>
-    </div>
-  </div>
 </div>
+
+
+
 
       <!-- GERIATRÍA -->
       <div id="escala-geriatria" class="escala-content" style="display: none;">
@@ -1686,101 +1816,7 @@ highlight-text {
       </div>
     </div>
   </div>
-  <!-- CALCULADORAS -->
-  <div class="section" style="padding-top:8px;padding-bottom:8px;">
-    <div class="card">
-      <div class="section-header">
-        <h3 style="display:flex;align-items:center;gap:6px;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2">
-            <rect x="4" y="2" width="16" height="20" rx="2"/>
-            <line x1="8" y1="6" x2="16" y2="6"/>
-            <line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/>
-            <line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/>
-            <line x1="8" y1="18" x2="10" y2="18"/><line x1="12" y1="18" x2="14" y2="18"/><line x1="16" y1="18" x2="16" y2="18"/>
-          </svg>
-          Calculadoras de enfermería
-        </h3>
-        <button class="see-all" onclick="showToast('🔢 Ver todas próximamente')">
-          Ver todas
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;">
-        <!-- Diluciones -->
-        <div onclick="showToast('💉 Diluciones próximamente')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:50px;height:50px;background:#EFF6FF;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #BFDBFE;">
-            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-              <rect x="12" y="4" width="8" height="22" rx="4" fill="#60A5FA" opacity="0.7"/>
-              <rect x="10" y="8" width="12" height="16" rx="3" fill="#BFDBFE"/>
-              <path d="M13 14 L19 14" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M13 17 L17 17" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round"/>
-              <rect x="14" y="2" width="4" height="4" rx="1" fill="#93C5FD"/>
-            </svg>
-          </div>
-          <span style="font-size:10.5px;font-weight:700;color:#2563EB;text-align:center;line-height:1.2;">Diluciones</span>
-          <span style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Cálculo de dilución de medicamentos</span>
-        </div>
-        <!-- IMC -->
-        <div onclick="showToast('⚖️ IMC próximamente')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:50px;height:50px;background:#F0FDF4;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #BBF7D0;">
-            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-              <!-- Báscula / persona -->
-              <ellipse cx="16" cy="10" rx="5" ry="6" fill="#86EFAC" opacity="0.8"/>
-              <path d="M10 22 Q10 18 16 17 Q22 18 22 22 L22 26 L10 26 Z" fill="#4ADE80" opacity="0.6"/>
-              <rect x="8" y="26" width="16" height="3" rx="1.5" fill="#16A34A" opacity="0.5"/>
-            </svg>
-          </div>
-          <span style="font-size:10.5px;font-weight:700;color:#16A34A;text-align:center;line-height:1.2;">IMC</span>
-          <span style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Índice de Masa Corporal</span>
-        </div>
-        <!-- PAM -->
-        <div onclick="showToast('❤️ PAM próximamente')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:50px;height:50px;background:#FFF1F2;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #FECDD3;">
-            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-              <path d="M16 26 Q8 20 6 14 Q5 8 10 7 Q14 6 16 10 Q18 6 22 7 Q27 8 26 14 Q24 20 16 26Z" fill="#FB7185" opacity="0.8"/>
-              <!-- Línea de pulso -->
-              <path d="M4 16 L10 16 L12 12 L14 20 L16 14 L18 18 L20 16 L28 16" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <span style="font-size:10.5px;font-weight:700;color:#F43F5E;text-align:center;line-height:1.2;">PAM</span>
-          <span style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Presión Arterial Media</span>
-        </div>
-        <!-- Goteo IV -->
-        <div onclick="showToast('🩸 Goteo IV próximamente')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:50px;height:50px;background:#FFFBEB;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #FDE68A;">
-            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-              <!-- Bolsa IV -->
-              <path d="M10 6 Q10 4 16 4 Q22 4 22 6 L22 18 Q22 24 16 24 Q10 24 10 18 Z" fill="#FDE68A" opacity="0.8"/>
-              <path d="M10 6 Q10 4 16 4 Q22 4 22 6 L22 18 Q22 24 16 24 Q10 24 10 18 Z" stroke="#F59E0B" stroke-width="1.2" fill="none"/>
-              <!-- Gota -->
-              <path d="M16 26 Q14 29 16 30 Q18 29 16 26Z" fill="#F59E0B"/>
-              <!-- Línea tubo -->
-              <line x1="16" y1="24" x2="16" y2="26" stroke="#F59E0B" stroke-width="1.5"/>
-              <!-- Burbujas dentro -->
-              <circle cx="14" cy="14" r="2" fill="#FBBF24" opacity="0.5"/>
-              <circle cx="18" cy="11" r="1.5" fill="#FBBF24" opacity="0.4"/>
-            </svg>
-          </div>
-          <span style="font-size:10.5px;font-weight:700;color:#D97706;text-align:center;line-height:1.2;">Goteo IV</span>
-          <span style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Cálculo de goteo por minuto</span>
-        </div>
-        <!-- Déficit Hídrico -->
-        <div onclick="showToast('💧 Déficit Hídrico próximamente')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:50px;height:50px;background:#F0FDF4;border-radius:14px;display:flex;align-items:center;justify-content:center;border:1.5px solid #BBF7D0;">
-            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-              <!-- Gota con porcentaje -->
-              <path d="M16 4 Q10 12 10 18 Q10 25 16 26 Q22 25 22 18 Q22 12 16 4Z" fill="#34D399" opacity="0.7"/>
-              <path d="M16 4 Q10 12 10 18 Q10 25 16 26 Q22 25 22 18 Q22 12 16 4Z" stroke="#10B981" stroke-width="1.2" fill="none"/>
-              <!-- % dentro -->
-              <text x="13" y="20" font-size="7" fill="#065F46" font-weight="bold">%</text>
-            </svg>
-          </div>
-          <span style="font-size:10.5px;font-weight:700;color:#059669;text-align:center;line-height:1.2;">Déficit Hídrico</span>
-          <span style="font-size:9px;color:var(--text-muted);text-align:center;line-height:1.2;">Cálculo de déficit de líquidos</span>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <!-- GUÍAS Y NORMAS -->
   <div class="section" style="padding-top:8px;">
@@ -4202,6 +4238,311 @@ function calcularMNA() {
   document.getElementById('mnaInterpretacion').innerHTML = inter;
 }
 
+// ============================================================
+// ESCALAS PEDIÁTRICAS - FUNCIONES (COLOR VERDE)
+// ============================================================
+
+// --- GLASGOW PEDIÁTRICO ---
+var gPediVals = { gpediOjo: 0, gpediVerbal: 0, gpediMotor: 0 };
+
+function selGlasgowPedi(grupo, val, el) {
+  gPediVals[grupo] = val;
+  document.querySelectorAll('#' + grupo + ' .escala-option').forEach(o => {
+    o.classList.remove('selected');
+    o.style.borderColor = 'transparent';
+    o.style.background = '#F0FDF9';
+  });
+  el.classList.add('selected');
+  el.style.borderColor = '#10B981';
+  el.style.background = '#ECFDF5';
+  calcGlasgowPedi();
+}
+
+function calcGlasgowPedi() {
+  var t = (gPediVals.gpediOjo || 0) + (gPediVals.gpediVerbal || 0) + (gPediVals.gpediMotor || 0);
+  if (t === 0 && !gPediVals.gpediOjo && !gPediVals.gpediVerbal && !gPediVals.gpediMotor) t = 0;
+  var real = t > 0 ? t : 0;
+  document.getElementById('gpPuntos').textContent = real || '—';
+  document.getElementById('gpPuntosLabel').textContent = real || '—';
+  var interp = '', emoji = '😐';
+  if (real >= 13) { interp = 'Trauma craneal leve'; emoji = '😊'; }
+  else if (real >= 9) { interp = 'Trauma craneal moderado'; emoji = '😟'; }
+  else if (real >= 3) { interp = 'Trauma craneal grave'; emoji = '😰'; }
+  document.getElementById('gpInterp').textContent = interp;
+  document.getElementById('gpEmoji').textContent = emoji;
+}
+
+function limpiarGlasgowPedi() {
+  gPediVals = { gpediOjo: 0, gpediVerbal: 0, gpediMotor: 0 };
+  ['gpediOjo','gpediVerbal','gpediMotor'].forEach(g => {
+    document.querySelectorAll('#' + g + ' .escala-option').forEach(o => {
+      o.classList.remove('selected');
+      o.style.borderColor = 'transparent';
+      o.style.background = '#F0FDF9';
+    });
+  });
+  document.getElementById('gpPuntos').textContent = '—';
+  document.getElementById('gpPuntosLabel').textContent = '—';
+  document.getElementById('gpInterp').textContent = '';
+  document.getElementById('gpEmoji').textContent = '😐';
+}
+
+function abrirModalGlasgowPedi() { document.getElementById('modalGlasgowPedi').classList.add('open'); }
+
+// --- PEWS ---
+var pewsVals = { pews1: 0, pews2: 0, pews3: 0, pews4: 0 };
+
+function selPEWS(grupo, val, el) {
+  pewsVals[grupo] = val;
+  document.querySelectorAll('#' + grupo + ' .escala-option').forEach(o => {
+    o.classList.remove('selected');
+    o.style.borderColor = 'transparent';
+    o.style.background = '#F0FDF9';
+  });
+  el.classList.add('selected');
+  el.style.borderColor = '#10B981';
+  el.style.background = '#ECFDF5';
+  calcPEWS();
+}
+
+function calcPEWS() {
+  var t = (pewsVals.pews1 || 0) + (pewsVals.pews2 || 0) + (pewsVals.pews3 || 0) + (pewsVals.pews4 || 0);
+  document.getElementById('pewsPuntos').textContent = t;
+  document.getElementById('pewsPuntosLabel').textContent = t;
+  var interp = '', emoji = '😐';
+  if (t === 0) { interp = 'Riesgo bajo - Monitoreo rutinario'; emoji = '😊'; }
+  else if (t <= 2) { interp = 'Riesgo moderado - Aumentar frecuencia'; emoji = '😟'; }
+  else { interp = 'Riesgo alto - Considerar UCI / Emergencia'; emoji = '🆘'; }
+  document.getElementById('pewsInterp').textContent = interp;
+  document.getElementById('pewsEmoji').textContent = emoji;
+}
+
+function limpiarPEWS() {
+  pewsVals = { pews1: 0, pews2: 0, pews3: 0, pews4: 0 };
+  ['pews1','pews2','pews3','pews4'].forEach(g => {
+    document.querySelectorAll('#' + g + ' .escala-option').forEach(o => {
+      o.classList.remove('selected');
+      o.style.borderColor = 'transparent';
+      o.style.background = '#F0FDF9';
+    });
+  });
+  document.getElementById('pewsPuntos').textContent = '0';
+  document.getElementById('pewsPuntosLabel').textContent = '0';
+  document.getElementById('pewsInterp').textContent = '';
+  document.getElementById('pewsEmoji').textContent = '😐';
+}
+
+function abrirModalPEWS() { document.getElementById('modalPEWS').classList.add('open'); }
+
+// --- WESTLEY (CRUP) ---
+var westVals = { west1: 0, west2: 0, west3: 0, west4: 0, west5: 0 };
+
+function selWestley(grupo, val, el) {
+  westVals[grupo] = val;
+  document.querySelectorAll('#' + grupo + ' .escala-option').forEach(o => {
+    o.classList.remove('selected');
+    o.style.borderColor = 'transparent';
+    o.style.background = '#F0FDF9';
+  });
+  el.classList.add('selected');
+  el.style.borderColor = '#10B981';
+  el.style.background = '#ECFDF5';
+  calcWestley();
+}
+
+function calcWestley() {
+  var t = (westVals.west1 || 0) + (westVals.west2 || 0) + (westVals.west3 || 0) + (westVals.west4 || 0) + (westVals.west5 || 0);
+  document.getElementById('westPuntos').textContent = t;
+  document.getElementById('westPuntosLabel').textContent = t;
+  var interp = '', emoji = '😐';
+  if (t <= 2) { interp = 'Crup leve - Manejo ambulatorio'; emoji = '😊'; }
+  else if (t <= 5) { interp = 'Crup moderado - Observación'; emoji = '😟'; }
+  else if (t <= 10) { interp = 'Crup grave - Hospitalización'; emoji = '😰'; }
+  else { interp = 'Insuficiencia respiratoria - UCI urgente'; emoji = '🆘'; }
+  document.getElementById('westInterp').textContent = interp;
+  document.getElementById('westEmoji').textContent = emoji;
+}
+
+function limpiarWestley() {
+  westVals = { west1: 0, west2: 0, west3: 0, west4: 0, west5: 0 };
+  ['west1','west2','west3','west4','west5'].forEach(g => {
+    document.querySelectorAll('#' + g + ' .escala-option').forEach(o => {
+      o.classList.remove('selected');
+      o.style.borderColor = 'transparent';
+      o.style.background = '#F0FDF9';
+    });
+  });
+  document.getElementById('westPuntos').textContent = '0';
+  document.getElementById('westPuntosLabel').textContent = '0';
+  document.getElementById('westInterp').textContent = '';
+  document.getElementById('westEmoji').textContent = '😐';
+}
+
+function abrirModalWestley() { document.getElementById('modalWestley').classList.add('open'); }
+
+
+// ============================================================
+// DENVER II
+// ============================================================
+var denverVals = { denver1: 0, denver2: 0 };
+
+function selDenver(grupo, val, el) {
+  if (denverVals[grupo] === val) {
+    denverVals[grupo] = 0;
+    el.classList.remove('selected');
+    el.style.borderColor = 'transparent';
+    el.style.background = '#F0FDF9';
+  } else {
+    document.querySelectorAll('#' + grupo + ' .escala-option').forEach(o => {
+      o.classList.remove('selected');
+      o.style.borderColor = 'transparent';
+      o.style.background = '#F0FDF9';
+    });
+    denverVals[grupo] = val;
+    el.classList.add('selected');
+    el.style.borderColor = '#10B981';
+    el.style.background = '#ECFDF5';
+  }
+  calcDenver();
+}
+
+function calcDenver() {
+  var t = (denverVals.denver1 || 0) + (denverVals.denver2 || 0);
+  document.getElementById('denverPuntos').textContent = t;
+  document.getElementById('denverPuntosLabel').textContent = t;
+  var interp = '', emoji = '😐';
+  if (t <= 2) { interp = 'Retraso significativo - Evaluación especializada urgente'; emoji = '🆘'; }
+  else if (t <= 4) { interp = 'Retraso moderado - Seguimiento estrecho'; emoji = '😟'; }
+  else { interp = 'Desarrollo normal - Mantener estimulación'; emoji = '😊'; }
+  document.getElementById('denverInterp').textContent = interp;
+  document.getElementById('denverEmoji').textContent = emoji;
+}
+
+function limpiarDenver() {
+  denverVals = { denver1: 0, denver2: 0 };
+  ['denver1','denver2'].forEach(g => {
+    document.querySelectorAll('#' + g + ' .escala-option').forEach(o => {
+      o.classList.remove('selected');
+      o.style.borderColor = 'transparent';
+      o.style.background = '#F0FDF9';
+    });
+  });
+  document.getElementById('denverPuntos').textContent = '0';
+  document.getElementById('denverPuntosLabel').textContent = '0';
+  document.getElementById('denverInterp').textContent = '';
+  document.getElementById('denverEmoji').textContent = '😐';
+}
+
+function abrirModalDenverII() { document.getElementById('modalDenverII').classList.add('open'); }
+
+// ============================================================
+// CURB-65 PEDIÁTRICO
+// ============================================================
+var curbPediVals = {};
+
+function toggleCURBPedi(el, key) {
+  curbPediVals[key] = !curbPediVals[key];
+  if (curbPediVals[key]) {
+    el.classList.add('selected');
+    el.style.borderColor = '#10B981';
+    el.style.background = '#ECFDF5';
+    el.querySelector('.escala-check-box').style.background = '#10B981';
+    el.querySelector('.escala-check-box').style.color = '#fff';
+  } else {
+    el.classList.remove('selected');
+    el.style.borderColor = 'transparent';
+    el.style.background = '#F0FDF9';
+    el.querySelector('.escala-check-box').style.background = '';
+    el.querySelector('.escala-check-box').style.color = '';
+  }
+  calcCURBPedi();
+}
+
+function calcCURBPedi() {
+  var t = Object.values(curbPediVals).filter(Boolean).length;
+  document.getElementById('curbpPuntos').textContent = t;
+  document.getElementById('curbpPuntosLabel').textContent = t;
+  var interp = '', emoji = '😐';
+  if (t <= 1) { interp = 'Severidad leve — manejo ambulatorio'; emoji = '😊'; }
+  else if (t === 2) { interp = 'Severidad moderada — considerar hospitalización'; emoji = '😟'; }
+  else { interp = 'Severidad grave — hospitalización urgente / UCI'; emoji = '🆘'; }
+  document.getElementById('curbpInterp').textContent = interp;
+  document.getElementById('curbpEmoji').textContent = emoji;
+}
+
+function limpiarCURBPedi() {
+  curbPediVals = {};
+  document.querySelectorAll('#modalCURB65Pedi .escala-check-option').forEach(el => {
+    el.classList.remove('selected');
+    el.style.borderColor = 'transparent';
+    el.style.background = '#F0FDF9';
+    el.querySelector('.escala-check-box').style.background = '';
+    el.querySelector('.escala-check-box').style.color = '';
+  });
+  document.getElementById('curbpPuntos').textContent = '0';
+  document.getElementById('curbpPuntosLabel').textContent = '0';
+  document.getElementById('curbpInterp').textContent = '';
+  document.getElementById('curbpEmoji').textContent = '😐';
+}
+
+function abrirModalCURB65Pedi() { document.getElementById('modalCURB65Pedi').classList.add('open'); }
+
+
+// ============================================================
+// ESCALA DE NORTON
+// ============================================================
+var nortonVals = { norton1: 4, norton2: 4, norton3: 4, norton4: 4, norton5: 4 };
+
+function selNorton(grupo, val, el) {
+  nortonVals[grupo] = val;
+  document.querySelectorAll('#' + grupo + ' .escala-option').forEach(o => {
+    o.classList.remove('selected');
+    o.style.borderColor = 'transparent';
+    o.style.background = '#F8FAFF';
+  });
+  el.classList.add('selected');
+  el.style.borderColor = '#3B82F6';
+  el.style.background = '#EFF6FF';
+  calcNorton();
+}
+
+function calcNorton() {
+  var t = (nortonVals.norton1 || 0) + (nortonVals.norton2 || 0) + (nortonVals.norton3 || 0) + (nortonVals.norton4 || 0) + (nortonVals.norton5 || 0);
+  document.getElementById('nortonPuntos').textContent = t;
+  document.getElementById('nortonPuntosLabel').textContent = t;
+  var interp = '', emoji = '😐';
+  if (t <= 12) { interp = 'Riesgo muy alto de úlceras por presión'; emoji = '🆘'; }
+  else if (t <= 14) { interp = 'Riesgo alto'; emoji = '😰'; }
+  else if (t <= 16) { interp = 'Riesgo moderado'; emoji = '😟'; }
+  else { interp = 'Riesgo bajo'; emoji = '😊'; }
+  document.getElementById('nortonInterp').textContent = interp;
+  document.getElementById('nortonEmoji').textContent = emoji;
+}
+
+function limpiarNorton() {
+  nortonVals = { norton1: 4, norton2: 4, norton3: 4, norton4: 4, norton5: 4 };
+  ['norton1','norton2','norton3','norton4','norton5'].forEach(g => {
+    const firstOption = document.querySelector('#' + g + ' .escala-option');
+    if (firstOption) {
+      firstOption.classList.add('selected');
+      firstOption.style.borderColor = '#3B82F6';
+      firstOption.style.background = '#EFF6FF';
+    }
+    document.querySelectorAll('#' + g + ' .escala-option').forEach((o, idx) => {
+      if (idx !== 0) {
+        o.classList.remove('selected');
+        o.style.borderColor = 'transparent';
+        o.style.background = '#F8FAFF';
+      }
+    });
+  });
+  document.getElementById('nortonPuntos').textContent = '20';
+  document.getElementById('nortonPuntosLabel').textContent = '20';
+  document.getElementById('nortonInterp').textContent = 'Riesgo bajo';
+  document.getElementById('nortonEmoji').textContent = '😊';
+}
+
+function abrirModalNorton() { document.getElementById('modalNorton').classList.add('open'); }
 
 </script>
   
@@ -5642,6 +5983,11 @@ function calcularMNA() {
 </div>
 </div>
 
+<!-- ============================================================
+     MODALES DE ESCALAS DE PEDIATRÍA
+============================================================ -->
+
+
 
 <script>
 // ============================================================
@@ -6060,6 +6406,546 @@ function limpiarNEWS() {
   document.getElementById('newsInterp').textContent = '';
   document.getElementById('newsEmoji').textContent = '😐';
 }
+
+
 </script>
+<!-- MODAL GLASGOW PEDIÁTRICO (VERDE) -->
+<div class="escala-overlay" id="modalGlasgowPedi" onclick="if(event.target===this)cerrarEscala('modalGlasgowPedi')">
+<div class="escala-sheet" style="background:#fff;">
+  <div class="escala-handle" style="background:#065F46;"></div>
+  <div class="escala-header">
+    <div class="escala-icon-wrap" style="background:#ECFDF5;">🧠</div>
+    <div class="escala-header-text">
+      <h2 style="color:#065F46;">Glasgow Pediátrico</h2>
+      <p style="color:#065F46;">Nivel de conciencia en niños (3–15 puntos)</p>
+    </div>
+    <button class="escala-close" style="background:#ECFDF5;color:#065F46;" onclick="cerrarEscala('modalGlasgowPedi')"><i class="fas fa-xmark"></i></button>
+  </div>
+
+  <!-- 1. Apertura ocular -->
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">👁️</div>
+      <span class="escala-section-title" style="color:#047857;">1. Apertura ocular</span>
+    </div>
+    <div class="escala-options" id="gpediOjo">
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selGlasgowPedi('gpediOjo',4,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Espontánea</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">4</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selGlasgowPedi('gpediOjo',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">A la voz</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">3</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selGlasgowPedi('gpediOjo',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Al dolor</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">2</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selGlasgowPedi('gpediOjo',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ninguna</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <!-- 2. Respuesta verbal (adaptada para niños) -->
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">💬</div>
+      <span class="escala-section-title" style="color:#047857;">2. Respuesta verbal</span>
+    </div>
+    <div class="escala-options" id="gpediVerbal">
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selGlasgowPedi('gpediVerbal',5,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Balbuceos / Sonrisa social</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">5</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selGlasgowPedi('gpediVerbal',4,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Llanto irritable / Confuso</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">4</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selGlasgowPedi('gpediVerbal',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Llora al dolor / Palabras inadecuadas</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">3</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selGlasgowPedi('gpediVerbal',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Quejidos / Sonidos incomprensibles</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">2</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selGlasgowPedi('gpediVerbal',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ninguna</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <!-- 3. Respuesta motora -->
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">✋</div>
+      <span class="escala-section-title" style="color:#047857;">3. Respuesta motora</span>
+    </div>
+    <div class="escala-options" id="gpediMotor">
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selGlasgowPedi('gpediMotor',6,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Se mueve espontáneamente</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">6</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selGlasgowPedi('gpediMotor',5,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Localiza el dolor</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">5</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selGlasgowPedi('gpediMotor',4,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Retirada al dolor</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">4</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selGlasgowPedi('gpediMotor',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Flexión anormal</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">3</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selGlasgowPedi('gpediMotor',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Extensión anormal</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">2</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selGlasgowPedi('gpediMotor',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ninguna</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">1</span></label>
+    </div>
+  </div>
+
+  <div class="escala-resultado" style="background:linear-gradient(135deg,#065F46,#10B981);">
+    <div class="escala-resultado-row">
+      <div class="escala-score-circle" style="background:rgba(255,255,255,0.15);">
+        <span class="escala-score-num" style="color:#fff;" id="gpPuntos">3</span>
+        <span class="escala-score-sub" style="color:#fff;">/15</span>
+      </div>
+      <div class="escala-score-info">
+        <h3 style="color:#fff;">Resultado: <span id="gpPuntosLabel">3</span> puntos</h3>
+        <p style="color:#A7F3D0;" id="gpInterp">—</p>
+      </div>
+      <span class="escala-score-emoji" id="gpEmoji">😐</span>
+    </div>
+    <div class="escala-ranges">
+      <span class="escala-range-chip" style="color:#fff;">13–15 Leve</span>
+      <span class="escala-range-chip" style="color:#fff;">9–12 Moderado</span>
+      <span class="escala-range-chip" style="color:#fff;">3–8 Severo</span>
+    </div>
+  </div>
+  <div class="escala-footer">
+    <button class="escala-btn-clear" style="background:#ECFDF5;color:#065F46;" onclick="limpiarGlasgowPedi()"><i class="fas fa-rotate-left"></i> Limpiar</button>
+    <button class="escala-btn-save" style="background:#10B981;" onclick="guardarEscala('Glasgow Pediátrico',document.getElementById('gpPuntos').textContent,'modalGlasgowPedi')"><i class="fas fa-bookmark"></i> Guardar</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL PEWS - Pediatric Early Warning Score -->
+<div class="escala-overlay" id="modalPEWS" onclick="if(event.target===this)cerrarEscala('modalPEWS')">
+<div class="escala-sheet" style="background:#fff;">
+  <div class="escala-handle" style="background:#065F46;"></div>
+  <div class="escala-header">
+    <div class="escala-icon-wrap" style="background:#ECFDF5;">📊</div>
+    <div class="escala-header-text">
+      <h2 style="color:#065F46;">PEWS Pediátrico</h2>
+      <p style="color:#065F46;">Alerta temprana de deterioro clínico</p>
+    </div>
+    <button class="escala-close" style="background:#ECFDF5;color:#065F46;" onclick="cerrarEscala('modalPEWS')"><i class="fas fa-xmark"></i></button>
+  </div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">😊</div>
+      <span class="escala-section-title" style="color:#047857;">1. Comportamiento</span>
+    </div>
+    <div class="escala-options" id="pews1">
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews1',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Jugando / Alerta</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews1',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Somnoliento (despierta al estímulo)</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews1',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Irritable / Inconsolable</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">2</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews1',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Letárgico / Confuso</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">3</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">❤️</div>
+      <span class="escala-section-title" style="color:#047857;">2. Estado Cardiovascular</span>
+    </div>
+    <div class="escala-options" id="pews2">
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews2',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Piel rosada / Relleno capilar &lt; 2″</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews2',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Palidez / Relleno capilar 2-3″</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews2',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Gris / Relleno capilar &gt; 3″</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">2</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews2',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Moteado / Hipotensión</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">3</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">🫁</div>
+      <span class="escala-section-title" style="color:#047857;">3. Estado Respiratorio</span>
+    </div>
+    <div class="escala-options" id="pews3">
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews3',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Normal / Sin quejido</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews3',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">FR aumentada / Aleteo nasal</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews3',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Retracciones / Quejido</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">2</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews3',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Apnea / Aleteo intenso</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">3</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">💨</div>
+      <span class="escala-section-title" style="color:#047857;">4. Oxígeno Suplementario</span>
+    </div>
+    <div class="escala-options" id="pews4">
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews4',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Sin oxígeno / Aire ambiente</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews4',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Hasta 2 L/min</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews4',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">2-4 L/min</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">2</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selPEWS('pews4',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">&gt; 4 L/min o ventilación</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">3</span></label>
+    </div>
+  </div>
+
+  <div class="escala-resultado" style="background:linear-gradient(135deg,#065F46,#10B981);">
+    <div class="escala-resultado-row">
+      <div class="escala-score-circle" style="background:rgba(255,255,255,0.15);">
+        <span class="escala-score-num" style="color:#fff;" id="pewsPuntos">0</span>
+        <span class="escala-score-sub" style="color:#fff;">pts</span>
+      </div>
+      <div class="escala-score-info">
+        <h3 style="color:#fff;">Resultado: <span id="pewsPuntosLabel">0</span> puntos</h3>
+        <p style="color:#A7F3D0;" id="pewsInterp">—</p>
+      </div>
+      <span class="escala-score-emoji" id="pewsEmoji">😐</span>
+    </div>
+    <div class="escala-ranges">
+      <span class="escala-range-chip" style="color:#fff;">0 Bajo riesgo</span>
+      <span class="escala-range-chip" style="color:#fff;">1–2 Riesgo moderado</span>
+      <span class="escala-range-chip" style="color:#fff;">≥3 Alto riesgo</span>
+    </div>
+  </div>
+  <div class="escala-footer">
+    <button class="escala-btn-clear" style="background:#ECFDF5;color:#065F46;" onclick="limpiarPEWS()"><i class="fas fa-rotate-left"></i> Limpiar</button>
+    <button class="escala-btn-save" style="background:#10B981;" onclick="guardarEscala('PEWS',document.getElementById('pewsPuntos').textContent,'modalPEWS')"><i class="fas fa-bookmark"></i> Guardar</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL WESTLEY (CRUP) -->
+<div class="escala-overlay" id="modalWestley" onclick="if(event.target===this)cerrarEscala('modalWestley')">
+<div class="escala-sheet" style="background:#fff;">
+  <div class="escala-handle" style="background:#065F46;"></div>
+  <div class="escala-header">
+    <div class="escala-icon-wrap" style="background:#ECFDF5;">😤</div>
+    <div class="escala-header-text">
+      <h2 style="color:#065F46;">Westley (Crup)</h2>
+      <p style="color:#065F46;">Severidad de laringotraqueítis (0–17 puntos)</p>
+    </div>
+    <button class="escala-close" style="background:#ECFDF5;color:#065F46;" onclick="cerrarEscala('modalWestley')"><i class="fas fa-xmark"></i></button>
+  </div>
+
+  <!-- 1. Estridor -->
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">🔊</div>
+      <span class="escala-section-title" style="color:#047857;">Estridor</span>
+    </div>
+    <div class="escala-options" id="west1">
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selWestley('west1',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ausente</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selWestley('west1',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Al agitarse</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selWestley('west1',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">En reposo</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">2</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <!-- 2. Tiraje -->
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">🫁</div>
+      <span class="escala-section-title" style="color:#047857;">Tiraje</span>
+    </div>
+    <div class="escala-options" id="west2">
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selWestley('west2',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ausente</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selWestley('west2',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Leve</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selWestley('west2',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Moderado</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">2</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selWestley('west2',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Severo</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">3</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <!-- 3. Entrada de aire -->
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">💨</div>
+      <span class="escala-section-title" style="color:#047857;">Entrada de aire</span>
+    </div>
+    <div class="escala-options" id="west3">
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selWestley('west3',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Normal</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selWestley('west3',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Disminuida</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selWestley('west3',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Muy disminuida</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">2</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <!-- 4. Cianosis -->
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">💙</div>
+      <span class="escala-section-title" style="color:#047857;">Cianosis</span>
+    </div>
+    <div class="escala-options" id="west4">
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selWestley('west4',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ausente</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selWestley('west4',4,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Con agitación</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">4</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selWestley('west4',5,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">En reposo</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">5</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <!-- 5. Nivel de conciencia -->
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">🧠</div>
+      <span class="escala-section-title" style="color:#047857;">Nivel de conciencia</span>
+    </div>
+    <div class="escala-options" id="west5">
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selWestley('west5',0,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Alerta</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">0</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selWestley('west5',5,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Disminuido</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">5</span></label>
+    </div>
+  </div>
+
+  <div class="escala-resultado" style="background:linear-gradient(135deg,#065F46,#10B981);">
+    <div class="escala-resultado-row">
+      <div class="escala-score-circle" style="background:rgba(255,255,255,0.15);">
+        <span class="escala-score-num" style="color:#fff;" id="westPuntos">0</span>
+        <span class="escala-score-sub" style="color:#fff;">/17</span>
+      </div>
+      <div class="escala-score-info">
+        <h3 style="color:#fff;">Resultado: <span id="westPuntosLabel">0</span> puntos</h3>
+        <p style="color:#A7F3D0;" id="westInterp">—</p>
+      </div>
+      <span class="escala-score-emoji" id="westEmoji">😐</span>
+    </div>
+    <div class="escala-ranges">
+      <span class="escala-range-chip" style="color:#fff;">0–2 Leve</span>
+      <span class="escala-range-chip" style="color:#fff;">3–5 Moderado</span>
+      <span class="escala-range-chip" style="color:#fff;">6–10 Grave</span>
+      <span class="escala-range-chip" style="color:#fff;">≥11 Insuficiencia respiratoria</span>
+    </div>
+  </div>
+  <div class="escala-footer">
+    <button class="escala-btn-clear" style="background:#ECFDF5;color:#065F46;" onclick="limpiarWestley()"><i class="fas fa-rotate-left"></i> Limpiar</button>
+    <button class="escala-btn-save" style="background:#10B981;" onclick="guardarEscala('Westley',document.getElementById('westPuntos').textContent,'modalWestley')"><i class="fas fa-bookmark"></i> Guardar</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL DENVER II -->
+<div class="escala-overlay" id="modalDenverII" onclick="if(event.target===this)cerrarEscala('modalDenverII')">
+<div class="escala-sheet" style="background:#fff;">
+  <div class="escala-handle" style="background:#065F46;"></div>
+  <div class="escala-header">
+    <div class="escala-icon-wrap" style="background:#ECFDF5;">🎯</div>
+    <div class="escala-header-text">
+      <h2 style="color:#065F46;">Denver II</h2>
+      <p style="color:#065F46;">Evaluación del desarrollo infantil (0-6 años)</p>
+    </div>
+    <button class="escala-close" style="background:#ECFDF5;color:#065F46;" onclick="cerrarEscala('modalDenverII')"><i class="fas fa-xmark"></i></button>
+  </div>
+
+  <!-- Áreas evaluadas -->
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">👶</div>
+      <span class="escala-section-title" style="color:#047857;">Áreas del desarrollo</span>
+    </div>
+    <div class="escala-options" id="denver1">
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selDenver('denver1',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Motor grueso (gatea, camina, salta)</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">+1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selDenver('denver1',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Motor fino (agarra, dibuja)</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">+1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selDenver('denver1',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Lenguaje (balbucea, palabras, frases)</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">+1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selDenver('denver1',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Social (sonrisa social, imita)</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">+1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">⚠️</div>
+      <span class="escala-section-title" style="color:#047857;">Señales de alerta</span>
+    </div>
+    <div class="escala-options" id="denver2">
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selDenver('denver2',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Pérdida de hitos del desarrollo</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">+1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selDenver('denver2',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Asimetría en movimientos</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">+1</span></label>
+      <label class="escala-option" style="background:#F0FDF9;color:#065F46;" onclick="selDenver('denver2',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Hipotonía o hipertonía</span><span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">+1</span></label>
+    </div>
+  </div>
+
+  <div class="escala-resultado" style="background:linear-gradient(135deg,#065F46,#10B981);">
+    <div class="escala-resultado-row">
+      <div class="escala-score-circle" style="background:rgba(255,255,255,0.15);">
+        <span class="escala-score-num" style="color:#fff;" id="denverPuntos">0</span>
+        <span class="escala-score-sub" style="color:#fff;">/7</span>
+      </div>
+      <div class="escala-score-info">
+        <h3 style="color:#fff;">Áreas adquiridas: <span id="denverPuntosLabel">0</span></h3>
+        <p style="color:#A7F3D0;" id="denverInterp">—</p>
+      </div>
+      <span class="escala-score-emoji" id="denverEmoji">😐</span>
+    </div>
+    <div class="escala-ranges">
+      <span class="escala-range-chip" style="color:#fff;">0–2: Retraso significativo</span>
+      <span class="escala-range-chip" style="color:#fff;">3–5: Retraso moderado</span>
+      <span class="escala-range-chip" style="color:#fff;">6–7: Desarrollo normal</span>
+    </div>
+  </div>
+  <div class="escala-footer">
+    <button class="escala-btn-clear" style="background:#ECFDF5;color:#065F46;" onclick="limpiarDenver()"><i class="fas fa-rotate-left"></i> Limpiar</button>
+    <button class="escala-btn-save" style="background:#10B981;" onclick="guardarEscala('Denver II',document.getElementById('denverPuntos').textContent,'modalDenverII')"><i class="fas fa-bookmark"></i> Guardar</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL CURB-65 PEDIÁTRICO -->
+<div class="escala-overlay" id="modalCURB65Pedi" onclick="if(event.target===this)cerrarEscala('modalCURB65Pedi')">
+<div class="escala-sheet" style="background:#fff;">
+  <div class="escala-handle" style="background:#065F46;"></div>
+  <div class="escala-header">
+    <div class="escala-icon-wrap" style="background:#ECFDF5;">🫁</div>
+    <div class="escala-header-text">
+      <h2 style="color:#065F46;">CURB-65 Pediátrico</h2>
+      <p style="color:#065F46;">Neumonía adquirida en comunidad (0–5 puntos)</p>
+    </div>
+    <button class="escala-close" style="background:#ECFDF5;color:#065F46;" onclick="cerrarEscala('modalCURB65Pedi')"><i class="fas fa-xmark"></i></button>
+  </div>
+
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#A7F3D0;">📋</div>
+      <span class="escala-section-title" style="color:#047857;">Criterios — marca los presentes</span>
+    </div>
+    <div class="escala-options" style="gap:8px;">
+      <div class="escala-check-option" style="background:#F0FDF9;color:#065F46;" onclick="toggleCURBPedi(this,'curbp_c')">
+        <span class="escala-check-box"></span>
+        <span class="escala-option-label"><b>C</b> — Confusión / alteración del estado mental</span>
+        <span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">1 pt</span>
+      </div>
+      <div class="escala-check-option" style="background:#F0FDF9;color:#065F46;" onclick="toggleCURBPedi(this,'curbp_u')">
+        <span class="escala-check-box"></span>
+        <span class="escala-option-label"><b>U</b> — Urea &gt; 7 mmol/L (BUN &gt; 20 mg/dL)</span>
+        <span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">1 pt</span>
+      </div>
+      <div class="escala-check-option" style="background:#F0FDF9;color:#065F46;" onclick="toggleCURBPedi(this,'curbp_r')">
+        <span class="escala-check-box"></span>
+        <span class="escala-option-label"><b>R</b> — Frecuencia respiratoria elevada (≥ 30 rpm o según edad)</span>
+        <span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">1 pt</span>
+      </div>
+      <div class="escala-check-option" style="background:#F0FDF9;color:#065F46;" onclick="toggleCURBPedi(this,'curbp_b')">
+        <span class="escala-check-box"></span>
+        <span class="escala-option-label"><b>B</b> — Presión arterial baja (PAS percentil &lt; 5 según edad)</span>
+        <span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">1 pt</span>
+      </div>
+      <div class="escala-check-option" style="background:#F0FDF9;color:#065F46;" onclick="toggleCURBPedi(this,'curbp_edad')">
+        <span class="escala-check-box"></span>
+        <span class="escala-option-label"><b>Edad</b> — &lt; 2 años o ≥ 65 años</span>
+        <span class="escala-option-pts" style="background:#A7F3D0;color:#065F46;">1 pt</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="escala-resultado" style="background:linear-gradient(135deg,#065F46,#10B981);">
+    <div class="escala-resultado-row">
+      <div class="escala-score-circle" style="background:rgba(255,255,255,0.15);">
+        <span class="escala-score-num" style="color:#fff;" id="curbpPuntos">0</span>
+        <span class="escala-score-sub" style="color:#fff;">/5</span>
+      </div>
+      <div class="escala-score-info">
+        <h3 style="color:#fff;">Resultado: <span id="curbpPuntosLabel">0</span> puntos</h3>
+        <p style="color:#A7F3D0;" id="curbpInterp">Severidad: —</p>
+      </div>
+      <span class="escala-score-emoji" id="curbpEmoji">😐</span>
+    </div>
+    <div class="escala-ranges">
+      <span class="escala-range-chip" style="color:#fff;">0–1 Leve (manejo ambulatorio)</span>
+      <span class="escala-range-chip" style="color:#fff;">2 Moderado (considerar hospitalización)</span>
+      <span class="escala-range-chip" style="color:#fff;">≥3 Severo (hospitalización urgente/UCI)</span>
+    </div>
+  </div>
+  <div class="escala-footer">
+    <button class="escala-btn-clear" style="background:#ECFDF5;color:#065F46;" onclick="limpiarCURBPedi()"><i class="fas fa-rotate-left"></i> Limpiar</button>
+    <button class="escala-btn-save" style="background:#10B981;" onclick="guardarEscala('CURB-65 Pediátrico',document.getElementById('curbpPuntos').textContent,'modalCURB65Pedi')"><i class="fas fa-bookmark"></i> Guardar</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL NORTON (Riesgo de úlceras por presión) -->
+<div class="escala-overlay" id="modalNorton" onclick="if(event.target===this)cerrarEscala('modalNorton')">
+<div class="escala-sheet" style="background:#fff;">
+  <div class="escala-handle" style="background:#1E3A8A;"></div>
+  <div class="escala-header">
+    <div class="escala-icon-wrap" style="background:#EFF6FF;">🛏️</div>
+    <div class="escala-header-text">
+      <h2 style="color:#1E3A8A;">Escala de Norton</h2>
+      <p style="color:#1E3A8A;">Riesgo de úlceras por presión (5–20 puntos)</p>
+    </div>
+    <button class="escala-close" style="background:#EFF6FF;color:#1E3A8A;" onclick="cerrarEscala('modalNorton')"><i class="fas fa-xmark"></i></button>
+  </div>
+
+  <!-- 1. Condición física -->
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DBEAFE;">💪</div>
+      <span class="escala-section-title" style="color:#1D4ED8;">1. Condición física</span>
+    </div>
+    <div class="escala-options" id="norton1">
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton1',4,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Buena</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">4</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton1',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Regular</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">3</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton1',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Mala</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">2</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton1',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Muy mala</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <!-- 2. Estado mental -->
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DBEAFE;">🧠</div>
+      <span class="escala-section-title" style="color:#1D4ED8;">2. Estado mental</span>
+    </div>
+    <div class="escala-options" id="norton2">
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton2',4,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Alerta</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">4</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton2',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Apático</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">3</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton2',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Confuso</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">2</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton2',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Estupor / Coma</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <!-- 3. Actividad -->
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DBEAFE;">🚶</div>
+      <span class="escala-section-title" style="color:#1D4ED8;">3. Actividad</span>
+    </div>
+    <div class="escala-options" id="norton3">
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton3',4,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ambulatorio</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">4</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton3',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Camina con ayuda</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">3</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton3',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">En silla de ruedas</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">2</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton3',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Encamado</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <!-- 4. Movilidad -->
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DBEAFE;">🔄</div>
+      <span class="escala-section-title" style="color:#1D4ED8;">4. Movilidad</span>
+    </div>
+    <div class="escala-options" id="norton4">
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton4',4,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Total</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">4</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton4',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ligeramente limitada</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">3</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton4',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Muy limitada</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">2</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton4',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Inmóvil</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">1</span></label>
+    </div>
+  </div>
+  <div class="escala-divider"></div>
+
+  <!-- 5. Incontinencia -->
+  <div class="escala-section">
+    <div class="escala-section-header">
+      <div class="escala-section-icon" style="background:#DBEAFE;">💧</div>
+      <span class="escala-section-title" style="color:#1D4ED8;">5. Incontinencia</span>
+    </div>
+    <div class="escala-options" id="norton5">
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton5',4,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Continente</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">4</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton5',3,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Ocasional</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">3</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton5',2,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Habitual</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">2</span></label>
+      <label class="escala-option" style="background:#F8FAFF;color:#1D4ED8;" onclick="selNorton('norton5',1,this)"><span class="escala-radio-dot"></span><span class="escala-option-label">Doble incontinencia</span><span class="escala-option-pts" style="background:#DBEAFE;color:#1D4ED8;">1</span></label>
+    </div>
+  </div>
+
+  <div class="escala-resultado" style="background:linear-gradient(135deg,#1E3A8A,#3B82F6);">
+    <div class="escala-resultado-row">
+      <div class="escala-score-circle" style="background:rgba(255,255,255,0.15);">
+        <span class="escala-score-num" style="color:#fff;" id="nortonPuntos">20</span>
+        <span class="escala-score-sub" style="color:#fff;">/20</span>
+      </div>
+      <div class="escala-score-info">
+        <h3 style="color:#fff;">Resultado: <span id="nortonPuntosLabel">20</span> puntos</h3>
+        <p style="color:#BFDBFE;" id="nortonInterp">—</p>
+      </div>
+      <span class="escala-score-emoji" id="nortonEmoji">😐</span>
+    </div>
+    <div class="escala-ranges">
+      <span class="escala-range-chip" style="color:#fff;">≤12 Riesgo muy alto</span>
+      <span class="escala-range-chip" style="color:#fff;">13–14 Riesgo alto</span>
+      <span class="escala-range-chip" style="color:#fff;">15–16 Riesgo moderado</span>
+      <span class="escala-range-chip" style="color:#fff;">≥17 Riesgo bajo</span>
+    </div>
+  </div>
+  <div class="escala-footer">
+    <button class="escala-btn-clear" style="background:#EFF6FF;color:#1D4ED8;" onclick="limpiarNorton()"><i class="fas fa-rotate-left"></i> Limpiar</button>
+    <button class="escala-btn-save" style="background:#3B82F6;" onclick="guardarEscala('Norton',document.getElementById('nortonPuntos').textContent,'modalNorton')"><i class="fas fa-bookmark"></i> Guardar</button>
+  </div>
+</div>
+</div>
+
+
+
 </body>
 </html>
