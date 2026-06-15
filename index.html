@@ -467,51 +467,29 @@ body {
   position: relative;
 }
 
-/* Panel izquierdo — lista de calculadoras */
-/* Panel izquierdo — lista de calculadoras */
+/* Panel izquierdo — lista de calculadoras (ancho ajustado a 90px) */
 .calc-sidebar {
-  width: 130px;
+  width: 90px;               /* un poco más que la mitad, pero no tan ancho como 130px */
   flex-shrink: 0;
   background: #F8FAFD;
   border-right: 1px solid var(--border);
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 12px 8px 20px;
+  padding: 12px 4px 20px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
   height: 100%;
   -webkit-overflow-scrolling: touch;
   max-height: 100%;
-}
-
-.calc-sidebar::-webkit-scrollbar {
-  display: none;
-}
-
-.calc-sidebar .calc-nav-item:last-child {
-  margin-bottom: 10px;
-}
-
-.calc-sidebar::-webkit-scrollbar {
-  display: none;
-}
-
-.calc-sidebar-label {
-  font-size: 9px;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  padding: 8px 6px 4px;
 }
 
 .calc-nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
-  padding: 10px 6px;
+  gap: 4px;
+  padding: 8px 2px;
   border-radius: 12px;
   cursor: pointer;
   border: none;
@@ -521,33 +499,26 @@ body {
   text-align: center;
 }
 
-.calc-nav-item:active {
-  transform: scale(0.96);
-}
-
-.calc-nav-item.active {
-  background: var(--card);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border);
-}
-
 .calc-nav-icon {
-  width: 44px;
-  height: 44px;
+  width: 38px;               /* un poco más grande que antes */
+  height: 38px;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 18px;           /* tamaño de icono legible */
   flex-shrink: 0;
 }
 
 .calc-nav-name {
-  font-size: 10.5px;
+  font-size: 9.5px;          /* ligeramente más grande */
   font-weight: 600;
   color: var(--text-secondary);
   line-height: 1.2;
-}
+  text-align: center;
+  word-break: break-word;
+  max-width: 80px;
+}}
 
 .calc-nav-item.active .calc-nav-name {
   color: var(--navy);
@@ -5865,6 +5836,16 @@ function abrirModalSuperficieCorporal() {
   padding: 8px 6px 12px;
   border-bottom: 2px solid #E2E8F0;
   margin-bottom: 8px;
+}
+
+/* Ocultar scrollbar en sidebar de calculadoras */
+.calc-sidebar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE y Edge */
+}
+
+.calc-sidebar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .calc-nav-item {
